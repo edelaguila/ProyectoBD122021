@@ -9,7 +9,6 @@ import com.formdev.flatlaf.FlatLightLaf;
 import dominio.ProcesosRepetidos;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
@@ -19,6 +18,8 @@ import javax.swing.UIManager;
  * @author Herbert Leonel Dominguez Chavez
  */
 public class Hoteleria_MDI extends javax.swing.JFrame {
+
+    private Mnt_Servicios form_Mant_Servicios;
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     public static JLabel Jl_logo = new JLabel();
@@ -40,6 +41,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         logo();
         Jdp_contenedor.add(Jl_logo);
     }
+
     public void logo() {
         ImageIcon icon = new ImageIcon("src/main/java/assets/logo_hotel.png");
         Jl_logo.setSize(300, 300);
@@ -50,7 +52,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         }
         Dimension desktopSize = Jdp_contenedor.getSize();
         Dimension FrameSize = Jl_logo.getSize();
-        Jl_logo.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height - FrameSize.height)/2);
+        Jl_logo.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
     }
 
     /**
@@ -66,6 +68,8 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         Mnb_menu = new javax.swing.JMenuBar();
         Sbm_archivos = new javax.swing.JMenu();
         Sbm_catalogo = new javax.swing.JMenu();
+        Mnu_mantenimientos = new javax.swing.JMenu();
+        MnI_Servicios = new javax.swing.JMenuItem();
         Sbm_procesos = new javax.swing.JMenu();
         Sbm_herramientas = new javax.swing.JMenu();
         Sbm_ayuda = new javax.swing.JMenu();
@@ -96,6 +100,19 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
 
         Sbm_catalogo.setText("Catalogo");
         Sbm_catalogo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+
+        Mnu_mantenimientos.setText("Mantenimientos");
+
+        MnI_Servicios.setText("Mant. Servicios");
+        MnI_Servicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnI_ServiciosActionPerformed(evt);
+            }
+        });
+        Mnu_mantenimientos.add(MnI_Servicios);
+
+        Sbm_catalogo.add(Mnu_mantenimientos);
+
         Mnb_menu.add(Sbm_catalogo);
 
         Sbm_procesos.setText("Procesos");
@@ -135,6 +152,17 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         logo();
     }//GEN-LAST:event_formComponentResized
 
+    private void MnI_ServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_ServiciosActionPerformed
+        form_Mant_Servicios = new Mnt_Servicios();
+
+        Jdp_contenedor.add(form_Mant_Servicios);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_Mant_Servicios.getSize();
+        form_Mant_Servicios.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_Mant_Servicios.setVisible(true);
+        form_Mant_Servicios.toFront();
+    }//GEN-LAST:event_MnI_ServiciosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -156,7 +184,9 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Btn_cerrarSesion;
     private javax.swing.JDesktopPane Jdp_contenedor;
+    private javax.swing.JMenuItem MnI_Servicios;
     private javax.swing.JMenuBar Mnb_menu;
+    private javax.swing.JMenu Mnu_mantenimientos;
     private javax.swing.JMenu Sbm_archivos;
     private javax.swing.JMenu Sbm_ayuda;
     private javax.swing.JMenu Sbm_catalogo;
