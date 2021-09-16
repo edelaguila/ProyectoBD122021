@@ -18,6 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+// @author Herbert Leonel Dominguez Chavez
+
 public class ProcesosRepetidos {
 
     DefaultTableModel modelo = new DefaultTableModel() {
@@ -99,7 +101,7 @@ public class ProcesosRepetidos {
         JOptionPane.showMessageDialog(null, Objeto + " " + Accion + " " + Estado, "ALERTA", 1);
     }
 
-    public static void Limpiar(JTextField... textFields) {
+    public void Limpiar(JTextField... textFields) {
         for (JTextField textField : textFields) {
             textField.setText("");
         }

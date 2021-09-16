@@ -19,6 +19,23 @@
               <Font name="Ubuntu" size="14" style="1"/>
             </Property>
           </Properties>
+          <SubComponents>
+            <Menu class="javax.swing.JMenu" name="Mnu_mantenimientos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Mantenimientos"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="MnI_Servicios">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Mant. Servicios"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnI_ServiciosActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="Sbm_procesos">
           <Properties>
