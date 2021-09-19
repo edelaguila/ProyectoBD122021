@@ -25,12 +25,20 @@
                 <Property name="text" type="java.lang.String" value="Mantenimientos"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="MnI_Servicios">
+                <MenuItem class="javax.swing.JMenuItem" name="MnI_servicios">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Mant. Servicios"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnI_ServiciosActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnI_serviciosActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MnI_metodoDePago">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Mant. Metodos de Pago"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnI_metodoDePagoActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>

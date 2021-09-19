@@ -20,10 +20,10 @@ import java.util.List;
 public class ServicioDAO {
 
     public static String codigoAuxiliar, nombreAuxiliar;
-    private static final String SQL_INSERT = "insert into tbl_servicios values(?,?,?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_servicios SET nombre_servicio=?, descripcion_servicio=?, precio_servicio=?, tipo_servicio=?, estado_servicio=? WHERE PK_id_servicio=?";
-    private static final String SQL_QUERY = "SELECT PK_id_servicio, nombre_servicio, descripcion_servicio, precio_servicio, tipo_servicio, estado_servicio FROM tbl_servicios WHERE PK_id_servicio = ?";
-    private static final String SQL_DELETE = "delete from tbl_servicios where PK_id_servicio = ?";
+    private static final String SQL_INSERT = "insert into tbl_servicio values(?,?,?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_servicio SET nombre_servicio=?, descripcion_servicio=?, precio_servicio=?, tipo_servicio=?, estado_servicio=? WHERE PK_id_servicio=?";
+    private static final String SQL_QUERY = "SELECT PK_id_servicio, nombre_servicio, descripcion_servicio, precio_servicio, tipo_servicio, estado_servicio FROM tbl_servicio WHERE PK_id_servicio = ?";
+    private static final String SQL_DELETE = "delete from tbl_servicio where PK_id_servicio = ?";
 
     public int insert(Servicio servicios) {
         Connection conn = null;
@@ -82,7 +82,7 @@ public class ServicioDAO {
 
     public List<Servicio> select() {
 
-        String SQL_SELECT = "SELECT * FROM tbl_servicios WHERE PK_id_servicio LIKE '%"+codigoAuxiliar+"%' OR nombre_servicio LIKE '%"+nombreAuxiliar+"%'";
+        String SQL_SELECT = "SELECT * FROM tbl_servicio WHERE PK_id_servicio LIKE '%"+codigoAuxiliar+"%' OR nombre_servicio LIKE '%"+nombreAuxiliar+"%'";
 
         Connection conn = null;
         PreparedStatement stmt = null;
