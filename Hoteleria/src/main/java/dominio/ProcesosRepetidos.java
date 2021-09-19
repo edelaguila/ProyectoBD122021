@@ -10,6 +10,8 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
@@ -19,7 +21,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 // @author Herbert Leonel Dominguez Chavez
-
 public class ProcesosRepetidos {
 
     DefaultTableModel modelo = new DefaultTableModel() {
@@ -38,7 +39,7 @@ public class ProcesosRepetidos {
                 boolean hasFocus,
                 int row,
                 int column) {
-            
+
             if (row % 2 == 0) {
                 setBackground(new Color(229, 229, 229));
                 setForeground(Color.BLACK);
@@ -118,6 +119,12 @@ public class ProcesosRepetidos {
         for (Component textField : textFields) {
             textField.setCursor(cursor);
         }
+    }
+
+    public static Boolean ValidarEmail(String email) {
+        Pattern pattern = Pattern.compile("^([0-9a-zA-Z]+[_.])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$");
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 
     public void llenarColumnas(String datos[], int cantidad, JTable tabla) {
