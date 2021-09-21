@@ -10,30 +10,30 @@ package dominio;
  * @author JEFF
  */
 public class AmaDeLlave {
-    private int idAmaDeLlave, pisoAmaDeLlave, horarioAmaDeLlave;
-    private String estadoAmaDeLlave, nombreAmaDeLlave, apellidoAmaDeLlave, descripcionAmaDeLlave;
 
-    public int getIdAmaDeLlave() {
+    private String idAmaDeLlave, pisoAmaDeLlave, horarioAmaDeLlave, estadoAmaDeLlave, nombreAmaDeLlave, apellidoAmaDeLlave, descripcionAmaDeLlave;
+
+    public String getIdAmaDeLlave() {
         return idAmaDeLlave;
     }
 
-    public void setIdAmaDeLlave(int idAmaDeLlave) {
+    public void setIdAmaDeLlave(String idAmaDeLlave) {
         this.idAmaDeLlave = idAmaDeLlave;
     }
 
-    public int getPisoAmaDeLlave() {
+    public String getPisoAmaDeLlave() {
         return pisoAmaDeLlave;
     }
 
-    public void setPisoAmaDeLlave(int pisoAmaDeLlave) {
+    public void setPisoAmaDeLlave(String pisoAmaDeLlave) {
         this.pisoAmaDeLlave = pisoAmaDeLlave;
     }
 
-    public int getHorarioAmaDeLlave() {
+    public String getHorarioAmaDeLlave() {
         return horarioAmaDeLlave;
     }
 
-    public void setHorarioAmaDeLlave(int horarioAmaDeLlave) {
+    public void setHorarioAmaDeLlave(String horarioAmaDeLlave) {
         this.horarioAmaDeLlave = horarioAmaDeLlave;
     }
 
@@ -41,7 +41,7 @@ public class AmaDeLlave {
         return estadoAmaDeLlave;
     }
 
-    public void setEstadoAmaDeLlave(String nombreAmaDeLlave) {
+    public void setEstadoAmaDeLlave(String estadoAmaDeLlave) {
         this.estadoAmaDeLlave = estadoAmaDeLlave;
     }
 
@@ -67,5 +67,6 @@ public class AmaDeLlave {
 
     public void setDescripcionAmaDeLlave(String descripcionAmaDeLlave) {
         this.descripcionAmaDeLlave = descripcionAmaDeLlave;
-    }  
+    }
+
 }

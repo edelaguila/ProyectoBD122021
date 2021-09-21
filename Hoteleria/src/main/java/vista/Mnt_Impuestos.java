@@ -5,9 +5,9 @@
  */
 package vista;
 
-import datos.PisoDAO;
+import datos.ImpuestoDAO;
 import dominio.ProcesosRepetidos;
-import dominio.Piso;
+import dominio.Impuesto;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -17,24 +17,25 @@ import javax.swing.JOptionPane;
  *
  * @author Jefferson Dávila
  */
-public class Mnt_Pisos extends javax.swing.JInternalFrame {
+public class Mnt_Impuestos extends javax.swing.JInternalFrame {
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
-    Piso pisos = new Piso();
+    Impuesto impuestos = new Impuesto();
 
     /**
      * Creates new form Mnt_¨Pisos
      */
-    public Mnt_Pisos() {
+    public Mnt_Impuestos() {
         initComponents();
         diseño();
         actualizarTabla("");
     }
 
     public void diseño() {
-        this.setTitle("Mantenimiento de Pisos");
+        this.setTitle("Mantenimiento de Impuestos");
         Txt_Id.setBorder(null);
-        Txt_NoHabitaciones.setBorder(null);
+        Txt_Nombre.setBorder(null);
+        Txt_Valor.setBorder(null);
         Txt_buscar.setBorder(null);
         Rdb_Limpiar2.setVisible(false);
         Txt_Descripcion.setBorder(BorderFactory.createEmptyBorder());
@@ -44,30 +45,31 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
 
     public void actualizarTabla(String codigo) {
         ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
-        PisoDAO.codigoAuxiliar = codigo;
-        PisoDAO.nombreAuxiliar = codigo;
-        String columnas[] = {"ID", "NO. HABITACIONES", "DESCRIPCION", "ESTADO"};
+        ImpuestoDAO.codigoAuxiliar = codigo;
+        ImpuestoDAO.nombreAuxiliar = codigo;
+        String columnas[] = {"ID", "NOMBRE IMPUESTO", "VALOR IMPUESTO", "DESCRIPCION", "ESTADO"};
         int cantidadcolumnas = columnas.length;
         prcs_repetidos.llenarColumnas(columnas, cantidadcolumnas, Tbl_Datos);
         String datos[] = new String[cantidadcolumnas];
-        int tamaño[] = {50, 250, 450, 150, 150, 150};
-        PisoDAO pisosdao = new PisoDAO();
-        List<Piso> piso = pisosdao.select();
-        for (Piso listaServicio : piso) {
-            datos[0] = String.valueOf(listaServicio.getIdPiso());
-            datos[1] = String.valueOf(listaServicio.getCantidadHabitacionesPiso());
-            datos[2] = listaServicio.getDescripcionPiso();
-            if (String.valueOf(listaServicio.getEstadoPiso()).equals("1")) {
-                datos[3] = "Activo";
+        int tamaño[] = {50, 250, 450, 150, 150};
+        ImpuestoDAO impuestodao = new ImpuestoDAO();
+        List<Impuesto> impuesto = impuestodao.select();
+        for (Impuesto listaServicio : impuesto) {
+            datos[0] = listaServicio.getIdImpuesto();
+            datos[1] = listaServicio.getNombreImpuesto();
+            datos[2] = listaServicio.getValorImpuesto();
+            datos[3] = listaServicio.getDescripcionImpuesto();
+            if (String.valueOf(listaServicio.getEstadoImpuesto()).equals("1")) {
+                datos[4] = "Activo";
             } else {
-                datos[3] = "Inactivo";
+                datos[4] = "Inactivo";
             }
             prcs_repetidos.llenarFilas(datos, tamaño, Tbl_Datos);
         }
     }
 
     public void Limpiar() {
-        prcs_repetidos.Limpiar(Txt_Id, Txt_NoHabitaciones, Txt_buscar);
+        prcs_repetidos.Limpiar(Txt_Id, Txt_Nombre, Txt_Valor, Txt_buscar);
         Txt_Descripcion.setText("");
         Rdb_Limpiar2.setSelected(true);
     }
@@ -90,7 +92,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         Lbl_estado = new javax.swing.JLabel();
         Txt_Id = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        Txt_NoHabitaciones = new javax.swing.JTextField();
+        Txt_Nombre = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         Txt_Descripcion = new javax.swing.JTextArea();
@@ -109,6 +111,9 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         Btn_ayuda = new javax.swing.JLabel();
         Btn_fondo_cancelar = new javax.swing.JPanel();
         Btn_cancelar = new javax.swing.JLabel();
+        Lbl_nombre1 = new javax.swing.JLabel();
+        Txt_Valor = new javax.swing.JTextField();
+        jSeparator3 = new javax.swing.JSeparator();
         Pnl_datos = new javax.swing.JPanel();
         Lbl_codigoNombre = new javax.swing.JLabel();
         Txt_buscar = new javax.swing.JTextField();
@@ -134,7 +139,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
 
         Lbl_nombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_nombre.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_nombre.setText("No. Habitaciones:");
+        Lbl_nombre.setText("Nombre:");
 
         Lbl_descripcion.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_descripcion.setForeground(new java.awt.Color(255, 255, 255));
@@ -148,9 +153,9 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         Txt_Id.setForeground(new java.awt.Color(255, 255, 255));
         Txt_Id.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        Txt_NoHabitaciones.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_NoHabitaciones.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_NoHabitaciones.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Txt_Nombre.setBackground(new java.awt.Color(36, 47, 65));
+        Txt_Nombre.setForeground(new java.awt.Color(255, 255, 255));
+        Txt_Nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         Txt_Descripcion.setBackground(new java.awt.Color(36, 47, 65));
         Txt_Descripcion.setColumns(20);
@@ -337,6 +342,14 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
             .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
+        Lbl_nombre1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_nombre1.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_nombre1.setText("Valor:");
+
+        Txt_Valor.setBackground(new java.awt.Color(36, 47, 65));
+        Txt_Valor.setForeground(new java.awt.Color(255, 255, 255));
+        Txt_Valor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout Pnl_ingresoDatosLayout = new javax.swing.GroupLayout(Pnl_ingresoDatos);
         Pnl_ingresoDatos.setLayout(Pnl_ingresoDatosLayout);
         Pnl_ingresoDatosLayout.setHorizontalGroup(
@@ -346,27 +359,35 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
-                                .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(Lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Lbl_nombre))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(Txt_NoHabitaciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                        .addComponent(jSeparator1)
-                                        .addComponent(Txt_Id)
-                                        .addComponent(jSeparator2))))
+                            .addComponent(jScrollPane1)
                             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                .addComponent(Lbl_estado)
-                                .addGap(80, 80, 80)
-                                .addComponent(Rdb_Activo)
-                                .addGap(18, 18, 18)
-                                .addComponent(Rdb_Limpiar2)
-                                .addGap(18, 18, 18)
-                                .addComponent(Rdb_Inactivo))
-                            .addComponent(Lbl_descripcion)))
+                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                        .addComponent(Lbl_nombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(Txt_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                        .addComponent(Lbl_estado)
+                                        .addGap(80, 80, 80)
+                                        .addComponent(Rdb_Activo)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(Rdb_Limpiar2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(Rdb_Inactivo))
+                                    .addComponent(Lbl_descripcion)
+                                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(Lbl_id, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                            .addComponent(Lbl_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(Txt_Nombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                                .addComponent(jSeparator1)
+                                                .addComponent(Txt_Id)
+                                                .addComponent(jSeparator2)))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -393,15 +414,21 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Txt_NoHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Txt_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Lbl_nombre))
                 .addGap(1, 1, 1)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Txt_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Lbl_nombre1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addComponent(Lbl_descripcion)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addGap(18, 18, 18)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(Lbl_estado)
@@ -410,7 +437,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                         .addComponent(Rdb_Inactivo)
                         .addGap(1, 1, 1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Btn_fondo_ayuda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -485,7 +512,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
             .addGroup(Pnl_datosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
                     .addGroup(Pnl_datosLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(Lbl_codigoNombre)
@@ -510,7 +537,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
                                 .addComponent(Txt_buscar)
                                 .addComponent(Lbl_codigoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -595,21 +622,22 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_buscarMouseExited
 
     private void Btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_Id, Txt_NoHabitaciones) && Txt_Descripcion.getText() != "") {
+        if (prcs_repetidos.isNoneEmpty(Txt_Id, Txt_Nombre, Txt_Valor) && Txt_Descripcion.getText() != "") {
             if (prcs_repetidos.isSelected(Rdb_Activo, Rdb_Inactivo)) {
-                if (prcs_repetidos.isNumeric(Txt_Id.getText(), Txt_NoHabitaciones.getText())) {
-                    PisoDAO pisosdao = new PisoDAO();
-                    pisos.setIdPiso(Integer.parseInt(Txt_Id.getText()));
-                    pisos.setCantidadHabitacionesPiso(Integer.parseInt(Txt_NoHabitaciones.getText()));
-                    pisos.setDescripcionPiso(Txt_Descripcion.getText());
+                if (prcs_repetidos.isNumeric(Txt_Id.getText(), Txt_Valor.getText())) {
+                    ImpuestoDAO impuestodao = new ImpuestoDAO();
+                    impuestos.setIdImpuesto(Txt_Id.getText());
+                    impuestos.setNombreImpuesto(Txt_Nombre.getText());
+                    impuestos.setValorImpuesto(Txt_Valor.getText());
+                    impuestos.setDescripcionImpuesto(Txt_Descripcion.getText());
                     if (Rdb_Activo.isSelected()) {
-                        pisos.setEstadoPiso("1");
+                        impuestos.setEstadoImpuesto("1");
                     } else if (Rdb_Inactivo.isSelected()) {
-                        pisos.setEstadoPiso("0");
+                        impuestos.setEstadoImpuesto("0");
                     }
-                    pisosdao.insert(pisos);
+                    impuestodao.insert(impuestos);
                     actualizarTabla("");
-                    prcs_repetidos.AlertaMensaje("guardado", "Piso", "exitosamente");
+                    prcs_repetidos.AlertaMensaje("guardado", "Impuesto", "exitosamente");
                     Limpiar();
                 } else {
                 }
@@ -618,21 +646,22 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_guardarMouseClicked
 
     private void Btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_Id, Txt_NoHabitaciones) && Txt_Descripcion.getText() != "") {
+        if (prcs_repetidos.isNoneEmpty(Txt_Id, Txt_Nombre, Txt_Valor) && Txt_Descripcion.getText() != "") {
             if (prcs_repetidos.isSelected(Rdb_Activo, Rdb_Inactivo)) {
-                if (prcs_repetidos.isNumeric(Txt_Id.getText(), Txt_NoHabitaciones.getText())) {
-                    PisoDAO pisosdao = new PisoDAO();
-                    pisos.setIdPiso(Integer.parseInt(Txt_Id.getText()));
-                    pisos.setCantidadHabitacionesPiso(Integer.parseInt(Txt_NoHabitaciones.getText()));
-                    pisos.setDescripcionPiso(Txt_Descripcion.getText());
+                if (prcs_repetidos.isNumeric(Txt_Id.getText(), Txt_Valor.getText())) {
+                    ImpuestoDAO impuestodao = new ImpuestoDAO();
+                    impuestos.setIdImpuesto(Txt_Id.getText());
+                    impuestos.setNombreImpuesto(Txt_Nombre.getText());
+                    impuestos.setValorImpuesto(Txt_Valor.getText());
+                    impuestos.setDescripcionImpuesto(Txt_Descripcion.getText());
                     if (Rdb_Activo.isSelected()) {
-                        pisos.setEstadoPiso("1");
+                        impuestos.setEstadoImpuesto("1");
                     } else if (Rdb_Inactivo.isSelected()) {
-                        pisos.setEstadoPiso("0");
+                        impuestos.setEstadoImpuesto("0");
                     }
-                    pisosdao.update(pisos);
+                    impuestodao.update(impuestos);
                     actualizarTabla("");
-                    prcs_repetidos.AlertaMensaje("modificado", "Piso", "exitosamente");
+                    prcs_repetidos.AlertaMensaje("modificado", "Impuesto", "exitosamente");
                     Limpiar();
                 }
             }
@@ -643,14 +672,14 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         if (prcs_repetidos.isNoneEmpty(Txt_Id)) {
             if (prcs_repetidos.isNumeric(Txt_Id.getText())) {
                 if (prcs_repetidos.ConfirmarEliminacion("eliminar", "Piso", this)) {
-                    PisoDAO pisosdao = new PisoDAO();
-                    pisos.setIdPiso(Integer.parseInt(Txt_Id.getText()));
-                    pisosdao.delete(pisos);
+                    ImpuestoDAO impuestodao = new ImpuestoDAO();
+                    impuestos.setIdImpuesto(Txt_Id.getText());
+                    impuestodao.delete(impuestos);
                     actualizarTabla("");
-                    prcs_repetidos.AlertaMensaje("eliminado", "Piso", "exitosamente");
+                    prcs_repetidos.AlertaMensaje("eliminado", "Impuesto", "exitosamente");
                     Limpiar();
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se pudo eliminar el Piso");
+                    JOptionPane.showMessageDialog(null, "No se pudo eliminar el Impuesto");
                 }
             }
         }
@@ -659,9 +688,10 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
     private void Tbl_DatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_DatosMouseClicked
         if (evt.getClickCount() == 2) {
             Txt_Id.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 0).toString());
-            Txt_NoHabitaciones.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 1).toString());
-            Txt_Descripcion.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString());
-            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString().equals("Activo")) {
+            Txt_Nombre.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 1).toString());
+            Txt_Valor.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString());
+            Txt_Descripcion.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString());
+            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 4).toString().equals("Activo")) {
                 Rdb_Activo.setSelected(true);
             } else {
                 Rdb_Inactivo.setSelected(true);
@@ -700,6 +730,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel Lbl_estado;
     private javax.swing.JLabel Lbl_id;
     private javax.swing.JLabel Lbl_nombre;
+    private javax.swing.JLabel Lbl_nombre1;
     private javax.swing.JPanel Pnl_datos;
     private javax.swing.JPanel Pnl_ingresoDatos;
     private javax.swing.JRadioButton Rdb_Activo;
@@ -708,12 +739,14 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
     private javax.swing.JTable Tbl_Datos;
     private javax.swing.JTextArea Txt_Descripcion;
     private javax.swing.JTextField Txt_Id;
-    private javax.swing.JTextField Txt_NoHabitaciones;
+    private javax.swing.JTextField Txt_Nombre;
+    private javax.swing.JTextField Txt_Valor;
     private javax.swing.JTextField Txt_buscar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator7;
     // End of variables declaration//GEN-END:variables
 }

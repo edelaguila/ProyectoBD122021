@@ -23,6 +23,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     private Mnt_MetodoDePago form_Mnt_MetodoDePago;
     private Mnt_Pisos form_Mant_Pisos;
     private Mnt_Horarios form_Mant_Horarios;
+    private Mnt_Impuestos form_Mant_Impuestos;
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     public static JLabel Jl_logo = new JLabel();
@@ -76,6 +77,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         MnI_metodoDePago = new javax.swing.JMenuItem();
         MnI_piso = new javax.swing.JMenuItem();
         MnI_horario = new javax.swing.JMenuItem();
+        MnI_impuesto = new javax.swing.JMenuItem();
         Sbm_procesos = new javax.swing.JMenu();
         Sbm_herramientas = new javax.swing.JMenu();
         Sbm_ayuda = new javax.swing.JMenu();
@@ -140,6 +142,14 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
             }
         });
         Mnu_mantenimientos.add(MnI_horario);
+
+        MnI_impuesto.setText("Mant. Impuestos");
+        MnI_impuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnI_impuestoActionPerformed(evt);
+            }
+        });
+        Mnu_mantenimientos.add(MnI_impuesto);
 
         Sbm_catalogo.add(Mnu_mantenimientos);
 
@@ -226,6 +236,17 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Mant_Horarios.toFront();
     }//GEN-LAST:event_MnI_horarioActionPerformed
 
+    private void MnI_impuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_impuestoActionPerformed
+        form_Mant_Impuestos = new Mnt_Impuestos();
+
+        Jdp_contenedor.add(form_Mant_Impuestos);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_Mant_Impuestos.getSize();
+        form_Mant_Impuestos.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_Mant_Impuestos.setVisible(true);
+        form_Mant_Impuestos.toFront();
+    }//GEN-LAST:event_MnI_impuestoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -248,6 +269,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     private javax.swing.JMenu Btn_cerrarSesion;
     private javax.swing.JDesktopPane Jdp_contenedor;
     private javax.swing.JMenuItem MnI_horario;
+    private javax.swing.JMenuItem MnI_impuesto;
     private javax.swing.JMenuItem MnI_metodoDePago;
     private javax.swing.JMenuItem MnI_piso;
     private javax.swing.JMenuItem MnI_servicios;

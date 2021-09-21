@@ -6,32 +6,22 @@ package dominio;
  * @author JEFF
  */
 public class Impuesto {
-    private int idImpuesto, estadoImpuesto;
-    private float valorImpuesto;
-    private String nombreImpuesto, descripcionImpuesto;
+    private String idImpuesto, nombreImpuesto, descripcionImpuesto, estadoImpuesto, valorImpuesto;
 
-    public int getIdImpuesto() {
-        return idImpuesto;
-    }
-
-    public void setIdImpuesto(int idImpuesto) {
-        this.idImpuesto = idImpuesto;
-    }
-
-    public int getEstadoImpuesto() {
-        return estadoImpuesto;
-    }
-
-    public void setEstadoImpuesto(int estadoImpuesto) {
-        this.estadoImpuesto = estadoImpuesto;
-    }
-
-    public float getValorImpuesto() {
+    public String getValorImpuesto() {
         return valorImpuesto;
     }
 
-    public void setValorImpuesto(float valorImpuesto) {
+    public void setValorImpuesto(String valorImpuesto) {
         this.valorImpuesto = valorImpuesto;
+    }
+
+    public String getIdImpuesto() {
+        return idImpuesto;
+    }
+
+    public void setIdImpuesto(String idImpuesto) {
+        this.idImpuesto = idImpuesto;
     }
 
     public String getNombreImpuesto() {
@@ -49,4 +39,12 @@ public class Impuesto {
     public void setDescripcionImpuesto(String descripcionImpuesto) {
         this.descripcionImpuesto = descripcionImpuesto;
     }
+
+    public String getEstadoImpuesto() {
+        return estadoImpuesto;
+    }
+
+    public void setEstadoImpuesto(String estadoImpuesto) {
+        this.estadoImpuesto = estadoImpuesto;
+    } 
 }
