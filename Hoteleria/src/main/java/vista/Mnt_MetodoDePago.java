@@ -5,85 +5,73 @@
  */
 package vista;
 
-import datos.ServicioDAO;
+import datos.MetodoDePagoDAO;
+import dominio.MetodoDePago;
 import dominio.ProcesosRepetidos;
-import dominio.Servicio;
 import java.awt.Color;
 import java.util.List;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Herbert Leonel Dominguez Chavez
+ * @author leone
  */
-public class Mnt_Servicios extends javax.swing.JInternalFrame {
+public class Mnt_MetodoDePago extends javax.swing.JInternalFrame {
 
+    MetodoDePago metodoDePago = new MetodoDePago();
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
-    Servicio servicios = new Servicio();
 
     /**
-     * Creates new form Mnt_Servicios
+     * Creates new form Mnt_MetodosDePago
      */
-    public Mnt_Servicios() {
+    public Mnt_MetodoDePago() {
         initComponents();
         diseño();
         actualizarTabla("");
     }
 
     public void diseño() {
-        this.setTitle("Mantenimiento de Servicios");
-        ImageIcon icono = new ImageIcon("src/main/java/assets/servicio.png");
+        this.setTitle("Mantenimiento de Metodos de Pago");
+        
+        ImageIcon icono = new ImageIcon("src/main/java/assets/metodo_pago.png");
         this.setFrameIcon(icono);
         Txt_codigo.setBorder(null);
         Txt_nombre.setBorder(null);
-        Txt_precio.setBorder(null);
         Txt_buscar.setBorder(null);
         Rdb_limpiar.setVisible(false);
-        Rdb_limpiar2.setVisible(false);
-        Txt_descripcion.setBorder(BorderFactory.createEmptyBorder());
-        Txt_descripcion.setBorder(null);
         prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar);
     }
 
     public void actualizarTabla(String codigo) {
         ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
-        ServicioDAO.codigoAuxiliar = codigo;
-        ServicioDAO.nombreAuxiliar = codigo;
-        String columnas[] = {"ID", "NOMBRE", "DESCRIPCION", "PRECIO", "TIPO DE SERVICIO", "ESTADO"};
+        MetodoDePagoDAO.codigoAuxiliar = codigo;
+        MetodoDePagoDAO.nombreAuxiliar = codigo;
+        String columnas[] = {"ID", "NOMBRE", "DESCRIPCION", "ESTADO"};
         int cantidadcolumnas = columnas.length;
         prcs_repetidos.llenarColumnas(columnas, cantidadcolumnas, Tbl_Datos);
         String datos[] = new String[cantidadcolumnas];
-        int tamaño[] = {50, 250, 450, 150, 150, 150};
-        ServicioDAO serviciosdao = new ServicioDAO();
-        List<Servicio> servicio = serviciosdao.select();
-        for (Servicio listaServicio : servicio) {
-            datos[0] = listaServicio.getId();
-            datos[1] = listaServicio.getNombre();
-            datos[2] = listaServicio.getDescripcion();
-            datos[3] = listaServicio.getPrecio();
-            if (listaServicio.getTipo().equals("1")) {
-                datos[4] = "Básico";
+        int tamaño[] = {50, 300, 500, 150};
+        MetodoDePagoDAO metodoDePagoDAO = new MetodoDePagoDAO();
+        List<MetodoDePago> metodo = metodoDePagoDAO.select();
+        for (MetodoDePago listaMetodos : metodo) {
+            datos[0] = listaMetodos.getId();
+            datos[1] = listaMetodos.getNombre();
+            datos[2] = listaMetodos.getDescripcion();
+            if (listaMetodos.getEstado().equals("1")) {
+                datos[3] = "Activo";
             } else {
-                datos[4] = "Adicional";
-            }
-            if (listaServicio.getEstado().equals("1")) {
-                datos[5] = "Activo";
-            } else {
-                datos[5] = "Inactivo";
+                datos[3] = "Inactivo";
             }
             prcs_repetidos.llenarFilas(datos, tamaño, Tbl_Datos);
         }
     }
-
+    
     public void Limpiar() {
-        prcs_repetidos.Limpiar(Txt_codigo, Txt_nombre, Txt_precio, Txt_buscar);
+        prcs_repetidos.Limpiar(Txt_codigo, Txt_nombre, Txt_buscar);
         Txt_descripcion.setText("");
         Rdb_limpiar.setSelected(true);
-        Rdb_limpiar2.setSelected(true);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -93,14 +81,11 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BtnGp_tipo = new javax.swing.ButtonGroup();
-        BtnGp_estado = new javax.swing.ButtonGroup();
+        BtnGrp_estado = new javax.swing.ButtonGroup();
         Pnl_ingresoDatos = new javax.swing.JPanel();
         Lbl_id = new javax.swing.JLabel();
         Lbl_nombre = new javax.swing.JLabel();
         Lbl_descripcion = new javax.swing.JLabel();
-        Lbl_precio = new javax.swing.JLabel();
-        Lbl_tiposServicio = new javax.swing.JLabel();
         Lbl_estado = new javax.swing.JLabel();
         Txt_codigo = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
@@ -108,13 +93,8 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         Txt_descripcion = new javax.swing.JTextArea();
-        Txt_precio = new javax.swing.JTextField();
-        jSeparator4 = new javax.swing.JSeparator();
-        Rdb_adicional = new javax.swing.JRadioButton();
-        Rdb_basico = new javax.swing.JRadioButton();
-        Rdb_limpiar = new javax.swing.JRadioButton();
         Rdb_activo = new javax.swing.JRadioButton();
-        Rdb_limpiar2 = new javax.swing.JRadioButton();
+        Rdb_limpiar = new javax.swing.JRadioButton();
         Rdb_inactivo = new javax.swing.JRadioButton();
         Btn_fondoGuardar = new javax.swing.JPanel();
         Btn_guardar = new javax.swing.JLabel();
@@ -142,7 +122,7 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setVisible(true);
+        setPreferredSize(new java.awt.Dimension(1150, 607));
 
         Pnl_ingresoDatos.setBackground(new java.awt.Color(36, 47, 65));
         Pnl_ingresoDatos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INGRESO DE DATOS:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -158,14 +138,6 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
         Lbl_descripcion.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_descripcion.setForeground(new java.awt.Color(255, 255, 255));
         Lbl_descripcion.setText("Descripción:");
-
-        Lbl_precio.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_precio.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_precio.setText("Precio:");
-
-        Lbl_tiposServicio.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_tiposServicio.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_tiposServicio.setText("Tipo de Servicio:");
 
         Lbl_estado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_estado.setForeground(new java.awt.Color(255, 255, 255));
@@ -186,30 +158,14 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
         Txt_descripcion.setBorder(null);
         jScrollPane1.setViewportView(Txt_descripcion);
 
-        Txt_precio.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_precio.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_precio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        BtnGp_tipo.add(Rdb_adicional);
-        Rdb_adicional.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
-        Rdb_adicional.setForeground(new java.awt.Color(255, 255, 255));
-        Rdb_adicional.setText("Adicional");
-
-        BtnGp_tipo.add(Rdb_basico);
-        Rdb_basico.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
-        Rdb_basico.setForeground(new java.awt.Color(255, 255, 255));
-        Rdb_basico.setText("Básico");
-
-        BtnGp_tipo.add(Rdb_limpiar);
-
-        BtnGp_estado.add(Rdb_activo);
+        BtnGrp_estado.add(Rdb_activo);
         Rdb_activo.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
         Rdb_activo.setForeground(new java.awt.Color(255, 255, 255));
         Rdb_activo.setText("Activo");
 
-        BtnGp_estado.add(Rdb_limpiar2);
+        BtnGrp_estado.add(Rdb_limpiar);
 
-        BtnGp_estado.add(Rdb_inactivo);
+        BtnGrp_estado.add(Rdb_inactivo);
         Rdb_inactivo.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
         Rdb_inactivo.setForeground(new java.awt.Color(255, 255, 255));
         Rdb_inactivo.setText("Inactivo");
@@ -403,32 +359,13 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
                                         .addComponent(Txt_codigo)
                                         .addComponent(jSeparator2))))
                             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                        .addComponent(Lbl_estado)
-                                        .addGap(80, 80, 80))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Pnl_ingresoDatosLayout.createSequentialGroup()
-                                        .addComponent(Lbl_tiposServicio)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                        .addComponent(Rdb_adicional)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Rdb_limpiar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(Rdb_basico))
-                                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                        .addComponent(Rdb_activo)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Rdb_limpiar2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Rdb_inactivo))))
-                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                .addComponent(Lbl_precio)
-                                .addGap(69, 69, 69)
-                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(Lbl_estado)
+                                .addGap(80, 80, 80)
+                                .addComponent(Rdb_activo)
+                                .addGap(18, 18, 18)
+                                .addComponent(Rdb_limpiar)
+                                .addGap(18, 18, 18)
+                                .addComponent(Rdb_inactivo))))
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -463,25 +400,11 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
                 .addComponent(Lbl_descripcion)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lbl_precio)
-                    .addComponent(Txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Rdb_basico, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(Rdb_limpiar)
-                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lbl_tiposServicio)
-                            .addComponent(Rdb_adicional))))
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(Lbl_estado)
-                        .addComponent(Rdb_limpiar2)
+                        .addComponent(Rdb_limpiar)
                         .addComponent(Rdb_activo))
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                         .addComponent(Rdb_inactivo)
@@ -561,7 +484,7 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
             .addGroup(Pnl_datosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(Pnl_datosLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(Lbl_codigoNombre)
@@ -614,6 +537,92 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void Btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseClicked
+        if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_nombre) && Txt_descripcion.getText() != "") {
+            if (prcs_repetidos.isNumeric(Txt_codigo.getText())) {
+                MetodoDePagoDAO metodoDePagoDAO = new MetodoDePagoDAO();
+                metodoDePago.setId(Txt_codigo.getText());
+                metodoDePago.setNombre(Txt_nombre.getText());
+                metodoDePago.setDescripcion(Txt_descripcion.getText());
+                if (Rdb_activo.isSelected()) {
+                    metodoDePago.setEstado("1");
+                } else if (Rdb_inactivo.isSelected()) {
+                    metodoDePago.setEstado("0");
+                }
+                metodoDePagoDAO.insert(metodoDePago);
+                actualizarTabla("");
+                prcs_repetidos.AlertaMensaje("guardado", "Metodo de Pago", "exitosamente");
+                Limpiar();
+            } else {
+            }
+        }
+    }//GEN-LAST:event_Btn_guardarMouseClicked
+
+    private void Btn_guardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseEntered
+        Btn_fondoGuardar.setBackground(new Color(114, 243, 227));
+    }//GEN-LAST:event_Btn_guardarMouseEntered
+
+    private void Btn_guardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseExited
+        Btn_fondoGuardar.setBackground(new Color(97, 212, 195));
+    }//GEN-LAST:event_Btn_guardarMouseExited
+
+    private void Btn_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseClicked
+        if (prcs_repetidos.isNoneEmpty(Txt_codigo)) {
+            if (prcs_repetidos.isNumeric(Txt_codigo.getText())) {
+                if (prcs_repetidos.ConfirmarEliminacion("eliminar", "servicio", this)) {
+                    MetodoDePagoDAO metodoDePagoDAO = new MetodoDePagoDAO();
+                    metodoDePago.setId(Txt_codigo.getText());
+                    metodoDePagoDAO.delete(metodoDePago);
+                    actualizarTabla("");
+                    prcs_repetidos.AlertaMensaje("eliminado", "Metodo de Pago", "exitosamente");
+                    Limpiar();
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo eliminar el servicio");
+                }
+            }
+        }
+    }//GEN-LAST:event_Btn_eliminarMouseClicked
+
+    private void Btn_eliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseEntered
+        Btn_fondo_eliminar.setBackground(new Color(114, 243, 227));
+    }//GEN-LAST:event_Btn_eliminarMouseEntered
+
+    private void Btn_eliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseExited
+        Btn_fondo_eliminar.setBackground(new Color(97, 212, 195));
+    }//GEN-LAST:event_Btn_eliminarMouseExited
+
+    private void Btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseClicked
+        if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_nombre) && Txt_descripcion.getText() != "") {
+            if (prcs_repetidos.isSelected(Rdb_activo, Rdb_inactivo)) {
+                if (prcs_repetidos.isNumeric(Txt_codigo.getText())) {
+
+                    MetodoDePagoDAO metodoDePagoDAO = new MetodoDePagoDAO();
+
+                    metodoDePago.setId(Txt_codigo.getText());
+                    metodoDePago.setNombre(Txt_nombre.getText());
+                    metodoDePago.setDescripcion(Txt_descripcion.getText());
+                    if (Rdb_activo.isSelected()) {
+                        metodoDePago.setEstado("1");
+                    } else if (Rdb_inactivo.isSelected()) {
+                        metodoDePago.setEstado("0");
+                    }
+                    metodoDePagoDAO.update(metodoDePago);
+                    actualizarTabla("");
+                    prcs_repetidos.AlertaMensaje("modificado", "Servicio", "exitosamente");
+                    Limpiar();
+                }
+            }
+        }
+    }//GEN-LAST:event_Btn_modificarMouseClicked
+
+    private void Btn_modificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseEntered
+        Btn_fondo_modificar.setBackground(new Color(114, 243, 227));
+    }//GEN-LAST:event_Btn_modificarMouseEntered
+
+    private void Btn_modificarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseExited
+        Btn_fondo_modificar.setBackground(new Color(97, 212, 195));
+    }//GEN-LAST:event_Btn_modificarMouseExited
+
     private void Btn_reporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseEntered
         Btn_fondo_reporte.setBackground(new Color(114, 243, 227));
     }//GEN-LAST:event_Btn_reporteMouseEntered
@@ -621,30 +630,6 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
     private void Btn_reporteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseExited
         Btn_fondo_reporte.setBackground(new Color(97, 212, 195));
     }//GEN-LAST:event_Btn_reporteMouseExited
-
-    private void Btn_guardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseEntered
-        Btn_fondoGuardar.setBackground(new Color(114, 243, 227));
-    }//GEN-LAST:event_Btn_guardarMouseEntered
-
-    private void Btn_eliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseEntered
-        Btn_fondo_eliminar.setBackground(new Color(114, 243, 227));
-    }//GEN-LAST:event_Btn_eliminarMouseEntered
-
-    private void Btn_modificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseEntered
-        Btn_fondo_modificar.setBackground(new Color(114, 243, 227));
-    }//GEN-LAST:event_Btn_modificarMouseEntered
-
-    private void Btn_guardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseExited
-        Btn_fondoGuardar.setBackground(new Color(97, 212, 195));
-    }//GEN-LAST:event_Btn_guardarMouseExited
-
-    private void Btn_eliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseExited
-        Btn_fondo_eliminar.setBackground(new Color(97, 212, 195));
-    }//GEN-LAST:event_Btn_eliminarMouseExited
-
-    private void Btn_modificarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseExited
-        Btn_fondo_modificar.setBackground(new Color(97, 212, 195));
-    }//GEN-LAST:event_Btn_modificarMouseExited
 
     private void Btn_ayudaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseEntered
         Btn_fondo_ayuda.setBackground(new Color(255, 255, 63));
@@ -654,6 +639,10 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
         Btn_fondo_ayuda.setBackground(new Color(253, 255, 182));
     }//GEN-LAST:event_Btn_ayudaMouseExited
 
+    private void Btn_cancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelarMouseClicked
+        Limpiar();
+    }//GEN-LAST:event_Btn_cancelarMouseClicked
+
     private void Btn_cancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelarMouseEntered
         Btn_fondo_cancelar.setBackground(new Color(255, 52, 31));
     }//GEN-LAST:event_Btn_cancelarMouseEntered
@@ -661,6 +650,23 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
     private void Btn_cancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelarMouseExited
         Btn_fondo_cancelar.setBackground(new Color(255, 128, 115));
     }//GEN-LAST:event_Btn_cancelarMouseExited
+
+    private void Tbl_DatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_DatosMouseClicked
+        if (evt.getClickCount() == 2) {
+            Txt_codigo.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 0).toString());
+            Txt_nombre.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 1).toString());
+            Txt_descripcion.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString());
+            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString().equals("Activo")) {
+                Rdb_activo.setSelected(true);
+            } else {
+                Rdb_inactivo.setSelected(true);
+            }
+        }
+    }//GEN-LAST:event_Tbl_DatosMouseClicked
+
+    private void Btn_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseClicked
+        actualizarTabla(Txt_buscar.getText());
+    }//GEN-LAST:event_Btn_buscarMouseClicked
 
     private void Btn_buscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseEntered
         Btn_fondo_buscar.setBackground(new Color(114, 243, 227));
@@ -670,117 +676,9 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
         Btn_fondo_buscar.setBackground(new Color(97, 212, 195));
     }//GEN-LAST:event_Btn_buscarMouseExited
 
-    private void Btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_nombre, Txt_precio) && Txt_descripcion.getText() != "") {
-            if (prcs_repetidos.isSelected(Rdb_adicional, Rdb_basico, Rdb_activo, Rdb_inactivo)) {
-                if (prcs_repetidos.isNumeric(Txt_codigo.getText(), Txt_precio.getText())) {
-                    ServicioDAO serviciosdao = new ServicioDAO();
-                    servicios.setId(Txt_codigo.getText());
-                    servicios.setNombre(Txt_nombre.getText());
-                    servicios.setDescripcion(Txt_descripcion.getText());
-                    if (Rdb_basico.isSelected()) {
-                        servicios.setTipo("1");
-                    } else if (Rdb_adicional.isSelected()) {
-                        servicios.setTipo("2");
-                    }
-                    if (Rdb_activo.isSelected()) {
-                        servicios.setEstado("1");
-                    } else if (Rdb_inactivo.isSelected()) {
-                        servicios.setEstado("0");
-                    }
-                    servicios.setPrecio(Txt_precio.getText());
-                    serviciosdao.insert(servicios);
-                    actualizarTabla("");
-                    prcs_repetidos.AlertaMensaje("guardado", "Servicio", "exitosamente");
-                    Limpiar();
-                } else {
-                }
-            }
-        }
-    }//GEN-LAST:event_Btn_guardarMouseClicked
-
-    private void Btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_nombre, Txt_precio) && Txt_descripcion.getText() != "") {
-            if (prcs_repetidos.isSelected(Rdb_adicional, Rdb_basico)) {
-                if (prcs_repetidos.isSelected(Rdb_activo, Rdb_inactivo)) {
-                    if (prcs_repetidos.isNumeric(Txt_codigo.getText(), Txt_precio.getText())) {
-
-                        ServicioDAO serviciosdao = new ServicioDAO();
-
-                        servicios.setId(Txt_codigo.getText());
-                        servicios.setNombre(Txt_nombre.getText());
-                        servicios.setDescripcion(Txt_descripcion.getText());
-                        servicios.setPrecio(Txt_precio.getText());
-
-                        if (Rdb_basico.isSelected()) {
-                            servicios.setTipo("1");
-                        } else if (Rdb_adicional.isSelected()) {
-                            servicios.setTipo("2");
-                        }
-
-                        if (Rdb_activo.isSelected()) {
-                            servicios.setEstado("1");
-                        } else if (Rdb_inactivo.isSelected()) {
-                            servicios.setEstado("0");
-                        }
-                        serviciosdao.update(servicios);
-                        actualizarTabla("");
-                        prcs_repetidos.AlertaMensaje("modificado", "Servicio", "exitosamente");
-                        Limpiar();
-                    }
-                }
-            }
-        }
-    }//GEN-LAST:event_Btn_modificarMouseClicked
-
-    private void Btn_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_codigo)) {
-            if (prcs_repetidos.isNumeric(Txt_codigo.getText())) {
-                if (prcs_repetidos.ConfirmarEliminacion("eliminar", "servicio", this)) {
-                    ServicioDAO serviciosdao = new ServicioDAO();
-                    servicios.setId(Txt_codigo.getText());
-                    serviciosdao.delete(servicios);
-                    actualizarTabla("");
-                    prcs_repetidos.AlertaMensaje("eliminado", "Servicio", "exitosamente");
-                    Limpiar();
-                } else {
-                    JOptionPane.showMessageDialog(null, "No se pudo eliminar el servicio");
-                }
-            }
-        }
-    }//GEN-LAST:event_Btn_eliminarMouseClicked
-
-    private void Tbl_DatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_DatosMouseClicked
-        if (evt.getClickCount() == 2) {
-            Txt_codigo.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 0).toString());
-            Txt_nombre.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 1).toString());
-            Txt_descripcion.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString());
-            Txt_precio.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString());
-            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 4).toString().equals("Básico")) {
-                Rdb_basico.setSelected(true);
-            } else {
-                Rdb_adicional.setSelected(true);
-            }
-            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 5).toString().equals("Activo")) {
-                Rdb_activo.setSelected(true);
-            } else {
-                Rdb_inactivo.setSelected(true);
-            }
-        }
-    }//GEN-LAST:event_Tbl_DatosMouseClicked
-
-    private void Btn_cancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelarMouseClicked
-        Limpiar();
-    }//GEN-LAST:event_Btn_cancelarMouseClicked
-
-    private void Btn_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseClicked
-        actualizarTabla(Txt_buscar.getText());
-    }//GEN-LAST:event_Btn_buscarMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup BtnGp_estado;
-    private javax.swing.ButtonGroup BtnGp_tipo;
+    private javax.swing.ButtonGroup BtnGrp_estado;
     private javax.swing.JLabel Btn_ayuda;
     private javax.swing.JLabel Btn_buscar;
     private javax.swing.JLabel Btn_cancelar;
@@ -800,27 +698,20 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
     private javax.swing.JLabel Lbl_estado;
     private javax.swing.JLabel Lbl_id;
     private javax.swing.JLabel Lbl_nombre;
-    private javax.swing.JLabel Lbl_precio;
-    private javax.swing.JLabel Lbl_tiposServicio;
     private javax.swing.JPanel Pnl_datos;
     private javax.swing.JPanel Pnl_ingresoDatos;
     private javax.swing.JRadioButton Rdb_activo;
-    private javax.swing.JRadioButton Rdb_adicional;
-    private javax.swing.JRadioButton Rdb_basico;
     private javax.swing.JRadioButton Rdb_inactivo;
     private javax.swing.JRadioButton Rdb_limpiar;
-    private javax.swing.JRadioButton Rdb_limpiar2;
     private javax.swing.JTable Tbl_Datos;
     private javax.swing.JTextField Txt_buscar;
     private javax.swing.JTextField Txt_codigo;
     private javax.swing.JTextArea Txt_descripcion;
     private javax.swing.JTextField Txt_nombre;
-    private javax.swing.JTextField Txt_precio;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator7;
     // End of variables declaration//GEN-END:variables
 }

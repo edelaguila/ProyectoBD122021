@@ -1,4 +1,5 @@
 reportes\reportes.class
+datos\MetodoDePagoDAO.class
 dominio\ProcesosRepetidos$2.class
 vista\Mnt_Servicios$4.class
 vista\Mnt_Servicios.class
@@ -11,9 +12,13 @@ vista\Hoteleria_MDI$3.class
 vista\Hoteleria_MDI.class
 vista\Mnt_Servicios$1.class
 vista\Mnt_Servicios$7.class
+dominio\MetodoDePago.class
 ayudas\ayudas.class
+vista\Mnt_Servicios$8.class
 dominio\ProcesosRepetidos.class
 vista\Hoteleria_MDI$2.class
 vista\Mnt_Servicios$2.class
 vista\Mnt_Servicios$6.class
+dominio\Servicio.class
+datos\Conexion.class
 vista\Mnt_Servicios$5.class
