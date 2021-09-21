@@ -22,8 +22,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     private Mnt_Servicios form_Mant_Servicios;
     private Mnt_Huespedes form_Mant_Huespedes;
     private Mnt_Habitaciones form_Mant_Habitaciones;
-    
-
+    private Mnt_MetodoDePago form_Mnt_MetodoDePago;
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     public static JLabel Jl_logo = new JLabel();
 
@@ -75,6 +74,8 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         MnI_Servicios = new javax.swing.JMenuItem();
         MnI_Huespedes = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        MnI_servicios = new javax.swing.JMenuItem();
+        MnI_metodoDePago = new javax.swing.JMenuItem();
         Sbm_procesos = new javax.swing.JMenu();
         Sbm_herramientas = new javax.swing.JMenu();
         Sbm_ayuda = new javax.swing.JMenu();
@@ -108,13 +109,21 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
 
         Mnu_mantenimientos.setText("Mantenimientos");
 
-        MnI_Servicios.setText("Mant. Servicios");
-        MnI_Servicios.addActionListener(new java.awt.event.ActionListener() {
+        MnI_servicios.setText("Mant. Servicios");
+        MnI_servicios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnI_ServiciosActionPerformed(evt);
+                MnI_serviciosActionPerformed(evt);
             }
         });
-        Mnu_mantenimientos.add(MnI_Servicios);
+        Mnu_mantenimientos.add(MnI_servicios);
+
+        MnI_metodoDePago.setText("Mant. Metodos de Pago");
+        MnI_metodoDePago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnI_metodoDePagoActionPerformed(evt);
+            }
+        });
+        Mnu_mantenimientos.add(MnI_metodoDePago);
 
         MnI_Huespedes.setText("Mant. Huespedes");
         MnI_Huespedes.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +182,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         logo();
     }//GEN-LAST:event_formComponentResized
 
-    private void MnI_ServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_ServiciosActionPerformed
+    private void MnI_serviciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_serviciosActionPerformed
         form_Mant_Servicios = new Mnt_Servicios();
 
         Jdp_contenedor.add(form_Mant_Servicios);
@@ -182,7 +191,18 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Mant_Servicios.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         form_Mant_Servicios.setVisible(true);
         form_Mant_Servicios.toFront();
-    }//GEN-LAST:event_MnI_ServiciosActionPerformed
+    }//GEN-LAST:event_MnI_serviciosActionPerformed
+
+    private void MnI_metodoDePagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_metodoDePagoActionPerformed
+        form_Mnt_MetodoDePago = new Mnt_MetodoDePago();
+
+        Jdp_contenedor.add(form_Mnt_MetodoDePago);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_Mnt_MetodoDePago.getSize();
+        form_Mnt_MetodoDePago.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_Mnt_MetodoDePago.setVisible(true);
+        form_Mnt_MetodoDePago.toFront();
+    }//GEN-LAST:event_MnI_metodoDePagoActionPerformed
 
     private void MnI_HuespedesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_HuespedesActionPerformed
         // TODO add your handling code here:
@@ -231,6 +251,8 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     private javax.swing.JDesktopPane Jdp_contenedor;
     private javax.swing.JMenuItem MnI_Huespedes;
     private javax.swing.JMenuItem MnI_Servicios;
+    private javax.swing.JMenuItem MnI_metodoDePago;
+    private javax.swing.JMenuItem MnI_servicios;
     private javax.swing.JMenuBar Mnb_menu;
     private javax.swing.JMenu Mnu_mantenimientos;
     private javax.swing.JMenu Sbm_archivos;
