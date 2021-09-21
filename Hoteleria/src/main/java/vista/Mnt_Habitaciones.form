@@ -4,12 +4,17 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup2">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup3">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="41" green="2f" red="24" type="rgb"/>
     </Property>
     <Property name="closable" type="boolean" value="true"/>
+    <Property name="iconifiable" type="boolean" value="true"/>
     <Property name="maximizable" type="boolean" value="true"/>
     <Property name="resizable" type="boolean" value="true"/>
   </Properties>
@@ -45,8 +50,8 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="Pnl_ingresoDatos" max="32767" attributes="0"/>
-                  <Component id="Pnl_datos" max="32767" attributes="0"/>
+                  <Component id="Pnl_datos" alignment="1" max="32767" attributes="0"/>
+                  <Component id="Pnl_ingresoDatos" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -71,7 +76,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
@@ -93,47 +98,51 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="Lbl_id" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <Component id="Lbl_nombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="Lbl_precio" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="Lbl_estado" min="-2" max="-2" attributes="0"/>
+                              <Component id="Lbl_tiposServicio1" min="-2" max="-2" attributes="0"/>
+                              <Component id="Lbl_precio" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="Lbl_id" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                          <Component id="Lbl_nombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="Lbl_descripcion" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="Lbl_tiposServicio" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="Txt_cantidad" alignment="1" pref="200" max="32767" attributes="0"/>
+                                          <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="Txt_codigo" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="Txt_Piso" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="Txt_codigo" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="Txt_nombre" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="Txt_apellido" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="jSeparator4" alignment="1" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="Rdb_Masculino" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Txt_precio" alignment="1" min="-2" pref="201" max="-2" attributes="0"/>
+                                  <Component id="jSeparator4" alignment="1" min="-2" pref="201" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="Rdb_limpio" min="-2" pref="75" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="Rdb_limpiar2" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="Rdb_Femenino" min="-2" max="-2" attributes="0"/>
+                                          <Component id="Rdb_sucio" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="Rdb_Familiar" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="Rdb_limpiar3" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="Rdb_Individual" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="Lbl_precio1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="Lbl_precio2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="Lbl_precio3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="Lbl_precio4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jSeparator6" pref="201" max="32767" attributes="0"/>
-                                      <Component id="Txt_nacionalidad" alignment="0" pref="201" max="32767" attributes="0"/>
-                                      <Component id="jSeparator5" alignment="0" pref="201" max="32767" attributes="0"/>
-                                      <Component id="Txt_correo" alignment="0" pref="201" max="32767" attributes="0"/>
-                                      <Component id="Txt_telefono" pref="201" max="32767" attributes="0"/>
-                                      <Component id="jSeparator8" alignment="0" pref="201" max="32767" attributes="0"/>
-                                      <Component id="jSeparator9" alignment="0" pref="201" max="32767" attributes="0"/>
-                                      <Component id="Txt_cumple" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="Lbl_estado" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                                      <Component id="Rdb_activo" min="-2" pref="75" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="Rdb_limpiar" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="Rdb_inactivo" pref="85" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -146,7 +155,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -154,65 +163,60 @@
                               <Component id="Lbl_id" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                          <Component id="jSeparator1" min="-2" pref="2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="Txt_nombre" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="Txt_cantidad" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="Lbl_nombre" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                           <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="Lbl_precio" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="Txt_apellido" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="Lbl_descripcion" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Txt_Piso" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jSeparator4" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="Lbl_estado" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="Rdb_Masculino" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="Lbl_tiposServicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="Rdb_limpio" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="Rdb_Femenino" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="Rdb_sucio" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <Component id="Rdb_limpiar2" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Lbl_precio1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Txt_nacionalidad" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSeparator6" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Lbl_precio2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Txt_telefono" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSeparator5" min="-2" pref="6" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="Txt_correo" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="Lbl_precio3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                          <Component id="Lbl_tiposServicio1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Rdb_Familiar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="Rdb_limpiar3" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="Rdb_Individual" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="Rdb_activo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Lbl_estado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="Rdb_limpiar" min="-2" max="-2" attributes="0"/>
+                      <Component id="Rdb_inactivo" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="Lbl_precio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Txt_precio" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSeparator8" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="Lbl_precio4" min="-2" max="-2" attributes="0"/>
-                      <Component id="Txt_cumple" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSeparator9" min="-2" max="-2" attributes="0"/>
+                  <Component id="jSeparator4" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="Btn_fondo_reporte" alignment="0" max="32767" attributes="0"/>
@@ -239,7 +243,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="PASAPORTE:"/>
+            <Property name="text" type="java.lang.String" value="ID:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="Lbl_nombre">
@@ -250,7 +254,18 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="NOMBRE:"/>
+            <Property name="text" type="java.lang.String" value="Cantidad Max:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="Lbl_descripcion">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Ubuntu" size="14" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Piso:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="Lbl_precio">
@@ -261,7 +276,18 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="APELLIDO:"/>
+            <Property name="text" type="java.lang.String" value="Precio:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="Lbl_tiposServicio">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Ubuntu" size="14" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Limpieza:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="Lbl_estado">
@@ -272,7 +298,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="SEXO:"/>
+            <Property name="text" type="java.lang.String" value="Estado:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="Txt_codigo">
@@ -288,7 +314,7 @@
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
         </Component>
-        <Component class="javax.swing.JTextField" name="Txt_nombre">
+        <Component class="javax.swing.JTextField" name="Txt_cantidad">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="41" green="2f" red="24" type="rgb"/>
@@ -301,7 +327,7 @@
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
         </Component>
-        <Component class="javax.swing.JTextField" name="Txt_apellido">
+        <Component class="javax.swing.JTextField" name="Txt_precio">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="41" green="2f" red="24" type="rgb"/>
@@ -314,7 +340,7 @@
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator4">
         </Component>
-        <Component class="javax.swing.JRadioButton" name="Rdb_Masculino">
+        <Component class="javax.swing.JRadioButton" name="Rdb_limpio">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroup1"/>
@@ -325,20 +351,55 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Masculino"/>
+            <Property name="text" type="java.lang.String" value="Limpia"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="Rdb_sucio">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="buttonGroup1"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Ubuntu" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Sucia"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="Rdb_limpiar">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="buttonGroup1"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="Rdb_activo">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="buttonGroup2"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Ubuntu" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Activa"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="Rdb_limpiar2">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="buttonGroup1"/>
+              <ComponentRef name="buttonGroup2"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="Rdb_Femenino">
+        <Component class="javax.swing.JRadioButton" name="Rdb_inactivo">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="buttonGroup1"/>
+              <ComponentRef name="buttonGroup2"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Ubuntu" size="14" style="0"/>
@@ -346,7 +407,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Femenino"/>
+            <Property name="text" type="java.lang.String" value="Inactiva"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="Btn_fondoGuardar">
@@ -569,7 +630,17 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="Lbl_precio1">
+        <Component class="javax.swing.JComboBox" name="Txt_Piso">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="Lbl_tiposServicio1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Ubuntu" size="14" style="1"/>
@@ -577,84 +648,43 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="NACIONALIDAD:"/>
+            <Property name="text" type="java.lang.String" value="Tipo Habitacion:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="Txt_nacionalidad">
+        <Component class="javax.swing.JRadioButton" name="Rdb_Familiar">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="41" green="2f" red="24" type="rgb"/>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="buttonGroup3"/>
             </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JSeparator" name="jSeparator5">
-        </Component>
-        <Component class="javax.swing.JLabel" name="Lbl_precio2">
-          <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Ubuntu" size="14" style="1"/>
+              <Font name="Ubuntu" size="14" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="TELEFONO:"/>
+            <Property name="text" type="java.lang.String" value="Familiar"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="Txt_correo">
+        <Component class="javax.swing.JRadioButton" name="Rdb_limpiar3">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="41" green="2f" red="24" type="rgb"/>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="buttonGroup3"/>
             </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSeparator" name="jSeparator6">
-        </Component>
-        <Component class="javax.swing.JLabel" name="Lbl_precio3">
+        <Component class="javax.swing.JRadioButton" name="Rdb_Individual">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="buttonGroup3"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Ubuntu" size="14" style="1"/>
+              <Font name="Ubuntu" size="14" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="CORREO:"/>
+            <Property name="text" type="java.lang.String" value="Individual"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="Txt_telefono">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="41" green="2f" red="24" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JSeparator" name="jSeparator8">
-        </Component>
-        <Component class="javax.swing.JLabel" name="Lbl_precio4">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Ubuntu" size="14" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="CUMPLEA&#xd1;OS:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JSeparator" name="jSeparator9">
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="Txt_cumple">
         </Component>
       </SubComponents>
     </Container>
@@ -678,7 +708,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" alignment="0" pref="670" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="0" pref="676" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                           <Component id="Lbl_codigoNombre" min="-2" max="-2" attributes="0"/>
@@ -712,7 +742,7 @@
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" pref="499" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" pref="480" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -727,7 +757,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Pasaporte o Nombre:"/>
+            <Property name="text" type="java.lang.String" value="C&#xf3;digo:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="Txt_buscar">

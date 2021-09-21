@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author leelu
  */
-public class huespedesDAO {
+public class HuespedesDAO {
     public static String codigoAuxiliar, nombreAuxiliar, apellidoAuxiliar;
     private static final String SQL_INSERT = "insert into tbl_huesped values(?,?,?,?,?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE tbl_huesped SET nombre_huesped=?, apellido_huesped=?, nacionalidad_huesped=?, direccion_huesped=?, sexo_huesped=?, telefono_huesped=?, cumpleaños_huesped=? WHERE PK_no_identificacion=?";
@@ -106,7 +106,6 @@ public class huespedesDAO {
                 String sexo = rs.getString("sexo_huesped");
                 String telefono = rs.getString("telefono_huesped");
                 String cumple = rs.getString("cumpleaños_huesped");
-
                 huespedes = new Huespedes();
                 huespedes.setPasaporte(id);
                 huespedes.setNombre(nombre);

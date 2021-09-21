@@ -5,88 +5,83 @@
  */
 package vista;
 
-import datos.HuespedesDAO;
+import datos.HabitacionDAO;
+import dominio.Habitaciones;
 import dominio.ProcesosRepetidos;
-import dominio.Huespedes;
 import java.awt.Color;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author leelu
  */
-public class Mnt_Huespedes extends javax.swing.JInternalFrame {
+public class Mnt_Habitaciones extends javax.swing.JInternalFrame {
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
-    Huespedes huespedes = new Huespedes();
-    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-    Date fechaCumpleaños = null;
-            String fechaCumpleañosAux="";
-    
+    Habitaciones servicios = new Habitaciones();
 
     /**
-     * Creates new form Mnt_Huespedes
+     * Creates new form Mnt_Habitaciones
      */
-    public Mnt_Huespedes() {
+    public Mnt_Habitaciones() {
         initComponents();
         diseño();
         actualizarTabla("");
     }
     
     public void diseño() {
-        this.setTitle("Mantenimiento de Huespedes");
+        this.setTitle("Mantenimiento de Servicios");
         Txt_codigo.setBorder(null);
-        Txt_nombre.setBorder(null);
-        Txt_apellido.setBorder(null);
-        Txt_nacionalidad.setBorder(null);
-        Txt_telefono.setBorder(null);
-        Txt_correo.setBorder(null);
-        Txt_cumple.setBorder(null);
-        Txt_apellido.setBorder(null);
+        Txt_cantidad.setBorder(null);
+        Txt_precio.setBorder(null);
         Txt_buscar.setBorder(null);
+        Rdb_limpiar.setVisible(false);
         Rdb_limpiar2.setVisible(false);
+        Rdb_limpiar3.setVisible(false);
+        Txt_Piso.setBorder(null);
         prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar);
     }
     
     public void actualizarTabla(String codigo) {
         ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
-        HuespedesDAO.codigoAuxiliar = codigo;
-        HuespedesDAO.nombreAuxiliar = codigo;
-        HuespedesDAO.apellidoAuxiliar = codigo;
-        String columnas[] = {"PASAPORTE", "NOMBRE", "APELLIDO","SEXO", "NACIONALIDAD", "TELEFONO", "CORREO", "CUMPLEAÑOS"};
+        HabitacionDAO.codigoAuxiliar = codigo;
+        String columnas[] = {"ID", "PISO", "LIMPIEZA", "CANTIDAD", "TIPO", "PRECIO", "ESTADO"};
         int cantidadcolumnas = columnas.length;
         prcs_repetidos.llenarColumnas(columnas, cantidadcolumnas, Tbl_Datos);
         String datos[] = new String[cantidadcolumnas];
-        int tamaño[] = {150, 150, 200, 50, 150, 150, 150, 150};
-        HuespedesDAO serviciosdao = new HuespedesDAO();
-        List<Huespedes> servicio = serviciosdao.select();
-        for (Huespedes listaServicio : servicio) {
-            datos[0] = listaServicio.getPasaporte();
-            datos[1] = listaServicio.getNombre();
-            datos[2] = listaServicio.getApellido();
-            if (listaServicio.getSexo().equals("M")) {
-                datos[3] = "M";
+        int tamaño[] = {100, 100, 250, 100, 150, 100, 100};
+        HabitacionDAO serviciosdao = new HabitacionDAO();
+        List<Habitaciones> servicio = serviciosdao.select();
+        for (Habitaciones listaServicio : servicio) {
+            datos[0] = listaServicio.getId();
+            datos[1] = listaServicio.getPiso();
+            if (listaServicio.getLimpieza().equals("1")) {
+                datos[2] = "Limpia";
             } else {
-                datos[3] = "F";
+                datos[2] = "Sucia";
             }
-            datos[4] = listaServicio.getNacionalidad();
-            datos[5] = listaServicio.getTelefono();
-            datos[6] = listaServicio.getDireccion();
-            datos[7] = listaServicio.getCumple();
+            datos[3] = listaServicio.getTipo();
+            if (listaServicio.getTipo().equals("1")) {
+                datos[4] = "Familiar";
+            } else {
+                datos[4] = "Individual";
+            }
+            datos[5] = listaServicio.getPrecio();
+            if (listaServicio.getEstado().equals("1")) {
+                datos[6] = "Activo";
+            } else {
+                datos[6] = "Inactivo";
+            }
             prcs_repetidos.llenarFilas(datos, tamaño, Tbl_Datos);
         }
     }
-
+    
     public void Limpiar() {
-        prcs_repetidos.Limpiar(Txt_codigo, Txt_nombre, Txt_apellido, Txt_buscar, Txt_nacionalidad, Txt_telefono, Txt_correo);
+        prcs_repetidos.Limpiar(Txt_codigo, Txt_cantidad, Txt_precio, Txt_buscar);
+        Txt_Piso.setSelectedItem("Seleccionar...");
+        Rdb_limpiar.setSelected(true);
         Rdb_limpiar2.setSelected(true);
-        Txt_cumple.setDate(null);
+        Rdb_limpiar3.setSelected(true);
     }
 
     /**
@@ -99,20 +94,27 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         Pnl_ingresoDatos = new javax.swing.JPanel();
         Lbl_id = new javax.swing.JLabel();
         Lbl_nombre = new javax.swing.JLabel();
+        Lbl_descripcion = new javax.swing.JLabel();
         Lbl_precio = new javax.swing.JLabel();
+        Lbl_tiposServicio = new javax.swing.JLabel();
         Lbl_estado = new javax.swing.JLabel();
         Txt_codigo = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        Txt_nombre = new javax.swing.JTextField();
+        Txt_cantidad = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
-        Txt_apellido = new javax.swing.JTextField();
+        Txt_precio = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
-        Rdb_Masculino = new javax.swing.JRadioButton();
+        Rdb_limpio = new javax.swing.JRadioButton();
+        Rdb_sucio = new javax.swing.JRadioButton();
+        Rdb_limpiar = new javax.swing.JRadioButton();
+        Rdb_activo = new javax.swing.JRadioButton();
         Rdb_limpiar2 = new javax.swing.JRadioButton();
-        Rdb_Femenino = new javax.swing.JRadioButton();
+        Rdb_inactivo = new javax.swing.JRadioButton();
         Btn_fondoGuardar = new javax.swing.JPanel();
         Btn_guardar = new javax.swing.JLabel();
         Btn_fondo_eliminar = new javax.swing.JPanel();
@@ -125,18 +127,11 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
         Btn_ayuda = new javax.swing.JLabel();
         Btn_fondo_cancelar = new javax.swing.JPanel();
         Btn_cancelar = new javax.swing.JLabel();
-        Lbl_precio1 = new javax.swing.JLabel();
-        Txt_nacionalidad = new javax.swing.JTextField();
-        jSeparator5 = new javax.swing.JSeparator();
-        Lbl_precio2 = new javax.swing.JLabel();
-        Txt_correo = new javax.swing.JTextField();
-        jSeparator6 = new javax.swing.JSeparator();
-        Lbl_precio3 = new javax.swing.JLabel();
-        Txt_telefono = new javax.swing.JTextField();
-        jSeparator8 = new javax.swing.JSeparator();
-        Lbl_precio4 = new javax.swing.JLabel();
-        jSeparator9 = new javax.swing.JSeparator();
-        Txt_cumple = new com.toedter.calendar.JDateChooser();
+        Txt_Piso = new javax.swing.JComboBox<>();
+        Lbl_tiposServicio1 = new javax.swing.JLabel();
+        Rdb_Familiar = new javax.swing.JRadioButton();
+        Rdb_limpiar3 = new javax.swing.JRadioButton();
+        Rdb_Individual = new javax.swing.JRadioButton();
         Pnl_datos = new javax.swing.JPanel();
         Lbl_codigoNombre = new javax.swing.JLabel();
         Txt_buscar = new javax.swing.JTextField();
@@ -148,6 +143,7 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
 
         setBackground(new java.awt.Color(36, 47, 65));
         setClosable(true);
+        setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
 
@@ -156,43 +152,63 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
 
         Lbl_id.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_id.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_id.setText("PASAPORTE:");
+        Lbl_id.setText("ID:");
 
         Lbl_nombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_nombre.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_nombre.setText("NOMBRE:");
+        Lbl_nombre.setText("Cantidad Max:");
+
+        Lbl_descripcion.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_descripcion.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_descripcion.setText("Piso:");
 
         Lbl_precio.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_precio.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_precio.setText("APELLIDO:");
+        Lbl_precio.setText("Precio:");
+
+        Lbl_tiposServicio.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_tiposServicio.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_tiposServicio.setText("Limpieza:");
 
         Lbl_estado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_estado.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_estado.setText("SEXO:");
+        Lbl_estado.setText("Estado:");
 
         Txt_codigo.setBackground(new java.awt.Color(36, 47, 65));
         Txt_codigo.setForeground(new java.awt.Color(255, 255, 255));
         Txt_codigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        Txt_nombre.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_nombre.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Txt_cantidad.setBackground(new java.awt.Color(36, 47, 65));
+        Txt_cantidad.setForeground(new java.awt.Color(255, 255, 255));
+        Txt_cantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        Txt_apellido.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_apellido.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_apellido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Txt_precio.setBackground(new java.awt.Color(36, 47, 65));
+        Txt_precio.setForeground(new java.awt.Color(255, 255, 255));
+        Txt_precio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        buttonGroup1.add(Rdb_Masculino);
-        Rdb_Masculino.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
-        Rdb_Masculino.setForeground(new java.awt.Color(255, 255, 255));
-        Rdb_Masculino.setText("Masculino");
+        buttonGroup1.add(Rdb_limpio);
+        Rdb_limpio.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        Rdb_limpio.setForeground(new java.awt.Color(255, 255, 255));
+        Rdb_limpio.setText("Limpia");
 
-        buttonGroup1.add(Rdb_limpiar2);
+        buttonGroup1.add(Rdb_sucio);
+        Rdb_sucio.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        Rdb_sucio.setForeground(new java.awt.Color(255, 255, 255));
+        Rdb_sucio.setText("Sucia");
 
-        buttonGroup1.add(Rdb_Femenino);
-        Rdb_Femenino.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
-        Rdb_Femenino.setForeground(new java.awt.Color(255, 255, 255));
-        Rdb_Femenino.setText("Femenino");
+        buttonGroup1.add(Rdb_limpiar);
+
+        buttonGroup2.add(Rdb_activo);
+        Rdb_activo.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        Rdb_activo.setForeground(new java.awt.Color(255, 255, 255));
+        Rdb_activo.setText("Activa");
+
+        buttonGroup2.add(Rdb_limpiar2);
+
+        buttonGroup2.add(Rdb_inactivo);
+        Rdb_inactivo.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        Rdb_inactivo.setForeground(new java.awt.Color(255, 255, 255));
+        Rdb_inactivo.setText("Inactiva");
 
         Btn_fondoGuardar.setBackground(new java.awt.Color(97, 212, 195));
 
@@ -360,33 +376,21 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
             .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        Lbl_precio1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_precio1.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_precio1.setText("NACIONALIDAD:");
+        Lbl_tiposServicio1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_tiposServicio1.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_tiposServicio1.setText("Tipo Habitacion:");
 
-        Txt_nacionalidad.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_nacionalidad.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_nacionalidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        buttonGroup3.add(Rdb_Familiar);
+        Rdb_Familiar.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        Rdb_Familiar.setForeground(new java.awt.Color(255, 255, 255));
+        Rdb_Familiar.setText("Familiar");
 
-        Lbl_precio2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_precio2.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_precio2.setText("TELEFONO:");
+        buttonGroup3.add(Rdb_limpiar3);
 
-        Txt_correo.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_correo.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_correo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        Lbl_precio3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_precio3.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_precio3.setText("CORREO:");
-
-        Txt_telefono.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_telefono.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_telefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        Lbl_precio4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_precio4.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_precio4.setText("CUMPLEAÑOS:");
+        buttonGroup3.add(Rdb_Individual);
+        Rdb_Individual.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        Rdb_Individual.setForeground(new java.awt.Color(255, 255, 255));
+        Rdb_Individual.setText("Individual");
 
         javax.swing.GroupLayout Pnl_ingresoDatosLayout = new javax.swing.GroupLayout(Pnl_ingresoDatos);
         Pnl_ingresoDatos.setLayout(Pnl_ingresoDatosLayout);
@@ -410,101 +414,98 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Lbl_nombre)
-                                    .addComponent(Lbl_precio)
-                                    .addComponent(Lbl_estado))
-                                .addGap(35, 35, 35)
-                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Txt_codigo, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Txt_nombre)
-                                    .addComponent(Txt_apellido)
-                                    .addComponent(jSeparator4)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Pnl_ingresoDatosLayout.createSequentialGroup()
-                                        .addComponent(Rdb_Masculino)
+                            .addComponent(Lbl_tiposServicio1)
+                            .addComponent(Lbl_precio)
+                            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(Lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Lbl_nombre)
+                                        .addComponent(Lbl_descripcion)
+                                        .addComponent(Lbl_tiposServicio))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(Txt_cantidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                        .addComponent(jSeparator1)
+                                        .addComponent(Txt_codigo)
+                                        .addComponent(jSeparator2)
+                                        .addComponent(Txt_Piso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(Txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                        .addComponent(Rdb_limpio, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(Rdb_limpiar2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(Rdb_Femenino))))
-                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Lbl_precio1)
-                                    .addComponent(Lbl_precio2)
-                                    .addComponent(Lbl_precio3)
-                                    .addComponent(Lbl_precio4))
-                                .addGap(18, 18, 18)
-                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jSeparator6, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                                    .addComponent(Txt_nacionalidad, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                                    .addComponent(jSeparator5, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                                    .addComponent(Txt_correo, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                                    .addComponent(Txt_telefono, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                                    .addComponent(jSeparator8, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                                    .addComponent(jSeparator9, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                                    .addComponent(Txt_cumple, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                        .addComponent(Rdb_sucio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                        .addComponent(Rdb_Familiar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(Rdb_limpiar3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(Rdb_Individual)))
+                                .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                    .addComponent(Lbl_estado)
+                                    .addGap(65, 65, 65)
+                                    .addComponent(Rdb_activo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(Rdb_limpiar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(Rdb_inactivo, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         Pnl_ingresoDatosLayout.setVerticalGroup(
             Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
+                .addGap(15, 15, 15)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Lbl_id))
                         .addGap(3, 3, 3)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Txt_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Lbl_nombre))
                         .addGap(1, 1, 1)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lbl_precio)
-                            .addComponent(Txt_apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Lbl_descripcion)
+                            .addComponent(Txt_Piso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
+                                .addGap(22, 22, 22)
                                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Lbl_estado)
-                                    .addComponent(Rdb_Masculino)))
+                                    .addComponent(Lbl_tiposServicio)
+                                    .addComponent(Rdb_limpio)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_ingresoDatosLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Rdb_Femenino))))
+                                .addGap(18, 18, 18)
+                                .addComponent(Rdb_sucio))))
                     .addComponent(Rdb_limpiar2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lbl_precio1)
-                    .addComponent(Txt_nacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lbl_precio2)
-                    .addComponent(Txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Txt_correo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lbl_precio3))
+                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Lbl_tiposServicio1)
+                        .addComponent(Rdb_Familiar))
+                    .addComponent(Rdb_limpiar3)
+                    .addComponent(Rdb_Individual))
+                .addGap(18, 18, 18)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Rdb_activo)
+                        .addComponent(Lbl_estado))
+                    .addComponent(Rdb_limpiar)
+                    .addComponent(Rdb_inactivo))
+                .addGap(18, 18, 18)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Lbl_precio)
+                    .addComponent(Txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Lbl_precio4)
-                    .addComponent(Txt_cumple, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -523,7 +524,7 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
 
         Lbl_codigoNombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_codigoNombre.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_codigoNombre.setText("Pasaporte o Nombre:");
+        Lbl_codigoNombre.setText("Código:");
 
         Txt_buscar.setBackground(new java.awt.Color(36, 47, 65));
         Txt_buscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -580,7 +581,7 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
             .addGroup(Pnl_datosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
                     .addGroup(Pnl_datosLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(Lbl_codigoNombre)
@@ -605,7 +606,7 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
                                 .addComponent(Txt_buscar)
                                 .addComponent(Lbl_codigoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -625,33 +626,173 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Pnl_ingresoDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Pnl_datos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Pnl_datos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Pnl_ingresoDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void Btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseClicked
+        if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_cantidad, Txt_precio) && Txt_Piso.getSelectedItem().toString().length()!=0) {
+            if (prcs_repetidos.isSelected(Rdb_limpio, Rdb_sucio, Rdb_activo, Rdb_inactivo, Rdb_Familiar, Rdb_Individual)) {
+                if (prcs_repetidos.isNumeric(Txt_codigo.getText(), Txt_precio.getText(), Txt_cantidad.getText())) {
+                    HabitacionDAO serviciosdao = new HabitacionDAO();
+                    servicios.setId(Txt_codigo.getText());
+                    servicios.setPiso(Txt_Piso.getSelectedItem().toString());
+                    if (Rdb_limpio.isSelected()) {
+                        servicios.setLimpieza("1");
+                    } else if (Rdb_sucio.isSelected()) {
+                        servicios.setLimpieza("2");
+                    }
+                    servicios.setId(Txt_cantidad.getText());
+                    if (Rdb_Familiar.isSelected()) {
+                        servicios.setTipo("1");
+                    } else if (Rdb_Individual.isSelected()) {
+                        servicios.setTipo("2");
+                    }
+                    servicios.setPrecio(Txt_precio.getText());
+                    if (Rdb_activo.isSelected()) {
+                        servicios.setTipo("1");
+                    } else if (Rdb_inactivo.isSelected()) {
+                        servicios.setTipo("0");
+                    }
+                    serviciosdao.insert(servicios);
+                    actualizarTabla("");
+                    prcs_repetidos.AlertaMensaje("guardada", "Habitacion", "exitosamente");
+                    Limpiar();
+                } else {
+                }
+            }
+        }
+    }//GEN-LAST:event_Btn_guardarMouseClicked
+
+    private void Btn_guardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseEntered
+        Btn_fondoGuardar.setBackground(new Color(114, 243, 227));
+    }//GEN-LAST:event_Btn_guardarMouseEntered
+
+    private void Btn_guardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseExited
+        Btn_fondoGuardar.setBackground(new Color(97, 212, 195));
+    }//GEN-LAST:event_Btn_guardarMouseExited
+
+    private void Btn_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseClicked
+        if (prcs_repetidos.isNoneEmpty(Txt_codigo)) {
+            if (prcs_repetidos.isNumeric(Txt_codigo.getText())) {
+                if (prcs_repetidos.ConfirmarEliminacion("eliminar", "Habitacion", this)) {
+                    HabitacionDAO serviciosdao = new HabitacionDAO();
+                    servicios.setId(Txt_codigo.getText());
+                    serviciosdao.delete(servicios);
+                    actualizarTabla("");
+                    prcs_repetidos.AlertaMensaje("eliminada", "habitacion", "exitosamente");
+                    Limpiar();
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo eliminar el servicio");
+                }
+            }
+        }
+    }//GEN-LAST:event_Btn_eliminarMouseClicked
+
+    private void Btn_eliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseEntered
+        Btn_fondo_eliminar.setBackground(new Color(114, 243, 227));
+    }//GEN-LAST:event_Btn_eliminarMouseEntered
+
+    private void Btn_eliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseExited
+        Btn_fondo_eliminar.setBackground(new Color(97, 212, 195));
+    }//GEN-LAST:event_Btn_eliminarMouseExited
+
+    private void Btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseClicked
+        if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_cantidad, Txt_precio) && Txt_Piso.getSelectedItem().toString().length()!=0) {
+            if (prcs_repetidos.isSelected(Rdb_limpio, Rdb_sucio, Rdb_activo, Rdb_inactivo, Rdb_Familiar, Rdb_Individual)) {
+                if (prcs_repetidos.isNumeric(Txt_codigo.getText(), Txt_precio.getText(), Txt_cantidad.getText())) {
+
+                    HabitacionDAO serviciosdao = new HabitacionDAO();
+
+                    servicios.setId(Txt_codigo.getText());
+                    servicios.setPiso(Txt_Piso.getSelectedItem().toString());
+                    if (Rdb_limpio.isSelected()) {
+                        servicios.setLimpieza("1");
+                    } else if (Rdb_sucio.isSelected()) {
+                        servicios.setLimpieza("2");
+                    }
+                    servicios.setId(Txt_cantidad.getText());
+                    if (Rdb_Familiar.isSelected()) {
+                        servicios.setTipo("1");
+                    } else if (Rdb_Individual.isSelected()) {
+                        servicios.setTipo("2");
+                    }
+                    servicios.setPrecio(Txt_precio.getText());
+                    if (Rdb_activo.isSelected()) {
+                        servicios.setTipo("1");
+                    } else if (Rdb_inactivo.isSelected()) {
+                        servicios.setTipo("0");
+                    }
+                    serviciosdao.update(servicios);
+                    actualizarTabla("");
+                    prcs_repetidos.AlertaMensaje("modificada", "Habitacion", "exitosamente");
+                    Limpiar();
+                }
+            }
+        }
+    }//GEN-LAST:event_Btn_modificarMouseClicked
+
+    private void Btn_modificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseEntered
+        Btn_fondo_modificar.setBackground(new Color(114, 243, 227));
+    }//GEN-LAST:event_Btn_modificarMouseEntered
+
+    private void Btn_modificarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseExited
+        Btn_fondo_modificar.setBackground(new Color(97, 212, 195));
+    }//GEN-LAST:event_Btn_modificarMouseExited
+
+    private void Btn_reporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseEntered
+        Btn_fondo_reporte.setBackground(new Color(114, 243, 227));
+    }//GEN-LAST:event_Btn_reporteMouseEntered
+
+    private void Btn_reporteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseExited
+        Btn_fondo_reporte.setBackground(new Color(97, 212, 195));
+    }//GEN-LAST:event_Btn_reporteMouseExited
+
+    private void Btn_ayudaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseEntered
+        Btn_fondo_ayuda.setBackground(new Color(255, 255, 63));
+    }//GEN-LAST:event_Btn_ayudaMouseEntered
+
+    private void Btn_ayudaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseExited
+        Btn_fondo_ayuda.setBackground(new Color(253, 255, 182));
+    }//GEN-LAST:event_Btn_ayudaMouseExited
+
+    private void Btn_cancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelarMouseClicked
+        Limpiar();
+    }//GEN-LAST:event_Btn_cancelarMouseClicked
+
+    private void Btn_cancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelarMouseEntered
+        Btn_fondo_cancelar.setBackground(new Color(255, 52, 31));
+    }//GEN-LAST:event_Btn_cancelarMouseEntered
+
+    private void Btn_cancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelarMouseExited
+        Btn_fondo_cancelar.setBackground(new Color(255, 128, 115));
+    }//GEN-LAST:event_Btn_cancelarMouseExited
+
     private void Tbl_DatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_DatosMouseClicked
         if (evt.getClickCount() == 2) {
             Txt_codigo.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 0).toString());
-            Txt_nombre.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 1).toString());
-            Txt_apellido.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString());
-            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString().equals("M")) {
-                Rdb_Masculino.setSelected(true);
+            Txt_cantidad.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 1).toString());
+            Txt_Piso.setSelectedItem(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString());
+            Txt_precio.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString());
+            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 4).toString().equals("Limpio")) {
+                Rdb_limpio.setSelected(true);
             } else {
-                Rdb_Femenino.setSelected(true);
+                Rdb_sucio.setSelected(true);
             }
-            Txt_nacionalidad.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 4).toString());
-            Txt_telefono.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 5).toString());
-            Txt_correo.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 6).toString());
-            try {
-                fechaCumpleaños=formato.parse(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 7).toString());
-            } catch (ParseException ex) {
-                Logger.getLogger(Mnt_Huespedes.class.getName()).log(Level.SEVERE, null, ex);
+            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 5).toString().equals("Activo")) {
+                Rdb_activo.setSelected(true);
+            } else {
+                Rdb_inactivo.setSelected(true);
             }
-            Txt_cumple.setDate(fechaCumpleaños);
+            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 6).toString().equals("Familiar")) {
+                Rdb_Familiar.setSelected(true);
+            } else {
+                Rdb_Individual.setSelected(true);
+            }
         }
     }//GEN-LAST:event_Tbl_DatosMouseClicked
 
@@ -666,132 +807,6 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
     private void Btn_buscarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseExited
         Btn_fondo_buscar.setBackground(new Color(97, 212, 195));
     }//GEN-LAST:event_Btn_buscarMouseExited
-
-    private void Btn_cancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelarMouseExited
-        Btn_fondo_cancelar.setBackground(new Color(255, 128, 115));
-    }//GEN-LAST:event_Btn_cancelarMouseExited
-
-    private void Btn_cancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelarMouseEntered
-        Btn_fondo_cancelar.setBackground(new Color(255, 52, 31));
-    }//GEN-LAST:event_Btn_cancelarMouseEntered
-
-    private void Btn_cancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelarMouseClicked
-        Limpiar();
-    }//GEN-LAST:event_Btn_cancelarMouseClicked
-
-    private void Btn_ayudaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseExited
-        Btn_fondo_ayuda.setBackground(new Color(253, 255, 182));
-    }//GEN-LAST:event_Btn_ayudaMouseExited
-
-    private void Btn_ayudaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseEntered
-        Btn_fondo_ayuda.setBackground(new Color(255, 255, 63));
-    }//GEN-LAST:event_Btn_ayudaMouseEntered
-
-    private void Btn_reporteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseExited
-        Btn_fondo_reporte.setBackground(new Color(97, 212, 195));
-    }//GEN-LAST:event_Btn_reporteMouseExited
-
-    private void Btn_reporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseEntered
-        Btn_fondo_reporte.setBackground(new Color(114, 243, 227));
-    }//GEN-LAST:event_Btn_reporteMouseEntered
-
-    private void Btn_modificarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseExited
-        Btn_fondo_modificar.setBackground(new Color(97, 212, 195));
-    }//GEN-LAST:event_Btn_modificarMouseExited
-
-    private void Btn_modificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseEntered
-        Btn_fondo_modificar.setBackground(new Color(114, 243, 227));
-    }//GEN-LAST:event_Btn_modificarMouseEntered
-
-    private void Btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_nombre, Txt_apellido, Txt_nacionalidad, Txt_telefono, Txt_correo)&&Txt_cumple.getDate()!=null) {
-            if (prcs_repetidos.isSelected(Rdb_Masculino, Rdb_Femenino)) {
-                if (prcs_repetidos.isNumeric(Txt_codigo.getText(), Txt_telefono.getText())) {
-
-                    HuespedesDAO serviciosdao = new HuespedesDAO();
-
-                    huespedes.setPasaporte(Txt_codigo.getText());
-                    huespedes.setNombre(Txt_nombre.getText());
-                    huespedes.setApellido(Txt_apellido.getText());
-                    if (Rdb_Masculino.isSelected()) {
-                        huespedes.setSexo("M");
-                    } else if (Rdb_Femenino.isSelected()) {
-                        huespedes.setSexo("F");
-                    }
-                    huespedes.setNacionalidad(Txt_nacionalidad.getText());
-                    huespedes.setTelefono(Txt_telefono.getText());
-                    huespedes.setDireccion(Txt_correo.getText());
-                    fechaCumpleañosAux=new SimpleDateFormat("yyyy-MM-dd").format(Txt_cumple.getDate());
-                    huespedes.setCumple(fechaCumpleañosAux);
-                    serviciosdao.update(huespedes);
-                    actualizarTabla("");
-                    prcs_repetidos.AlertaMensaje("modificado", "huesped", "exitosamente");
-                    Limpiar();
-                }
-            }
-        }
-    }//GEN-LAST:event_Btn_modificarMouseClicked
-
-    private void Btn_eliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseExited
-        Btn_fondo_eliminar.setBackground(new Color(97, 212, 195));
-    }//GEN-LAST:event_Btn_eliminarMouseExited
-
-    private void Btn_eliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseEntered
-        Btn_fondo_eliminar.setBackground(new Color(114, 243, 227));
-    }//GEN-LAST:event_Btn_eliminarMouseEntered
-
-    private void Btn_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_codigo)) {
-            if (prcs_repetidos.isNumeric(Txt_codigo.getText())) {
-                if (prcs_repetidos.ConfirmarEliminacion("eliminar", "servicio", this)) {
-                    HuespedesDAO huespedesdao = new HuespedesDAO();
-                    huespedes.setPasaporte(Txt_codigo.getText());
-                    huespedesdao.delete(huespedes);
-                    actualizarTabla("");
-                    prcs_repetidos.AlertaMensaje("eliminado", "huesped", "exitosamente");
-                    Limpiar();
-                } else {
-                    JOptionPane.showMessageDialog(null, "No se pudo eliminar el huesped");
-                }
-            }
-        }
-    }//GEN-LAST:event_Btn_eliminarMouseClicked
-
-    private void Btn_guardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseExited
-        Btn_fondoGuardar.setBackground(new Color(97, 212, 195));
-    }//GEN-LAST:event_Btn_guardarMouseExited
-
-    private void Btn_guardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseEntered
-        Btn_fondoGuardar.setBackground(new Color(114, 243, 227));
-    }//GEN-LAST:event_Btn_guardarMouseEntered
-
-    private void Btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_nombre, Txt_apellido, Txt_nacionalidad, Txt_telefono, Txt_correo)&&Txt_cumple.getDate()!=null) {
-            if (prcs_repetidos.isSelected(Rdb_Masculino, Rdb_Femenino)) {
-                if (prcs_repetidos.isNumeric(Txt_codigo.getText(), Txt_telefono.getText())) {
-                    HuespedesDAO serviciosdao = new HuespedesDAO();
-                    huespedes.setPasaporte(Txt_codigo.getText());
-                    huespedes.setNombre(Txt_nombre.getText());
-                    huespedes.setApellido(Txt_apellido.getText());
-                    if (Rdb_Masculino.isSelected()) {
-                        huespedes.setSexo("M");
-                    } else if (Rdb_Femenino.isSelected()) {
-                        huespedes.setSexo("F");
-                    }
-                    huespedes.setNacionalidad(Txt_nacionalidad.getText());
-                    huespedes.setTelefono(Txt_telefono.getText());
-                    huespedes.setDireccion(Txt_correo.getText());
-                    fechaCumpleañosAux=new SimpleDateFormat("yyyy-MM-dd").format(Txt_cumple.getDate());
-                    huespedes.setCumple(fechaCumpleañosAux);
-                    serviciosdao.insert(huespedes);
-                    actualizarTabla("");
-                    prcs_repetidos.AlertaMensaje("guardado", "huesped", "exitosamente");
-                    Limpiar();
-                } else {
-                }
-            }
-        }
-    }//GEN-LAST:event_Btn_guardarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -810,37 +825,37 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel Btn_modificar;
     private javax.swing.JLabel Btn_reporte;
     private javax.swing.JLabel Lbl_codigoNombre;
+    private javax.swing.JLabel Lbl_descripcion;
     private javax.swing.JLabel Lbl_estado;
     private javax.swing.JLabel Lbl_id;
     private javax.swing.JLabel Lbl_nombre;
     private javax.swing.JLabel Lbl_precio;
-    private javax.swing.JLabel Lbl_precio1;
-    private javax.swing.JLabel Lbl_precio2;
-    private javax.swing.JLabel Lbl_precio3;
-    private javax.swing.JLabel Lbl_precio4;
+    private javax.swing.JLabel Lbl_tiposServicio;
+    private javax.swing.JLabel Lbl_tiposServicio1;
     private javax.swing.JPanel Pnl_datos;
     private javax.swing.JPanel Pnl_ingresoDatos;
-    private javax.swing.JRadioButton Rdb_Femenino;
-    private javax.swing.JRadioButton Rdb_Masculino;
+    private javax.swing.JRadioButton Rdb_Familiar;
+    private javax.swing.JRadioButton Rdb_Individual;
+    private javax.swing.JRadioButton Rdb_activo;
+    private javax.swing.JRadioButton Rdb_inactivo;
+    private javax.swing.JRadioButton Rdb_limpiar;
     private javax.swing.JRadioButton Rdb_limpiar2;
+    private javax.swing.JRadioButton Rdb_limpiar3;
+    private javax.swing.JRadioButton Rdb_limpio;
+    private javax.swing.JRadioButton Rdb_sucio;
     private javax.swing.JTable Tbl_Datos;
-    private javax.swing.JTextField Txt_apellido;
+    private javax.swing.JComboBox<String> Txt_Piso;
     private javax.swing.JTextField Txt_buscar;
+    private javax.swing.JTextField Txt_cantidad;
     private javax.swing.JTextField Txt_codigo;
-    private javax.swing.JTextField Txt_correo;
-    private com.toedter.calendar.JDateChooser Txt_cumple;
-    private javax.swing.JTextField Txt_nacionalidad;
-    private javax.swing.JTextField Txt_nombre;
-    private javax.swing.JTextField Txt_telefono;
+    private javax.swing.JTextField Txt_precio;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
-    private javax.swing.JSeparator jSeparator9;
     // End of variables declaration//GEN-END:variables
 }
