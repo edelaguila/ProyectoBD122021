@@ -3,7 +3,7 @@ package dominio;
 
 /**
  *
- * @author JEFF
+ * @author Jefferson Dávila
  */
 public class Piso {
     private int idPiso, cantidadHabitacionesPiso;

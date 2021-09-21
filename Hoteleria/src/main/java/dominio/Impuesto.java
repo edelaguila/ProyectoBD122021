@@ -3,7 +3,7 @@ package dominio;
 
 /**
  *
- * @author JEFF
+ * @author Jefferson Dávila
  */
 public class Impuesto {
     private String idImpuesto, nombreImpuesto, descripcionImpuesto, estadoImpuesto, valorImpuesto;

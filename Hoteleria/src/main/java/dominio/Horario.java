@@ -2,7 +2,7 @@ package dominio;
 
 /**
  *
- * @author JEFF
+ * @author Jefferson Dávila
  */
 public class Horario {
 
