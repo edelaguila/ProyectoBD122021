@@ -21,6 +21,10 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
 
     private Mnt_Servicios form_Mant_Servicios;
     private Mnt_MetodoDePago form_Mnt_MetodoDePago;
+    private Mnt_Pisos form_Mant_Pisos;
+    private Mnt_Horarios form_Mant_Horarios;
+    private Mnt_Impuestos form_Mant_Impuestos;
+    private Mnt_AmaDeLlaves form_Mant_AmaDeLlaves;
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     public static JLabel Jl_logo = new JLabel();
@@ -72,6 +76,10 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         Mnu_mantenimientos = new javax.swing.JMenu();
         MnI_servicios = new javax.swing.JMenuItem();
         MnI_metodoDePago = new javax.swing.JMenuItem();
+        MnI_piso = new javax.swing.JMenuItem();
+        MnI_horario = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        MnI_impuesto = new javax.swing.JMenuItem();
         Sbm_procesos = new javax.swing.JMenu();
         Sbm_herramientas = new javax.swing.JMenu();
         Sbm_ayuda = new javax.swing.JMenu();
@@ -120,6 +128,38 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
             }
         });
         Mnu_mantenimientos.add(MnI_metodoDePago);
+
+        MnI_piso.setText("Mant. Pisos");
+        MnI_piso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnI_pisoActionPerformed(evt);
+            }
+        });
+        Mnu_mantenimientos.add(MnI_piso);
+
+        MnI_horario.setText("Mant. Horarios");
+        MnI_horario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnI_horarioActionPerformed(evt);
+            }
+        });
+        Mnu_mantenimientos.add(MnI_horario);
+
+        jMenuItem1.setText("Mant. Ama de Llaves");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        Mnu_mantenimientos.add(jMenuItem1);
+
+        MnI_impuesto.setText("Mant. Impuestos");
+        MnI_impuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnI_impuestoActionPerformed(evt);
+            }
+        });
+        Mnu_mantenimientos.add(MnI_impuesto);
 
         Sbm_catalogo.add(Mnu_mantenimientos);
 
@@ -184,6 +224,50 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Mnt_MetodoDePago.toFront();
     }//GEN-LAST:event_MnI_metodoDePagoActionPerformed
 
+    private void MnI_pisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_pisoActionPerformed
+        form_Mant_Pisos = new Mnt_Pisos();
+
+        Jdp_contenedor.add(form_Mant_Pisos);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_Mant_Pisos.getSize();
+        form_Mant_Pisos.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_Mant_Pisos.setVisible(true);
+        form_Mant_Pisos.toFront();
+    }//GEN-LAST:event_MnI_pisoActionPerformed
+
+    private void MnI_horarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_horarioActionPerformed
+        form_Mant_Horarios = new Mnt_Horarios();
+
+        Jdp_contenedor.add(form_Mant_Horarios);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_Mant_Horarios.getSize();
+        form_Mant_Horarios.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_Mant_Horarios.setVisible(true);
+        form_Mant_Horarios.toFront();
+    }//GEN-LAST:event_MnI_horarioActionPerformed
+
+    private void MnI_impuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_impuestoActionPerformed
+        form_Mant_Impuestos = new Mnt_Impuestos();
+
+        Jdp_contenedor.add(form_Mant_Impuestos);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_Mant_Impuestos.getSize();
+        form_Mant_Impuestos.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_Mant_Impuestos.setVisible(true);
+        form_Mant_Impuestos.toFront();
+    }//GEN-LAST:event_MnI_impuestoActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        form_Mant_AmaDeLlaves = new Mnt_AmaDeLlaves();
+
+        Jdp_contenedor.add(form_Mant_AmaDeLlaves);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_Mant_AmaDeLlaves.getSize();
+        form_Mant_AmaDeLlaves.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_Mant_AmaDeLlaves.setVisible(true);
+        form_Mant_AmaDeLlaves.toFront();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -205,7 +289,10 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Btn_cerrarSesion;
     private javax.swing.JDesktopPane Jdp_contenedor;
+    private javax.swing.JMenuItem MnI_horario;
+    private javax.swing.JMenuItem MnI_impuesto;
     private javax.swing.JMenuItem MnI_metodoDePago;
+    private javax.swing.JMenuItem MnI_piso;
     private javax.swing.JMenuItem MnI_servicios;
     private javax.swing.JMenuBar Mnb_menu;
     private javax.swing.JMenu Mnu_mantenimientos;
@@ -214,5 +301,6 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     private javax.swing.JMenu Sbm_catalogo;
     private javax.swing.JMenu Sbm_herramientas;
     private javax.swing.JMenu Sbm_procesos;
+    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }
