@@ -6,6 +6,7 @@ import dominio.Horario;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,6 +36,8 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
         Txt_descripcion.setBorder(BorderFactory.createEmptyBorder());
         Txt_descripcion.setBorder(null);
         prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar);
+        ImageIcon icono = new ImageIcon("src/main/java/assets/horarios.png");
+        this.setFrameIcon(icono);
     }
 
     public void actualizarTabla(String codigo) {
