@@ -302,6 +302,9 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
         Btn_ayuda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_ayuda.setText("Ayuda");
         Btn_ayuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_ayudaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Btn_ayudaMouseEntered(evt);
             }
@@ -808,6 +811,10 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
     private void Cbx_SHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cbx_SHoraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Cbx_SHoraActionPerformed
+
+    private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
+        prcs_repetidos.imprimirAyuda("AyudaMantenimientoHorarios.chm");
+    }//GEN-LAST:event_Btn_ayudaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
