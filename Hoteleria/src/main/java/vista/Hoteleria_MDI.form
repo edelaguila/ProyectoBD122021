@@ -57,20 +57,20 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnI_horarioActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+                <MenuItem class="javax.swing.JMenuItem" name="MnI_huespedes">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Mant. Ama de Llaves"/>
+                    <Property name="text" type="java.lang.String" value="Mant. Huespedes"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnI_huespedesActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="MnI_impuesto">
+                <MenuItem class="javax.swing.JMenuItem" name="MnI_habitaciones">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Mant. Impuestos"/>
+                    <Property name="text" type="java.lang.String" value="Mant. Habitaciones"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnI_impuestoActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnI_habitacionesActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>

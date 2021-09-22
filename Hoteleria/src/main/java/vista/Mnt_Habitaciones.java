@@ -1,100 +1,106 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package vista;
 
-import datos.HorarioDAO;
+import datos.HabitacionDAO;
 import datos.PisoDAO;
-import dominio.Horario;
+import dominio.Habitacion;
 import dominio.Piso;
-import datos.AmaDeLlaveDAO;
 import dominio.ProcesosRepetidos;
-import dominio.AmaDeLlave;
 import java.awt.Color;
 import java.util.List;
-import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Jefferson Dávila
+ * @author leelu
  */
-public class Mnt_AmaDeLlaves extends javax.swing.JInternalFrame {
+public class Mnt_Habitaciones extends javax.swing.JInternalFrame {
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
-    AmaDeLlave pisos = new AmaDeLlave();
+    Habitacion servicios = new Habitacion();
 
     /**
-     * Creates new form Mnt_¨AmaDeLlaves
+     * Creates new form Mnt_Habitaciones
      */
-    public Mnt_AmaDeLlaves() {
+    public Mnt_Habitaciones() {
         initComponents();
         diseño();
         actualizarTabla("");
-        cargar_habitaciones();
-        cargar_habitaciones2();
+        cargar_pisos();
     }
 
     public void diseño() {
-        this.setTitle("Mantenimiento Ama de Llave");
-        Txt_Id.setBorder(null);
-        Txt_Nombre.setBorder(null);
-        Txt_Apellido.setBorder(null);
+        this.setTitle("Mantenimiento de Habitaciones");
+        Txt_codigo.setBorder(null);
+        Txt_cantidad.setBorder(null);
+        Txt_precio.setBorder(null);
         Txt_buscar.setBorder(null);
-        Rdb_Limpiar2.setVisible(false);
-        Txt_Descripcion.setBorder(BorderFactory.createEmptyBorder());
-        Txt_Descripcion.setBorder(null);
-        prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar);
-    }
-
-    public void cargar_habitaciones() {
-        Cbx_Piso.addItem("Seleccionar...");
-        PisoDAO pisoDAO = new PisoDAO();
-        List<Piso> pisos = pisoDAO.select();
-        for (Piso piso : pisos) {
-            Cbx_Piso.addItem(String.valueOf(piso.getIdPiso()));
-        }
-    }
-    
-    public void cargar_habitaciones2() {
-        Cbx_Horario.addItem("Seleccionar...");
-        HorarioDAO horarioDAO = new HorarioDAO();
-        List<Horario> horarios = horarioDAO.select();
-        for (Horario horario : horarios) {
-            Cbx_Horario.addItem(String.valueOf(horario.getIdHorario()));
-        }
+        Rdb_limpiar.setVisible(false);
+        Rdb_limpiar2.setVisible(false);
+        Rdb_limpiar3.setVisible(false);
+        Txt_Piso.setBorder(null);
+        prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar, Tbl_Datos);
     }
 
     public void actualizarTabla(String codigo) {
         ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
-        AmaDeLlaveDAO.codigoAuxiliar = codigo;
-        AmaDeLlaveDAO.nombreAuxiliar = codigo;
-        String columnas[] = {"ID", "NOMBRE", "APELLIDO", "PISO", "HORARIO", "DESCRIPCION", "ESTADO"};
+        HabitacionDAO.codigoAuxiliar = codigo;
+        String columnas[] = {"ID", "PRECIO", "PISO", "ESTADO", "LIMPIEZA", "TIPO", "CANTIDAD"};
         int cantidadcolumnas = columnas.length;
         prcs_repetidos.llenarColumnas(columnas, cantidadcolumnas, Tbl_Datos);
         String datos[] = new String[cantidadcolumnas];
-        int tamaño[] = {50, 250, 450, 150, 150, 150, 150};
-        AmaDeLlaveDAO pisosdao = new AmaDeLlaveDAO();
-        List<AmaDeLlave> piso = pisosdao.select();
-        for (AmaDeLlave listaServicio : piso) {
-            datos[0] = listaServicio.getIdAmaDeLlave();
-            datos[1] = listaServicio.getNombreAmaDeLlave();
-            datos[2] = listaServicio.getApellidoAmaDeLlave();
-            datos[3] = listaServicio.getPisoAmaDeLlave();
-            datos[4] = listaServicio.getHorarioAmaDeLlave();
-            datos[5] = listaServicio.getDescripcionAmaDeLlave();
-            if (String.valueOf(listaServicio.getEstadoAmaDeLlave()).equals("1")) {
-                datos[6] = "Activo";
+        int tamaño[] = {150, 100, 250, 100, 150, 100, 100};
+        HabitacionDAO serviciosdao = new HabitacionDAO();
+        List<Habitacion> servicio = serviciosdao.select();
+        for (Habitacion listaServicio : servicio) {
+            datos[0] = listaServicio.getId();
+            datos[1] = listaServicio.getPrecio();
+            datos[2] = listaServicio.getPiso();
+            if (listaServicio.getEstado().equals("1")) {
+                datos[3] = "Activo";
             } else {
-                datos[6] = "Inactivo";
+                datos[3] = "Inactivo";
             }
+
+            if (listaServicio.getLimpieza().equals("1")) {
+                datos[4] = "Limpia";
+            } else {
+                datos[4] = "Sucia";
+            }
+            if (listaServicio.getTipo().equals("1")) {
+                datos[5] = "Familiar";
+            } else {
+                datos[5] = "Individual";
+            }
+            datos[6] = listaServicio.getCantidad();
+
             prcs_repetidos.llenarFilas(datos, tamaño, Tbl_Datos);
         }
     }
 
     public void Limpiar() {
-        prcs_repetidos.Limpiar(Txt_Id, Txt_Nombre, Txt_Apellido, Txt_buscar);
-        Cbx_Piso.setSelectedIndex(0);
-        Cbx_Horario.setSelectedIndex(0);
-        Txt_Descripcion.setText("");
-        Rdb_Limpiar2.setSelected(true);
+        prcs_repetidos.Limpiar(Txt_codigo, Txt_cantidad, Txt_precio, Txt_buscar);
+        Txt_Piso.setSelectedItem("Seleccionar...");
+        Rdb_limpiar.setSelected(true);
+        Rdb_limpiar2.setSelected(true);
+        Rdb_limpiar3.setSelected(true);
+    }
+
+    public void cargar_pisos() {
+        Txt_Piso.addItem("Seleccionar...");
+        PisoDAO.codigoAuxiliar = "";
+        PisoDAO.nombreAuxiliar = "";
+        PisoDAO pisosdao = new PisoDAO();
+        List<Piso> piso = pisosdao.select();
+        for (Piso listaPiso : piso) {
+            if (String.valueOf(listaPiso.getEstadoPiso()).equals("1")) {
+                Txt_Piso.addItem(String.valueOf(listaPiso.getIdPiso()));
+            }
+        }
     }
 
     /**
@@ -106,22 +112,28 @@ public class Mnt_AmaDeLlaves extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BtnGp_tipo = new javax.swing.ButtonGroup();
-        BtnGp_estado = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         Pnl_ingresoDatos = new javax.swing.JPanel();
         Lbl_id = new javax.swing.JLabel();
         Lbl_nombre = new javax.swing.JLabel();
         Lbl_descripcion = new javax.swing.JLabel();
+        Lbl_precio = new javax.swing.JLabel();
+        Lbl_tiposServicio = new javax.swing.JLabel();
         Lbl_estado = new javax.swing.JLabel();
-        Txt_Id = new javax.swing.JTextField();
+        Txt_codigo = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        Txt_Nombre = new javax.swing.JTextField();
+        Txt_cantidad = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        Txt_Descripcion = new javax.swing.JTextArea();
-        Rdb_Activo = new javax.swing.JRadioButton();
-        Rdb_Limpiar2 = new javax.swing.JRadioButton();
-        Rdb_Inactivo = new javax.swing.JRadioButton();
+        Txt_precio = new javax.swing.JTextField();
+        jSeparator4 = new javax.swing.JSeparator();
+        Rdb_limpio = new javax.swing.JRadioButton();
+        Rdb_sucio = new javax.swing.JRadioButton();
+        Rdb_limpiar = new javax.swing.JRadioButton();
+        Rdb_activo = new javax.swing.JRadioButton();
+        Rdb_limpiar2 = new javax.swing.JRadioButton();
+        Rdb_inactivo = new javax.swing.JRadioButton();
         Btn_fondoGuardar = new javax.swing.JPanel();
         Btn_guardar = new javax.swing.JLabel();
         Btn_fondo_eliminar = new javax.swing.JPanel();
@@ -134,13 +146,11 @@ public class Mnt_AmaDeLlaves extends javax.swing.JInternalFrame {
         Btn_ayuda = new javax.swing.JLabel();
         Btn_fondo_cancelar = new javax.swing.JPanel();
         Btn_cancelar = new javax.swing.JLabel();
-        Lbl_nombre1 = new javax.swing.JLabel();
-        Txt_Apellido = new javax.swing.JTextField();
-        jSeparator3 = new javax.swing.JSeparator();
-        Cbx_Piso = new javax.swing.JComboBox<>();
-        Cbx_Horario = new javax.swing.JComboBox<>();
-        Lbl_id1 = new javax.swing.JLabel();
-        Lbl_id2 = new javax.swing.JLabel();
+        Txt_Piso = new javax.swing.JComboBox<>();
+        Lbl_tiposServicio1 = new javax.swing.JLabel();
+        Rdb_Familiar = new javax.swing.JRadioButton();
+        Rdb_limpiar3 = new javax.swing.JRadioButton();
+        Rdb_Individual = new javax.swing.JRadioButton();
         Pnl_datos = new javax.swing.JPanel();
         Lbl_codigoNombre = new javax.swing.JLabel();
         Txt_buscar = new javax.swing.JTextField();
@@ -155,7 +165,6 @@ public class Mnt_AmaDeLlaves extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setVisible(true);
 
         Pnl_ingresoDatos.setBackground(new java.awt.Color(36, 47, 65));
         Pnl_ingresoDatos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INGRESO DE DATOS:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -166,42 +175,59 @@ public class Mnt_AmaDeLlaves extends javax.swing.JInternalFrame {
 
         Lbl_nombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_nombre.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_nombre.setText("Nombre:");
+        Lbl_nombre.setText("Cantidad Max:");
 
         Lbl_descripcion.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_descripcion.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_descripcion.setText("Descripción:");
+        Lbl_descripcion.setText("Piso:");
+
+        Lbl_precio.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_precio.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_precio.setText("Precio:");
+
+        Lbl_tiposServicio.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_tiposServicio.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_tiposServicio.setText("Limpieza:");
 
         Lbl_estado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_estado.setForeground(new java.awt.Color(255, 255, 255));
         Lbl_estado.setText("Estado:");
 
-        Txt_Id.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_Id.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_Id.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Txt_codigo.setBackground(new java.awt.Color(36, 47, 65));
+        Txt_codigo.setForeground(new java.awt.Color(255, 255, 255));
+        Txt_codigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        Txt_Nombre.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_Nombre.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_Nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Txt_cantidad.setBackground(new java.awt.Color(36, 47, 65));
+        Txt_cantidad.setForeground(new java.awt.Color(255, 255, 255));
+        Txt_cantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        Txt_Descripcion.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_Descripcion.setColumns(20);
-        Txt_Descripcion.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_Descripcion.setRows(5);
-        Txt_Descripcion.setBorder(null);
-        jScrollPane1.setViewportView(Txt_Descripcion);
+        Txt_precio.setBackground(new java.awt.Color(36, 47, 65));
+        Txt_precio.setForeground(new java.awt.Color(255, 255, 255));
+        Txt_precio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        BtnGp_estado.add(Rdb_Activo);
-        Rdb_Activo.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
-        Rdb_Activo.setForeground(new java.awt.Color(255, 255, 255));
-        Rdb_Activo.setText("Activo");
+        buttonGroup1.add(Rdb_limpio);
+        Rdb_limpio.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        Rdb_limpio.setForeground(new java.awt.Color(255, 255, 255));
+        Rdb_limpio.setText("Limpia");
 
-        BtnGp_estado.add(Rdb_Limpiar2);
+        buttonGroup1.add(Rdb_sucio);
+        Rdb_sucio.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        Rdb_sucio.setForeground(new java.awt.Color(255, 255, 255));
+        Rdb_sucio.setText("Sucia");
 
-        BtnGp_estado.add(Rdb_Inactivo);
-        Rdb_Inactivo.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
-        Rdb_Inactivo.setForeground(new java.awt.Color(255, 255, 255));
-        Rdb_Inactivo.setText("Inactivo");
+        buttonGroup1.add(Rdb_limpiar);
+
+        buttonGroup2.add(Rdb_activo);
+        Rdb_activo.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        Rdb_activo.setForeground(new java.awt.Color(255, 255, 255));
+        Rdb_activo.setText("Activa");
+
+        buttonGroup2.add(Rdb_limpiar2);
+
+        buttonGroup2.add(Rdb_inactivo);
+        Rdb_inactivo.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        Rdb_inactivo.setForeground(new java.awt.Color(255, 255, 255));
+        Rdb_inactivo.setText("Inactiva");
 
         Btn_fondoGuardar.setBackground(new java.awt.Color(97, 212, 195));
 
@@ -369,21 +395,21 @@ public class Mnt_AmaDeLlaves extends javax.swing.JInternalFrame {
             .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        Lbl_nombre1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_nombre1.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_nombre1.setText("Apellido:");
+        Lbl_tiposServicio1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_tiposServicio1.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_tiposServicio1.setText("Tipo Habitacion:");
 
-        Txt_Apellido.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_Apellido.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_Apellido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        buttonGroup3.add(Rdb_Familiar);
+        Rdb_Familiar.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        Rdb_Familiar.setForeground(new java.awt.Color(255, 255, 255));
+        Rdb_Familiar.setText("Familiar");
 
-        Lbl_id1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_id1.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_id1.setText("Piso:");
+        buttonGroup3.add(Rdb_limpiar3);
 
-        Lbl_id2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_id2.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_id2.setText("Horario:");
+        buttonGroup3.add(Rdb_Individual);
+        Rdb_Individual.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        Rdb_Individual.setForeground(new java.awt.Color(255, 255, 255));
+        Rdb_Individual.setText("Individual");
 
         javax.swing.GroupLayout Pnl_ingresoDatosLayout = new javax.swing.GroupLayout(Pnl_ingresoDatos);
         Pnl_ingresoDatos.setLayout(Pnl_ingresoDatosLayout);
@@ -391,43 +417,6 @@ public class Mnt_AmaDeLlaves extends javax.swing.JInternalFrame {
             Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane1)
-                                .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                    .addComponent(Lbl_id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGap(18, 18, 18)
-                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jSeparator1)
-                                        .addComponent(Txt_Id, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_ingresoDatosLayout.createSequentialGroup()
-                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(Lbl_id1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(Lbl_id2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(Lbl_nombre1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(Txt_Apellido, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Cbx_Horario, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Cbx_Piso, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                    .addComponent(Lbl_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGap(18, 18, 18)
-                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(Txt_Nombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                        .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))))
-                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                .addComponent(Lbl_estado)
-                                .addGap(80, 80, 80)
-                                .addComponent(Rdb_Activo)
-                                .addGap(18, 18, 18)
-                                .addComponent(Rdb_Limpiar2)
-                                .addGap(18, 18, 18)
-                                .addComponent(Rdb_Inactivo))
-                            .addComponent(Lbl_descripcion)))
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -440,51 +429,103 @@ public class Mnt_AmaDeLlaves extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Btn_fondo_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(Btn_fondo_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Lbl_precio)
+                            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(Lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Lbl_nombre)
+                                        .addComponent(Lbl_descripcion))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(Txt_cantidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                        .addComponent(jSeparator1)
+                                        .addComponent(Txt_codigo)
+                                        .addComponent(jSeparator2)
+                                        .addComponent(Txt_Piso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(Txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Pnl_ingresoDatosLayout.createSequentialGroup()
+                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                            .addComponent(Lbl_estado)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(Rdb_activo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(Rdb_limpiar))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_ingresoDatosLayout.createSequentialGroup()
+                                            .addComponent(Lbl_tiposServicio1)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(Rdb_Familiar)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(Rdb_limpiar3))
+                                        .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                            .addComponent(Lbl_tiposServicio)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(Rdb_limpio, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(Rdb_limpiar2)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(Rdb_sucio, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Rdb_Individual)
+                                        .addComponent(Rdb_inactivo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         Pnl_ingresoDatosLayout.setVerticalGroup(
             Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(19, 19, 19)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Txt_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Lbl_id))
                 .addGap(3, 3, 3)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Txt_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Txt_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Lbl_nombre))
                 .addGap(1, 1, 1)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Txt_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lbl_nombre1))
-                .addGap(1, 1, 1)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Cbx_Piso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lbl_id1))
-                .addGap(18, 18, 18)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Cbx_Horario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lbl_id2))
-                .addGap(18, 18, 18)
-                .addComponent(Lbl_descripcion)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Lbl_descripcion)
+                    .addComponent(Txt_Piso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(Lbl_tiposServicio))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_ingresoDatosLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Rdb_limpiar2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Rdb_sucio, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Rdb_limpio, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGap(18, 18, 18)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(Lbl_estado)
-                        .addComponent(Rdb_Limpiar2)
-                        .addComponent(Rdb_Activo))
-                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addComponent(Rdb_Inactivo)
-                        .addGap(1, 1, 1)))
+                        .addComponent(Rdb_Familiar, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Rdb_Individual)
+                            .addComponent(Lbl_tiposServicio1)))
+                    .addComponent(Rdb_limpiar3))
+                .addGap(18, 18, 18)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Rdb_activo)
+                        .addComponent(Lbl_estado))
+                    .addComponent(Rdb_limpiar)
+                    .addComponent(Rdb_inactivo))
+                .addGap(18, 18, 18)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Lbl_precio)
+                    .addComponent(Txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -560,7 +601,7 @@ public class Mnt_AmaDeLlaves extends javax.swing.JInternalFrame {
             .addGroup(Pnl_datosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
                     .addGroup(Pnl_datosLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(Lbl_codigoNombre)
@@ -585,7 +626,7 @@ public class Mnt_AmaDeLlaves extends javax.swing.JInternalFrame {
                                 .addComponent(Txt_buscar)
                                 .addComponent(Lbl_codigoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -613,6 +654,123 @@ public class Mnt_AmaDeLlaves extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void Btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseClicked
+        if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_cantidad, Txt_precio) && Txt_Piso.getSelectedItem().toString().length() != 0) {
+            if (prcs_repetidos.isSelected(Rdb_limpio, Rdb_sucio)) {
+                if (prcs_repetidos.isSelected(Rdb_activo, Rdb_inactivo)) {
+                    if (prcs_repetidos.isSelected(Rdb_Familiar, Rdb_Individual)) {
+                        if (prcs_repetidos.isNumeric(Txt_codigo.getText(), Txt_precio.getText(), Txt_cantidad.getText())) {
+                            HabitacionDAO serviciosdao = new HabitacionDAO();
+                            servicios.setId(Txt_codigo.getText());
+                            servicios.setPiso(Txt_Piso.getSelectedItem().toString());
+                            if (Rdb_limpio.isSelected()) {
+                                servicios.setLimpieza("1");
+                            } else if (Rdb_sucio.isSelected()) {
+                                servicios.setLimpieza("2");
+                            }
+                            servicios.setCantidad(Txt_cantidad.getText());
+                            if (Rdb_Familiar.isSelected()) {
+                                servicios.setTipo("1");
+                            } else if (Rdb_Individual.isSelected()) {
+                                servicios.setTipo("2");
+                            }
+                            servicios.setPrecio(Txt_precio.getText());
+                            if (Rdb_activo.isSelected()) {
+                                servicios.setEstado("1");
+                            } else if (Rdb_inactivo.isSelected()) {
+                                servicios.setEstado("0");
+                            }
+                            serviciosdao.insert(servicios);
+                            actualizarTabla("");
+                            prcs_repetidos.AlertaMensaje("guardada", "Habitacion", "exitosamente");
+                            Limpiar();
+                        }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_Btn_guardarMouseClicked
+
+    private void Btn_guardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseEntered
+        Btn_fondoGuardar.setBackground(new Color(114, 243, 227));
+    }//GEN-LAST:event_Btn_guardarMouseEntered
+
+    private void Btn_guardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseExited
+        Btn_fondoGuardar.setBackground(new Color(97, 212, 195));
+    }//GEN-LAST:event_Btn_guardarMouseExited
+
+    private void Btn_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseClicked
+        if (prcs_repetidos.isNoneEmpty(Txt_codigo)) {
+            if (prcs_repetidos.isNumeric(Txt_codigo.getText())) {
+                if (prcs_repetidos.ConfirmarEliminacion("eliminar", "Habitacion", this)) {
+                    HabitacionDAO serviciosdao = new HabitacionDAO();
+                    servicios.setId(Txt_codigo.getText());
+                    serviciosdao.delete(servicios);
+                    actualizarTabla("");
+                    prcs_repetidos.AlertaMensaje("eliminada", "habitacion", "exitosamente");
+                    Limpiar();
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo eliminar el servicio");
+                }
+            }
+        }
+    }//GEN-LAST:event_Btn_eliminarMouseClicked
+
+    private void Btn_eliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseEntered
+        Btn_fondo_eliminar.setBackground(new Color(114, 243, 227));
+    }//GEN-LAST:event_Btn_eliminarMouseEntered
+
+    private void Btn_eliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseExited
+        Btn_fondo_eliminar.setBackground(new Color(97, 212, 195));
+    }//GEN-LAST:event_Btn_eliminarMouseExited
+
+    private void Btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseClicked
+        if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_cantidad, Txt_precio) && Txt_Piso.getSelectedItem().toString().length() != 0) {
+            if (prcs_repetidos.isSelected(Rdb_limpio, Rdb_sucio)) {
+                if (prcs_repetidos.isSelected(Rdb_activo, Rdb_inactivo)) {
+                    if (prcs_repetidos.isSelected(Rdb_Familiar, Rdb_Individual)) {
+                        if (prcs_repetidos.isNumeric(Txt_codigo.getText(), Txt_precio.getText(), Txt_cantidad.getText())) {
+
+                            HabitacionDAO serviciosdao = new HabitacionDAO();
+
+                            servicios.setId(Txt_codigo.getText());
+                            servicios.setPiso(Txt_Piso.getSelectedItem().toString());
+                            if (Rdb_limpio.isSelected()) {
+                                servicios.setLimpieza("1");
+                            } else if (Rdb_sucio.isSelected()) {
+                                servicios.setLimpieza("2");
+                            }
+                            servicios.setCantidad(Txt_cantidad.getText());
+                            if (Rdb_Familiar.isSelected()) {
+                                servicios.setTipo("1");
+                            } else if (Rdb_Individual.isSelected()) {
+                                servicios.setTipo("2");
+                            }
+                            servicios.setPrecio(Txt_precio.getText());
+                            if (Rdb_activo.isSelected()) {
+                                servicios.setEstado("1");
+                            } else if (Rdb_inactivo.isSelected()) {
+                                servicios.setEstado("0");
+                            }
+                            serviciosdao.update(servicios);
+                            actualizarTabla("");
+                            prcs_repetidos.AlertaMensaje("modificada", "Habitacion", "exitosamente");
+                            Limpiar();
+                        }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_Btn_modificarMouseClicked
+
+    private void Btn_modificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseEntered
+        Btn_fondo_modificar.setBackground(new Color(114, 243, 227));
+    }//GEN-LAST:event_Btn_modificarMouseEntered
+
+    private void Btn_modificarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseExited
+        Btn_fondo_modificar.setBackground(new Color(97, 212, 195));
+    }//GEN-LAST:event_Btn_modificarMouseExited
+
     private void Btn_reporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseEntered
         Btn_fondo_reporte.setBackground(new Color(114, 243, 227));
     }//GEN-LAST:event_Btn_reporteMouseEntered
@@ -620,30 +778,6 @@ public class Mnt_AmaDeLlaves extends javax.swing.JInternalFrame {
     private void Btn_reporteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseExited
         Btn_fondo_reporte.setBackground(new Color(97, 212, 195));
     }//GEN-LAST:event_Btn_reporteMouseExited
-
-    private void Btn_guardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseEntered
-        Btn_fondoGuardar.setBackground(new Color(114, 243, 227));
-    }//GEN-LAST:event_Btn_guardarMouseEntered
-
-    private void Btn_eliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseEntered
-        Btn_fondo_eliminar.setBackground(new Color(114, 243, 227));
-    }//GEN-LAST:event_Btn_eliminarMouseEntered
-
-    private void Btn_modificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseEntered
-        Btn_fondo_modificar.setBackground(new Color(114, 243, 227));
-    }//GEN-LAST:event_Btn_modificarMouseEntered
-
-    private void Btn_guardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseExited
-        Btn_fondoGuardar.setBackground(new Color(97, 212, 195));
-    }//GEN-LAST:event_Btn_guardarMouseExited
-
-    private void Btn_eliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseExited
-        Btn_fondo_eliminar.setBackground(new Color(97, 212, 195));
-    }//GEN-LAST:event_Btn_eliminarMouseExited
-
-    private void Btn_modificarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseExited
-        Btn_fondo_modificar.setBackground(new Color(97, 212, 195));
-    }//GEN-LAST:event_Btn_modificarMouseExited
 
     private void Btn_ayudaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseEntered
         Btn_fondo_ayuda.setBackground(new Color(255, 255, 63));
@@ -653,6 +787,10 @@ public class Mnt_AmaDeLlaves extends javax.swing.JInternalFrame {
         Btn_fondo_ayuda.setBackground(new Color(253, 255, 182));
     }//GEN-LAST:event_Btn_ayudaMouseExited
 
+    private void Btn_cancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelarMouseClicked
+        Limpiar();
+    }//GEN-LAST:event_Btn_cancelarMouseClicked
+
     private void Btn_cancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelarMouseEntered
         Btn_fondo_cancelar.setBackground(new Color(255, 52, 31));
     }//GEN-LAST:event_Btn_cancelarMouseEntered
@@ -660,6 +798,37 @@ public class Mnt_AmaDeLlaves extends javax.swing.JInternalFrame {
     private void Btn_cancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelarMouseExited
         Btn_fondo_cancelar.setBackground(new Color(255, 128, 115));
     }//GEN-LAST:event_Btn_cancelarMouseExited
+
+    private void Tbl_DatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_DatosMouseClicked
+        if (evt.getClickCount() == 2) {
+            Txt_codigo.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 0).toString());
+            Txt_precio.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 1).toString());
+            Txt_Piso.setSelectedItem(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString());
+            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString().equals("Activo")) {
+                Rdb_activo.setSelected(true);
+            } else {
+                Rdb_inactivo.setSelected(true);
+            }
+            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 4).toString().equals("Limpio")) {
+                Rdb_limpio.setSelected(true);
+            } else {
+                Rdb_sucio.setSelected(true);
+            }
+
+            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 5).toString().equals("Familiar")) {
+                Rdb_Familiar.setSelected(true);
+            } else {
+                Rdb_Individual.setSelected(true);
+            }
+
+            Txt_cantidad.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 6).toString());
+
+        }
+    }//GEN-LAST:event_Tbl_DatosMouseClicked
+
+    private void Btn_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseClicked
+        actualizarTabla(Txt_buscar.getText());
+    }//GEN-LAST:event_Btn_buscarMouseClicked
 
     private void Btn_buscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseEntered
         Btn_fondo_buscar.setBackground(new Color(114, 243, 227));
@@ -669,108 +838,8 @@ public class Mnt_AmaDeLlaves extends javax.swing.JInternalFrame {
         Btn_fondo_buscar.setBackground(new Color(97, 212, 195));
     }//GEN-LAST:event_Btn_buscarMouseExited
 
-    private void Btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_Id, Txt_Nombre, Txt_Apellido) && Txt_Descripcion.getText() != "") {
-            if (prcs_repetidos.isSelected(Rdb_Activo, Rdb_Inactivo)) {
-                if (prcs_repetidos.isNumeric(Txt_Id.getText())) {
-                    AmaDeLlaveDAO amaDeLlavedao = new AmaDeLlaveDAO();
-                    String cbx_Piso = Cbx_Piso.getSelectedItem().toString();
-                    String cbx_Horario = Cbx_Horario.getSelectedItem().toString();
-
-                    pisos.setIdAmaDeLlave(Txt_Id.getText());
-                    pisos.setNombreAmaDeLlave(Txt_Nombre.getText());
-                    pisos.setApellidoAmaDeLlave(Txt_Apellido.getText());
-                    pisos.setPisoAmaDeLlave(cbx_Piso);
-                    pisos.setHorarioAmaDeLlave(cbx_Horario);
-                    pisos.setDescripcionAmaDeLlave(Txt_Descripcion.getText());
-                    if (Rdb_Activo.isSelected()) {
-                        pisos.setEstadoAmaDeLlave("1");
-                    } else if (Rdb_Inactivo.isSelected()) {
-                        pisos.setEstadoAmaDeLlave("0");
-                    }
-                    amaDeLlavedao.insert(pisos);
-                    actualizarTabla("");
-                    prcs_repetidos.AlertaMensaje("guardada", "Ama de Llave", "exitosamente");
-                    Limpiar();
-                } else {
-                }
-            }
-        }
-    }//GEN-LAST:event_Btn_guardarMouseClicked
-
-    private void Btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_Id, Txt_Nombre) && Txt_Descripcion.getText() != "") {
-            if (prcs_repetidos.isSelected(Rdb_Activo, Rdb_Inactivo)) {
-                if (prcs_repetidos.isNumeric(Txt_Id.getText(), Txt_Nombre.getText())) {
-                    AmaDeLlaveDAO amaDeLlavedao = new AmaDeLlaveDAO();
-                    String cbx_Piso = Cbx_Piso.getSelectedItem().toString();
-                    String cbx_Horario = Cbx_Horario.getSelectedItem().toString();
-
-                    pisos.setIdAmaDeLlave(Txt_Id.getText());
-                    pisos.setNombreAmaDeLlave(Txt_Nombre.getText());
-                    pisos.setApellidoAmaDeLlave(Txt_Apellido.getText());
-                    pisos.setPisoAmaDeLlave(cbx_Piso);
-                    pisos.setHorarioAmaDeLlave(cbx_Horario);
-                    pisos.setDescripcionAmaDeLlave(Txt_Descripcion.getText());
-                    if (Rdb_Activo.isSelected()) {
-                        pisos.setEstadoAmaDeLlave("1");
-                    } else if (Rdb_Inactivo.isSelected()) {
-                        pisos.setEstadoAmaDeLlave("0");
-                    }
-                    amaDeLlavedao.update(pisos);
-                    actualizarTabla("");
-                    prcs_repetidos.AlertaMensaje("modificada", "Ama de llave", "exitosamente");
-                    Limpiar();
-                }
-            }
-        }
-    }//GEN-LAST:event_Btn_modificarMouseClicked
-
-    private void Btn_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_Id)) {
-            if (prcs_repetidos.isNumeric(Txt_Id.getText())) {
-                if (prcs_repetidos.ConfirmarEliminacion("eliminar", "Piso", this)) {
-                    AmaDeLlaveDAO amaDeLlavedao = new AmaDeLlaveDAO();
-                    pisos.setIdAmaDeLlave(Txt_Id.getText());
-                    amaDeLlavedao.delete(pisos);
-                    actualizarTabla("");
-                    prcs_repetidos.AlertaMensaje("eliminada", "Ama de Llave", "exitosamente");
-                    Limpiar();
-                } else {
-                    JOptionPane.showMessageDialog(null, "No se pudo eliminar la Ama de Llave");
-                }
-            }
-        }
-    }//GEN-LAST:event_Btn_eliminarMouseClicked
-
-    private void Tbl_DatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_DatosMouseClicked
-        if (evt.getClickCount() == 2) {
-            Txt_Id.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 0).toString());
-            Txt_Nombre.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 1).toString());
-            Txt_Apellido.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString());
-            Cbx_Piso.setSelectedItem(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString());
-            Cbx_Horario.setSelectedItem(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 4).toString());
-            Txt_Descripcion.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 5).toString());
-            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 6).toString().equals("Activo")) {
-                Rdb_Activo.setSelected(true);
-            } else {
-                Rdb_Inactivo.setSelected(true);
-            }
-        }
-    }//GEN-LAST:event_Tbl_DatosMouseClicked
-
-    private void Btn_cancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelarMouseClicked
-        Limpiar();
-    }//GEN-LAST:event_Btn_cancelarMouseClicked
-
-    private void Btn_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseClicked
-        actualizarTabla(Txt_buscar.getText());
-    }//GEN-LAST:event_Btn_buscarMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup BtnGp_estado;
-    private javax.swing.ButtonGroup BtnGp_tipo;
     private javax.swing.JLabel Btn_ayuda;
     private javax.swing.JLabel Btn_buscar;
     private javax.swing.JLabel Btn_cancelar;
@@ -785,32 +854,38 @@ public class Mnt_AmaDeLlaves extends javax.swing.JInternalFrame {
     private javax.swing.JLabel Btn_guardar;
     private javax.swing.JLabel Btn_modificar;
     private javax.swing.JLabel Btn_reporte;
-    private javax.swing.JComboBox<String> Cbx_Horario;
-    private javax.swing.JComboBox<String> Cbx_Piso;
     private javax.swing.JLabel Lbl_codigoNombre;
     private javax.swing.JLabel Lbl_descripcion;
     private javax.swing.JLabel Lbl_estado;
     private javax.swing.JLabel Lbl_id;
-    private javax.swing.JLabel Lbl_id1;
-    private javax.swing.JLabel Lbl_id2;
     private javax.swing.JLabel Lbl_nombre;
-    private javax.swing.JLabel Lbl_nombre1;
+    private javax.swing.JLabel Lbl_precio;
+    private javax.swing.JLabel Lbl_tiposServicio;
+    private javax.swing.JLabel Lbl_tiposServicio1;
     private javax.swing.JPanel Pnl_datos;
     private javax.swing.JPanel Pnl_ingresoDatos;
-    private javax.swing.JRadioButton Rdb_Activo;
-    private javax.swing.JRadioButton Rdb_Inactivo;
-    private javax.swing.JRadioButton Rdb_Limpiar2;
+    private javax.swing.JRadioButton Rdb_Familiar;
+    private javax.swing.JRadioButton Rdb_Individual;
+    private javax.swing.JRadioButton Rdb_activo;
+    private javax.swing.JRadioButton Rdb_inactivo;
+    private javax.swing.JRadioButton Rdb_limpiar;
+    private javax.swing.JRadioButton Rdb_limpiar2;
+    private javax.swing.JRadioButton Rdb_limpiar3;
+    private javax.swing.JRadioButton Rdb_limpio;
+    private javax.swing.JRadioButton Rdb_sucio;
     private javax.swing.JTable Tbl_Datos;
-    private javax.swing.JTextField Txt_Apellido;
-    private javax.swing.JTextArea Txt_Descripcion;
-    private javax.swing.JTextField Txt_Id;
-    private javax.swing.JTextField Txt_Nombre;
+    private javax.swing.JComboBox<String> Txt_Piso;
     private javax.swing.JTextField Txt_buscar;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField Txt_cantidad;
+    private javax.swing.JTextField Txt_codigo;
+    private javax.swing.JTextField Txt_precio;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator7;
     // End of variables declaration//GEN-END:variables
 }
