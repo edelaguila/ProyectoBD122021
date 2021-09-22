@@ -1,4 +1,3 @@
-
 package vista;
 
 import datos.PisoDAO;
@@ -8,6 +7,7 @@ import java.awt.Color;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import java.io.File;
 
 /**
  *
@@ -286,6 +286,9 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         Btn_ayuda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_ayuda.setText("Ayuda");
         Btn_ayuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_ayudaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Btn_ayudaMouseEntered(evt);
             }
@@ -338,33 +341,31 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         Pnl_ingresoDatosLayout.setHorizontalGroup(
             Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
-                                .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(Lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Lbl_nombre))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(Txt_NoHabitaciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                        .addComponent(jSeparator1)
-                                        .addComponent(Txt_Id)
-                                        .addComponent(jSeparator2))))
+                .addGap(22, 22, 22)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1)
                             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                .addComponent(Lbl_estado)
-                                .addGap(80, 80, 80)
-                                .addComponent(Rdb_Activo)
+                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lbl_nombre))
                                 .addGap(18, 18, 18)
-                                .addComponent(Rdb_Limpiar2)
-                                .addGap(18, 18, 18)
-                                .addComponent(Rdb_Inactivo))
-                            .addComponent(Lbl_descripcion)))
+                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(Txt_NoHabitaciones, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jSeparator1)
+                                    .addComponent(Txt_Id)
+                                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                            .addComponent(Lbl_estado)
+                            .addGap(80, 80, 80)
+                            .addComponent(Rdb_Activo)
+                            .addGap(18, 18, 18)
+                            .addComponent(Rdb_Limpiar2)
+                            .addGap(18, 18, 18)
+                            .addComponent(Rdb_Inactivo))
+                        .addComponent(Lbl_descripcion))
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Btn_fondoGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -376,12 +377,12 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Btn_fondo_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         Pnl_ingresoDatosLayout.setVerticalGroup(
             Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                .addGap(90, 90, 90)
+                .addContainerGap()
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Txt_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Lbl_id))
@@ -406,7 +407,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                         .addComponent(Rdb_Inactivo)
                         .addGap(1, 1, 1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Btn_fondo_ayuda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -506,7 +507,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
                                 .addComponent(Txt_buscar)
                                 .addComponent(Lbl_codigoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -672,6 +673,10 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
     private void Btn_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseClicked
         actualizarTabla(Txt_buscar.getText());
     }//GEN-LAST:event_Btn_buscarMouseClicked
+
+    private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
+        prcs_repetidos.imprimirAyuda("AyudaMantenimientoPisos.chm");
+    }//GEN-LAST:event_Btn_ayudaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
