@@ -25,6 +25,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     private Mnt_Horarios form_Mant_Horarios;
     private Mnt_Habitaciones form_Mant_Habitaciones;
     private Mnt_Huespedes form_Mant_Huespedes;
+    private Mnt_Menu form_Mant_Menu;
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     public static JLabel Jl_logo = new JLabel();
@@ -80,6 +81,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         MnI_horario = new javax.swing.JMenuItem();
         MnI_huespedes = new javax.swing.JMenuItem();
         MnI_habitaciones = new javax.swing.JMenuItem();
+        MnI_menu = new javax.swing.JMenuItem();
         Sbm_procesos = new javax.swing.JMenu();
         Sbm_herramientas = new javax.swing.JMenu();
         Sbm_ayuda = new javax.swing.JMenu();
@@ -160,6 +162,14 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
             }
         });
         Mnu_mantenimientos.add(MnI_habitaciones);
+
+        MnI_menu.setText("Mant. Menu");
+        MnI_menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnI_menuActionPerformed(evt);
+            }
+        });
+        Mnu_mantenimientos.add(MnI_menu);
 
         Sbm_catalogo.add(Mnu_mantenimientos);
 
@@ -270,6 +280,18 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Mant_Habitaciones.toFront();
     }//GEN-LAST:event_MnI_habitacionesActionPerformed
 
+    private void MnI_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_menuActionPerformed
+        // TODO add your handling code here:
+        form_Mant_Menu = new Mnt_Menu();
+
+        Jdp_contenedor.add(form_Mant_Menu);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_Mant_Menu.getSize();
+        form_Mant_Menu.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_Mant_Menu.setVisible(true);
+        form_Mant_Menu.toFront();
+    }//GEN-LAST:event_MnI_menuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -294,6 +316,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     private javax.swing.JMenuItem MnI_habitaciones;
     private javax.swing.JMenuItem MnI_horario;
     private javax.swing.JMenuItem MnI_huespedes;
+    private javax.swing.JMenuItem MnI_menu;
     private javax.swing.JMenuItem MnI_metodoDePago;
     private javax.swing.JMenuItem MnI_piso;
     private javax.swing.JMenuItem MnI_servicios;
