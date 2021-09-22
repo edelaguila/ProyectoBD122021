@@ -22,7 +22,6 @@ import seguridad.dominio.Bitacora;
  *
  */
 public class MDIComercial extends javax.swing.JFrame {
-
 //    private MantenimientoProductos formModulos;
 //    private MantenimientoProductos MantenimientoProductos;
 //    // private Mantenimiento_Cliente Mantenimiento_Cliente;
