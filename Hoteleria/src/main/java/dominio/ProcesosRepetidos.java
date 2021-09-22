@@ -8,6 +8,7 @@ package dominio;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -143,6 +144,22 @@ public class ProcesosRepetidos {
         }
         modelo.addRow(fila);
         tabla.setModel(modelo);
+    }
+
+    public void imprimirAyuda(String nombreAyuda) {
+        try {
+            if ((new File("src\\main\\java\\ayudas\\" + nombreAyuda + "")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\ayudas\\" + nombreAyuda + "");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
 }
