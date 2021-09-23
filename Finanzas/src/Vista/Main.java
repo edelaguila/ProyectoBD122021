@@ -19,6 +19,7 @@ public class Main extends javax.swing.JFrame {
         JMenuBarMain = new javax.swing.JMenuBar();
         JMenuArchivo = new javax.swing.JMenu();
         JMenuConta = new javax.swing.JMenu();
+        Menu_MantCT = new javax.swing.JMenuItem();
         JMenuBancos = new javax.swing.JMenu();
         JMenuNominas = new javax.swing.JMenu();
 
@@ -40,6 +41,15 @@ public class Main extends javax.swing.JFrame {
         JMenuBarMain.add(JMenuArchivo);
 
         JMenuConta.setText("Contabilidad");
+
+        Menu_MantCT.setText("Mantenimientos");
+        Menu_MantCT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Menu_MantCTActionPerformed(evt);
+            }
+        });
+        JMenuConta.add(Menu_MantCT);
+
         JMenuBarMain.add(JMenuConta);
 
         JMenuBancos.setText("Bancos");
@@ -65,6 +75,12 @@ public class Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void Menu_MantCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_MantCTActionPerformed
+        Mantenimientos_Contabilidad mantenimientosContabilidad = new Mantenimientos_Contabilidad();
+        mantenimientosContabilidad.setVisible(true);
+        JDesktopMain.add(mantenimientosContabilidad);
+    }//GEN-LAST:event_Menu_MantCTActionPerformed
+
     public static void main(String args[]) {
         
          try {
@@ -87,5 +103,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuBar JMenuBarMain;
     private javax.swing.JMenu JMenuConta;
     private javax.swing.JMenu JMenuNominas;
+    private javax.swing.JMenuItem Menu_MantCT;
     // End of variables declaration//GEN-END:variables
 }
