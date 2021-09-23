@@ -12,6 +12,8 @@ import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login_LD;
 
 /**
  *
@@ -35,11 +37,17 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
      */
     public Hoteleria_MDI() {
         initComponents();
+        
+        this.setTitle("Usuario: " + "[" + Login_LD.usuario + "]" + " \t" + "FECHA: [" + prcs_repetidos.getFecha()+ "]");
+        GenerarPermisos generarPermisos = new GenerarPermisos();
+        var usuario = Login_LD.usuario;
+        var modulo = "Hotelero";
+        generarPermisos.getPermisos(modulo, usuario);
+        
         Diseño();
     }
 
     public void Diseño() {
-        setTitle("USUARIOS:[PRUEBAS] FECHA:[" + prcs_repetidos.getFecha() + "]");
         Jdp_contenedor.setBackground(new Color(228, 68, 68));
         prcs_repetidos.Cursor(Mnb_menu);
         ImageIcon icono = new ImageIcon("src/main/java/assets/hotel.png");
@@ -311,21 +319,21 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu Btn_cerrarSesion;
+    public static javax.swing.JMenu Btn_cerrarSesion;
     private javax.swing.JDesktopPane Jdp_contenedor;
-    private javax.swing.JMenuItem MnI_habitaciones;
-    private javax.swing.JMenuItem MnI_horario;
-    private javax.swing.JMenuItem MnI_huespedes;
-    private javax.swing.JMenuItem MnI_menu;
-    private javax.swing.JMenuItem MnI_metodoDePago;
-    private javax.swing.JMenuItem MnI_piso;
-    private javax.swing.JMenuItem MnI_servicios;
-    private javax.swing.JMenuBar Mnb_menu;
-    private javax.swing.JMenu Mnu_mantenimientos;
-    private javax.swing.JMenu Sbm_archivos;
-    private javax.swing.JMenu Sbm_ayuda;
-    private javax.swing.JMenu Sbm_catalogo;
-    private javax.swing.JMenu Sbm_herramientas;
-    private javax.swing.JMenu Sbm_procesos;
+    public static javax.swing.JMenuItem MnI_habitaciones;
+    public static javax.swing.JMenuItem MnI_horario;
+    public static javax.swing.JMenuItem MnI_huespedes;
+    public static javax.swing.JMenuItem MnI_menu;
+    public static javax.swing.JMenuItem MnI_metodoDePago;
+    public static javax.swing.JMenuItem MnI_piso;
+    public static javax.swing.JMenuItem MnI_servicios;
+    public static javax.swing.JMenuBar Mnb_menu;
+    public static javax.swing.JMenu Mnu_mantenimientos;
+    public static javax.swing.JMenu Sbm_archivos;
+    public static javax.swing.JMenu Sbm_ayuda;
+    public static javax.swing.JMenu Sbm_catalogo;
+    public static javax.swing.JMenu Sbm_herramientas;
+    public static javax.swing.JMenu Sbm_procesos;
     // End of variables declaration//GEN-END:variables
 }
