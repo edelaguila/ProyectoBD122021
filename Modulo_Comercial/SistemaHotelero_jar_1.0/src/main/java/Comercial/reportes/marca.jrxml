@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="85637867-e1cf-462d-805f-bbdbb5cb01e1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM administracion.tbl_marca;]]>
+	</queryString>
+	<field name="PK_codigo_marca" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_marca" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estatus_marca" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="55" y="0" width="109" height="79" uuid="8153d3b6-a1e5-4215-876c-f9c1d02014d7"/>
+				<imageExpression><![CDATA["C:\\Users\\SipaqueRitaMaria.LAPTOP-TII06UQE\\Desktop\\programas\\uno\\SistemaHotelero\\src\\main\\java\\Comercial\\vista\\Captura.PNG"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="145" y="0" width="539" height="56" uuid="80df4de5-1c4f-4376-909a-98c0401b5fa6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="30" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Mantenimiento Marca]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="55" y="31" width="100" height="20" uuid="dea9bbbf-1ffc-4181-9535-39ec4c9d6c8e"/>
+				<text><![CDATA[Codigo Marca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="31" width="100" height="20" uuid="b2fe4c6c-f1ff-45e8-843a-895cf041e290"/>
+				<text><![CDATA[Nombre Marca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="376" y="31" width="100" height="20" uuid="3105d529-70db-4947-aa31-1dcd764e6810"/>
+				<text><![CDATA[Estatus Marca]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="64" y="21" width="100" height="20" uuid="b8c4b151-be8d-4c56-88fe-8848093e4d73"/>
+				<textFieldExpression><![CDATA[$F{PK_codigo_marca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="214" y="21" width="100" height="20" uuid="a2781690-1240-49fc-8346-ae102e1753a0"/>
+				<textFieldExpression><![CDATA[$F{nombre_marca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="376" y="21" width="100" height="20" uuid="c8b5d79e-f120-4868-a12e-c784ac916151"/>
+				<textFieldExpression><![CDATA[$F{estatus_marca}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="dd88e111-5f17-4ce8-a7e2-e2bc29f87e08"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="e43414c8-de16-4f50-9f68-00ce5b776084"/>
+			</line>
+			<line>
+				<reportElement x="10" y="1" width="802" height="1" uuid="b01e9f99-215f-4f02-a023-55bc856f35c2"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

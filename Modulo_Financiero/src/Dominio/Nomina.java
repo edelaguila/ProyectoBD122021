@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ayudas;
+package dominio;
 
 /**
  *
- * @author leone
+ * @author OtakuGT
  */
-public class ayudas {
+public class Nomina {
     
 }

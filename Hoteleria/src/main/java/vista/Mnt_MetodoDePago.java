@@ -289,6 +289,9 @@ public class Mnt_MetodoDePago extends javax.swing.JInternalFrame {
         Btn_ayuda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_ayuda.setText("Ayuda");
         Btn_ayuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_ayudaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Btn_ayudaMouseEntered(evt);
             }
@@ -675,6 +678,10 @@ public class Mnt_MetodoDePago extends javax.swing.JInternalFrame {
     private void Btn_buscarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseExited
         Btn_fondo_buscar.setBackground(new Color(97, 212, 195));
     }//GEN-LAST:event_Btn_buscarMouseExited
+
+    private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
+        prcs_repetidos.imprimirAyuda("AyudaMantenimientoMetodoPago.chm");
+    }//GEN-LAST:event_Btn_ayudaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

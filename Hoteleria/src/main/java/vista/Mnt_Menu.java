@@ -35,7 +35,7 @@ public class Mnt_Menu extends javax.swing.JInternalFrame {
 
     public void diseño() {
         this.setTitle("Mantenimiento de Menu");
-        ImageIcon icono = new ImageIcon("src/main/java/assets/servicio.png");
+        ImageIcon icono = new ImageIcon("src/main/java/assets/menu.png");
         this.setFrameIcon(icono);
         Txt_codigo.setBorder(null);
         Txt_nombre.setBorder(null);
@@ -131,6 +131,7 @@ public class Mnt_Menu extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setPreferredSize(new java.awt.Dimension(1150, 615));
 
         Pnl_ingresoDatos.setBackground(new java.awt.Color(36, 47, 65));
         Pnl_ingresoDatos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INGRESO DE DATOS:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -305,6 +306,9 @@ public class Mnt_Menu extends javax.swing.JInternalFrame {
         Btn_ayuda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_ayuda.setText("Ayuda");
         Btn_ayuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_ayudaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Btn_ayudaMouseEntered(evt);
             }
@@ -537,7 +541,7 @@ public class Mnt_Menu extends javax.swing.JInternalFrame {
                                 .addComponent(Txt_buscar)
                                 .addComponent(Lbl_codigoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -710,6 +714,11 @@ public class Mnt_Menu extends javax.swing.JInternalFrame {
     private void Btn_buscarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseExited
         Btn_fondo_buscar.setBackground(new Color(97, 212, 195));
     }//GEN-LAST:event_Btn_buscarMouseExited
+
+    private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
+        // TODO add your handling code here:
+        prcs_repetidos.imprimirAyuda("AyudaMenu.chm");
+    }//GEN-LAST:event_Btn_ayudaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
