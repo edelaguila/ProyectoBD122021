@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Comercial.vista;
+
 import Comercial.datos.LineaDAO;
 import Comercial.datos.Conexion;
 import Comercial.dominio.Linea;
@@ -22,6 +23,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+
 /**
  *
  * @author SipaqueRitaMaria
@@ -31,16 +33,15 @@ public class Mantenimiento_Linea extends javax.swing.JInternalFrame {
     /**
      * Creates new form Mantenimiento_Linea
      */
-    
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Codigo");
         modelo.addColumn("Nombre");
         modelo.addColumn("Estado");
         LineaDAO lineaDAO = new LineaDAO();
-        
+
         List<Linea> linea = lineaDAO.select();
-        
+
         Tbl_Datos.setModel(modelo);
         String[] dato = new String[3];
         for (int i = 0; i < linea.size(); i++) {
@@ -51,32 +52,25 @@ public class Mantenimiento_Linea extends javax.swing.JInternalFrame {
             modelo.addRow(dato);
         }
     }
-    
-     public void buscar() {
-      Linea lineaAConsultar = new Linea();
+
+    public void buscar() {
+        Linea lineaAConsultar = new Linea();
         LineaDAO proveedorDAO = new LineaDAO();
         lineaAConsultar.setPK_codigo_Linea(Txt_codigo.getText());
         lineaAConsultar = proveedorDAO.query(lineaAConsultar);
-        
+
         Txt_nombre.setText(lineaAConsultar.getNombre_Linea());
         Txt_estado.setText(lineaAConsultar.getEstatus_Linea());
-        
-                
-   
-                
-    }        
-    
-     public void limpiar() {
+
+    }
+
+    public void limpiar() {
         Txt_codigo.setText("");
         Txt_nombre.setText("");
         Txt_estado.setText("");
-        
-        
+
     }
-    
-    
-    
-    
+
     public Mantenimiento_Linea() {
         initComponents();
         llenadoDeTablas();
@@ -303,8 +297,8 @@ public class Mantenimiento_Linea extends javax.swing.JInternalFrame {
         try {
             if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoLinea.chm")).exists()) {
                 Process p = Runtime
-                .getRuntime()
-                .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoLinea.chm");
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoLinea.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
@@ -315,17 +309,17 @@ public class Mantenimiento_Linea extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_Btn_AyudaActionPerformed
-private Connection connection = null;
+    private Connection connection = null;
     private void Btn_ReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ReporteActionPerformed
         // TODO add your handling code here:
-         Map p = new HashMap();
+        Map p = new HashMap();
         JasperReport report;
         JasperPrint print;
 
         try {
             connection = Conexion.getConnection();
             report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-                + "/src/main/java/Comercial/reportes/linea.jrxml");
+                    + "/src/main/java/Comercial/reportes/linea.jrxml");
             print = JasperFillManager.fillReport(report, p, connection);
             JasperViewer view = new JasperViewer(print, false);
             view.setTitle("Reporte Mantenimiento linea");
@@ -351,7 +345,7 @@ private Connection connection = null;
 
     private void Btn_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ModificarActionPerformed
         // TODO add your handling code here:
-        LineaDAO lineaDAO = new  LineaDAO();
+        LineaDAO lineaDAO = new LineaDAO();
         Linea lineaAActualizar = new Linea();
         lineaAActualizar.setPK_codigo_Linea(Txt_codigo.getText());
         lineaAActualizar.setNombre_Linea(Txt_nombre.getText());

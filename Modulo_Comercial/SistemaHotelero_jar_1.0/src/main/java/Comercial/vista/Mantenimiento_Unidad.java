@@ -86,6 +86,12 @@ public class Mantenimiento_Unidad extends javax.swing.JInternalFrame {
         Tbl_unidad = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setVisible(true);
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle Unidad"));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
