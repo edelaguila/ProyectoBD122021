@@ -25,8 +25,6 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Modulo de Finanzas");
 
-        JDesktopMain.setBackground(new java.awt.Color(15, 60, 75));
-
         javax.swing.GroupLayout JDesktopMainLayout = new javax.swing.GroupLayout(JDesktopMain);
         JDesktopMain.setLayout(JDesktopMainLayout);
         JDesktopMainLayout.setHorizontalGroup(
@@ -35,23 +33,19 @@ public class Main extends javax.swing.JFrame {
         );
         JDesktopMainLayout.setVerticalGroup(
             JDesktopMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 622, Short.MAX_VALUE)
+            .addGap(0, 626, Short.MAX_VALUE)
         );
 
         JMenuArchivo.setText("Archivo");
-        JMenuArchivo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         JMenuBarMain.add(JMenuArchivo);
 
         JMenuConta.setText("Contabilidad");
-        JMenuConta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         JMenuBarMain.add(JMenuConta);
 
         JMenuBancos.setText("Bancos");
-        JMenuBancos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         JMenuBarMain.add(JMenuBancos);
 
         JMenuNominas.setText("Nóminas");
-        JMenuNominas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         JMenuBarMain.add(JMenuNominas);
 
         setJMenuBar(JMenuBarMain);
