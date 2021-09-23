@@ -5,8 +5,8 @@
  */
 package Comercial.vista;
 
-import Comercial.datos.BodegaDAO;
-import Comercial.dominio.Bodega;
+import Comercial.datos.UnidadDAO;
+import Comercial.dominio.Unidad;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -15,25 +15,25 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Diana
  */
-public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
+public class Mantenimiento_Unidad extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form Mantenimiento_Bodega
+     * Creates new form Mantenimiento_Unidad
      */
       public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID Bodega");
         modelo.addColumn("Nombre Bodega");
         modelo.addColumn("Estatus Bodega");
-        BodegaDAO bodegaDAO = new BodegaDAO();
+        UnidadDAO unidadDAO = new UnidadDAO();
 
-        List<Bodega> bodega = bodegaDAO.select();
-        Tbl_tablabodega.setModel(modelo);
+        List<Unidad> unidad = unidadDAO.select();
+        Tbl_unidad.setModel(modelo);
         String[] dato = new String[3];
-        for (int i = 0; i < bodega.size(); i++) {
-            dato[0] = Integer.toString(bodega.get(i).getPKcodigoBodega());
-            dato[1] = bodega.get(i).getNombreBodega();
-            dato[2] = bodega.get(i).getEstatusBodega();
+        for (int i = 0; i < unidad.size(); i++) {
+            dato[0] = Integer.toString(unidad.get(i).getPKcodigoUnidad());
+            dato[1] = unidad.get(i).getUnidadEntrada();
+            dato[2] = unidad.get(i).getUnidadSalida();
 
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
@@ -41,22 +41,22 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
     }
 
     public void buscar() {
-        Bodega bodegaAConsultar = new Bodega();
-        BodegaDAO bodegaDAO = new BodegaDAO();
-        bodegaAConsultar.setPKcodigoBodega(Integer.parseInt(Txt_id.getText()));
-        bodegaAConsultar = bodegaDAO.query(bodegaAConsultar);
-        Txt_nombre.setText(bodegaAConsultar.getNombreBodega());
-        Txt_estatus.setText(String.valueOf(bodegaAConsultar.getEstatusBodega()));
+        Unidad unidadAConsultar = new Unidad();
+        UnidadDAO unidadDAO = new UnidadDAO();
+        unidadAConsultar.setPKcodigoUnidad(Integer.parseInt(Txt_id.getText()));
+        unidadAConsultar = unidadDAO.query(unidadAConsultar);
+        Txt_unidadentrada.setText(unidadAConsultar.getUnidadEntrada());
+        Txt_unidadsalida.setText(String.valueOf(unidadAConsultar.getUnidadSalida()));
 //        cbx_bodega.setSelectedItem(String.valueOf(0));
     }
 
     public void limpiar() {
         Txt_id.setText("");
-        Txt_nombre.setText("");
-        Txt_estatus.setText("");
+        Txt_unidadentrada.setText("");
+        Txt_unidadsalida.setText("");
 //        cbx_bodega.setSelectedIndex(0);
     }
-    public Mantenimiento_Bodega() {
+    public Mantenimiento_Unidad() {
         initComponents();
     }
 
@@ -71,46 +71,42 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        Txt_id = new javax.swing.JTextField();
-        Btn_Buscar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        Txt_nombre = new javax.swing.JTextField();
-        Txt_estatus = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        Txt_id = new javax.swing.JTextField();
+        Txt_unidadentrada = new javax.swing.JTextField();
+        Txt_unidadsalida = new javax.swing.JTextField();
         Btn_Guardar = new javax.swing.JButton();
         Btn_Modificar = new javax.swing.JButton();
         Btn_Eliminar = new javax.swing.JButton();
+        Btn_Buscar = new javax.swing.JButton();
         Btn_Reporte = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Tbl_tablabodega = new javax.swing.JTable();
+        Tbl_unidad = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        Btn_Ayuda = new javax.swing.JButton();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle Unidad"));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel2.setText("ID ");
+        jLabel2.setText("ID");
+
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel3.setText("Unidad Entrada");
+
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel4.setText("Unidad Salida");
 
         Txt_id.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        Btn_Buscar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        Btn_Buscar.setText("Buscar");
-        Btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
+        Txt_unidadentrada.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Txt_unidadentrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_BuscarActionPerformed(evt);
+                Txt_unidadentradaActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel3.setText("Nombre Bodega");
-
-        Txt_nombre.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        Txt_estatus.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel4.setText("Estado Bodega");
+        Txt_unidadsalida.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         Btn_Guardar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         Btn_Guardar.setText("Guardar");
@@ -136,79 +132,75 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
             }
         });
 
-        Btn_Reporte.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        Btn_Reporte.setText("Reporte");
-        Btn_Reporte.addActionListener(new java.awt.event.ActionListener() {
+        Btn_Buscar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Btn_Buscar.setText("Buscar");
+        Btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_ReporteActionPerformed(evt);
+                Btn_BuscarActionPerformed(evt);
             }
         });
+
+        Btn_Reporte.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Btn_Reporte.setText("Reporte");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Btn_Guardar)
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Txt_id)
+                            .addComponent(Txt_unidadentrada)
+                            .addComponent(Txt_unidadsalida))
+                        .addGap(24, 24, 24)
+                        .addComponent(Btn_Buscar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(Btn_Guardar)
+                        .addGap(28, 28, 28)
                         .addComponent(Btn_Modificar)
                         .addGap(18, 18, 18)
                         .addComponent(Btn_Eliminar)
-                        .addGap(27, 27, 27)
-                        .addComponent(Btn_Reporte))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Txt_id)
-                            .addComponent(Txt_estatus, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                            .addComponent(Txt_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Btn_Buscar)))
-                .addGap(200, 200, 200))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel4))
-                    .addContainerGap(484, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(Btn_Reporte)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
                     .addComponent(Txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Btn_Buscar))
                 .addGap(18, 18, 18)
-                .addComponent(Txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Txt_estatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(Txt_unidadentrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(Txt_unidadsalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Btn_Guardar)
                     .addComponent(Btn_Modificar)
                     .addComponent(Btn_Eliminar)
                     .addComponent(Btn_Reporte))
-                .addGap(28, 28, 28))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(41, 41, 41)
-                    .addComponent(jLabel2)
-                    .addGap(18, 18, 18)
-                    .addComponent(jLabel3)
-                    .addGap(18, 18, 18)
-                    .addComponent(jLabel4)
-                    .addContainerGap(91, Short.MAX_VALUE)))
+                .addGap(25, 25, 25))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle Unidad"));
 
-        Tbl_tablabodega.setModel(new javax.swing.table.DefaultTableModel(
+        Tbl_unidad.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -219,7 +211,7 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(Tbl_tablabodega);
+        jScrollPane1.setViewportView(Tbl_unidad);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -227,124 +219,111 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel1.setText("Mantenimiento Bodega");
-
-        Btn_Ayuda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        Btn_Ayuda.setText("Ayuda");
+        jLabel1.setText("Mantenimiento Unidad");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, Short.MAX_VALUE)
-                        .addGap(53, 53, 53))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(158, 158, 158)
-                .addComponent(jLabel1)
-                .addGap(57, 57, 57)
-                .addComponent(Btn_Ayuda)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(206, 206, 206)
+                        .addComponent(jLabel1)))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(Btn_Ayuda))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_BuscarActionPerformed
+    private void Txt_unidadentradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_unidadentradaActionPerformed
         // TODO add your handling code here:
-        buscar();
-
-    }//GEN-LAST:event_Btn_BuscarActionPerformed
+    }//GEN-LAST:event_Txt_unidadentradaActionPerformed
 
     private void Btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_GuardarActionPerformed
         // TODO add your handling code here:
-        //        MDI_Components mdi_Components = new MDI_Components();
         String id = "0";
-        Mantenimiento_Bodega mntbodegaDAO = new Mantenimiento_Bodega();
-        BodegaDAO bodegaDAO = new BodegaDAO();
-        Bodega bodegaAInsertar = new Bodega();
+        Mantenimiento_Unidad mntunidadDAO = new Mantenimiento_Unidad();
+        UnidadDAO unidadDAO = new UnidadDAO();
+        Unidad unidadAInsertar = new Unidad();
         //String cbxbodega = cbx_bodega.getSelectedItem().toString();
-        bodegaAInsertar.setPKcodigoBodega((int) Integer.parseInt(Txt_id.getText()));
-        bodegaAInsertar.setNombreBodega(Txt_nombre.getText());
-        bodegaAInsertar.setEstatusBodega(Txt_estatus.getText());
-        bodegaDAO.insert(bodegaAInsertar);
+        unidadAInsertar.setPKcodigoUnidad((int) Integer.parseInt(Txt_id.getText()));
+        unidadAInsertar.setUnidadEntrada(Txt_unidadentrada.getText());
+        unidadAInsertar.setUnidadSalida(Txt_unidadsalida.getText());
+        unidadDAO.insert(unidadAInsertar);
         llenadoDeTablas();
         limpiar();
     }//GEN-LAST:event_Btn_GuardarActionPerformed
 
     private void Btn_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ModificarActionPerformed
         // TODO add your handling code here:
-        BodegaDAO bodegaDAO = new BodegaDAO();
-        Bodega bodegaAActualizar = new Bodega();
-        bodegaAActualizar.setPKcodigoBodega(Integer.parseInt(Txt_id.getText()));
-        bodegaAActualizar.setNombreBodega(Txt_nombre.getText());
-        bodegaAActualizar.setEstatusBodega(Txt_estatus.getText());
-        bodegaDAO.update(bodegaAActualizar);
+        UnidadDAO unidadDAO = new UnidadDAO();
+        Unidad unidadAActualizar = new Unidad();
+        unidadAActualizar.setPKcodigoUnidad(Integer.parseInt(Txt_id.getText()));
+        unidadAActualizar.setUnidadEntrada(Txt_unidadentrada.getText());
+        unidadAActualizar.setUnidadSalida(Txt_unidadsalida.getText());
+        unidadDAO.update(unidadAActualizar);
         JOptionPane.showMessageDialog(null, "Modificación Exitosa.");
-
         llenadoDeTablas();
         limpiar();
     }//GEN-LAST:event_Btn_ModificarActionPerformed
 
     private void Btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EliminarActionPerformed
         // TODO add your handling code here:
-        BodegaDAO bodegaDAO = new BodegaDAO();
-        Bodega bodegaAEliminar = new Bodega();
-        bodegaAEliminar.setPKcodigoBodega(Integer.parseInt(Txt_id.getText()));
-        bodegaDAO.delete(bodegaAEliminar);
+        UnidadDAO unidadDAO = new UnidadDAO();
+        Unidad unidadAEliminar = new Unidad();
+        unidadAEliminar.setPKcodigoUnidad(Integer.parseInt(Txt_id.getText()));
+        unidadDAO.delete(unidadAEliminar);
         JOptionPane.showMessageDialog(null, "Registro Eliminado.");
 
         llenadoDeTablas();
         limpiar();
     }//GEN-LAST:event_Btn_EliminarActionPerformed
 
-    private void Btn_ReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ReporteActionPerformed
+    private void Btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_BuscarActionPerformed
         // TODO add your handling code here:
-
-    }//GEN-LAST:event_Btn_ReporteActionPerformed
+        buscar ();
+    }//GEN-LAST:event_Btn_BuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Btn_Ayuda;
     private javax.swing.JButton Btn_Buscar;
     private javax.swing.JButton Btn_Eliminar;
     private javax.swing.JButton Btn_Guardar;
     private javax.swing.JButton Btn_Modificar;
     private javax.swing.JButton Btn_Reporte;
-    private javax.swing.JTable Tbl_tablabodega;
-    private javax.swing.JTextField Txt_estatus;
+    private javax.swing.JTable Tbl_unidad;
     private javax.swing.JTextField Txt_id;
-    private javax.swing.JTextField Txt_nombre;
+    private javax.swing.JTextField Txt_unidadentrada;
+    private javax.swing.JTextField Txt_unidadsalida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

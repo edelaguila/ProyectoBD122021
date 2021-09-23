@@ -99,8 +99,24 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="Lbl_nombre" min="-2" max="-2" attributes="0"/>
+                              <Component id="Lbl_codigo" min="-2" max="-2" attributes="0"/>
+                              <Component id="Lbl_estado" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="Txt_nombre" alignment="1" max="32767" attributes="0"/>
+                              <Component id="Txt_estado" alignment="1" pref="289" max="32767" attributes="0"/>
+                              <Component id="Txt_codigo" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                          <Component id="Btn_Buscar" min="-2" pref="104" max="-2" attributes="0"/>
+                      </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                           <Component id="Btn_Guardar" min="-2" pref="104" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="Btn_Modificar" min="-2" pref="104" max="-2" attributes="0"/>
@@ -108,28 +124,6 @@
                           <Component id="Btn_Eliminar" min="-2" pref="104" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="Btn_Reporte" min="-2" pref="104" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="Lbl_nombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="Lbl_codigo" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="Lbl_estado" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                  <Component id="Txt_estado" min="-2" pref="289" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="Txt_nombre" alignment="1" min="-2" pref="294" max="-2" attributes="0"/>
-                                      <Component id="Txt_codigo" alignment="1" min="-2" pref="294" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="Btn_Buscar" min="-2" pref="104" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace pref="50" max="32767" attributes="0"/>
@@ -140,31 +134,29 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="Lbl_codigo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="Txt_codigo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="Btn_Buscar" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="Lbl_nombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="Txt_nombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                          <Component id="Txt_estado" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="Lbl_estado" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="Lbl_codigo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Txt_codigo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Btn_Buscar" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="Lbl_nombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Txt_nombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="Txt_estado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Lbl_estado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="Btn_Reporte" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                       <Component id="Btn_Guardar" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                       <Component id="Btn_Modificar" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                       <Component id="Btn_Eliminar" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
