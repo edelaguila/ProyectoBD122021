@@ -46,7 +46,7 @@ public class Mantenimiento_Empleados extends javax.swing.JInternalFrame {
         EmpleadoDAO empleadosDAO = new EmpleadoDAO();
         List<Empleado> empleados = empleadosDAO.select();
         Tabla.setModel(modelo);
-        Object[] objeto = new Object[7];
+        Object[] objeto = new Object[8];
         for (int i = 0; i < empleados.size(); i++) {
             objeto[0] = empleados.get(i).getId_empleado();
             objeto[1] = empleados.get(i).getNombre_empleado();
@@ -54,7 +54,8 @@ public class Mantenimiento_Empleados extends javax.swing.JInternalFrame {
             objeto[3] = empleados.get(i).getDpi_empleado();
             objeto[4] = empleados.get(i).getCorreo_empleado();
             objeto[5] = empleados.get(i).getPuesto_empleado();
-            objeto[6] = empleados.get(i).getFcontrato_empleado();
+            objeto[6] = empleados.get(i).getEstado_empleado();
+            objeto[7] = empleados.get(i).getFcontrato_empleado();
 
             modelo.addRow(objeto);
         }
@@ -205,6 +206,8 @@ public class Mantenimiento_Empleados extends javax.swing.JInternalFrame {
         });
 
         jLabel5.setText("Puesto");
+
+        cbx_puesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Proto 1", "Proto 2", "Proto 3" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -416,9 +419,6 @@ public class Mantenimiento_Empleados extends javax.swing.JInternalFrame {
     private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
         Empleado empleadoBuscar = new Empleado();
         EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-        String ID = txt_ID.getText();
-        int IntID = Integer.parseInt(ID);
-        empleadoBuscar.setId_empleado(IntID);
 
         empleadoBuscar = empleadoDAO.query(empleadoBuscar);
 

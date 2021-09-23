@@ -18,11 +18,11 @@ import java.util.List;
  * @author OtakuGT
  */
 public class EmpleadoDAO extends Conexion {
-    private static final String SQL_SELECT = "SELECT * FROM tbl_usuario";
-    private static final String SQL_INSERT = "INSERT INTO tbl_usuario(PK_id_usuario, nombre_usuario, apellido_usuario, username_usuario, password_usuario, correo_usuario, cambio_password, estado_usuario, ultima_conexion) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_usuario SET PK_id_usuario=?, nombre_usuario=?, apellido_usuario=?, username_usuario=?, password_usuario=?, correo_usuario=?, cambio_password=?, estado_usuario=?, ultima_conexion=? WHERE PK_id_usuario = ?";
-    private static final String SQL_DELETE = "DELETE FROM tbl_usuario WHERE PK_id_usuario=?";
-    private static final String SQL_QUERY = "SELECT PK_id_usuario, nombre_usuario, apellido_usuario, username_usuario, password_usuario, correo_usuario, cambio_password, estado_usuario, ultima_conexion FROM tbl_usuario WHERE username_usuario = ?";
+    private static final String SQL_SELECT = "SELECT * FROM tbl_empleado";
+    private static final String SQL_INSERT = "INSERT INTO tbl_empleado(PK_id_empleado, nombre_empleado, apellido_empleado, dpi_empleado, correo_empleado, puesto_empleado, estado_empleado, fechacontrato_empleado) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_empleados SET PK_id_empleado=?, nombre_empleado=?, apellido_empleado=?, dpi_empleado=?, correo_empleado=?, puesto_empleado=?, estado_usuario=?, fechacontrato_empleado=? WHERE PK_id_empleado = ?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_empleado WHERE PK_id_empleado=?";
+    private static final String SQL_QUERY = "SELECT PK_id_empleado, nombre_empleado, apellido_empleado, dpi_empleado, correo_empleado, puesto_empleado, estado_empleado, fechacontrato_empleado FROM tbl_empleado WHERE PK_id_empleado = ?";
 
     Conexion conectar = new Conexion();
     Connection conn = null;
@@ -45,10 +45,10 @@ public class EmpleadoDAO extends Conexion {
                 String nombre = rs.getString("nombre_empleado");
                 String apellido = rs.getString("apellido_empleado");
                 int dpi = rs.getInt("dpi_empleado");
-                var correo = rs.getString("correo_empleado");
+                String correo = rs.getString("correo_empleado");
                 String puesto = rs.getString("puesto_empleado");                
                 int estado = rs.getInt("estado_empleado");
-                String contrato = rs.getString("fcontrato_empleado");
+                String contrato = rs.getString("fechacontrato_empleado");
 
                 empleado = new Empleado();
                 empleado.setId_empleado(id_empleado);
@@ -60,7 +60,7 @@ public class EmpleadoDAO extends Conexion {
                 empleado.setEstado_empleado(estado);
                 empleado.setFcontrato_empleado(contrato);
 
-                empleado.add(empleado);
+                empleados.add(empleado);
             }
 
         } catch (SQLException ex) {
@@ -93,7 +93,7 @@ public class EmpleadoDAO extends Conexion {
                 String correo_empleado = rs.getString("correo_empleado");
                 String puesto_empleado = rs.getString("puesto_empleado");
                 int estado_empleado = rs.getInt("estado_empleado");
-                String fcontrato_empleado = rs.getString("fcontrato_empleado");
+                String fcontrato_empleado = rs.getString("fechacontrato_empleado");
 
                 empleado = new Empleado();
                 empleado.setId_empleado(id_empleado);
@@ -107,7 +107,6 @@ public class EmpleadoDAO extends Conexion {
 
                 rows++;
             }
-            //System.out.println("Registros buscado:" + usuario);
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {

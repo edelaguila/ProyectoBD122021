@@ -381,7 +381,11 @@
         <Component class="javax.swing.JComboBox" name="cbx_puesto">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
+              <StringArray count="3">
+                <StringItem index="0" value="Proto 1"/>
+                <StringItem index="1" value="Proto 2"/>
+                <StringItem index="2" value="Proto 3"/>
+              </StringArray>
             </Property>
           </Properties>
           <AuxValues>

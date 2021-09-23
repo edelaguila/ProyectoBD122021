@@ -101,9 +101,4 @@ public class Empleado {
         this.estado_empleado = estado_empleado;
         this.fcontrato_empleado = fcontrato_empleado;
     }
-
-    public void add(Empleado empleado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }
