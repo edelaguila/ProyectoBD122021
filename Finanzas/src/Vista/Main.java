@@ -6,7 +6,7 @@ import javax.swing.UIManager;
 /* @author Diego Vásquez*/
 
 public class Main extends javax.swing.JFrame {
-
+ private MntDivisa formMantenimiento_Moneda;
     public Main() {
         initComponents();
     }
@@ -21,6 +21,7 @@ public class Main extends javax.swing.JFrame {
         JMenuConta = new javax.swing.JMenu();
         Menu_MantCT = new javax.swing.JMenuItem();
         JMenuBancos = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         JMenuNominas = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,6 +54,19 @@ public class Main extends javax.swing.JFrame {
         JMenuBarMain.add(JMenuConta);
 
         JMenuBancos.setText("Bancos");
+
+        JMenuBancos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jMenuItem1.setText("DIVISAS");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        JMenuBancos.add(jMenuItem1);
+
+
+
         JMenuBarMain.add(JMenuBancos);
 
         JMenuNominas.setText("Nóminas");
@@ -75,11 +89,19 @@ public class Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+               formMantenimiento_Moneda = new MntDivisa();
+        JDesktopMain.add(formMantenimiento_Moneda);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     private void Menu_MantCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_MantCTActionPerformed
         Mantenimientos_Contabilidad mantenimientosContabilidad = new Mantenimientos_Contabilidad();
         mantenimientosContabilidad.setVisible(true);
         JDesktopMain.add(mantenimientosContabilidad);
     }//GEN-LAST:event_Menu_MantCTActionPerformed
+
 
     public static void main(String args[]) {
         
@@ -103,6 +125,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuBar JMenuBarMain;
     private javax.swing.JMenu JMenuConta;
     private javax.swing.JMenu JMenuNominas;
+
+    private javax.swing.JMenuItem jMenuItem1;
+
     private javax.swing.JMenuItem Menu_MantCT;
+
     // End of variables declaration//GEN-END:variables
 }
