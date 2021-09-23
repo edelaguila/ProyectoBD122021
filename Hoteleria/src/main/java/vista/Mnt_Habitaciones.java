@@ -12,6 +12,7 @@ import dominio.Piso;
 import dominio.ProcesosRepetidos;
 import java.awt.Color;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -44,6 +45,8 @@ public class Mnt_Habitaciones extends javax.swing.JInternalFrame {
         Rdb_limpiar3.setVisible(false);
         Txt_Piso.setBorder(null);
         prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar, Tbl_Datos);
+        ImageIcon icono = new ImageIcon("src/main/java/assets/habitaciones.png");
+        this.setFrameIcon(icono);
     }
 
     public void actualizarTabla(String codigo) {
@@ -348,6 +351,9 @@ public class Mnt_Habitaciones extends javax.swing.JInternalFrame {
         Btn_ayuda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_ayuda.setText("Ayuda");
         Btn_ayuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_ayudaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Btn_ayudaMouseEntered(evt);
             }
@@ -837,6 +843,11 @@ public class Mnt_Habitaciones extends javax.swing.JInternalFrame {
     private void Btn_buscarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseExited
         Btn_fondo_buscar.setBackground(new Color(97, 212, 195));
     }//GEN-LAST:event_Btn_buscarMouseExited
+
+    private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
+        // TODO add your handling code here:
+        prcs_repetidos.imprimirAyuda("AyudaHabitaciones.chm");
+    }//GEN-LAST:event_Btn_ayudaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

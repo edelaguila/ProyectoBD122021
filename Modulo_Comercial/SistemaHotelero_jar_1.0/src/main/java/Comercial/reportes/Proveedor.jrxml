@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7f6d9fe2-dc0f-412d-92f9-e4c0bfead21d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM administracion.tbl_proveedor;]]>
+	</queryString>
+	<field name="PK_codigo_proveedor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_proveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccion_proveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefono_proveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nit_proveedor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="email_proveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="saldo_proveedor" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estatus_proveedor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="46" y="0" width="109" height="79" uuid="6ede5449-456e-4fc5-abc1-6f8981c9e209"/>
+				<imageExpression><![CDATA["C:\\Users\\SipaqueRitaMaria.LAPTOP-TII06UQE\\Desktop\\programas\\uno\\SistemaHotelero\\src\\main\\java\\Comercial\\vista\\Captura.PNG"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="133" y="10" width="539" height="56" uuid="737fc097-3b37-4072-846b-971946f20d9f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="30" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Mantenimiento Proveedor]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="41" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="77" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="ff67c5e8-1ca7-4a2a-b218-e7147e9be1f7"/>
+			</line>
+			<staticText>
+				<reportElement x="11" y="27" width="100" height="20" uuid="7a102572-65f7-435c-8273-f8c2b89fb44c"/>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="27" width="100" height="20" uuid="3c8bb566-b773-4287-ad8e-92b1bacb09c1"/>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="211" y="27" width="55" height="20" uuid="66e12881-2632-49ea-ab6b-dc837dede4e9"/>
+				<text><![CDATA[Direccion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="27" width="100" height="20" uuid="918466df-aa2c-4387-96d8-910f085ad902"/>
+				<text><![CDATA[telefono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="362" y="27" width="62" height="20" uuid="8ac5a180-9e3b-4555-a0e6-b636a92a6802"/>
+				<text><![CDATA[Nit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="27" width="65" height="20" uuid="7c44def0-71a4-42a8-a255-7287d4bb0780"/>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="591" y="27" width="100" height="20" uuid="d6ee583c-0fe7-49e8-9c0a-f980902f2ef9"/>
+				<text><![CDATA[Saldo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="705" y="27" width="100" height="20" uuid="3d676fdd-2957-4862-a931-e85a4a6a99a5"/>
+				<text><![CDATA[Estatus]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="60" width="802" height="1" uuid="3ef1b2ee-d55b-43b8-9324-6af0889f9377"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="21" y="0" width="74" height="17" uuid="691ae3a4-b5b7-4f33-aad5-34940da44ce9"/>
+				<textFieldExpression><![CDATA[$F{PK_codigo_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="121" y="0" width="78" height="20" uuid="6785bcca-6f3e-4a57-b75f-9763113e4411"/>
+				<textFieldExpression><![CDATA[$F{nombre_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="211" y="0" width="55" height="20" uuid="78660e8f-5651-40b1-9f4f-df696b04777f"/>
+				<textFieldExpression><![CDATA[$F{direccion_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="0" width="56" height="20" uuid="bfa3139a-aad1-4c68-a18d-956da462d7cc"/>
+				<textFieldExpression><![CDATA[$F{telefono_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="362" y="0" width="87" height="20" uuid="eccb6c6f-8a50-498c-b3fd-298bbdf9344f"/>
+				<textFieldExpression><![CDATA[$F{nit_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="473" y="0" width="100" height="20" uuid="80c52f20-ce7c-40b7-8eb6-caccd6fb83ee"/>
+				<textFieldExpression><![CDATA[$F{email_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="605" y="0" width="100" height="20" uuid="a8238d74-f4bb-4e7e-b574-6c4ef3660d15"/>
+				<textFieldExpression><![CDATA[$F{saldo_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="721" y="0" width="100" height="20" uuid="d8fa713a-9b82-4c7a-a7cf-2955dbbcd3bc"/>
+				<textFieldExpression><![CDATA[$F{estatus_proveedor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
