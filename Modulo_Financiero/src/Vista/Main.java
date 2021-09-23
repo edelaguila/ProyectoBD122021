@@ -6,7 +6,13 @@
 package Vista;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Toolkit;
+import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
 import javax.swing.UIManager;
+import vista.Mantenimiento_Empleados;
 
 /**
  *
@@ -30,39 +36,70 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane2 = new javax.swing.JDesktopPane();
+        JDesktopMain = new javax.swing.JDesktopPane();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
+        Menu_MantConta = new javax.swing.JMenuItem();
+        Menu_TransConta = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Módulo Financiero");
 
-        jDesktopPane2.setBackground(new java.awt.Color(15, 67, 76));
+        JDesktopMain.setBackground(new java.awt.Color(15, 67, 76));
 
-        javax.swing.GroupLayout jDesktopPane2Layout = new javax.swing.GroupLayout(jDesktopPane2);
-        jDesktopPane2.setLayout(jDesktopPane2Layout);
-        jDesktopPane2Layout.setHorizontalGroup(
-            jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout JDesktopMainLayout = new javax.swing.GroupLayout(JDesktopMain);
+        JDesktopMain.setLayout(JDesktopMainLayout);
+        JDesktopMainLayout.setHorizontalGroup(
+            JDesktopMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1200, Short.MAX_VALUE)
         );
-        jDesktopPane2Layout.setVerticalGroup(
-            jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        JDesktopMainLayout.setVerticalGroup(
+            JDesktopMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 696, Short.MAX_VALUE)
         );
 
-        jMenu3.setText("File");
+        jMenu3.setText("Archivo");
+        jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuBar2.add(jMenu3);
 
         jMenu4.setText("Contabilidad");
+        jMenu4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        Menu_MantConta.setText("Mantenimientos");
+        Menu_MantConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Menu_MantContaActionPerformed(evt);
+            }
+        });
+        jMenu4.add(Menu_MantConta);
+
+        Menu_TransConta.setText("Transaccionales");
+        jMenu4.add(Menu_TransConta);
+
         jMenuBar2.add(jMenu4);
 
         jMenu1.setText("Bancos");
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jMenuBar2.add(jMenu1);
 
         jMenu2.setText("Nóminas");
+
+        jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+
+        jMenuItem1.setText("Mantenimiento Empleados");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+
         jMenuBar2.add(jMenu2);
 
         setJMenuBar(jMenuBar2);
@@ -71,16 +108,31 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane2)
+            .addComponent(JDesktopMain)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane2)
+            .addComponent(JDesktopMain)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+
+    private void Menu_MantContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_MantContaActionPerformed
+        Mantenimientos mantenimientos = new Mantenimientos();
+        mantenimientos.setVisible(true);
+        JDesktopMain.add(mantenimientos);
+    }//GEN-LAST:event_Menu_MantContaActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        Mantenimiento_Empleados formMantenimiento_Empleados = new Mantenimiento_Empleados();
+        formMantenimiento_Empleados.setVisible(true);
+        jDesktopPane2.add(formMantenimiento_Empleados);
+ 
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -103,11 +155,14 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane2;
+    private javax.swing.JDesktopPane JDesktopMain;
+    private javax.swing.JMenuItem Menu_MantConta;
+    private javax.swing.JMenu Menu_TransConta;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }
