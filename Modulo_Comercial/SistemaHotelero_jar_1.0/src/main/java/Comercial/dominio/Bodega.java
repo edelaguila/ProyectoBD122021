@@ -11,32 +11,34 @@ package Comercial.dominio;
  */
 public class Bodega {
 
-    int PK_codigo_bodega;
-    String nombre_bodega;
-    String estatus_bodega;
+     int PKcodigoBodega;
+    String nombreBodega;
+    String estatusBodega;
 
-    public int getPK_codigo_bodega() {
-        return PK_codigo_bodega;
+    public int getPKcodigoBodega() {
+        return PKcodigoBodega;
     }
 
-    public String getNombre_bodega() {
-        return nombre_bodega;
+    public String getNombreBodega() {
+        return nombreBodega;
     }
 
-    public String getEstatus_bodega() {
-        return estatus_bodega;
+    public String getEstatusBodega() {
+        return estatusBodega;
     }
 
-    public void setPK_codigo_bodega(int PK_codigo_bodega) {
-        this.PK_codigo_bodega = PK_codigo_bodega;
+    public void setPKcodigoBodega(int PKcodigoBodega) {
+        this.PKcodigoBodega = PKcodigoBodega;
     }
 
-    public void setNombre_bodega(String nombre_bodega) {
-        this.nombre_bodega = nombre_bodega;
+    public void setNombreBodega(String nombreBodega) {
+        this.nombreBodega = nombreBodega;
     }
 
-    public void setEstatus_bodega(String estatus_bodega) {
-        this.estatus_bodega = estatus_bodega;
+    public void setEstatusBodega(String estatusBodega) {
+        this.estatusBodega = estatusBodega;
     }
+
+   
 
 }
