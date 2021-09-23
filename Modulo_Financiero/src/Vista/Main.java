@@ -13,7 +13,7 @@ import javax.swing.UIManager;
  * @author Diego Vásquez
  */
 public class Main extends javax.swing.JFrame {
-
+     private Mantenimiento_Divisa formMantenimiento_Moneda;
     /**
      * Creates new form Main
      */
@@ -35,6 +35,7 @@ public class Main extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,6 +61,15 @@ public class Main extends javax.swing.JFrame {
         jMenuBar2.add(jMenu4);
 
         jMenu1.setText("Bancos");
+
+        jMenu5.setText("DIVISAS");
+        jMenu5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenu5);
+
         jMenuBar2.add(jMenu1);
 
         jMenu2.setText("Nóminas");
@@ -81,6 +91,13 @@ public class Main extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu5ActionPerformed
+        // TODO add your handling code here:
+                // Divisas
+        formMantenimiento_Moneda = new Mantenimiento_Divisa();
+        jDesktopPane2.add(formMantenimiento_Moneda);
+    }//GEN-LAST:event_jMenu5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -108,6 +125,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar2;
     // End of variables declaration//GEN-END:variables
 }
