@@ -33,6 +33,9 @@ public class MDIComercial extends javax.swing.JFrame {
 //    private Proceso_Producto Proceso_Producto;
 //    private ProcesoCompra Compra;
 //    private FacturaProveedor Factura;
+    private Mantenimiento_Proveedor MantenimientoProveedor;
+   private Mantenimiento_Marca MantenimientoMarca;
+   private Mantenimiento_Linea MantenimientoLinea;
    public static JLabel logo = new JLabel();
 
     public MDIComercial() throws UnknownHostException {
@@ -82,9 +85,11 @@ public class MDIComercial extends javax.swing.JFrame {
         M_cliente = new javax.swing.JMenuItem();
         M_deudor = new javax.swing.JMenuItem();
         M_compras = new javax.swing.JMenu();
-        M_proveedor = new javax.swing.JMenuItem();
+        Item_proveedor = new javax.swing.JMenuItem();
         M_inventario = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        Item_marca = new javax.swing.JCheckBoxMenuItem();
+        Item_Linea = new javax.swing.JCheckBoxMenuItem();
         M_producto1 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         P_ventas = new javax.swing.JMenu();
@@ -140,13 +145,13 @@ public class MDIComercial extends javax.swing.JFrame {
 
         M_compras.setText("Mantenimientos Compras");
 
-        M_proveedor.setText("Mantenimiento Proveedor");
-        M_proveedor.addActionListener(new java.awt.event.ActionListener() {
+        Item_proveedor.setText("Mantenimiento Proveedor");
+        Item_proveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                M_proveedorActionPerformed(evt);
+                Item_proveedorActionPerformed(evt);
             }
         });
-        M_compras.add(M_proveedor);
+        M_compras.add(Item_proveedor);
 
         M_ccompras.add(M_compras);
 
@@ -160,6 +165,24 @@ public class MDIComercial extends javax.swing.JFrame {
             }
         });
         M_inventario.add(jCheckBoxMenuItem1);
+
+        Item_marca.setSelected(true);
+        Item_marca.setText("Mantenimiento Marca");
+        Item_marca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Item_marcaActionPerformed(evt);
+            }
+        });
+        M_inventario.add(Item_marca);
+
+        Item_Linea.setSelected(true);
+        Item_Linea.setText("Mantenimiento Linea");
+        Item_Linea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Item_LineaActionPerformed(evt);
+            }
+        });
+        M_inventario.add(Item_Linea);
 
         M_producto1.setText("Mantenimiento Producto");
         M_producto1.addActionListener(new java.awt.event.ActionListener() {
@@ -305,11 +328,12 @@ public class MDIComercial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_M_deudorActionPerformed
 
-    private void M_proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_M_proveedorActionPerformed
-
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_M_proveedorActionPerformed
+    private void Item_proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_proveedorActionPerformed
+// TODO add your handling code here:
+MantenimientoProveedor = new Mantenimiento_Proveedor();
+        jdpescritorio.add(MantenimientoProveedor);
+        
+    }//GEN-LAST:event_Item_proveedorActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
 
@@ -379,6 +403,18 @@ public class MDIComercial extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
+    private void Item_marcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_marcaActionPerformed
+        // TODO add your handling code here:
+        MantenimientoMarca = new Mantenimiento_Marca();
+        jdpescritorio.add(MantenimientoMarca);
+    }//GEN-LAST:event_Item_marcaActionPerformed
+
+    private void Item_LineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_LineaActionPerformed
+        // TODO add your handling code here:
+        MantenimientoLinea = new Mantenimiento_Linea();
+        jdpescritorio.add(MantenimientoLinea);
+    }//GEN-LAST:event_Item_LineaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -404,13 +440,15 @@ public class MDIComercial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JMenuItem FacturaCompras;
+    private javax.swing.JCheckBoxMenuItem Item_Linea;
+    private javax.swing.JCheckBoxMenuItem Item_marca;
+    public static javax.swing.JMenuItem Item_proveedor;
     public static javax.swing.JMenu M_ccompras;
     public static javax.swing.JMenuItem M_cliente;
     public static javax.swing.JMenu M_compras;
     public static javax.swing.JMenuItem M_deudor;
     public static javax.swing.JMenu M_inventario;
     public static javax.swing.JMenuItem M_producto1;
-    public static javax.swing.JMenuItem M_proveedor;
     public static javax.swing.JMenu M_venta;
     public static javax.swing.JMenu P_compras;
     public static javax.swing.JMenuItem P_pedido_factura;
