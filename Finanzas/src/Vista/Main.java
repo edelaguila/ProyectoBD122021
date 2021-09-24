@@ -7,6 +7,7 @@ import javax.swing.UIManager;
 
 public class Main extends javax.swing.JFrame {
  private MntDivisa formMantenimiento_Moneda;
+ private Mantenimiento_Banco Mantenimiento_Banco;
     public Main() {
         initComponents();
     }
@@ -22,6 +23,7 @@ public class Main extends javax.swing.JFrame {
         Menu_MantCT = new javax.swing.JMenuItem();
         JMenuBancos = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        MenuMantenimientoBanco = new javax.swing.JMenuItem();
         JMenuNominas = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -64,6 +66,14 @@ public class Main extends javax.swing.JFrame {
             }
         });
         JMenuBancos.add(jMenuItem1);
+
+        MenuMantenimientoBanco.setText("Banco");
+        MenuMantenimientoBanco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuMantenimientoBancoActionPerformed(evt);
+            }
+        });
+        JMenuBancos.add(MenuMantenimientoBanco);
 
         JMenuBarMain.add(JMenuBancos);
 
@@ -119,6 +129,11 @@ public class Main extends javax.swing.JFrame {
         JDesktopMain.add(mantenimientoEmpleados);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void MenuMantenimientoBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuMantenimientoBancoActionPerformed
+    Mantenimiento_Banco = new Mantenimiento_Banco();
+    JDesktopMain.add(Mantenimiento_Banco);
+    }//GEN-LAST:event_MenuMantenimientoBancoActionPerformed
+
 
     public static void main(String args[]) {
         
@@ -142,6 +157,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuBar JMenuBarMain;
     private javax.swing.JMenu JMenuConta;
     private javax.swing.JMenu JMenuNominas;
+    private javax.swing.JMenuItem MenuMantenimientoBanco;
     private javax.swing.JMenuItem Menu_MantCT;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
