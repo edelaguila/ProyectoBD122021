@@ -63,9 +63,7 @@ public class Mantenimiento_Empleados extends javax.swing.JInternalFrame {
         }
     }
 
-    /**
-     * Creates new form FrmCrudUsuarios
-     */
+
  
 
     public Mantenimiento_Empleados() {
@@ -73,6 +71,7 @@ public class Mantenimiento_Empleados extends javax.swing.JInternalFrame {
         llenadoDeTablas();
     }
 
+    
     public void limpiar() {
         txt_ID.setText("");
         txt_nombre.setText("");
