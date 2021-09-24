@@ -5,8 +5,8 @@
  */
 package Vista;
 
-import controlador.Conexion;
-import controlador.DivisaDAO;
+import Controlador.Conexion;
+import Controlador.DivisaDAO;
 import Modelo.Divisa;
 import java.io.File;
 import java.net.UnknownHostException;
