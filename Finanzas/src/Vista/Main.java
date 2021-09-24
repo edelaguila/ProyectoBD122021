@@ -23,6 +23,8 @@ public class Main extends javax.swing.JFrame {
         JMenuBancos = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         JMenuNominas = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Modulo de Finanzas");
@@ -55,8 +57,6 @@ public class Main extends javax.swing.JFrame {
 
         JMenuBancos.setText("Bancos");
 
-        JMenuBancos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
         jMenuItem1.setText("DIVISAS");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,11 +65,22 @@ public class Main extends javax.swing.JFrame {
         });
         JMenuBancos.add(jMenuItem1);
 
-
-
         JMenuBarMain.add(JMenuBancos);
 
         JMenuNominas.setText("Nóminas");
+
+        jMenu1.setText("Mantenimientos");
+
+        jMenuItem2.setText("Mantenimiento Empleados");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        JMenuNominas.add(jMenu1);
+
         JMenuBarMain.add(JMenuNominas);
 
         setJMenuBar(JMenuBarMain);
@@ -102,6 +113,12 @@ public class Main extends javax.swing.JFrame {
         JDesktopMain.add(mantenimientosContabilidad);
     }//GEN-LAST:event_Menu_MantCTActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        Mantenimiento_Empleados mantenimientoEmpleados = new Mantenimiento_Empleados();
+        mantenimientoEmpleados.setVisible(true);
+        JDesktopMain.add(mantenimientoEmpleados);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
 
     public static void main(String args[]) {
         
@@ -125,10 +142,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuBar JMenuBarMain;
     private javax.swing.JMenu JMenuConta;
     private javax.swing.JMenu JMenuNominas;
-
-    private javax.swing.JMenuItem jMenuItem1;
-
     private javax.swing.JMenuItem Menu_MantCT;
-
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 }
