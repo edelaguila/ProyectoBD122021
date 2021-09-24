@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -52,6 +53,8 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
         Txt_buscar.setBorder(null);
         Rdb_limpiar2.setVisible(false);
         prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar);
+        ImageIcon icono = new ImageIcon("src/main/java/assets/cliente.png");
+        this.setFrameIcon(icono);
     }
     
     public void actualizarTabla(String codigo) {
@@ -314,6 +317,9 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
         Btn_ayuda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_ayuda.setText("Ayuda");
         Btn_ayuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_ayudaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Btn_ayudaMouseEntered(evt);
             }
@@ -796,6 +802,11 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_Btn_guardarMouseClicked
+
+    private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
+        // TODO add your handling code here:
+        prcs_repetidos.imprimirAyuda("AyudaHuespedes.chm");
+    }//GEN-LAST:event_Btn_ayudaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import java.io.File;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -36,6 +37,8 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         Txt_Descripcion.setBorder(BorderFactory.createEmptyBorder());
         Txt_Descripcion.setBorder(null);
         prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar);
+        ImageIcon icono = new ImageIcon("src/main/java/assets/pisos.png");
+        this.setFrameIcon(icono);
     }
 
     public void actualizarTabla(String codigo) {
