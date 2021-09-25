@@ -7,6 +7,7 @@ import javax.swing.UIManager;
 
 public class Main extends javax.swing.JFrame {
  private MntDivisa formMantenimiento_Moneda;
+ private MntConcepto formMantenimiento_Concepto;
     public Main() {
         initComponents();
     }
@@ -22,10 +23,10 @@ public class Main extends javax.swing.JFrame {
         Menu_MantCT = new javax.swing.JMenuItem();
         JMenuBancos = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         JMenuNominas = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Modulo de Finanzas");
@@ -66,6 +67,14 @@ public class Main extends javax.swing.JFrame {
         });
         JMenuBancos.add(jMenuItem1);
 
+        jMenuItem3.setText("jMenuItem3");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        JMenuBancos.add(jMenuItem3);
+
         JMenuBarMain.add(JMenuBancos);
 
         JMenuNominas.setText("Nóminas");
@@ -79,14 +88,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem2);
-
-        jMenuItem3.setText("Mantenimiento Puestos");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem3);
 
         JMenuNominas.add(jMenu1);
 
@@ -129,9 +130,10 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        Mantenimiento_Puesto mantenimientoPuesto = new Mantenimiento_Puesto();
-        mantenimientoPuesto.setVisible(true);
-        JDesktopMain.add(mantenimientoPuesto);
+        // TODO add your handling code here:
+   
+          formMantenimiento_Concepto = new MntConcepto();
+        JDesktopMain.add(formMantenimiento_Concepto);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
 
