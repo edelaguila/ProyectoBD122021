@@ -18,11 +18,11 @@ import java.util.List;
  * @author OtakuGT
  */
 public class ConceptopDAO extends Conexion{
-    private static final String SQL_SELECT = "SELECT * FROM tbl_puesto";
-    private static final String SQL_INSERT = "INSERT INTO tbl_puesto(PK_id_puesto, nombre_puesto, salario_puesto) VALUES(?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_puesto SET nombre_puesto=?, salario_puesto=? WHERE PK_id_puesto=?";
-    private static final String SQL_DELETE = "DELETE FROM tbl_puesto WHERE PK_id_puesto=?";
-    private static final String SQL_QUERY = "SELECT PK_id_puesto, nombre_puesto, salario_puesto FROM tbl_puesto WHERE PK_id_puesto = ?";
+    private static final String SQL_SELECT = "SELECT * FROM concepto_planilla";
+    private static final String SQL_INSERT = "INSERT INTO concepto_planilla(id_conceptoPlanilla, nombre_concepto, tipo_concepto, clase_concepto, valor_concepto) VALUES(?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE concepto_planilla SET nombre_concepto=?, tipo_concepto=?, clase_concepto=?, valor_concepto=? WHERE PK_id_puesto=?";
+    private static final String SQL_DELETE = "DELETE FROM concepto_planilla WHERE id_conceptoPlanilla=?";
+    private static final String SQL_QUERY = "SELECT id_conceptoPlanilla, nombre_concepto, tipo_concepto, clase_concepto, valor_concepto FROM concepto_planilla WHERE id_conceptoPlanilla = ?";
 
     Conexion conectar = new Conexion();
     Connection conn = null;
