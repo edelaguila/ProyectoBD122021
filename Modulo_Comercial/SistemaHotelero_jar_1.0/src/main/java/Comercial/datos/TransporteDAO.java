@@ -5,52 +5,53 @@
  */
 package Comercial.datos;
 
-import Comercial.dominio.Bodega;
-import Comercial.dominio.Unidad;
+
+
+import Comercial.dominio.Transporte;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Diana
  */
-public class UnidadDAO {
-    
-      private static final String SQL_SELECT = "SELECT PK_codigo_unidad, unidad_entrada, unidad_salida FROM tbl_unidad";
-    private static final String SQL_INSERT = "INSERT INTO tbl_unidad (PK_codigo_unidad, unidad_entrada, unidad_salida) VALUES(?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_unidad SET  unidad_entrada= ?, unidad_salida= ? WHERE PK_codigo_unidad=?";
-    private static final String SQL_QUERY = "SELECT PK_codigo_unidad, unidad_entrada, unidad_salida FROM tbl_unidad WHERE PK_codigo_unidad=?";
-    private static final String SQL_DELETE = "DELETE FROM tbl_unidad WHERE PK_codigo_unidad=?";
-      public static final String SQL_QUERY2 = "SELECT PK_codigo_unidad FROM tbl_unidad";
-    
-    public List<Unidad> select() {
+public class TransporteDAO {
+
+    private static final String SQL_SELECT = "SELECT PK_codigo_transporte, nombre_transporte, tipo_transporte, estatus_transporte FROM tbl_transporte";
+    private static final String SQL_INSERT = "INSERT INTO tbl_transporte (PK_codigo_transporte, nombre_transporte, tipo_transporte, estatus_transporte) VALUES(?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_transporte SET  nombre_transporte= ?, tipo_transporte= ?, estatus_transporte=? WHERE PK_codigo_transporte=?";
+    private static final String SQL_QUERY = "SELECT PK_codigo_transporte, nombre_transporte, tipo_transporte, estatus_transporte FROM tbl_transporte WHERE PK_codigo_transporte=?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_transporte WHERE PK_codigo_transporte=?";
+
+    public List<Transporte> select() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Unidad unidad = null;
-        List<Unidad> unidades = new ArrayList<Unidad>();
+        Transporte transporte = null;
+        List<Transporte> transportes = new ArrayList<Transporte>();
 
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                String PKcodigoUnidad = rs.getString("PK_codigo_unidad");
-                String unidadEntrada = rs.getString("unidad_entrada");
-                String unidadSalida = rs.getString("unidad_salida");
+                int PKcodigoTransporte = rs.getInt("PK_codigo_transporte");
+                String nombreTransporte = rs.getString("nombre_transporte");
+                String tipoTransporte = rs.getString("tipo_transporte");
+                String estatusTransporte = rs.getString("estatus_transporte");
+                
+                transporte = new Transporte();
+                transporte.setPKcodigoTransporte(PKcodigoTransporte);
+                transporte.setNombreTransporte(nombreTransporte);
+                transporte.setTipoTransporte(tipoTransporte);
+                transporte.setEstatusTransporte(estatusTransporte);
 
-                unidad = new Unidad();
-                unidad.setPKcodigoUnidad(PKcodigoUnidad);
-                unidad.setUnidadEntrada(unidadEntrada);
-                unidad.setUnidadSalida(unidadSalida);
-
-                unidades.add(unidad);
+                transportes.add(transporte);
             }
 
         } catch (SQLException ex) {
@@ -61,20 +62,20 @@ public class UnidadDAO {
             Conexion.close(conn);
         }
 
-        return unidades;
+        return transportes;
     }
 
-    public int insert(Unidad unidad) {
+    public int insert(Transporte transporte) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1, unidad.getPKcodigoUnidad());
-            stmt.setString(2, unidad.getUnidadEntrada());
-            stmt.setString(3, unidad.getUnidadSalida());
-
+            stmt.setInt(1, transporte.getPKcodigoTransporte());
+            stmt.setString(2, transporte.getNombreTransporte());
+            stmt.setString(3, transporte.getTipoTransporte());
+            stmt.setString(4, transporte.getEstatusTransporte());
             //System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
             //System.out.println("Registros afectados:" + rows);
@@ -89,7 +90,7 @@ public class UnidadDAO {
         return rows;
     }
 
-    public int update(Unidad unidad) {
+    public int update(Transporte transporte) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -98,10 +99,11 @@ public class UnidadDAO {
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            
-            stmt.setString(1, unidad.getPKcodigoUnidad());
-            stmt.setString(2, unidad.getUnidadEntrada());
-            stmt.setString(3, unidad.getUnidadSalida());
+
+            stmt.setInt(1, transporte.getPKcodigoTransporte());
+            stmt.setString(2, transporte.getNombreTransporte());
+            stmt.setString(3, transporte.getTipoTransporte());
+            stmt.setString(4, transporte.getEstatusTransporte());
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
 
@@ -115,30 +117,31 @@ public class UnidadDAO {
         return rows;
     }
 
-  
-    public Unidad query(Unidad unidad) {
+    public Transporte query(Transporte transporte) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        List<Bodega> bodegas = new ArrayList<Bodega>();
+        List<Transporte> transportes = new ArrayList<Transporte>();
         int rows = 0;
 
         try {
             conn = Conexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setString(1, unidad.getPKcodigoUnidad());
+            stmt.setInt(1, transporte.getPKcodigoTransporte());
             rs = stmt.executeQuery();
-            
-            while (rs.next()) {
-                String PKcodigoUnidad = rs.getString("PK_codigo_unidad");
-                String unidadEntrada = rs.getString("unidad_entrada");
-                String unidadSalida = rs.getString("unidad_salida");
 
-                unidad = new Unidad();
-                unidad.setPKcodigoUnidad(PKcodigoUnidad);
-                unidad.setUnidadEntrada(unidadEntrada);
-                unidad.setUnidadSalida(unidadSalida);
+            while (rs.next()) {
+                int PKcodigoTransporte = rs.getInt("PK_codigo_transporte");
+                String nombreTransporte = rs.getString("nombre_transporte");
+                String tipoTransporte = rs.getString("tipo_transporte");
+                String estatusTransporte = rs.getString("estatus_transporte");
+
+                transporte = new Transporte();
+                transporte.setPKcodigoTransporte(PKcodigoTransporte);
+                transporte.setNombreTransporte(nombreTransporte);
+                transporte.setTipoTransporte(tipoTransporte);
+                transporte.setEstatusTransporte(estatusTransporte);
 
                 //empleados.add(empleado); // Si se utiliza un ArrayList
             }
@@ -152,10 +155,10 @@ public class UnidadDAO {
         }
 
         //return empleados;  // Si se utiliza un ArrayList
-        return unidad;
+        return transporte;
     }
 
-    public int delete(Unidad unidad) {
+    public int delete(Transporte transporte) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -165,7 +168,7 @@ public class UnidadDAO {
             conn = Conexion.getConnection();
             //System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setString(1, unidad.getPKcodigoUnidad());
+            stmt.setInt(1, transporte.getPKcodigoTransporte());
             rows = stmt.executeUpdate();
             //System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
@@ -178,29 +181,4 @@ public class UnidadDAO {
         return rows;
     }
 
- public void query2(JComboBox cbxUnidad) {
-
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        try {
-            conn = Conexion.getConnection();
-            //System.out.println("Ejecutando query:" + SQL_QUERY);
-            stmt = conn.prepareStatement(SQL_QUERY2);
-            //stmt.setInt(1, aplicacion.getId_ModuloCbx());
-            rs = stmt.executeQuery();
-            cbxUnidad.addItem("Seleccionar...");        
-            while (rs.next()) {
-                cbxUnidad.addItem(rs.getInt("PK_codigo_unidad"));
-                
-            }
-            //System.out.println("Registros buscado:" + aplicacion);
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Conexion.close(rs);
-            Conexion.close(stmt);
-            Conexion.close(conn);
-        }
 }
- }
