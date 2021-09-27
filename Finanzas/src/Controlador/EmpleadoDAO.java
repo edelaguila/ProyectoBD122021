@@ -158,7 +158,6 @@ public class EmpleadoDAO extends Conexion {
             stmt.setString(7, empleado.getFcontrato_empleado());
             stmt.setInt(8, empleado.getId_empleado());
             rows = stmt.executeUpdate();
-            //System.out.println("Registros actualizado:" + rows);
 
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
