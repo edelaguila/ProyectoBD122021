@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="228605d1-3b01-476d-bfd4-228efc3af0e0">
-	<property name="ireport.zoom" value="1.2100000000000009"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
@@ -40,7 +40,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="102" splitType="Stretch">
+		<band height="109" splitType="Stretch">
 			<frame>
 				<reportElement mode="Opaque" x="0" y="0" width="802" height="66" backcolor="#000000" uuid="d9b8da25-1044-40f4-b0de-941be0a58b82"/>
 				<staticText>
@@ -162,8 +162,7 @@
 						<font size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[($F{tipo_servicio}.equals(1)?
-"basico" : "adicional" )
-]]></textFieldExpression>
+"basico" : "adicional" )]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement style="Detail" positionType="Float" x="699" y="0" width="103" height="31" uuid="8b18261f-97b2-4d9c-b649-58fa1f7319d2"/>
@@ -171,8 +170,7 @@
 						<font size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[($F{estado_servicio}.equals(1)?
-"activo" : "inactivo" )
-]]></textFieldExpression>
+"activo" : "inactivo" )]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement style="Detail" positionType="Float" x="0" y="0" width="83" height="31" uuid="5bf758fe-edb1-4f53-837f-cd771290aa86"/>
