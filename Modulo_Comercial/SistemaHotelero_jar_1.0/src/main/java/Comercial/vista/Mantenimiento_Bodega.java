@@ -7,6 +7,7 @@ package Comercial.vista;
 
 import Comercial.datos.BodegaDAO;
 import Comercial.dominio.Bodega;
+import java.io.File;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -86,6 +87,12 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
         Tbl_tablabodega = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         Btn_Ayuda = new javax.swing.JButton();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setVisible(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle"));
 
@@ -242,6 +249,11 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
 
         Btn_Ayuda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         Btn_Ayuda.setText("Ayuda");
+        Btn_Ayuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_AyudaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -332,6 +344,27 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_Btn_ReporteActionPerformed
+
+    private void Btn_AyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_AyudaActionPerformed
+        // TODO add your handling code here:
+        try {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoLinea.chm")).exists()) {
+                Process p = Runtime
+                .getRuntime()
+                .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoBodega.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_Btn_AyudaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

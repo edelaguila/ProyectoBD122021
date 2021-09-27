@@ -63,9 +63,7 @@ public class Mantenimiento_Empleados extends javax.swing.JInternalFrame {
         }
     }
 
-    /**
-     * Creates new form FrmCrudUsuarios
-     */
+
  
 
     public Mantenimiento_Empleados() {
@@ -73,6 +71,7 @@ public class Mantenimiento_Empleados extends javax.swing.JInternalFrame {
         llenadoDeTablas();
     }
 
+    
     public void limpiar() {
         txt_ID.setText("");
         txt_nombre.setText("");
@@ -213,7 +212,7 @@ public class Mantenimiento_Empleados extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Puesto");
 
-        cbx_puesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Proto 1", "Proto 2", "Proto 3" }));
+        cbx_puesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha Contrato"));
 
