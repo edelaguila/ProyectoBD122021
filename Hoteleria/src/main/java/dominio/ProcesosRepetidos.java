@@ -5,12 +5,16 @@
  */
 package dominio;
 
+import datos.Conexion;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.io.File;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JLabel;
@@ -20,6 +24,12 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+import seguridad.vista.Login_LD;
 
 // @author Herbert Leonel Dominguez Chavez
 public class ProcesosRepetidos {
@@ -159,6 +169,30 @@ public class ProcesosRepetidos {
             //System.out.println("Correcto");
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    private Connection connection = null;
+
+    public void imprimirReporte(String nombreReporte) {
+        Map p = new HashMap();
+        System.out.println(Login_LD.usuario);
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            connection = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/main/java/reportes/"+ nombreReporte + "");
+            p.put("usuario", Login_LD.usuario);
+            p.put("logo", new File("").getAbsolutePath() + "/src/main/java/reportes/hotel.png");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte de Servicios");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

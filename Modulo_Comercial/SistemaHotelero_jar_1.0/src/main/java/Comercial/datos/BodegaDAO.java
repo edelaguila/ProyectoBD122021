@@ -43,9 +43,9 @@ public class BodegaDAO {
                 String estatus_bodega = rs.getString("estatus_bodega");
 
                 bodega = new Bodega();
-                bodega.setPK_codigo_bodega(PK_codigo_bodega);
-                bodega.setNombre_bodega(nombre_bodega);
-                bodega.setEstatus_bodega(estatus_bodega);
+                bodega.setPKcodigoBodega(PK_codigo_bodega);
+                bodega.setNombreBodega(nombre_bodega);
+                bodega.setEstatusBodega(estatus_bodega);
 
                 bodegas.add(bodega);
             }
@@ -68,9 +68,9 @@ public class BodegaDAO {
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setInt(1, bodega.getPK_codigo_bodega());
-            stmt.setString(2, bodega.getNombre_bodega());
-            stmt.setString(3, bodega.getEstatus_bodega());
+            stmt.setInt(1, bodega.getPKcodigoBodega());
+            stmt.setString(2, bodega.getNombreBodega());
+            stmt.setString(3, bodega.getEstatusBodega());
 
             //System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -96,9 +96,9 @@ public class BodegaDAO {
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             
-            stmt.setInt(1, bodega.getPK_codigo_bodega());
-            stmt.setString(2, bodega.getNombre_bodega());
-            stmt.setString(3, bodega.getEstatus_bodega());
+            stmt.setInt(1, bodega.getPKcodigoBodega());
+            stmt.setString(2, bodega.getNombreBodega());
+            stmt.setString(3, bodega.getEstatusBodega());
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
 
@@ -126,7 +126,7 @@ public class BodegaDAO {
             conn = Conexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setInt(1, bodega.getPK_codigo_bodega());
+            stmt.setInt(1, bodega.getPKcodigoBodega());
             rs = stmt.executeQuery();
             
             while (rs.next()) {
@@ -135,9 +135,9 @@ public class BodegaDAO {
                 String estatus_bodega = rs.getString("estatus_bodega");
 
                 bodega = new Bodega();
-                bodega.setPK_codigo_bodega(PK_codigo_bodega);
-                bodega.setNombre_bodega(nombre_bodega);
-                bodega.setEstatus_bodega(estatus_bodega);
+                bodega.setPKcodigoBodega(PK_codigo_bodega);
+                bodega.setNombreBodega(nombre_bodega);
+                bodega.setEstatusBodega(estatus_bodega);
 
                 //empleados.add(empleado); // Si se utiliza un ArrayList
             }
@@ -164,7 +164,7 @@ public class BodegaDAO {
             conn = Conexion.getConnection();
             //System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setInt(1, bodega.getPK_codigo_bodega());
+            stmt.setInt(1, bodega.getPKcodigoBodega());
             rows = stmt.executeUpdate();
             //System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {

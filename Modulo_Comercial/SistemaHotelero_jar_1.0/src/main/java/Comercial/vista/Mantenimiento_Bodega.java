@@ -7,6 +7,7 @@ package Comercial.vista;
 
 import Comercial.datos.BodegaDAO;
 import Comercial.dominio.Bodega;
+import java.io.File;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -31,9 +32,9 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
         Tbl_tablabodega.setModel(modelo);
         String[] dato = new String[3];
         for (int i = 0; i < bodega.size(); i++) {
-            dato[0] = Integer.toString(bodega.get(i).getPK_codigo_bodega());
-            dato[1] = bodega.get(i).getNombre_bodega();
-            dato[2] = bodega.get(i).getEstatus_bodega();
+            dato[0] = Integer.toString(bodega.get(i).getPKcodigoBodega());
+            dato[1] = bodega.get(i).getNombreBodega();
+            dato[2] = bodega.get(i).getEstatusBodega();
 
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
@@ -43,10 +44,10 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
     public void buscar() {
         Bodega bodegaAConsultar = new Bodega();
         BodegaDAO bodegaDAO = new BodegaDAO();
-        bodegaAConsultar.setPK_codigo_bodega(Integer.parseInt(Txt_id.getText()));
+        bodegaAConsultar.setPKcodigoBodega(Integer.parseInt(Txt_id.getText()));
         bodegaAConsultar = bodegaDAO.query(bodegaAConsultar);
-        Txt_nombre.setText(bodegaAConsultar.getNombre_bodega());
-        Txt_estatus.setText(String.valueOf(bodegaAConsultar.getEstatus_bodega()));
+        Txt_nombre.setText(bodegaAConsultar.getNombreBodega());
+        Txt_estatus.setText(String.valueOf(bodegaAConsultar.getEstatusBodega()));
 //        cbx_bodega.setSelectedItem(String.valueOf(0));
     }
 
@@ -72,75 +73,81 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         Txt_id = new javax.swing.JTextField();
-        Btn_buscar = new javax.swing.JButton();
+        Btn_Buscar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         Txt_nombre = new javax.swing.JTextField();
         Txt_estatus = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        Btn_guardar = new javax.swing.JButton();
-        Btn_modificar = new javax.swing.JButton();
-        Btn_eliminar = new javax.swing.JButton();
-        Btn_reporte = new javax.swing.JButton();
+        Btn_Guardar = new javax.swing.JButton();
+        Btn_Modificar = new javax.swing.JButton();
+        Btn_Eliminar = new javax.swing.JButton();
+        Btn_Reporte = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tbl_tablabodega = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        Btn_ayuda = new javax.swing.JButton();
+        Btn_Ayuda = new javax.swing.JButton();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setVisible(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle"));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setText("ID ");
 
         Txt_id.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        Btn_buscar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        Btn_buscar.setText("Buscar");
-        Btn_buscar.addActionListener(new java.awt.event.ActionListener() {
+        Btn_Buscar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Btn_Buscar.setText("Buscar");
+        Btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_buscarActionPerformed(evt);
+                Btn_BuscarActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setText("Nombre Bodega");
 
         Txt_nombre.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         Txt_estatus.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Estado Bodega");
 
-        Btn_guardar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        Btn_guardar.setText("Guardar");
-        Btn_guardar.addActionListener(new java.awt.event.ActionListener() {
+        Btn_Guardar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Btn_Guardar.setText("Guardar");
+        Btn_Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_guardarActionPerformed(evt);
+                Btn_GuardarActionPerformed(evt);
             }
         });
 
-        Btn_modificar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        Btn_modificar.setText("Modificar");
-        Btn_modificar.addActionListener(new java.awt.event.ActionListener() {
+        Btn_Modificar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Btn_Modificar.setText("Modificar");
+        Btn_Modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_modificarActionPerformed(evt);
+                Btn_ModificarActionPerformed(evt);
             }
         });
 
-        Btn_eliminar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        Btn_eliminar.setText("Eliminar");
-        Btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+        Btn_Eliminar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Btn_Eliminar.setText("Eliminar");
+        Btn_Eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_eliminarActionPerformed(evt);
+                Btn_EliminarActionPerformed(evt);
             }
         });
 
-        Btn_reporte.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        Btn_reporte.setText("Reporte");
-        Btn_reporte.addActionListener(new java.awt.event.ActionListener() {
+        Btn_Reporte.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Btn_Reporte.setText("Reporte");
+        Btn_Reporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_reporteActionPerformed(evt);
+                Btn_ReporteActionPerformed(evt);
             }
         });
 
@@ -152,26 +159,22 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Btn_guardar)
+                        .addComponent(Btn_Guardar)
                         .addGap(18, 18, 18)
-                        .addComponent(Btn_modificar)
+                        .addComponent(Btn_Modificar)
                         .addGap(18, 18, 18)
-                        .addComponent(Btn_eliminar)
-                        .addGap(18, 18, 18)
-                        .addComponent(Btn_reporte))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(Btn_Eliminar)
+                        .addGap(27, 27, 27)
+                        .addComponent(Btn_Reporte))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(115, 115, 115)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Txt_id)
-                                .addGap(18, 18, 18)
-                                .addComponent(Btn_buscar))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Txt_estatus, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(220, 220, 220))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Txt_id)
+                            .addComponent(Txt_estatus, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                            .addComponent(Txt_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Btn_Buscar)))
+                .addGap(200, 200, 200))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -187,17 +190,17 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Btn_buscar))
+                    .addComponent(Btn_Buscar))
                 .addGap(18, 18, 18)
                 .addComponent(Txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Txt_estatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Btn_guardar)
-                    .addComponent(Btn_modificar)
-                    .addComponent(Btn_eliminar)
-                    .addComponent(Btn_reporte))
+                    .addComponent(Btn_Guardar)
+                    .addComponent(Btn_Modificar)
+                    .addComponent(Btn_Eliminar)
+                    .addComponent(Btn_Reporte))
                 .addGap(28, 28, 28))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -241,11 +244,16 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setText("Mantenimiento Bodega");
 
-        Btn_ayuda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        Btn_ayuda.setText("Ayuda");
+        Btn_Ayuda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Btn_Ayuda.setText("Ayuda");
+        Btn_Ayuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_AyudaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -264,7 +272,7 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
                 .addGap(158, 158, 158)
                 .addComponent(jLabel1)
                 .addGap(57, 57, 57)
-                .addComponent(Btn_ayuda)
+                .addComponent(Btn_Ayuda)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -273,7 +281,7 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(Btn_ayuda))
+                    .addComponent(Btn_Ayuda))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -284,13 +292,13 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_buscarActionPerformed
+    private void Btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_BuscarActionPerformed
         // TODO add your handling code here:
         buscar();
 
-    }//GEN-LAST:event_Btn_buscarActionPerformed
+    }//GEN-LAST:event_Btn_BuscarActionPerformed
 
-    private void Btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_guardarActionPerformed
+    private void Btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_GuardarActionPerformed
         // TODO add your handling code here:
         //        MDI_Components mdi_Components = new MDI_Components();
         String id = "0";
@@ -298,68 +306,74 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
         BodegaDAO bodegaDAO = new BodegaDAO();
         Bodega bodegaAInsertar = new Bodega();
         //String cbxbodega = cbx_bodega.getSelectedItem().toString();
-        bodegaAInsertar.setPK_codigo_bodega((int) Integer.parseInt(Txt_id.getText()));
-        bodegaAInsertar.setNombre_bodega(Txt_nombre.getText());
-        bodegaAInsertar.setEstatus_bodega(Txt_estatus.getText());
+        bodegaAInsertar.setPKcodigoBodega((int) Integer.parseInt(Txt_id.getText()));
+        bodegaAInsertar.setNombreBodega(Txt_nombre.getText());
+        bodegaAInsertar.setEstatusBodega(Txt_estatus.getText());
         bodegaDAO.insert(bodegaAInsertar);
         llenadoDeTablas();
         limpiar();
-    }//GEN-LAST:event_Btn_guardarActionPerformed
+    }//GEN-LAST:event_Btn_GuardarActionPerformed
 
-    private void Btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_modificarActionPerformed
+    private void Btn_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ModificarActionPerformed
         // TODO add your handling code here:
         BodegaDAO bodegaDAO = new BodegaDAO();
         Bodega bodegaAActualizar = new Bodega();
-        bodegaAActualizar.setPK_codigo_bodega(Integer.parseInt(Txt_id.getText()));
-        bodegaAActualizar.setNombre_bodega(Txt_nombre.getText());
-        bodegaAActualizar.setEstatus_bodega(Txt_estatus.getText());
+        bodegaAActualizar.setPKcodigoBodega(Integer.parseInt(Txt_id.getText()));
+        bodegaAActualizar.setNombreBodega(Txt_nombre.getText());
+        bodegaAActualizar.setEstatusBodega(Txt_estatus.getText());
         bodegaDAO.update(bodegaAActualizar);
         JOptionPane.showMessageDialog(null, "Modificación Exitosa.");
 
         llenadoDeTablas();
         limpiar();
-    }//GEN-LAST:event_Btn_modificarActionPerformed
+    }//GEN-LAST:event_Btn_ModificarActionPerformed
 
-    private void Btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_eliminarActionPerformed
+    private void Btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EliminarActionPerformed
         // TODO add your handling code here:
         BodegaDAO bodegaDAO = new BodegaDAO();
         Bodega bodegaAEliminar = new Bodega();
-        bodegaAEliminar.setPK_codigo_bodega(Integer.parseInt(Txt_id.getText()));
+        bodegaAEliminar.setPKcodigoBodega(Integer.parseInt(Txt_id.getText()));
         bodegaDAO.delete(bodegaAEliminar);
         JOptionPane.showMessageDialog(null, "Registro Eliminado.");
 
         llenadoDeTablas();
         limpiar();
-    }//GEN-LAST:event_Btn_eliminarActionPerformed
+    }//GEN-LAST:event_Btn_EliminarActionPerformed
 
-    private void Btn_reporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_reporteActionPerformed
+    private void Btn_ReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ReporteActionPerformed
         // TODO add your handling code here:
-        //        Map p = new HashMap();
-        //        JasperReport report;
-        //        JasperPrint print;
-        //
-        //        try {
-            //            connection = Conexion.getConnection();
-            //            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-                //                    + "/src/main/java/Comercial/reportes/MantenimientoProducto.jrxml");
-            //            print = JasperFillManager.fillReport(report, p, connection);
-            //            JasperViewer view = new JasperViewer(print, false);
-            //            view.setTitle("Reporte de Proceso Productos");
-            //            view.setVisible(true);
-            //
-            //        } catch (Exception e) {
-            //            e.printStackTrace();
-            //        }
-    }//GEN-LAST:event_Btn_reporteActionPerformed
+
+    }//GEN-LAST:event_Btn_ReporteActionPerformed
+
+    private void Btn_AyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_AyudaActionPerformed
+        // TODO add your handling code here:
+        try {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoLinea.chm")).exists()) {
+                Process p = Runtime
+                .getRuntime()
+                .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoBodega.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_Btn_AyudaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Btn_ayuda;
-    private javax.swing.JButton Btn_buscar;
-    private javax.swing.JButton Btn_eliminar;
-    private javax.swing.JButton Btn_guardar;
-    private javax.swing.JButton Btn_modificar;
-    private javax.swing.JButton Btn_reporte;
+    private javax.swing.JButton Btn_Ayuda;
+    private javax.swing.JButton Btn_Buscar;
+    private javax.swing.JButton Btn_Eliminar;
+    private javax.swing.JButton Btn_Guardar;
+    private javax.swing.JButton Btn_Modificar;
+    private javax.swing.JButton Btn_Reporte;
     private javax.swing.JTable Tbl_tablabodega;
     private javax.swing.JTextField Txt_estatus;
     private javax.swing.JTextField Txt_id;
