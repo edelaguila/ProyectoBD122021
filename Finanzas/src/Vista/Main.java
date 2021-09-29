@@ -8,6 +8,8 @@ import javax.swing.UIManager;
 public class Main extends javax.swing.JFrame {
  private MntDivisa formMantenimiento_Moneda;
  private MntConcepto formMantenimiento_Concepto;
+ private Mantenimiento_Banco Mantenimiento_Banco;
+ private Mantenimiento_TipoPersonas Mantenimiento_TipoPersona;
     public Main() {
         initComponents();
     }
@@ -24,9 +26,12 @@ public class Main extends javax.swing.JFrame {
         JMenuBancos = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        Mantenimiento_Bancos = new javax.swing.JMenuItem();
+        Mantenimiento_TipoP = new javax.swing.JMenuItem();
         JMenuNominas = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Modulo de Finanzas");
@@ -75,6 +80,22 @@ public class Main extends javax.swing.JFrame {
         });
         JMenuBancos.add(jMenuItem3);
 
+        Mantenimiento_Bancos.setText("Banco");
+        Mantenimiento_Bancos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mantenimiento_BancosActionPerformed(evt);
+            }
+        });
+        JMenuBancos.add(Mantenimiento_Bancos);
+
+        Mantenimiento_TipoP.setText("Tipo Persona");
+        Mantenimiento_TipoP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mantenimiento_TipoPActionPerformed(evt);
+            }
+        });
+        JMenuBancos.add(Mantenimiento_TipoP);
+
         JMenuBarMain.add(JMenuBancos);
 
         JMenuNominas.setText("Nóminas");
@@ -88,6 +109,14 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem2);
+
+        jMenuItem4.setText("Mantenimiento Puesto");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
 
         JMenuNominas.add(jMenu1);
 
@@ -136,6 +165,22 @@ public class Main extends javax.swing.JFrame {
         JDesktopMain.add(formMantenimiento_Concepto);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        Mantenimiento_Puesto mantenimientoPuesto = new Mantenimiento_Puesto();
+        mantenimientoPuesto.setVisible(true);
+        JDesktopMain.add(mantenimientoPuesto);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void Mantenimiento_BancosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mantenimiento_BancosActionPerformed
+       Mantenimiento_Banco = new Mantenimiento_Banco();
+        JDesktopMain.add(Mantenimiento_Banco);
+    }//GEN-LAST:event_Mantenimiento_BancosActionPerformed
+
+    private void Mantenimiento_TipoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mantenimiento_TipoPActionPerformed
+       Mantenimiento_TipoPersona = new Mantenimiento_TipoPersonas();
+        JDesktopMain.add(Mantenimiento_TipoPersona);
+    }//GEN-LAST:event_Mantenimiento_TipoPActionPerformed
+
 
     public static void main(String args[]) {
         
@@ -159,10 +204,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuBar JMenuBarMain;
     private javax.swing.JMenu JMenuConta;
     private javax.swing.JMenu JMenuNominas;
+    private javax.swing.JMenuItem Mantenimiento_Bancos;
+    private javax.swing.JMenuItem Mantenimiento_TipoP;
     private javax.swing.JMenuItem Menu_MantCT;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
 }
