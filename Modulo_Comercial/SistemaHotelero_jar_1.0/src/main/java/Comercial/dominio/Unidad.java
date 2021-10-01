@@ -11,11 +11,11 @@ package Comercial.dominio;
  */
 public class Unidad {
     
-    int PKcodigoUnidad;
+    String PKcodigoUnidad;
     String unidadEntrada;
     String unidadSalida;
 
-    public int getPKcodigoUnidad() {
+    public String getPKcodigoUnidad() {
         return PKcodigoUnidad;
     }
 
@@ -27,7 +27,7 @@ public class Unidad {
         return unidadSalida;
     }
 
-    public void setPKcodigoUnidad(int PKcodigoUnidad) {
+    public void setPKcodigoUnidad(String PKcodigoUnidad) {
         this.PKcodigoUnidad = PKcodigoUnidad;
     }
 
@@ -38,10 +38,5 @@ public class Unidad {
     public void setUnidadSalida(String unidadSalida) {
         this.unidadSalida = unidadSalida;
     }
-    
-    
-    
-    
-    
     
 }

@@ -7,6 +7,7 @@ package Comercial.vista;
 
 import Comercial.datos.UnidadDAO;
 import Comercial.dominio.Unidad;
+import java.io.File;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,16 +23,16 @@ public class Mantenimiento_Unidad extends javax.swing.JInternalFrame {
      */
       public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("ID Bodega");
-        modelo.addColumn("Nombre Bodega");
-        modelo.addColumn("Estatus Bodega");
+        modelo.addColumn("ID Unidad");
+        modelo.addColumn("Entrada Unidad");
+        modelo.addColumn("Salida Unidad");
         UnidadDAO unidadDAO = new UnidadDAO();
 
         List<Unidad> unidad = unidadDAO.select();
         Tbl_unidad.setModel(modelo);
         String[] dato = new String[3];
         for (int i = 0; i < unidad.size(); i++) {
-            dato[0] = Integer.toString(unidad.get(i).getPKcodigoUnidad());
+            dato[0] = unidad.get(i).getPKcodigoUnidad();
             dato[1] = unidad.get(i).getUnidadEntrada();
             dato[2] = unidad.get(i).getUnidadSalida();
 
@@ -43,7 +44,7 @@ public class Mantenimiento_Unidad extends javax.swing.JInternalFrame {
     public void buscar() {
         Unidad unidadAConsultar = new Unidad();
         UnidadDAO unidadDAO = new UnidadDAO();
-        unidadAConsultar.setPKcodigoUnidad(Integer.parseInt(Txt_id.getText()));
+        unidadAConsultar.setPKcodigoUnidad(String.valueOf(Txt_id.getText()));
         unidadAConsultar = unidadDAO.query(unidadAConsultar);
         Txt_unidadentrada.setText(unidadAConsultar.getUnidadEntrada());
         Txt_unidadsalida.setText(String.valueOf(unidadAConsultar.getUnidadSalida()));
@@ -85,6 +86,13 @@ public class Mantenimiento_Unidad extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Tbl_unidad = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        Btn_Ayuda = new javax.swing.JButton();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setVisible(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle Unidad"));
 
@@ -233,32 +241,43 @@ public class Mantenimiento_Unidad extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setText("Mantenimiento Unidad");
 
+        Btn_Ayuda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Btn_Ayuda.setText("Ayuda");
+        Btn_Ayuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_AyudaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(206, 206, 206)
-                        .addComponent(jLabel1)))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(68, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(206, 206, 206)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Btn_Ayuda)
+                .addGap(76, 76, 76))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(Btn_Ayuda))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -270,12 +289,12 @@ public class Mantenimiento_Unidad extends javax.swing.JInternalFrame {
 
     private void Btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_GuardarActionPerformed
         // TODO add your handling code here:
-        String id = "0";
+         String id = "0";
         Mantenimiento_Unidad mntunidadDAO = new Mantenimiento_Unidad();
         UnidadDAO unidadDAO = new UnidadDAO();
         Unidad unidadAInsertar = new Unidad();
         //String cbxbodega = cbx_bodega.getSelectedItem().toString();
-        unidadAInsertar.setPKcodigoUnidad((int) Integer.parseInt(Txt_id.getText()));
+        unidadAInsertar.setPKcodigoUnidad(Txt_id.getText());
         unidadAInsertar.setUnidadEntrada(Txt_unidadentrada.getText());
         unidadAInsertar.setUnidadSalida(Txt_unidadsalida.getText());
         unidadDAO.insert(unidadAInsertar);
@@ -287,7 +306,7 @@ public class Mantenimiento_Unidad extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         UnidadDAO unidadDAO = new UnidadDAO();
         Unidad unidadAActualizar = new Unidad();
-        unidadAActualizar.setPKcodigoUnidad(Integer.parseInt(Txt_id.getText()));
+        unidadAActualizar.setPKcodigoUnidad(Txt_id.getText());
         unidadAActualizar.setUnidadEntrada(Txt_unidadentrada.getText());
         unidadAActualizar.setUnidadSalida(Txt_unidadsalida.getText());
         unidadDAO.update(unidadAActualizar);
@@ -298,9 +317,9 @@ public class Mantenimiento_Unidad extends javax.swing.JInternalFrame {
 
     private void Btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EliminarActionPerformed
         // TODO add your handling code here:
-        UnidadDAO unidadDAO = new UnidadDAO();
+       UnidadDAO unidadDAO = new UnidadDAO();
         Unidad unidadAEliminar = new Unidad();
-        unidadAEliminar.setPKcodigoUnidad(Integer.parseInt(Txt_id.getText()));
+        unidadAEliminar.setPKcodigoUnidad(Txt_id.getText());
         unidadDAO.delete(unidadAEliminar);
         JOptionPane.showMessageDialog(null, "Registro Eliminado.");
 
@@ -313,8 +332,26 @@ public class Mantenimiento_Unidad extends javax.swing.JInternalFrame {
         buscar ();
     }//GEN-LAST:event_Btn_BuscarActionPerformed
 
+    private void Btn_AyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_AyudaActionPerformed
+        // TODO add your handling code here:
+        try {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoUnidad1.chm")).exists()) {
+                Process p = Runtime
+                .getRuntime()
+                .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoUnidad1.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_Btn_AyudaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Btn_Ayuda;
     private javax.swing.JButton Btn_Buscar;
     private javax.swing.JButton Btn_Eliminar;
     private javax.swing.JButton Btn_Guardar;

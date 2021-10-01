@@ -5,9 +5,6 @@ package Comercial.vista;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
-
 import Comercial.datos.VendedorDao;
 import Comercial.dominio.Vendedor;
 import java.io.File;
@@ -60,7 +57,6 @@ public class Mantenimiento_Vendedor extends javax.swing.JInternalFrame {
 //            btnEliminar.setEnabled(true);
 //        }
 //    }
-
     public void llenadoDeTablas() {
         /**
          *
@@ -69,11 +65,8 @@ public class Mantenimiento_Vendedor extends javax.swing.JInternalFrame {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Codico Vendedor");
         modelo.addColumn("Nombre Vendedor");
-       
-
 
         modelo.addColumn("Estatus Vendedor");
-      
 
         VendedorDao ventasDAO = new VendedorDao();
 
@@ -83,9 +76,8 @@ public class Mantenimiento_Vendedor extends javax.swing.JInternalFrame {
         for (int i = 0; i < ventas.size(); i++) {
             dato[0] = (ventas.get(i).getCodigo_Vendedor());
             dato[1] = ventas.get(i).getNombre_Vendedor();
-            
+
             dato[2] = (ventas.get(i).getEstatus_Vendedor());
-         
 
             System.out.println("vendedor:" + ventas);
             modelo.addRow(dato);
@@ -94,27 +86,23 @@ public class Mantenimiento_Vendedor extends javax.swing.JInternalFrame {
 
     public void buscarVendedor() {
 
-      VendedorDao Clientes = new VendedorDao();
+        VendedorDao Clientes = new VendedorDao();
 
-        Vendedor Buscar = new Vendedor() ;
+        Vendedor Buscar = new Vendedor();
         Buscar.setCodigo_Vendedor(Txt_codigo.getText());
         Buscar = Clientes.query(Buscar);
         Txt_nombre.setText(Buscar.getNombre_Vendedor());
-      
+
         Txt_estatus.setText(Buscar.getEstatus_Vendedor());
-       
-   
 
     }
 
     public void limpiar() {
         Txt_codigo.setText("");
         Txt_nombre.setText("");
-     
+
         Txt_estatus.setText("");
-       
-        
-    
+
     }
 
     /**
@@ -284,7 +272,7 @@ public class Mantenimiento_Vendedor extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Btn_Buscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addGap(22, 22, 22))
         );
@@ -299,13 +287,12 @@ public class Mantenimiento_Vendedor extends javax.swing.JInternalFrame {
         VendedorDao dao = new VendedorDao();
 
         Vendedor modi = new Vendedor();
-        
-         modi.setCodigo_Vendedor(Txt_codigo.getText());
-         modi.setNombre_Vendedor(Txt_nombre.getText());
-     
-            
-         modi.setEstatus_Vendedor(Txt_estatus.getText());
-         
+
+        modi.setCodigo_Vendedor(Txt_codigo.getText());
+        modi.setNombre_Vendedor(Txt_nombre.getText());
+
+        modi.setEstatus_Vendedor(Txt_estatus.getText());
+
         dao.update(modi);
         llenadoDeTablas();
         limpiar();
@@ -332,16 +319,14 @@ public class Mantenimiento_Vendedor extends javax.swing.JInternalFrame {
 
     private void Btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EliminarActionPerformed
 //
-         VendedorDao acreedor = new  VendedorDao();
+        VendedorDao acreedor = new VendedorDao();
 
-         Vendedor vendedorAEliminar = new  Vendedor();
-            vendedorAEliminar.setCodigo_Vendedor(Txt_codigo.getText());
-         vendedorAEliminar.setNombre_Vendedor(Txt_nombre.getText());
-       
-           
-         vendedorAEliminar.setEstatus_Vendedor(Txt_estatus.getText());
-      
-      
+        Vendedor vendedorAEliminar = new Vendedor();
+        vendedorAEliminar.setCodigo_Vendedor(Txt_codigo.getText());
+        vendedorAEliminar.setNombre_Vendedor(Txt_nombre.getText());
+
+        vendedorAEliminar.setEstatus_Vendedor(Txt_estatus.getText());
+
         acreedor.delete(vendedorAEliminar);
         llenadoDeTablas();
         limpiar();
@@ -366,7 +351,7 @@ public class Mantenimiento_Vendedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_EliminarActionPerformed
 
     private void Btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_BuscarActionPerformed
-        buscarVendedor() ;
+        buscarVendedor();
 //        BitacoraDao BitacoraDAO = new BitacoraDao();
 //
 //        Bitacora Insertar = new Bitacora();
@@ -393,19 +378,18 @@ public class Mantenimiento_Vendedor extends javax.swing.JInternalFrame {
 ////        MDI_Components mdi_Components = new MDI_Components();
 ////
 ////        String id = "0";
-         VendedorDao ClienteDAO = new  VendedorDao();
+        VendedorDao ClienteDAO = new VendedorDao();
 
-         Vendedor AInsertar = new Vendedor();
+        Vendedor AInsertar = new Vendedor();
         AInsertar.setCodigo_Vendedor(Txt_codigo.getText());
         AInsertar.setNombre_Vendedor(Txt_nombre.getText());
-      
-            
+
         AInsertar.setEstatus_Vendedor(Txt_estatus.getText());
-      
+
         ClienteDAO.insert(AInsertar);
 
         llenadoDeTablas();
-      limpiar();
+        limpiar();
 ////        BitacoraDao BitacoraDAO = new BitacoraDao();
 ////
 ////        Bitacora Insertar = new Bitacora();
@@ -420,7 +404,7 @@ public class Mantenimiento_Vendedor extends javax.swing.JInternalFrame {
 ////        } catch (UnknownHostException ex) {
 ////            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
 ////        }
-   JOptionPane.showMessageDialog(null, " La ejecunsion a  sido un exito");
+        JOptionPane.showMessageDialog(null, " La ejecunsion a  sido un exito");
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_AgregarActionPerformed
 
@@ -444,7 +428,7 @@ public class Mantenimiento_Vendedor extends javax.swing.JInternalFrame {
     private void Txt_estatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_estatusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Txt_estatusActionPerformed
-private Connection connection = null;
+    private Connection connection = null;
     private void Btn_reporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_reporteActionPerformed
 //  Map p = new HashMap();
 //        JasperReport report;
@@ -462,7 +446,6 @@ private Connection connection = null;
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-        
 
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_reporteActionPerformed
