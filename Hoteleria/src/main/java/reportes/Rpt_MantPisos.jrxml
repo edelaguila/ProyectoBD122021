@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e7d647e3-a250-46a8-99cf-b86bd6346534">
 	<property name="ireport.zoom" value="1.6105100000000037"/>
-	<property name="ireport.x" value="371"/>
+	<property name="ireport.x" value="397"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
@@ -114,35 +114,36 @@
 	<detail>
 		<band height="31" splitType="Stretch">
 			<frame>
-				<reportElement style="Row" mode="Opaque" x="0" y="0" width="797" height="18" uuid="f6815e3d-51f2-42b7-96fe-2eab3e04f509"/>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="797" height="31" uuid="f6815e3d-51f2-42b7-96fe-2eab3e04f509"/>
 			</frame>
 			<textField isStretchWithOverflow="true">
-				<reportElement style="Detail" positionType="Float" x="0" y="0" width="143" height="18" uuid="dc82c9f1-617e-475b-a7ee-495a3b617814"/>
-				<textElement textAlignment="Center" verticalAlignment="Bottom">
+				<reportElement style="Detail" positionType="Float" x="0" y="0" width="143" height="31" uuid="dc82c9f1-617e-475b-a7ee-495a3b617814"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{PK_id_piso}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement style="Detail" positionType="Float" x="143" y="0" width="145" height="18" uuid="f095089e-922d-45ac-ab6f-c2b1cad570c4"/>
-				<textElement textAlignment="Center" verticalAlignment="Bottom">
+				<reportElement style="Detail" positionType="Float" x="143" y="0" width="145" height="31" uuid="f095089e-922d-45ac-ab6f-c2b1cad570c4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cantidad_habitaciones_piso}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement style="Detail" positionType="Float" x="288" y="0" width="356" height="18" uuid="5c5950ac-c20d-4889-92aa-0423d67a7f6e"/>
-				<textElement textAlignment="Center" verticalAlignment="Bottom">
+				<reportElement style="Detail" positionType="Float" x="288" y="0" width="356" height="31" uuid="5c5950ac-c20d-4889-92aa-0423d67a7f6e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{descripcion_piso}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement style="Detail" positionType="Float" x="644" y="0" width="158" height="18" uuid="19a20ef8-8647-4fd9-8472-4b1ac422c287"/>
-				<textElement textAlignment="Center" verticalAlignment="Bottom">
+				<reportElement style="Detail" positionType="Float" x="644" y="0" width="158" height="31" uuid="19a20ef8-8647-4fd9-8472-4b1ac422c287"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{estado_piso}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{estado_piso}.equals(1)?
+"activo" : "inactivo" )]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
