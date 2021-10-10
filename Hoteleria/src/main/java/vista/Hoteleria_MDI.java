@@ -28,6 +28,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     private Mnt_Habitaciones form_Mant_Habitaciones;
     private Mnt_Huespedes form_Mant_Huespedes;
     private Mnt_Menu form_Mant_Menu;
+    private Mnt_Tarifas form_Mant_Tarifas;
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     public static JLabel Jl_logo = new JLabel();
@@ -90,6 +91,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         MnI_huespedes = new javax.swing.JMenuItem();
         MnI_habitaciones = new javax.swing.JMenuItem();
         MnI_menu = new javax.swing.JMenuItem();
+        MnI_tarifas = new javax.swing.JMenuItem();
         Sbm_procesos = new javax.swing.JMenu();
         Sbm_herramientas = new javax.swing.JMenu();
         Sbm_ayuda = new javax.swing.JMenu();
@@ -178,6 +180,14 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
             }
         });
         Mnu_mantenimientos.add(MnI_menu);
+
+        MnI_tarifas.setText("Mant. Tarifas");
+        MnI_tarifas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnI_tarifasActionPerformed(evt);
+            }
+        });
+        Mnu_mantenimientos.add(MnI_tarifas);
 
         Sbm_catalogo.add(Mnu_mantenimientos);
 
@@ -300,6 +310,17 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Mant_Menu.toFront();
     }//GEN-LAST:event_MnI_menuActionPerformed
 
+    private void MnI_tarifasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_tarifasActionPerformed
+        // TODO add your handling code here:
+        form_Mant_Tarifas = new Mnt_Tarifas();
+
+        Jdp_contenedor.add(form_Mant_Tarifas);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_Mant_Tarifas.getSize();
+        form_Mant_Tarifas.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_Mant_Tarifas.setVisible(true);
+    }//GEN-LAST:event_MnI_tarifasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -328,6 +349,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     public static javax.swing.JMenuItem MnI_metodoDePago;
     public static javax.swing.JMenuItem MnI_piso;
     public static javax.swing.JMenuItem MnI_servicios;
+    public static javax.swing.JMenuItem MnI_tarifas;
     public static javax.swing.JMenuBar Mnb_menu;
     public static javax.swing.JMenu Mnu_mantenimientos;
     public static javax.swing.JMenu Sbm_archivos;

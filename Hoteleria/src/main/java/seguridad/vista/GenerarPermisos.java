@@ -70,6 +70,7 @@ public class GenerarPermisos {
                 Hoteleria_MDI.MnI_metodoDePago.setVisible(false);
                 Hoteleria_MDI.MnI_piso.setVisible(false);
                 Hoteleria_MDI.MnI_servicios.setVisible(false);
+                Hoteleria_MDI.MnI_tarifas.setVisible(false);
                 
                 ejecutarPermisos.ejecutarBusqueda(usuario);
                 for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
@@ -97,6 +98,9 @@ public class GenerarPermisos {
                                 break;
                             case 2007:
                                 Hoteleria_MDI.MnI_menu.setVisible(true);
+                                break;
+                            case 2008:
+                                Hoteleria_MDI.MnI_tarifas.setVisible(true);
                                 break;
                         }
                     }
