@@ -34,7 +34,8 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
 
     public void diseño() {
         this.setTitle("Mantenimiento de Tarifas");
-        ImageIcon icono = new ImageIcon("src/main/java/assets/servicio.png");
+        ImageIcon icono = new ImageIcon("src/main/java/assets/price.png");
+        Txt_codigo.setEditable(false);
         this.setFrameIcon(icono);
         Txt_codigo.setBorder(null);
         Txt_nombre.setBorder(null);
@@ -52,7 +53,7 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
         int cantidadcolumnas = columnas.length;
         prcs_repetidos.llenarColumnas(columnas, cantidadcolumnas, Tbl_Datos);
         String datos[] = new String[cantidadcolumnas];
-        int tamaño[] = {50, 150, 450, 150, 150};
+        int tamaño[] = {50, 150, 450, 150};
         TarifaDAO tarifadao = new TarifaDAO();
         List<Tarifa> tarifa = tarifadao.select();
         for (Tarifa listaTarifa : tarifa) {
@@ -69,8 +70,9 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
     }
 
     public void Limpiar() {
-        prcs_repetidos.Limpiar(Txt_buscar, Txt_codigo, Txt_habitacion, Txt_nombre);
+        prcs_repetidos.Limpiar(Txt_buscar, Txt_habitacion, Txt_nombre);
         Rdb_limpiar2.setSelected(true);
+        Txt_codigo.setText("0");
     }
 
     /**
@@ -348,6 +350,7 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
         Txt_codigo.setBackground(new java.awt.Color(36, 47, 65));
         Txt_codigo.setForeground(new java.awt.Color(255, 255, 255));
         Txt_codigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Txt_codigo.setText("0");
 
         javax.swing.GroupLayout Pnl_ingresoDatosLayout = new javax.swing.GroupLayout(Pnl_ingresoDatos);
         Pnl_ingresoDatos.setLayout(Pnl_ingresoDatosLayout);
