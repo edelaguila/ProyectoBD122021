@@ -8,6 +8,7 @@ package seguridad.vista;
 import com.formdev.flatlaf.FlatLightLaf;
 import dominio.ProcesosRepetidos;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import seguridad.datos.Hash;
 import seguridad.datos.UsuarioDAO;
@@ -34,6 +35,8 @@ public class Login_LD extends javax.swing.JFrame {
     public void componentes() {
         prcs_repetidos.Cursor(caja_iniciar_sesion, btn_restablecer_contraseña, btn_salir, barra_superior);
         txt_usuario.setForeground(fondo);
+        ImageIcon icono = new ImageIcon("src/main/java/assets/security.png");
+        this.setIconImage(icono.getImage());
     }
 
     /**
