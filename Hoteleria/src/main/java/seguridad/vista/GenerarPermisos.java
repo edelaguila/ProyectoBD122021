@@ -62,6 +62,7 @@ public class GenerarPermisos {
                 Hoteleria_MDI.Btn_cerrarSesion.setVisible(true);
                 
                 Hoteleria_MDI.Mnu_mantenimientos.setVisible(false);
+                Hoteleria_MDI.Mnu_procesos.setVisible(false);
                 
                 Hoteleria_MDI.MnI_habitaciones.setVisible(false);
                 Hoteleria_MDI.MnI_horario.setVisible(false);
@@ -70,6 +71,9 @@ public class GenerarPermisos {
                 Hoteleria_MDI.MnI_metodoDePago.setVisible(false);
                 Hoteleria_MDI.MnI_piso.setVisible(false);
                 Hoteleria_MDI.MnI_servicios.setVisible(false);
+                Hoteleria_MDI.MnI_tarifas.setVisible(false);
+                
+                Hoteleria_MDI.MnI_asingacionServiciosHabitacion.setVisible(false);
                 
                 ejecutarPermisos.ejecutarBusqueda(usuario);
                 for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
@@ -77,27 +81,23 @@ public class GenerarPermisos {
                     if (varApp >= 2001 && varApp <= 2200) {
                                 Hoteleria_MDI.Mnu_mantenimientos.setVisible(true);
                         switch (varApp) {
-                            case 2001:
-                                Hoteleria_MDI.MnI_habitaciones.setVisible(true);
-                                break;
-                            case 2002:
-                                Hoteleria_MDI.MnI_horario.setVisible(true);
-                                break;
-                            case 2003:
-                                Hoteleria_MDI.MnI_huespedes.setVisible(true);
-                                break;
-                            case 2004:
-                                Hoteleria_MDI.MnI_metodoDePago.setVisible(true);
-                                break;
-                            case 2005:
-                                Hoteleria_MDI.MnI_piso.setVisible(true);
-                                break;
-                            case 2006:
-                                Hoteleria_MDI.MnI_servicios.setVisible(true);
-                                break;
-                            case 2007:
-                                Hoteleria_MDI.MnI_menu.setVisible(true);
-                                break;
+                            case 2001:Hoteleria_MDI.MnI_habitaciones.setVisible(true);break;
+                            case 2002:Hoteleria_MDI.MnI_horario.setVisible(true);break;
+                            case 2003:Hoteleria_MDI.MnI_huespedes.setVisible(true);break;
+                            case 2004:Hoteleria_MDI.MnI_metodoDePago.setVisible(true);break;
+                            case 2005:Hoteleria_MDI.MnI_piso.setVisible(true);break;
+                            case 2006:Hoteleria_MDI.MnI_servicios.setVisible(true);break;
+                            case 2007:Hoteleria_MDI.MnI_menu.setVisible(true);break;
+                            case 2008:Hoteleria_MDI.MnI_tarifas.setVisible(true);break;
+                        }
+                    }
+                }
+                for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
+                    int varApp = Integer.parseInt(ejecutarPermisos.getAplicaciones()[i]);
+                    if (varApp >= 2201 && varApp <= 2500) {
+                                Hoteleria_MDI.Mnu_procesos.setVisible(true);
+                        switch (varApp) {
+                            case 2201:Hoteleria_MDI.MnI_asingacionServiciosHabitacion.setVisible(true);break;
                         }
                     }
                 }
