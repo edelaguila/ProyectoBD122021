@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  *
- * @author leone
+ * @author Herbert Leonel Dominguez Chavez
  */
 public class TarifaDAO {
     public static String codigoAuxiliar, nombreAuxiliar;
