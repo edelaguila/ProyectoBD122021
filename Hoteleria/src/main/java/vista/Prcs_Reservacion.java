@@ -42,7 +42,7 @@ public class Prcs_Reservacion extends javax.swing.JInternalFrame {
         fechaActual();
     }
 
-    public void fechaActual(){
+    public void fechaActual() {
         Date date = new Date();
         Date date2 = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -50,6 +50,7 @@ public class Prcs_Reservacion extends javax.swing.JInternalFrame {
         Dtc_fechaIngreso.setMinSelectableDate(date);
         Dtc_fechaEgreso.setMinSelectableDate(date);
     }
+
     public void diseño() {
         this.setTitle("Reservación PASO 1");
         ImageIcon icono = new ImageIcon("src/main/java/assets/price.png");
@@ -769,7 +770,7 @@ public class Prcs_Reservacion extends javax.swing.JInternalFrame {
                         String fechaactual = new SimpleDateFormat("yyyy-MM-dd").format(Dtc_fechaActual.getDate());
                         String fechaentrada = new SimpleDateFormat("yyyy-MM-dd").format(Dtc_fechaIngreso.getDate());
                         String fechasalida = new SimpleDateFormat("yyyy-MM-dd").format(Dtc_fechaEgreso.getDate());
-                        System.out.println(fechaactual+" "+fechaentrada+" "+fechasalida);
+                        System.out.println(fechaactual + " " + fechaentrada + " " + fechasalida);
 
                         reservacion.setIdReservacion(Txt_codigo.getText());
                         reservacion.setFechaActual(fechaactual);
@@ -785,6 +786,7 @@ public class Prcs_Reservacion extends javax.swing.JInternalFrame {
 
                         reservaciondao.update(reservacion);
                         actualizarTabla("");
+                        Limpiar();
                     }
                 }
             }
@@ -858,6 +860,7 @@ public class Prcs_Reservacion extends javax.swing.JInternalFrame {
 
     private void Btn_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseClicked
         actualizarTabla(Txt_buscar.getText());
+        Limpiar();
     }//GEN-LAST:event_Btn_buscarMouseClicked
 
     private void Btn_buscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseEntered
