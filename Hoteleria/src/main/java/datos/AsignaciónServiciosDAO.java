@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  *
- * @author leone
+ * @author Herbert Leonel Dominguez Chavez
  */
 public class AsignaciónServiciosDAO {
     private static final String SQL_INSERT = "insert into tbl_paquete_servicios values(?,?,?)";
