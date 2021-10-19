@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author leone
+ * @author Herbert Leonel Dominguez Chavez
  */
 public class Catalogo_Habitaciones extends javax.swing.JFrame {
 
