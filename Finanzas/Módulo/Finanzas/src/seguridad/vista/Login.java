@@ -103,7 +103,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel5.setText("Seleccione el Area");
 
-        cbxAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione: ", "Area Seguridad", "Area Hoteleria", "Area Finanzas", "Area Comercial", " " }));
+        cbxAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione: ", "Area Seguridad", "Area Finanzas", " " }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
