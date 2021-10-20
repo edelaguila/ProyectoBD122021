@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author leone
+ * @author Herbert Leonel Dominguez Chavez
  */
 public class Mnt_MetodoDePago extends javax.swing.JInternalFrame {
 
