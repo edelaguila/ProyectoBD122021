@@ -116,7 +116,6 @@ public class FrmMantEmp extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Mantenimiento Empleados");
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N

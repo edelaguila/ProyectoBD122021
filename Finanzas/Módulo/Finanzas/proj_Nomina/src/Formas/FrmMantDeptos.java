@@ -60,7 +60,6 @@ public class FrmMantDeptos extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Mantenimiento Departamentos");
 
-        panelMantPuesto.setBackground(new java.awt.Color(51, 51, 51));
         panelMantPuesto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N

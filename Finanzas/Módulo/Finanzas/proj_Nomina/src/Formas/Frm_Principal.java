@@ -5,7 +5,9 @@
  */
 package Formas;
 
-import com.jtattoo.plaf.noire.NoireLookAndFeel;
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Dimension;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -227,8 +229,6 @@ public class Frm_Principal extends javax.swing.JFrame {
     }
     private void Salir_SistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Salir_SistemaActionPerformed
        this.dispose();
-       Inicio fInicio = new Inicio();
-       fInicio.setVisible(true);
     }//GEN-LAST:event_Salir_SistemaActionPerformed
 
     private void FrmMantDepto_CallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FrmMantDepto_CallActionPerformed
@@ -266,8 +266,16 @@ public class Frm_Principal extends javax.swing.JFrame {
      * @throws javax.swing.UnsupportedLookAndFeelException
      */
     public static void main(String args[]) throws UnsupportedLookAndFeelException {
-        UIManager.setLookAndFeel(new NoireLookAndFeel());
-        /* Create and display the form */
+        
+        try
+        {
+                UIManager.setLookAndFeel(new FlatLightLaf());
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.toString());
+        }
+        
         java.awt.EventQueue.invokeLater(() -> {
             new Frm_Principal().setVisible(true);
         });

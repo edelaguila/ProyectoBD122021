@@ -102,11 +102,9 @@ public class FrmCalcNom extends javax.swing.JInternalFrame {
         btnCambioDepto = new javax.swing.JButton();
         cmbDepto = new javax.swing.JComboBox<>();
 
-        setBackground(new java.awt.Color(51, 51, 51));
         setClosable(true);
         setTitle("Calcular Nómina");
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
@@ -151,7 +149,6 @@ public class FrmCalcNom extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Calculo Nómina", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -236,13 +233,11 @@ public class FrmCalcNom extends javax.swing.JInternalFrame {
 
         txtmop.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
 
-        rm.setBackground(new java.awt.Color(51, 51, 51));
         buttonGroup1.add(rm);
         rm.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         rm.setForeground(new java.awt.Color(255, 255, 255));
         rm.setText("Monto");
 
-        rp.setBackground(new java.awt.Color(51, 51, 51));
         buttonGroup1.add(rp);
         rp.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         rp.setForeground(new java.awt.Color(255, 255, 255));
