@@ -5,6 +5,7 @@
  */
 package dominio;
 
+import com.toedter.calendar.JDateChooser;
 import datos.Conexion;
 import java.awt.Color;
 import java.awt.Component;
@@ -194,6 +195,16 @@ public class ProcesosRepetidos {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public static boolean isDateNoneEmpty(JDateChooser... date){
+        for (JDateChooser fecha : date) {
+            if (fecha==null) {
+                JOptionPane.showMessageDialog(null, "Existen campos vacios, revise e intente de nuevo");
+                return false;
+            }
+        }
+        return true;
     }
 
 }

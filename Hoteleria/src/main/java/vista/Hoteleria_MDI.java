@@ -29,6 +29,8 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     private Mnt_Huespedes form_Mant_Huespedes;
     private Mnt_Menu form_Mant_Menu;
     private Mnt_Tarifas form_Mant_Tarifas;
+    private Prcs_AsignacionServicios form_Prcs_AsignacionServicios;
+    private Prcs_Reservacion form_Prcs_Reservacion;
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     public static JLabel Jl_logo = new JLabel();
@@ -93,6 +95,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         MnI_menu = new javax.swing.JMenuItem();
         MnI_tarifas = new javax.swing.JMenuItem();
         Sbm_procesos = new javax.swing.JMenu();
+        MnI_reservacion = new javax.swing.JMenuItem();
         Sbm_herramientas = new javax.swing.JMenu();
         Sbm_ayuda = new javax.swing.JMenu();
         Btn_cerrarSesion = new javax.swing.JMenu();
@@ -195,6 +198,27 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
 
         Sbm_procesos.setText("Procesos");
         Sbm_procesos.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+
+        Mnu_procesos.setText("Procesos");
+
+        MnI_asingacionServiciosHabitacion.setText("Prcs. Asignación de Servicios a Habitacion");
+        MnI_asingacionServiciosHabitacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnI_asingacionServiciosHabitacionActionPerformed(evt);
+            }
+        });
+        Mnu_procesos.add(MnI_asingacionServiciosHabitacion);
+
+        MnI_reservacion.setText("Prcs. Reservación");
+        MnI_reservacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnI_reservacionActionPerformed(evt);
+            }
+        });
+        Mnu_procesos.add(MnI_reservacion);
+
+        Sbm_procesos.add(Mnu_procesos);
+
         Mnb_menu.add(Sbm_procesos);
 
         Sbm_herramientas.setText("Herramientas");
@@ -319,7 +343,31 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         Dimension FrameSize = form_Mant_Tarifas.getSize();
         form_Mant_Tarifas.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         form_Mant_Tarifas.setVisible(true);
+        form_Mant_Tarifas.toFront();
     }//GEN-LAST:event_MnI_tarifasActionPerformed
+
+    private void MnI_asingacionServiciosHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_asingacionServiciosHabitacionActionPerformed
+        // TODO add your handling code here:
+        form_Prcs_AsignacionServicios = new Prcs_AsignacionServicios();
+        
+        Jdp_contenedor.add(form_Prcs_AsignacionServicios);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_Prcs_AsignacionServicios.getSize();
+        form_Prcs_AsignacionServicios.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_Prcs_AsignacionServicios.setVisible(true);
+        form_Prcs_AsignacionServicios.toFront();
+    }//GEN-LAST:event_MnI_asingacionServiciosHabitacionActionPerformed
+
+    private void MnI_reservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_reservacionActionPerformed
+        form_Prcs_Reservacion = new Prcs_Reservacion();
+        
+        Jdp_contenedor.add(form_Prcs_Reservacion);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_Prcs_Reservacion.getSize();
+        form_Prcs_Reservacion.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_Prcs_Reservacion.setVisible(true);
+        form_Prcs_Reservacion.toFront();
+    }//GEN-LAST:event_MnI_reservacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,16 +390,19 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JMenu Btn_cerrarSesion;
     private javax.swing.JDesktopPane Jdp_contenedor;
+    public static final javax.swing.JMenuItem MnI_asingacionServiciosHabitacion = new javax.swing.JMenuItem();
     public static javax.swing.JMenuItem MnI_habitaciones;
     public static javax.swing.JMenuItem MnI_horario;
     public static javax.swing.JMenuItem MnI_huespedes;
     public static javax.swing.JMenuItem MnI_menu;
     public static javax.swing.JMenuItem MnI_metodoDePago;
     public static javax.swing.JMenuItem MnI_piso;
+    private javax.swing.JMenuItem MnI_reservacion;
     public static javax.swing.JMenuItem MnI_servicios;
     public static javax.swing.JMenuItem MnI_tarifas;
     public static javax.swing.JMenuBar Mnb_menu;
     public static javax.swing.JMenu Mnu_mantenimientos;
+    public static final javax.swing.JMenu Mnu_procesos = new javax.swing.JMenu();
     public static javax.swing.JMenu Sbm_archivos;
     public static javax.swing.JMenu Sbm_ayuda;
     public static javax.swing.JMenu Sbm_catalogo;

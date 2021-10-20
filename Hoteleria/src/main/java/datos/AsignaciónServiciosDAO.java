@@ -5,7 +5,7 @@
  */
 package datos;
 
-import dominio.Tarifa;
+import dominio.AsignaciónServicios;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,24 +17,22 @@ import java.util.List;
  *
  * @author Herbert Leonel Dominguez Chavez
  */
-public class TarifaDAO {
-    public static String codigoAuxiliar, nombreAuxiliar;
-    private static final String SQL_INSERT = "insert into tbl_tarifa values(?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_tarifa SET id_habitacion_tarifa=?, nombre_tarifa=?, estado_tarifa=? WHERE PK_id_tarifa=?";
-    private static final String SQL_QUERY = "SELECT PK_id_tarifa, id_habitacion_tarifa, nombre_tarifa, estado_tarifa FROM tbl_tarifa WHERE PK_id_tarifa = ?";
-    private static final String SQL_DELETE = "delete from tbl_tarifa where PK_id_tarifa = ?";
-
-    public int insert(Tarifa tarifa) {
+public class AsignaciónServiciosDAO {
+    private static final String SQL_INSERT = "insert into tbl_paquete_servicios values(?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_paquete_servicios SET id_tarifa_paquete=?, id_servicio_paquete=? WHERE PK_correlativo_paquete=?";
+    private static final String SQL_QUERY = "SELECT * FROM tbl_paquete_servicios WHERE id_tarifa_paquete=?";
+    private static final String SQL_DELETE = "delete from tbl_paquete_servicios where PK_correlativo_paquete = ?";
+    private static final String SQL_SELECT = "SELECT * FROM tbl_paquete_servicios";
+    public int insert(AsignaciónServicios asignacion) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1, tarifa.getId_tarifa());
-            stmt.setString(2, tarifa.getId_habitacion());
-            stmt.setString(3, tarifa.getNombre());
-            stmt.setString(4, tarifa.getEstado());
+            stmt.setString(1, asignacion.getCorrelativo());
+            stmt.setString(2, asignacion.getId_tarifa());
+            stmt.setString(3, asignacion.getId_servicio());
 
             //System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -49,7 +47,7 @@ public class TarifaDAO {
         return rows;
     }
 
-    public int update(Tarifa tarifa) {
+    public int update(AsignaciónServicios asignacion) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -58,10 +56,9 @@ public class TarifaDAO {
             conn = Conexion.getConnection();
 //          System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, tarifa.getId_habitacion());
-            stmt.setString(2, tarifa.getNombre());
-            stmt.setString(3, tarifa.getEstado());
-            stmt.setString(4, tarifa.getId_tarifa());
+            stmt.setString(4, asignacion.getId_tarifa());
+            stmt.setString(4, asignacion.getId_servicio());
+            stmt.setString(4, asignacion.getCorrelativo());
 
             rows = stmt.executeUpdate();
 
@@ -75,32 +72,27 @@ public class TarifaDAO {
         return rows;
     }
 
-    public List<Tarifa> select() {
-
-        String SQL_SELECT = "SELECT * FROM tbl_tarifa WHERE PK_id_tarifa LIKE '%"+codigoAuxiliar+"%' OR nombre_tarifa LIKE '%"+nombreAuxiliar+"%'";
-
+    public List<AsignaciónServicios> select() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Tarifa tarifa = null;
-        List<Tarifa> tarifas=  new ArrayList<Tarifa>();
+        AsignaciónServicios asignacion = null;
+        List<AsignaciónServicios> asiganaciones=  new ArrayList<AsignaciónServicios>();
 
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                String id_tarifa = rs.getString("PK_id_tarifa");
-                String id_habitacion = rs.getString("id_habitacion_tarifa");
-                String nombre = rs.getString("nombre_tarifa");
-                String estado = rs.getString("estado_tarifa");
+                String correlativo = rs.getString("PK_correlativo_paquete");
+                String id_tarifa = rs.getString("id_tarifa_paquete");
+                String id_servicio = rs.getString("id_servicio_paquete");
 
-                tarifa = new Tarifa();
-                tarifa.setId_tarifa(id_tarifa);
-                tarifa.setId_habitacion(id_habitacion);
-                tarifa.setNombre(nombre);
-                tarifa.setEstado(estado);
-                tarifas.add(tarifa);
+                asignacion = new AsignaciónServicios();
+                asignacion.setCorrelativo(correlativo);
+                asignacion.setId_tarifa(id_tarifa);
+                asignacion.setId_servicio(id_servicio);
+                asiganaciones.add(asignacion);
             }
 
         } catch (SQLException ex) {
@@ -111,10 +103,10 @@ public class TarifaDAO {
             Conexion.close(conn);
         }
 
-        return tarifas;
+        return asiganaciones;
     }
 
-    public Tarifa query(Tarifa tarifa) {
+    public AsignaciónServicios query(AsignaciónServicios asignacion) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -124,20 +116,19 @@ public class TarifaDAO {
             conn = Conexion.getConnection();
             //System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setString(1, tarifa.getId_tarifa());
+            stmt.setString(1, asignacion.getId_tarifa());
+            stmt.setString(2, asignacion.getId_servicio());
             rs = stmt.executeQuery();
             while (rs.next()) {                
-                String id_tarifa = rs.getString("PK_id_tarifa");
-                String id_habitacion = rs.getString("id_habitacion_tarifa");
-                String nombre = rs.getString("nombre_tarifa");
-                String estado = rs.getString("estado_tarifa");
+                String correlativo = rs.getString("PK_correlativo_paquete");
+                String id_tarifa = rs.getString("id_tarifa_paquete");
+                String id_servicio = rs.getString("id_servicio_paquete");
 
-
-                tarifa = new Tarifa();
-                tarifa.setId_tarifa(id_tarifa);
-                tarifa.setId_habitacion(id_habitacion);
-                tarifa.setNombre(nombre);
-                tarifa.setEstado(estado);
+                asignacion = new AsignaciónServicios();
+                asignacion.setCorrelativo(correlativo);
+                asignacion.setId_tarifa(id_tarifa);
+                asignacion.setId_tarifa(id_servicio);
+                System.out.println(asignacion.getCorrelativo()+" "+asignacion.getId_servicio()+" "+asignacion.getId_tarifa());
             }
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
@@ -146,10 +137,10 @@ public class TarifaDAO {
             Conexion.close(stmt);
             Conexion.close(conn);
         }
-        return tarifa;
+        return asignacion;
     }
 
-    public int delete(Tarifa tarifa) {
+    public int delete(AsignaciónServicios asignacion) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -157,7 +148,7 @@ public class TarifaDAO {
             conn = Conexion.getConnection();
             //System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setString(1, tarifa.getId_tarifa());
+            stmt.setString(1, asignacion.getCorrelativo());
             rows = stmt.executeUpdate();
             //System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {

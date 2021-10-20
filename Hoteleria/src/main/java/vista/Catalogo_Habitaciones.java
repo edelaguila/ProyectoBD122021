@@ -10,10 +10,11 @@ import dominio.Habitacion;
 import dominio.ProcesosRepetidos;
 import java.awt.Color;
 import java.util.List;
+import javax.swing.ImageIcon;
 
 /**
  *
- * @author leone
+ * @author Herbert Leonel Dominguez Chavez
  */
 public class Catalogo_Habitaciones extends javax.swing.JFrame {
 
@@ -23,8 +24,15 @@ public class Catalogo_Habitaciones extends javax.swing.JFrame {
     public Catalogo_Habitaciones() {
         initComponents();
         actualizarTabla("");
+        Diseño();
     }
 
+    public void Diseño() {
+        ImageIcon icono = new ImageIcon("src/main/java/assets/habitaciones.png");
+        this.setIconImage(icono.getImage());
+        this.setTitle("Catalogo de Habitaciones");
+    }
+    
     public void actualizarTabla(String codigo) {
         ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
         HabitacionDAO.codigoAuxiliar = codigo;
@@ -79,7 +87,7 @@ public class Catalogo_Habitaciones extends javax.swing.JFrame {
         Btn_buscar = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Pnl_datos.setBackground(new java.awt.Color(36, 47, 65));
         Pnl_datos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N

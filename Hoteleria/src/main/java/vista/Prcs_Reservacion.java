@@ -5,74 +5,97 @@
  */
 package vista;
 
-import datos.HabitacionDAO;
-import datos.TarifaDAO;
-import dominio.Habitacion;
+import datos.HuespedDAO;
+import datos.ReservacionDAO;
+import dominio.Huesped;
 import dominio.ProcesosRepetidos;
-import dominio.Tarifa;
+import dominio.Reservacion;
 import java.awt.Color;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Herbert Leonel Dominguez Chavez
+ * @author leone
  */
-public class Mnt_Tarifas extends javax.swing.JInternalFrame {
+public class Prcs_Reservacion extends javax.swing.JInternalFrame {
+
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
-    Tarifa tarifa = new Tarifa();
+    Reservacion reservacion = new Reservacion();
+    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+    Date fechaentrada = null, fechasalida = null, fechaactual = null;
 
     /**
-     * Creates new form Prcs_Tarifa
+     * Creates new form Prcs_Reservacion
      */
-    public Mnt_Tarifas() {
+    public Prcs_Reservacion() {
         initComponents();
-        diseño();
         actualizarTabla("");
+        diseño();
+        fechaActual();
+    }
+
+    public void fechaActual() {
+        Date date = new Date();
+        Date date2 = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Dtc_fechaActual.setDate(date);
+        Dtc_fechaIngreso.setMinSelectableDate(date);
+        Dtc_fechaEgreso.setMinSelectableDate(date);
     }
 
     public void diseño() {
-        this.setTitle("Mantenimiento de Tarifas");
+        this.setTitle("Reservación PASO 1");
         ImageIcon icono = new ImageIcon("src/main/java/assets/price.png");
-        Txt_codigo.setEditable(false);
         this.setFrameIcon(icono);
         Txt_codigo.setBorder(null);
-        Txt_nombre.setBorder(null);
         Txt_buscar.setBorder(null);
-        Txt_habitacion.setBorder(null);
+        Txt_nombreCliente.setBorder(null);
+        Txt_cantPersonas.setBorder(null);
+        Txt_docIdentificacion.setBorder(null);
         Rdb_limpiar2.setVisible(false);
-        prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar, Btn_cargarHabitaciones);
+        prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar, Btn_buscarCliente, Tbl_Datos);
     }
 
     public void actualizarTabla(String dato) {
-        TarifaDAO.codigoAuxiliar = dato;
-        TarifaDAO.nombreAuxiliar = dato;
+        ReservacionDAO.codigoAuxReservacion = dato;
+        ReservacionDAO.codigoAuxCliente = dato;
         ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
-        String columnas[] = {"ID", "HABITACIÓN", "NOMBRE", "ESTADO"};
+        String columnas[] = {"ID", "F. Reservación", "F. Ingreso", "F. Egreso", "ID Cliente", "Cant. Personas", "Estado"};
         int cantidadcolumnas = columnas.length;
         prcs_repetidos.llenarColumnas(columnas, cantidadcolumnas, Tbl_Datos);
         String datos[] = new String[cantidadcolumnas];
-        int tamaño[] = {50, 150, 450, 150};
-        TarifaDAO tarifadao = new TarifaDAO();
-        List<Tarifa> tarifa = tarifadao.select();
-        for (Tarifa listaTarifa : tarifa) {
-            datos[0] = listaTarifa.getId_tarifa();
-            datos[1] = listaTarifa.getId_habitacion();
-            datos[2] = listaTarifa.getNombre();
-            if (listaTarifa.getEstado().equals("1")) {
-                datos[3] = "Activo";
+        int tamaño[] = {40, 100, 100, 100, 50, 100, 100};
+        ReservacionDAO reservaciondao = new ReservacionDAO();
+        List<Reservacion> reservacion = reservaciondao.select();
+        for (Reservacion listaReservaciones : reservacion) {
+            datos[0] = listaReservaciones.getIdReservacion();
+            datos[1] = listaReservaciones.getFechaActual();
+            datos[2] = listaReservaciones.getFechaIngreso();
+            datos[3] = listaReservaciones.getFechaEgreso();
+            datos[4] = listaReservaciones.getIdCliente();
+            datos[5] = listaReservaciones.getCantidadPersonas();
+            if (listaReservaciones.getEstadoReservacion().equals("1")) {
+                datos[6] = "Activo";
             } else {
-                datos[3] = "Inactivo";
+                datos[6] = "Inactivo";
             }
             prcs_repetidos.llenarFilas(datos, tamaño, Tbl_Datos);
         }
     }
 
     public void Limpiar() {
-        prcs_repetidos.Limpiar(Txt_buscar, Txt_habitacion, Txt_nombre);
+        prcs_repetidos.Limpiar(Txt_buscar, Txt_codigo, Txt_cantPersonas, Txt_docIdentificacion, Txt_nombreCliente);
+        Dtc_fechaEgreso.setDate(null);
+        Dtc_fechaIngreso.setDate(null);
         Rdb_limpiar2.setSelected(true);
-        Txt_codigo.setText("0");
     }
 
     /**
@@ -84,18 +107,28 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        Btg_estado = new javax.swing.ButtonGroup();
         Pnl_ingresoDatos = new javax.swing.JPanel();
         Lbl_id = new javax.swing.JLabel();
-        Lbl_estado = new javax.swing.JLabel();
+        Txt_codigo = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        Lbl_habitacion = new javax.swing.JLabel();
+        Lbl_ingreso = new javax.swing.JLabel();
+        Dtc_fechaIngreso = new com.toedter.calendar.JDateChooser();
         jSeparator3 = new javax.swing.JSeparator();
-        Txt_habitacion = new javax.swing.JTextField();
-        Lbl_nombre = new javax.swing.JLabel();
-        Txt_nombre = new javax.swing.JTextField();
+        Lbl_fechaEgreso = new javax.swing.JLabel();
+        Dtc_fechaEgreso = new com.toedter.calendar.JDateChooser();
         jSeparator4 = new javax.swing.JSeparator();
-        Btn_cargarHabitaciones = new javax.swing.JButton();
+        Lbl_docIdenficacion = new javax.swing.JLabel();
+        Txt_docIdentificacion = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        Btn_buscarCliente = new javax.swing.JButton();
+        Lbl_estado = new javax.swing.JLabel();
+        Lbl_nombreCliente = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        Txt_nombreCliente = new javax.swing.JTextField();
+        Lbl_cantPersonas = new javax.swing.JLabel();
+        Txt_cantPersonas = new javax.swing.JTextField();
+        jSeparator6 = new javax.swing.JSeparator();
         Rdb_activo = new javax.swing.JRadioButton();
         Rdb_limpiar2 = new javax.swing.JRadioButton();
         Rdb_inactivo = new javax.swing.JRadioButton();
@@ -111,7 +144,9 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
         Btn_ayuda = new javax.swing.JLabel();
         Btn_fondo_cancelar = new javax.swing.JPanel();
         Btn_cancelar = new javax.swing.JLabel();
-        Txt_codigo = new javax.swing.JTextField();
+        Lbl_ingreso1 = new javax.swing.JLabel();
+        Dtc_fechaActual = new com.toedter.calendar.JDateChooser();
+        jSeparator8 = new javax.swing.JSeparator();
         Pnl_datos = new javax.swing.JPanel();
         Lbl_codigoNombre = new javax.swing.JLabel();
         Txt_buscar = new javax.swing.JTextField();
@@ -132,45 +167,91 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
 
         Lbl_id.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_id.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_id.setText("ID Paquete:");
+        Lbl_id.setText("ID Reservación:");
+
+        Txt_codigo.setBackground(new java.awt.Color(36, 47, 65));
+        Txt_codigo.setForeground(new java.awt.Color(255, 255, 255));
+        Txt_codigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Txt_codigo.setPreferredSize(new java.awt.Dimension(200, 20));
+
+        jSeparator1.setPreferredSize(new java.awt.Dimension(200, 20));
+
+        Lbl_ingreso.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_ingreso.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_ingreso.setText("Fecha Ingreso:");
+
+        Dtc_fechaIngreso.setBackground(new java.awt.Color(36, 47, 65));
+        Dtc_fechaIngreso.setForeground(new java.awt.Color(255, 255, 255));
+        Dtc_fechaIngreso.setDateFormatString("yyyy-MM-dd");
+        Dtc_fechaIngreso.setPreferredSize(new java.awt.Dimension(200, 20));
+
+        jSeparator3.setPreferredSize(new java.awt.Dimension(200, 20));
+
+        Lbl_fechaEgreso.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_fechaEgreso.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_fechaEgreso.setText("Fecha Egreso:");
+
+        Dtc_fechaEgreso.setBackground(new java.awt.Color(36, 47, 65));
+        Dtc_fechaEgreso.setForeground(new java.awt.Color(255, 255, 255));
+        Dtc_fechaEgreso.setDateFormatString("yyyy-MM-dd");
+        Dtc_fechaEgreso.setPreferredSize(new java.awt.Dimension(200, 20));
+
+        jSeparator4.setPreferredSize(new java.awt.Dimension(200, 20));
+
+        Lbl_docIdenficacion.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_docIdenficacion.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_docIdenficacion.setText("Doc. Ident:");
+
+        Txt_docIdentificacion.setBackground(new java.awt.Color(36, 47, 65));
+        Txt_docIdentificacion.setForeground(new java.awt.Color(255, 255, 255));
+        Txt_docIdentificacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Txt_docIdentificacion.setPreferredSize(new java.awt.Dimension(200, 20));
+
+        jSeparator2.setPreferredSize(new java.awt.Dimension(200, 20));
+
+        Btn_buscarCliente.setBackground(new java.awt.Color(36, 47, 65));
+        Btn_buscarCliente.setForeground(new java.awt.Color(255, 255, 255));
+        Btn_buscarCliente.setText("BUSCAR");
+        Btn_buscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_buscarClienteActionPerformed(evt);
+            }
+        });
 
         Lbl_estado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_estado.setForeground(new java.awt.Color(255, 255, 255));
         Lbl_estado.setText("Estado:");
 
-        Lbl_habitacion.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_habitacion.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_habitacion.setText("ID Habitación:");
+        Lbl_nombreCliente.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_nombreCliente.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_nombreCliente.setText("Nombre:");
 
-        Txt_habitacion.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_habitacion.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_habitacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jSeparator5.setPreferredSize(new java.awt.Dimension(200, 20));
 
-        Lbl_nombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_nombre.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_nombre.setText("Nombre Tarifa:");
+        Txt_nombreCliente.setBackground(new java.awt.Color(36, 47, 65));
+        Txt_nombreCliente.setForeground(new java.awt.Color(255, 255, 255));
+        Txt_nombreCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Txt_nombreCliente.setPreferredSize(new java.awt.Dimension(200, 20));
 
-        Txt_nombre.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_nombre.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Lbl_cantPersonas.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_cantPersonas.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_cantPersonas.setText("Cant. Personas:");
 
-        Btn_cargarHabitaciones.setBackground(new java.awt.Color(36, 47, 65));
-        Btn_cargarHabitaciones.setForeground(new java.awt.Color(255, 255, 255));
-        Btn_cargarHabitaciones.setText("Cargar Habitaciones");
-        Btn_cargarHabitaciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_cargarHabitacionesActionPerformed(evt);
-            }
-        });
+        Txt_cantPersonas.setBackground(new java.awt.Color(36, 47, 65));
+        Txt_cantPersonas.setForeground(new java.awt.Color(255, 255, 255));
+        Txt_cantPersonas.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Txt_cantPersonas.setPreferredSize(new java.awt.Dimension(200, 20));
 
-        buttonGroup1.add(Rdb_activo);
+        jSeparator6.setPreferredSize(new java.awt.Dimension(200, 20));
+
+        Btg_estado.add(Rdb_activo);
         Rdb_activo.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
         Rdb_activo.setForeground(new java.awt.Color(255, 255, 255));
         Rdb_activo.setText("Activo");
 
-        buttonGroup1.add(Rdb_limpiar2);
+        Btg_estado.add(Rdb_limpiar2);
 
-        buttonGroup1.add(Rdb_inactivo);
+        Btg_estado.add(Rdb_inactivo);
         Rdb_inactivo.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
         Rdb_inactivo.setForeground(new java.awt.Color(255, 255, 255));
         Rdb_inactivo.setText("Inactivo");
@@ -347,10 +428,17 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
             .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        Txt_codigo.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_codigo.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_codigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Txt_codigo.setText("0");
+        Lbl_ingreso1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_ingreso1.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_ingreso1.setText("Fecha Actual:");
+
+        Dtc_fechaActual.setBackground(new java.awt.Color(36, 47, 65));
+        Dtc_fechaActual.setForeground(new java.awt.Color(255, 255, 255));
+        Dtc_fechaActual.setDateFormatString("yyyy-MM-dd");
+        Dtc_fechaActual.setEnabled(false);
+        Dtc_fechaActual.setPreferredSize(new java.awt.Dimension(200, 20));
+
+        jSeparator8.setPreferredSize(new java.awt.Dimension(200, 20));
 
         javax.swing.GroupLayout Pnl_ingresoDatosLayout = new javax.swing.GroupLayout(Pnl_ingresoDatos);
         Pnl_ingresoDatos.setLayout(Pnl_ingresoDatosLayout);
@@ -360,31 +448,56 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
                 .addGap(22, 22, 22)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addComponent(Lbl_estado)
-                        .addGap(61, 61, 61)
-                        .addComponent(Rdb_activo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Rdb_limpiar2)
-                        .addGap(40, 40, 40)
-                        .addComponent(Rdb_inactivo))
-                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Lbl_habitacion)
-                            .addComponent(Lbl_nombre))
-                        .addGap(18, 18, 18)
-                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSeparator4)
-                            .addComponent(Txt_nombre)
-                            .addComponent(jSeparator3)
-                            .addComponent(Txt_habitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(Lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSeparator1)
-                            .addComponent(Btn_cargarHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(Lbl_ingreso, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(Lbl_docIdenficacion)
+                                        .addComponent(Lbl_fechaEgreso)
+                                        .addComponent(Lbl_nombreCliente)))
+                                .addGap(18, 18, 18)
+                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(Dtc_fechaEgreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(Dtc_fechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Pnl_ingresoDatosLayout.createSequentialGroup()
+                                            .addComponent(Rdb_activo)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(Rdb_limpiar2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(Rdb_inactivo))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(Txt_cantPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(Txt_nombreCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                                        .addComponent(Txt_docIdentificacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(Btn_buscarCliente)))
+                                            .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Lbl_estado)
+                                    .addComponent(Lbl_cantPersonas)))
+                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lbl_ingreso1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(Txt_codigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(Dtc_fechaActual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -408,39 +521,64 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
                     .addComponent(Txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Btn_cargarHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addComponent(Txt_habitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Lbl_habitacion))
-                .addGap(18, 18, 18)
+                .addGap(14, 14, 14)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lbl_nombre))
+                    .addComponent(Lbl_ingreso1)
+                    .addComponent(Dtc_fechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Lbl_ingreso)
+                    .addComponent(Dtc_fechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Lbl_fechaEgreso)
+                    .addComponent(Dtc_fechaEgreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Txt_docIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Lbl_docIdenficacion)
+                    .addComponent(Btn_buscarCliente))
+                .addGap(2, 2, 2)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Txt_nombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Lbl_nombreCliente))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Lbl_cantPersonas)
+                    .addComponent(Txt_cantPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Lbl_estado)
-                        .addComponent(Rdb_activo))
-                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(Lbl_estado)
+                                .addComponent(Rdb_activo))
+                            .addComponent(Rdb_limpiar2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Btn_fondo_ayuda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Btn_fondo_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Btn_fondoGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Btn_fondo_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                         .addComponent(Rdb_inactivo)
-                        .addComponent(Rdb_limpiar2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Btn_fondo_ayuda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Btn_fondo_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Btn_fondoGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Btn_fondo_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -531,7 +669,7 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
                                 .addComponent(Txt_buscar)
                                 .addComponent(Lbl_codigoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -560,31 +698,31 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_nombre, Txt_habitacion)) {
-            if (prcs_repetidos.isSelected(Rdb_activo, Rdb_inactivo)) {
-                if (prcs_repetidos.isNumeric(Txt_codigo.getText())) {
-                    HabitacionDAO habitaciondao = new HabitacionDAO();
-                    TarifaDAO tarifadao = new TarifaDAO();
-                    Habitacion habitacion = new Habitacion();
+        if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_docIdentificacion, Txt_nombreCliente, Txt_cantPersonas)) {
+            if (prcs_repetidos.isDateNoneEmpty(Dtc_fechaEgreso, Dtc_fechaIngreso)) {
+                if (prcs_repetidos.isSelected(Rdb_activo, Rdb_inactivo)) {
+                    if (prcs_repetidos.isNumeric(Txt_codigo.getText(), Txt_docIdentificacion.getText(), Txt_cantPersonas.getText())) {
 
-                    habitacion.setId(Txt_habitacion.getText());
-                    habitacion = habitaciondao.query(habitacion);
+                        ReservacionDAO reservaciondao = new ReservacionDAO();
+                        String fechaactual = new SimpleDateFormat("yyyy-MM-dd").format(Dtc_fechaActual.getDate());
+                        String fechaentrada = new SimpleDateFormat("yyyy-MM-dd").format(Dtc_fechaIngreso.getDate());
+                        String fechasalida = new SimpleDateFormat("yyyy-MM-dd").format(Dtc_fechaEgreso.getDate());
 
-                    if (habitacion.getEstado().equals("1")) {
-                        tarifa.setId_tarifa("0");
-                        tarifa.setId_habitacion(habitacion.getId());
-                        tarifa.setNombre(Txt_nombre.getText());
+                        reservacion.setIdReservacion(Txt_codigo.getText());
+                        reservacion.setFechaActual(fechaactual);
+                        reservacion.setFechaIngreso(fechaentrada);
+                        reservacion.setFechaEgreso(fechasalida);
+                        reservacion.setIdCliente(Txt_docIdentificacion.getText());
+                        reservacion.setCantidadPersonas(Txt_cantPersonas.getText());
                         if (Rdb_activo.isSelected()) {
-                            tarifa.setEstado("1");
+                            reservacion.setEstadoReservacion("1");
                         } else {
-                            tarifa.setEstado("0");
+                            reservacion.setEstadoReservacion("0");
                         }
-                        tarifadao.insert(tarifa);
+
+                        reservaciondao.insert(reservacion);
                         actualizarTabla("");
-                        prcs_repetidos.AlertaMensaje("guardada", "Tarifa", "exitosamente");
                         Limpiar();
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Habitación no encontrada o esta fuera de servicio");
                     }
                 }
             }
@@ -602,15 +740,13 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
     private void Btn_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseClicked
         if (prcs_repetidos.isNoneEmpty(Txt_codigo)) {
             if (prcs_repetidos.isNumeric(Txt_codigo.getText())) {
-                if (prcs_repetidos.ConfirmarEliminacion("eliminar", "tarifa", this)) {
-                    TarifaDAO tarifadao = new TarifaDAO();
-                    tarifa.setId_tarifa(Txt_codigo.getText());
-                    tarifadao.delete(tarifa);
+                if (prcs_repetidos.ConfirmarEliminacion("eliminar", "reservación", this)) {
+                    ReservacionDAO reservaciondao = new ReservacionDAO();
+                    reservacion.setIdReservacion(Txt_codigo.getText());
+                    reservaciondao.delete(reservacion);
                     actualizarTabla("");
-                    prcs_repetidos.AlertaMensaje("eliminado", "Servicio", "exitosamente");
-                    Limpiar();
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se pudo eliminar la tarifa");
+                    JOptionPane.showMessageDialog(null, "No se pudo eliminar la reservación");
                 }
             }
         }
@@ -625,31 +761,32 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_eliminarMouseExited
 
     private void Btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_nombre, Txt_habitacion)) {
-            if (prcs_repetidos.isSelected(Rdb_activo, Rdb_inactivo)) {
-                if (prcs_repetidos.isNumeric(Txt_codigo.getText())) {
-                    HabitacionDAO habitaciondao = new HabitacionDAO();
-                    TarifaDAO tarifadao = new TarifaDAO();
-                    Habitacion habitacion = new Habitacion();
+        if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_docIdentificacion, Txt_nombreCliente, Txt_cantPersonas)) {
+            if (prcs_repetidos.isDateNoneEmpty(Dtc_fechaEgreso, Dtc_fechaIngreso)) {
+                if (prcs_repetidos.isSelected(Rdb_activo, Rdb_inactivo)) {
+                    if (prcs_repetidos.isNumeric(Txt_codigo.getText(), Txt_docIdentificacion.getText(), Txt_cantPersonas.getText())) {
 
-                    habitacion.setId(Txt_habitacion.getText());
-                    habitacion = habitaciondao.query(habitacion);
+                        ReservacionDAO reservaciondao = new ReservacionDAO();
+                        String fechaactual = new SimpleDateFormat("yyyy-MM-dd").format(Dtc_fechaActual.getDate());
+                        String fechaentrada = new SimpleDateFormat("yyyy-MM-dd").format(Dtc_fechaIngreso.getDate());
+                        String fechasalida = new SimpleDateFormat("yyyy-MM-dd").format(Dtc_fechaEgreso.getDate());
+                        System.out.println(fechaactual + " " + fechaentrada + " " + fechasalida);
 
-                    if (habitacion.getEstado().equals("1")) {
-                        tarifa.setId_tarifa(Txt_codigo.getText());
-                        tarifa.setId_habitacion(habitacion.getId());
-                        tarifa.setNombre(Txt_nombre.getText());
+                        reservacion.setIdReservacion(Txt_codigo.getText());
+                        reservacion.setFechaActual(fechaactual);
+                        reservacion.setFechaIngreso(fechaentrada);
+                        reservacion.setFechaEgreso(fechasalida);
+                        reservacion.setIdCliente(Txt_docIdentificacion.getText());
+                        reservacion.setCantidadPersonas(Txt_cantPersonas.getText());
                         if (Rdb_activo.isSelected()) {
-                            tarifa.setEstado("1");
+                            reservacion.setEstadoReservacion("1");
                         } else {
-                            tarifa.setEstado("0");
+                            reservacion.setEstadoReservacion("0");
                         }
-                        tarifadao.update(tarifa);
+
+                        reservaciondao.update(reservacion);
                         actualizarTabla("");
-                        prcs_repetidos.AlertaMensaje("modificada", "Tarifa", "exitosamente");
                         Limpiar();
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Habitación no encontrada o esta fuera de servicio");
                     }
                 }
             }
@@ -703,9 +840,17 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
     private void Tbl_DatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_DatosMouseClicked
         if (evt.getClickCount() == 2) {
             Txt_codigo.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 0).toString());
-            Txt_habitacion.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 1).toString());
-            Txt_nombre.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString());
-            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString().equals("Activo")) {
+            try {
+                fechaentrada = formato.parse(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString());
+                fechasalida = formato.parse(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString());
+            } catch (ParseException ex) {
+                Logger.getLogger(Prcs_Reservacion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Dtc_fechaIngreso.setDate(fechaentrada);
+            Dtc_fechaEgreso.setDate(fechasalida);
+            Txt_docIdentificacion.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 4).toString());
+            Txt_cantPersonas.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 5).toString());
+            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 6).toString().equals("Activo")) {
                 Rdb_activo.setSelected(true);
             } else {
                 Rdb_inactivo.setSelected(true);
@@ -715,6 +860,7 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
 
     private void Btn_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseClicked
         actualizarTabla(Txt_buscar.getText());
+        Limpiar();
     }//GEN-LAST:event_Btn_buscarMouseClicked
 
     private void Btn_buscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseEntered
@@ -725,18 +871,30 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
         Btn_fondo_buscar.setBackground(new Color(97, 212, 195));
     }//GEN-LAST:event_Btn_buscarMouseExited
 
-    private void Btn_cargarHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_cargarHabitacionesActionPerformed
-    Catalogo_Habitaciones ctl_habitaciones = null;
-    ctl_habitaciones = new Catalogo_Habitaciones();
-    ctl_habitaciones.show();
-    }//GEN-LAST:event_Btn_cargarHabitacionesActionPerformed
+    private void Btn_buscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_buscarClienteActionPerformed
+        if (prcs_repetidos.isNoneEmpty(Txt_docIdentificacion)) {
+            if (prcs_repetidos.isNumeric(Txt_docIdentificacion.getText())) {
+                HuespedDAO huespeddao = new HuespedDAO();
+                Huesped huesped = new Huesped();
+                huesped.setPasaporte(Txt_docIdentificacion.getText());
+                huesped = huespeddao.query(huesped);
+
+                if (huesped.getNombre() != null) {
+                    Txt_nombreCliente.setText(huesped.getNombre() + " " + huesped.getApellido());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Huesped no encontrado");
+                }
+            }
+        }
+    }//GEN-LAST:event_Btn_buscarClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup Btg_estado;
     private javax.swing.JLabel Btn_ayuda;
     private javax.swing.JLabel Btn_buscar;
+    private javax.swing.JButton Btn_buscarCliente;
     private javax.swing.JLabel Btn_cancelar;
-    private javax.swing.JButton Btn_cargarHabitaciones;
     private javax.swing.JLabel Btn_eliminar;
     private javax.swing.JPanel Btn_fondoGuardar;
     private javax.swing.JPanel Btn_fondo_ayuda;
@@ -748,11 +906,18 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel Btn_guardar;
     private javax.swing.JLabel Btn_modificar;
     private javax.swing.JLabel Btn_reporte;
+    private com.toedter.calendar.JDateChooser Dtc_fechaActual;
+    private com.toedter.calendar.JDateChooser Dtc_fechaEgreso;
+    private com.toedter.calendar.JDateChooser Dtc_fechaIngreso;
+    private javax.swing.JLabel Lbl_cantPersonas;
     private javax.swing.JLabel Lbl_codigoNombre;
+    private javax.swing.JLabel Lbl_docIdenficacion;
     private javax.swing.JLabel Lbl_estado;
-    private javax.swing.JLabel Lbl_habitacion;
+    private javax.swing.JLabel Lbl_fechaEgreso;
     private javax.swing.JLabel Lbl_id;
-    private javax.swing.JLabel Lbl_nombre;
+    private javax.swing.JLabel Lbl_ingreso;
+    private javax.swing.JLabel Lbl_ingreso1;
+    private javax.swing.JLabel Lbl_nombreCliente;
     private javax.swing.JPanel Pnl_datos;
     private javax.swing.JPanel Pnl_ingresoDatos;
     private javax.swing.JRadioButton Rdb_activo;
@@ -760,14 +925,18 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton Rdb_limpiar2;
     private javax.swing.JTable Tbl_Datos;
     private javax.swing.JTextField Txt_buscar;
+    private javax.swing.JTextField Txt_cantPersonas;
     private javax.swing.JTextField Txt_codigo;
-    private javax.swing.JTextField Txt_habitacion;
-    private javax.swing.JTextField Txt_nombre;
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JTextField Txt_docIdentificacion;
+    private javax.swing.JTextField Txt_nombreCliente;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
     // End of variables declaration//GEN-END:variables
 }
