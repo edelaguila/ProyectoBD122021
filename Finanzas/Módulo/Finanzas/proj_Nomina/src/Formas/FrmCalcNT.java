@@ -197,7 +197,7 @@ public class FrmCalcNT extends javax.swing.JInternalFrame {
     private void BtnCalcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCalcActionPerformed
         try
         {
-            com.mysql.jdbc.Connection cn = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost/planilla_sys", "root", "informaticdv2016");
+            com.mysql.jdbc.Connection cn = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost/finanzas_db1", "root", "informaticdv2016");
             String sql1="SELECT sum(valor_concepto) FROM detalle_nomina\n" +
             "INNER JOIN nomina_empleado on nomina_empleado.id_nomEmp = detalle_nomina.fk_nominae\n" +
             "INNER JOIN concepto ON concepto.id_concepto = detalle_nomina.fk_concepto\n" +
@@ -233,7 +233,7 @@ public class FrmCalcNT extends javax.swing.JInternalFrame {
     private void BtnAlmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAlmActionPerformed
         try
         {
-            com.mysql.jdbc.Connection cn = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost/planilla_sys", "root", "informaticdv2016");
+            com.mysql.jdbc.Connection cn = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost/finanzas_db1", "root", "informaticdv2016");
             java.sql.PreparedStatement pst = cn.prepareStatement("insert into impresion_nomina values(?,?,?,?,?)");
             pst.setString(1, "0");
             pst.setString(2, TxtCodNom.getText().trim());

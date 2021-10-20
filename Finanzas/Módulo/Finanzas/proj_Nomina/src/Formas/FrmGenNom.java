@@ -175,7 +175,7 @@ public class FrmGenNom extends javax.swing.JInternalFrame {
         TxtCodNom.setText(cod);
         try
         {
-            com.mysql.jdbc.Connection cn = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost/planilla_sys", "root", "informaticdv2016");
+            com.mysql.jdbc.Connection cn = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost/finanzas_db1", "root", "informaticdv2016");
             // Este comando es para hacer coneccion de Datos con Mysql
             PreparedStatement pst1 = cn.prepareStatement("INSERT INTO nomina VALUES(?,?,?)");// Inserta Datos 
             pst1.setString(1, TxtCodNom.getText().trim());//Ingreso de Dato COdigo De Nomina 

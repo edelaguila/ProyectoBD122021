@@ -262,7 +262,7 @@ public class FrmMantConcepto extends javax.swing.JInternalFrame {
 
     private void btnBuscaxCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaxCodActionPerformed
         try{
-            Connection cn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/planilla_sys", "root", "informaticdv2016");
+            Connection cn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/finanzas_db1", "root", "informaticdv2016");
             PreparedStatement pst = (PreparedStatement) cn.prepareStatement("select * from concepto where id_concepto = ?");
             pst.setString(1, txtBuscaxCod.getText().trim());
             ResultSet rs = pst.executeQuery();
@@ -281,7 +281,7 @@ public class FrmMantConcepto extends javax.swing.JInternalFrame {
 
     private void btnBuscaxNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaxNomActionPerformed
         try{
-            Connection cn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/planilla_sys", "root", "informaticdv2016");
+            Connection cn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/finanzas_db1", "root", "informaticdv2016");
             PreparedStatement pst = (PreparedStatement) cn.prepareStatement("select * from concepto where nombre_concepto = ?");
             pst.setString(1, txtBuscaxNom.getText().trim());
             ResultSet rs = pst.executeQuery();
@@ -301,7 +301,7 @@ public class FrmMantConcepto extends javax.swing.JInternalFrame {
     private void btnCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambioActionPerformed
         try{
             String ID = txtCodCon.getText().trim();
-            Connection cn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/planilla_sys", "root", "informaticdv2016");
+            Connection cn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/finanzas_db1", "root", "informaticdv2016");
             PreparedStatement pst = (PreparedStatement) cn.prepareStatement("UPDATE concepto SET nombre_concepto=?, efecto_concepto=? WHERE id_concepto='"+ID+"'");
             pst.setString(1, txtNomCon.getText().trim());
             pst.setString(2, txtEstadoCon.getText().trim());
@@ -315,7 +315,7 @@ public class FrmMantConcepto extends javax.swing.JInternalFrame {
     private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed
         // TODO add your handling code here:
         try {
-             java.sql.Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/planilla_sys", "root", "informaticdv2016");
+             java.sql.Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/finanzas_db1", "root", "informaticdv2016");
             java.sql.PreparedStatement pst = cn.prepareStatement("delete from concepto where id_concepto = ?");
             
             pst.setString(1, txtBuscaxCod.getText().trim());
@@ -332,7 +332,7 @@ public class FrmMantConcepto extends javax.swing.JInternalFrame {
 
     private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
       try{
-            java.sql.Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/planilla_sys", "root", "informaticdv2016");
+            java.sql.Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/finanzas_db1", "root", "informaticdv2016");
             java.sql.PreparedStatement pst = cn.prepareStatement("insert into concepto values(?,?,?)");
             pst.setString(1, txtCodCon.getText().trim());
             pst.setString(2, txtNomCon.getText().trim());
