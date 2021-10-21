@@ -31,6 +31,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     private Mnt_Tarifas form_Mant_Tarifas;
     private Prcs_AsignacionServicios form_Prcs_AsignacionServicios;
     private Prcs_Reservacion form_Prcs_Reservacion;
+    private Prcs_AsignacionGobernanta form_Prcs_AsignacionGobernanta;
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     public static JLabel Jl_logo = new JLabel();
@@ -96,6 +97,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         MnI_tarifas = new javax.swing.JMenuItem();
         Sbm_procesos = new javax.swing.JMenu();
         MnI_reservacion = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         Sbm_herramientas = new javax.swing.JMenu();
         Sbm_ayuda = new javax.swing.JMenu();
         Btn_cerrarSesion = new javax.swing.JMenu();
@@ -216,6 +218,14 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
             }
         });
         Mnu_procesos.add(MnI_reservacion);
+
+        jMenuItem1.setText("Prcs. Asignación Gobernanta");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        Mnu_procesos.add(jMenuItem1);
 
         Sbm_procesos.add(Mnu_procesos);
 
@@ -369,6 +379,17 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Prcs_Reservacion.toFront();
     }//GEN-LAST:event_MnI_reservacionActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        form_Prcs_AsignacionGobernanta = new Prcs_AsignacionGobernanta();
+        
+        Jdp_contenedor.add(form_Prcs_AsignacionGobernanta);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_Prcs_AsignacionGobernanta.getSize();
+        form_Prcs_AsignacionGobernanta.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_Prcs_AsignacionGobernanta.setVisible(true);
+        form_Prcs_AsignacionGobernanta.toFront();        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -408,5 +429,6 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     public static javax.swing.JMenu Sbm_catalogo;
     public static javax.swing.JMenu Sbm_herramientas;
     public static javax.swing.JMenu Sbm_procesos;
+    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }

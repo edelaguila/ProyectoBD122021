@@ -12,12 +12,17 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.io.File;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
@@ -205,6 +210,27 @@ public class ProcesosRepetidos {
             }
         }
         return true;
+    }
+    
+    public void llenarCbx(String consulta, String mostrar, JComboBox cbxModulo) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(consulta);
+            rs = stmt.executeQuery();
+            cbxModulo.addItem("Seleccionar...");
+            while (rs.next()) {
+                cbxModulo.addItem(rs.getInt(mostrar));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
     }
 
 }
