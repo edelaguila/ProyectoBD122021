@@ -203,8 +203,8 @@ public class ProcesosRepetidos {
     }
     
     public static boolean isDateNoneEmpty(JDateChooser... date){
-        for (JDateChooser textField : date) {
-            if (textField.getDate().toString().isEmpty()) {
+        for (JDateChooser fecha : date) {
+            if (fecha==null) {
                 JOptionPane.showMessageDialog(null, "Existen campos vacios, revise e intente de nuevo");
                 return false;
             }
