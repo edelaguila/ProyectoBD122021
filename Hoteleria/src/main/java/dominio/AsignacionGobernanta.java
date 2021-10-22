@@ -7,7 +7,7 @@ package dominio;
  */
 public class AsignacionGobernanta {
     private String idAsignacionGobernanta, idGobernanta, estadoAsignacionGobernanta;
-    private String idAmaDeLlave, nombreAmaDeLlave, idPiso;
+    private String idAmaDeLlave, nombreAmaDeLlave;
 
     public String getEstadoAsignacionGobernanta() {
         return estadoAsignacionGobernanta;
@@ -40,21 +40,13 @@ public class AsignacionGobernanta {
     public void setIdAmaDeLlave(String idAmaDeLlave) {
         this.idAmaDeLlave = idAmaDeLlave;
     }
-
+    
     public String getNombreAmaDeLlave() {
         return nombreAmaDeLlave;
     }
 
     public void setNombreAmaDeLlave(String nombreAmaDeLlave) {
         this.nombreAmaDeLlave = nombreAmaDeLlave;
-    }
-
-    public String getIdPiso() {
-        return idPiso;
-    }
-
-    public void setIdPiso(String idPiso) {
-        this.idPiso = idPiso;
     }
     
 }
