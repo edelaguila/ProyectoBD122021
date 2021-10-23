@@ -12,6 +12,8 @@ import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login_LD;
 
 /**
  *
@@ -26,6 +28,10 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     private Mnt_Habitaciones form_Mant_Habitaciones;
     private Mnt_Huespedes form_Mant_Huespedes;
     private Mnt_Menu form_Mant_Menu;
+    private Mnt_Tarifas form_Mant_Tarifas;
+    private Prcs_AsignacionServicios form_Prcs_AsignacionServicios;
+    private Prcs_Reservacion form_Prcs_Reservacion;
+    private Prcs_AsignacionGobernanta form_Prcs_AsignacionGobernanta;
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     public static JLabel Jl_logo = new JLabel();
@@ -35,11 +41,17 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
      */
     public Hoteleria_MDI() {
         initComponents();
+        
+        this.setTitle("Usuario: " + "[" + Login_LD.usuario + "]" + " \t" + "FECHA: [" + prcs_repetidos.getFecha()+ "]");
+        GenerarPermisos generarPermisos = new GenerarPermisos();
+        var usuario = Login_LD.usuario;
+        var modulo = "Hotelero";
+        generarPermisos.getPermisos(modulo, usuario);
+        
         Diseño();
     }
 
     public void Diseño() {
-        setTitle("USUARIOS:[PRUEBAS] FECHA:[" + prcs_repetidos.getFecha() + "]");
         Jdp_contenedor.setBackground(new Color(228, 68, 68));
         prcs_repetidos.Cursor(Mnb_menu);
         ImageIcon icono = new ImageIcon("src/main/java/assets/hotel.png");
@@ -82,7 +94,10 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         MnI_huespedes = new javax.swing.JMenuItem();
         MnI_habitaciones = new javax.swing.JMenuItem();
         MnI_menu = new javax.swing.JMenuItem();
+        MnI_tarifas = new javax.swing.JMenuItem();
         Sbm_procesos = new javax.swing.JMenu();
+        MnI_reservacion = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         Sbm_herramientas = new javax.swing.JMenu();
         Sbm_ayuda = new javax.swing.JMenu();
         Btn_cerrarSesion = new javax.swing.JMenu();
@@ -171,12 +186,49 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         });
         Mnu_mantenimientos.add(MnI_menu);
 
+        MnI_tarifas.setText("Mant. Tarifas");
+        MnI_tarifas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnI_tarifasActionPerformed(evt);
+            }
+        });
+        Mnu_mantenimientos.add(MnI_tarifas);
+
         Sbm_catalogo.add(Mnu_mantenimientos);
 
         Mnb_menu.add(Sbm_catalogo);
 
         Sbm_procesos.setText("Procesos");
         Sbm_procesos.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+
+        Mnu_procesos.setText("Procesos");
+
+        MnI_asingacionServiciosHabitacion.setText("Prcs. Asignación de Servicios a Habitacion");
+        MnI_asingacionServiciosHabitacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnI_asingacionServiciosHabitacionActionPerformed(evt);
+            }
+        });
+        Mnu_procesos.add(MnI_asingacionServiciosHabitacion);
+
+        MnI_reservacion.setText("Prcs. Reservación");
+        MnI_reservacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnI_reservacionActionPerformed(evt);
+            }
+        });
+        Mnu_procesos.add(MnI_reservacion);
+
+        jMenuItem1.setText("Prcs. Asignación Gobernanta");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        Mnu_procesos.add(jMenuItem1);
+
+        Sbm_procesos.add(Mnu_procesos);
+
         Mnb_menu.add(Sbm_procesos);
 
         Sbm_herramientas.setText("Herramientas");
@@ -292,6 +344,52 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Mant_Menu.toFront();
     }//GEN-LAST:event_MnI_menuActionPerformed
 
+    private void MnI_tarifasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_tarifasActionPerformed
+        // TODO add your handling code here:
+        form_Mant_Tarifas = new Mnt_Tarifas();
+
+        Jdp_contenedor.add(form_Mant_Tarifas);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_Mant_Tarifas.getSize();
+        form_Mant_Tarifas.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_Mant_Tarifas.setVisible(true);
+        form_Mant_Tarifas.toFront();
+    }//GEN-LAST:event_MnI_tarifasActionPerformed
+
+    private void MnI_asingacionServiciosHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_asingacionServiciosHabitacionActionPerformed
+        // TODO add your handling code here:
+        form_Prcs_AsignacionServicios = new Prcs_AsignacionServicios();
+        
+        Jdp_contenedor.add(form_Prcs_AsignacionServicios);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_Prcs_AsignacionServicios.getSize();
+        form_Prcs_AsignacionServicios.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_Prcs_AsignacionServicios.setVisible(true);
+        form_Prcs_AsignacionServicios.toFront();
+    }//GEN-LAST:event_MnI_asingacionServiciosHabitacionActionPerformed
+
+    private void MnI_reservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_reservacionActionPerformed
+        form_Prcs_Reservacion = new Prcs_Reservacion();
+        
+        Jdp_contenedor.add(form_Prcs_Reservacion);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_Prcs_Reservacion.getSize();
+        form_Prcs_Reservacion.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_Prcs_Reservacion.setVisible(true);
+        form_Prcs_Reservacion.toFront();
+    }//GEN-LAST:event_MnI_reservacionActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        form_Prcs_AsignacionGobernanta = new Prcs_AsignacionGobernanta();
+        
+        Jdp_contenedor.add(form_Prcs_AsignacionGobernanta);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_Prcs_AsignacionGobernanta.getSize();
+        form_Prcs_AsignacionGobernanta.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_Prcs_AsignacionGobernanta.setVisible(true);
+        form_Prcs_AsignacionGobernanta.toFront();        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -311,21 +409,26 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu Btn_cerrarSesion;
+    public static javax.swing.JMenu Btn_cerrarSesion;
     private javax.swing.JDesktopPane Jdp_contenedor;
-    private javax.swing.JMenuItem MnI_habitaciones;
-    private javax.swing.JMenuItem MnI_horario;
-    private javax.swing.JMenuItem MnI_huespedes;
-    private javax.swing.JMenuItem MnI_menu;
-    private javax.swing.JMenuItem MnI_metodoDePago;
-    private javax.swing.JMenuItem MnI_piso;
-    private javax.swing.JMenuItem MnI_servicios;
-    private javax.swing.JMenuBar Mnb_menu;
-    private javax.swing.JMenu Mnu_mantenimientos;
-    private javax.swing.JMenu Sbm_archivos;
-    private javax.swing.JMenu Sbm_ayuda;
-    private javax.swing.JMenu Sbm_catalogo;
-    private javax.swing.JMenu Sbm_herramientas;
-    private javax.swing.JMenu Sbm_procesos;
+    public static final javax.swing.JMenuItem MnI_asingacionServiciosHabitacion = new javax.swing.JMenuItem();
+    public static javax.swing.JMenuItem MnI_habitaciones;
+    public static javax.swing.JMenuItem MnI_horario;
+    public static javax.swing.JMenuItem MnI_huespedes;
+    public static javax.swing.JMenuItem MnI_menu;
+    public static javax.swing.JMenuItem MnI_metodoDePago;
+    public static javax.swing.JMenuItem MnI_piso;
+    private javax.swing.JMenuItem MnI_reservacion;
+    public static javax.swing.JMenuItem MnI_servicios;
+    public static javax.swing.JMenuItem MnI_tarifas;
+    public static javax.swing.JMenuBar Mnb_menu;
+    public static javax.swing.JMenu Mnu_mantenimientos;
+    public static final javax.swing.JMenu Mnu_procesos = new javax.swing.JMenu();
+    public static javax.swing.JMenu Sbm_archivos;
+    public static javax.swing.JMenu Sbm_ayuda;
+    public static javax.swing.JMenu Sbm_catalogo;
+    public static javax.swing.JMenu Sbm_herramientas;
+    public static javax.swing.JMenu Sbm_procesos;
+    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }

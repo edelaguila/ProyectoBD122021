@@ -317,6 +317,9 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
         Btn_ayuda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_ayuda.setText("Ayuda");
         Btn_ayuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_ayudaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Btn_ayudaMouseEntered(evt);
             }
@@ -799,6 +802,11 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_Btn_guardarMouseClicked
+
+    private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
+        // TODO add your handling code here:
+        prcs_repetidos.imprimirAyuda("AyudaHuespedes.chm");
+    }//GEN-LAST:event_Btn_ayudaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

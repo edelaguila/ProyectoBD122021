@@ -5,14 +5,24 @@
  */
 package dominio;
 
+import com.toedter.calendar.JDateChooser;
+import datos.Conexion;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
@@ -20,6 +30,12 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+import seguridad.vista.Login_LD;
 
 // @author Herbert Leonel Dominguez Chavez
 public class ProcesosRepetidos {
@@ -159,6 +175,61 @@ public class ProcesosRepetidos {
             //System.out.println("Correcto");
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    private Connection connection = null;
+
+    public void imprimirReporte(String nombreReporte) {
+        Map p = new HashMap();
+        System.out.println(Login_LD.usuario);
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            connection = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/main/java/reportes/"+ nombreReporte + "");
+            p.put("usuario", Login_LD.usuario);
+            p.put("logo", new File("").getAbsolutePath() + "/src/main/java/reportes/hotel.png");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte de Servicios");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static boolean isDateNoneEmpty(JDateChooser... date){
+        for (JDateChooser fecha : date) {
+            if (fecha==null) {
+                JOptionPane.showMessageDialog(null, "Existen campos vacios, revise e intente de nuevo");
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public void llenarCbx(String consulta, String mostrar, JComboBox cbxModulo) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(consulta);
+            rs = stmt.executeQuery();
+            cbxModulo.addItem("Seleccionar...");
+            while (rs.next()) {
+                cbxModulo.addItem(rs.getInt(mostrar));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
     }
 

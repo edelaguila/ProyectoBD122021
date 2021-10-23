@@ -5,14 +5,25 @@
  */
 package vista;
 
+import datos.Conexion;
 import datos.ServicioDAO;
 import dominio.ProcesosRepetidos;
 import dominio.Servicio;
 import java.awt.Color;
+import java.io.File;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+import seguridad.vista.Login_LD;
 
 /**
  *
@@ -308,6 +319,9 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
         Btn_reporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_reporte.setText("Reporte");
         Btn_reporte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_reporteMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Btn_reporteMouseEntered(evt);
             }
@@ -675,28 +689,29 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
 
     private void Btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseClicked
         if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_nombre, Txt_precio) && Txt_descripcion.getText() != "") {
-            if (prcs_repetidos.isSelected(Rdb_adicional, Rdb_basico, Rdb_activo, Rdb_inactivo)) {
-                if (prcs_repetidos.isNumeric(Txt_codigo.getText(), Txt_precio.getText())) {
-                    ServicioDAO serviciosdao = new ServicioDAO();
-                    servicios.setId(Txt_codigo.getText());
-                    servicios.setNombre(Txt_nombre.getText());
-                    servicios.setDescripcion(Txt_descripcion.getText());
-                    if (Rdb_basico.isSelected()) {
-                        servicios.setTipo("1");
-                    } else if (Rdb_adicional.isSelected()) {
-                        servicios.setTipo("2");
+            if (prcs_repetidos.isSelected(Rdb_adicional, Rdb_basico)) {
+                if (prcs_repetidos.isSelected(Rdb_activo, Rdb_inactivo)) {
+                    if (prcs_repetidos.isNumeric(Txt_codigo.getText(), Txt_precio.getText())) {
+                        ServicioDAO serviciosdao = new ServicioDAO();
+                        servicios.setId(Txt_codigo.getText());
+                        servicios.setNombre(Txt_nombre.getText());
+                        servicios.setDescripcion(Txt_descripcion.getText());
+                        if (Rdb_basico.isSelected()) {
+                            servicios.setTipo("1");
+                        } else if (Rdb_adicional.isSelected()) {
+                            servicios.setTipo("2");
+                        }
+                        if (Rdb_activo.isSelected()) {
+                            servicios.setEstado("1");
+                        } else if (Rdb_inactivo.isSelected()) {
+                            servicios.setEstado("0");
+                        }
+                        servicios.setPrecio(Txt_precio.getText());
+                        serviciosdao.insert(servicios);
+                        actualizarTabla("");
+                        prcs_repetidos.AlertaMensaje("guardado", "Servicio", "exitosamente");
+                        Limpiar();
                     }
-                    if (Rdb_activo.isSelected()) {
-                        servicios.setEstado("1");
-                    } else if (Rdb_inactivo.isSelected()) {
-                        servicios.setEstado("0");
-                    }
-                    servicios.setPrecio(Txt_precio.getText());
-                    serviciosdao.insert(servicios);
-                    actualizarTabla("");
-                    prcs_repetidos.AlertaMensaje("guardado", "Servicio", "exitosamente");
-                    Limpiar();
-                } else {
                 }
             }
         }
@@ -783,6 +798,29 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
     private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
         prcs_repetidos.imprimirAyuda("AyudaMantenimientoServicios.chm");
     }//GEN-LAST:event_Btn_ayudaMouseClicked
+    private Connection connection = null;
+
+    private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
+        Map p = new HashMap();
+        System.out.println(Login_LD.usuario);
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            connection = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/main/java/reportes/Rpt_MantServicios.jrxml");
+            p.put("usuario", Login_LD.usuario);
+            p.put("logo", new File("").getAbsolutePath() + "/src/main/java/reportes/hotel.png");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte de Servicios");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_Btn_reporteMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

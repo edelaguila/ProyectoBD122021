@@ -11,7 +11,6 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
@@ -24,3 +23,13 @@ hs_err_pid*
 /Area Comercial/SistemaHotelerov2/target/
 /Modulo_Financiero/build/
 /Modulo_Comercial/SistemaHotelero_jar_1.0/target/
+/Finanzas/nbproject/private/
+/Finanzas/build/
+/Finanzas/dist/
+/Finanzas/Módulo/Finanzas/target/
+/Finanzas/Módulo/Finanzas/proj_Nomina/build/
+/Finanzas/Módulo/Finanzas/proj_Nomina/dist/
+/Finanzas/Módulo/Finanzas/proj_Nomina/nbproject/private/
+/Finanzas/Módulo/Finanzas/nbproject/private/
+/Finanzas/Módulo/Finanzas/build/
+/Hoteleria/target/

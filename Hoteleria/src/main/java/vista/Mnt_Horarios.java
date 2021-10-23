@@ -280,6 +280,9 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
         Btn_reporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_reporte.setText("Reporte");
         Btn_reporte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_reporteMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Btn_reporteMouseEntered(evt);
             }
@@ -758,7 +761,7 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
     private void Btn_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseClicked
         if (prcs_repetidos.isNoneEmpty(Txt_Id)) {
             if (prcs_repetidos.isNumeric(Txt_Id.getText())) {
-                if (prcs_repetidos.ConfirmarEliminacion("eliminar", "servicio", this)) {
+                if (prcs_repetidos.ConfirmarEliminacion("eliminar", "horario", this)) {
                     HorarioDAO horariosdao = new HorarioDAO();
                     horarios.setIdHorario(Txt_Id.getText());
                     horariosdao.delete(horarios);
@@ -818,6 +821,10 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
     private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
         prcs_repetidos.imprimirAyuda("AyudaMantenimientoHorarios.chm");
     }//GEN-LAST:event_Btn_ayudaMouseClicked
+
+    private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
+        prcs_repetidos.imprimirReporte("Rpt_MantHorario.jrxml");
+    }//GEN-LAST:event_Btn_reporteMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
