@@ -761,7 +761,7 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
     private void Btn_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseClicked
         if (prcs_repetidos.isNoneEmpty(Txt_Id)) {
             if (prcs_repetidos.isNumeric(Txt_Id.getText())) {
-                if (prcs_repetidos.ConfirmarEliminacion("eliminar", "servicio", this)) {
+                if (prcs_repetidos.ConfirmarEliminacion("eliminar", "horario", this)) {
                     HorarioDAO horariosdao = new HorarioDAO();
                     horarios.setIdHorario(Txt_Id.getText());
                     horariosdao.delete(horarios);
