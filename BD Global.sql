@@ -1321,6 +1321,7 @@ CREATE TABLE `empresarial`.`tbl_asignacion_limpieza` (
 `PK_id_asignacion_gobernanta` INT NOT NULL,
 `PK_id_piso` INT NOT NULL,
 `PK_id_horario` INT NOT NULL,
+`estado_asignacion_limpieza` TINYINT NOT NULL,
 PRIMARY KEY (`PK_id_asignacion_limpieza`),
 FOREIGN KEY (`PK_id_asignacion_gobernanta`) REFERENCES `tbl_asignacion_gobernanta`(`PK_id_asignacion_gobernanta`),
 FOREIGN KEY (`PK_id_piso`) REFERENCES `tbl_piso`(`PK_id_piso`),
