@@ -645,7 +645,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
     private void Btn_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseClicked
         if (prcs_repetidos.isNoneEmpty(Txt_Id)) {
             if (prcs_repetidos.isNumeric(Txt_Id.getText())) {
-                if (prcs_repetidos.ConfirmarEliminacion("eliminar", "Piso", this)) {
+                if (prcs_repetidos.ConfirmarEliminacion("eliminar", "piso", this)) {
                     PisoDAO pisosdao = new PisoDAO();
                     pisos.setIdPiso(Integer.parseInt(Txt_Id.getText()));
                     pisosdao.delete(pisos);
@@ -653,7 +653,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
                     prcs_repetidos.AlertaMensaje("eliminado", "Piso", "exitosamente");
                     Limpiar();
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se pudo eliminar el Piso");
+                    JOptionPane.showMessageDialog(null, "No se pudo eliminar el piso");
                 }
             }
         }
