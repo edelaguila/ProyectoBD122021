@@ -9,8 +9,8 @@ package dominio;
  *
  * @author leone
  */
-public class DetalleReservación {
-    private String correlativo, idReservacion, idTarifa, subTotal;
+public class DetalleReservacion {
+    private String correlativo, idReservacion, idTarifa;
 
     public String getCorrelativo() {
         return correlativo;
@@ -36,12 +36,4 @@ public class DetalleReservación {
         this.idTarifa = idTarifa;
     }
 
-    public String getSubTotal() {
-        return subTotal;
-    }
-
-    public void setSubTotal(String subTotal) {
-        this.subTotal = subTotal;
-    }
-    
 }
