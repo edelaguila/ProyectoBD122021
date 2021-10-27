@@ -24,7 +24,7 @@ public class MDIComercial extends javax.swing.JFrame {
     private Mantenimiento_Producto MantenimientoProducto;
     private Mantenimiento_Bodega MantenimientoBodega;
     private Mantenimiento_Unidad MantenimientoUnidad;
-
+    private Proceso_Factura_venta Proceso_Factura_venta;
     private Mantenimiento_Transporte MantenimientoTransporte;
     private Mantenimiento_Proveedor MantenimientoProveedor;
     private Mantenimiento_Marca MantenimientoMarca;
@@ -391,7 +391,15 @@ public class MDIComercial extends javax.swing.JFrame {
     }//GEN-LAST:event_ProcesoCompraActionPerformed
 
     private void P_pedido_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P_pedido_facturaActionPerformed
+   Proceso_Factura_venta = new Proceso_Factura_venta();
 
+        jdpescritorio.add(Proceso_Factura_venta);
+        Dimension desktopSize = jdpescritorio.getSize();
+        Dimension FrameSize = Proceso_Factura_venta.getSize();
+        Proceso_Factura_venta.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        Proceso_Factura_venta.show();
+        logo.setVisible(true);
+        Proceso_Factura_venta.setVisible(true);
 //      
         // TODO add your handling code here:
     }//GEN-LAST:event_P_pedido_facturaActionPerformed
