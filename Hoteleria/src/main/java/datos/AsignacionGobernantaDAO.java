@@ -26,7 +26,7 @@ public class AsignacionGobernantaDAO {
     private static final String SQL_SELECT_LLAVE = "SELECT empresarial.tbl_empleado.PK_id_empleado as ID, empresarial.tbl_empleado.nombre_empleado as NOMBRE FROM tbl_empleado INNER JOIN tbl_puesto ON empresarial.tbl_empleado.puesto_empleado = empresarial.tbl_puesto.nombre_puesto WHERE empresarial.tbl_puesto.nombre_puesto='Ama de Llave' AND empresarial.tbl_empleado.estado_empleado='1'";
     private static final String SQL_UPDATE = "UPDATE tbl_asignacion_gobernanta SET PK_id_gobernanta=?, PK_id_ama_de_llave=?, estado_asignacion_gobernanta=? WHERE PK_id_asignacion_gobernanta=?";
     private static final String SQL_DELETE = "delete from tbl_asignacion_gobernanta where PK_id_asignacion_gobernanta = ?";
-
+    private static final String SQL_QUERY = "select PK_id_empleado, concat(nombre_empleado,' ',apellido_empleado) AS nombreCompleto, estado_empleado from tbl_empleado where puesto_empleado='Gobernanta' and estado_empleado='1'";
     private static final String SQL_QUERY_GOBERNANTA = "select PK_id_empleado from tbl_empleado where puesto_empleado='Gobernanta' and estado_empleado='1'";
     private static final String SQL_PK = "PK_id_empleado";
     private static final String SQL_QUERY_LLAVE = "select PK_id_empleado from tbl_empleado where puesto_empleado='Ama de Llave' and estado_empleado='1'";
@@ -179,5 +179,40 @@ public class AsignacionGobernantaDAO {
         }
 
         return rows;
+    }
+    
+    public List<AsignacionGobernanta> selectGobernanta() {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        AsignacionGobernanta piso = null;
+        List<AsignacionGobernanta> pisos = new ArrayList<AsignacionGobernanta>();
+
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_QUERY);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String id = rs.getString("PK_id_empleado");
+                String nombre = rs.getString("nombreCompleto");
+                String estado = rs.getString("estado_empleado");
+
+                piso = new AsignacionGobernanta();
+                piso.setIdGobernanta(id);
+                piso.setNombreGobernanta(nombre);
+                piso.setEstadoGobernanta(estado);
+
+                pisos.add(piso);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+
+        return pisos;
     }
 }
