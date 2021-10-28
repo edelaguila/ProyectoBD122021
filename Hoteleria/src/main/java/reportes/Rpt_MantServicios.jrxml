@@ -59,7 +59,7 @@
 					<text><![CDATA[Mantenimiento Servicio]]></text>
 				</staticText>
 				<image>
-					<reportElement x="10" y="0" width="66" height="66" uuid="c6411f10-02b9-417a-8609-e3df05a4ef05"/>
+					<reportElement x="0" y="0" width="66" height="66" uuid="c6411f10-02b9-417a-8609-e3df05a4ef05"/>
 					<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 				</image>
 			</frame>
