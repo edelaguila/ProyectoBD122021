@@ -704,7 +704,7 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
-        prcs_repetidos.imprimirReporte("Rpt_MantPisos.jrxml");
+        prcs_repetidos.imprimirReporte("Rpt_MantPisos.jrxml", "Reporte de Limpieza");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

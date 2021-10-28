@@ -823,7 +823,7 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
-        prcs_repetidos.imprimirReporte("Rpt_MantHorario.jrxml");
+        prcs_repetidos.imprimirReporte("Rpt_MantHorario.jrxml", "Reporte Horarios");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
 
