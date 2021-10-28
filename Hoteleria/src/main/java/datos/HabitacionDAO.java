@@ -18,12 +18,14 @@ import java.util.List;
  * @author leelu
  */
 public class HabitacionDAO {
-        public static String codigoAuxiliar;
+
+    public static String codigoAuxiliar;
     private static final String SQL_INSERT = "insert into tbl_mantenimiento_habitacion values(?,?,?,?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE tbl_mantenimiento_habitacion SET precio_habitacion=?, PK_id_piso=?, estado_habitacion=?, estado_limpieza=?, tipo_de_habitacion=?, cantidad_maxima_persona=? WHERE PK_id_habitacion=?";
     private static final String SQL_QUERY = "SELECT PK_id_habitacion, precio_habitacion, PK_id_piso, estado_habitacion, estado_limpieza, tipo_de_habitacion, cantidad_maxima_persona FROM tbl_mantenimiento_habitacion WHERE PK_id_habitacion = ?";
     private static final String SQL_DELETE = "delete from tbl_mantenimiento_habitacion where PK_id_habitacion = ?";
-    
+    private static final String SQL_UPDATE2 = "UPDATE tbl_mantenimiento_habitacion SET estado_limpieza=? WHERE PK_id_habitacion=?";
+
     public int insert(Habitacion huespedes) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -51,7 +53,7 @@ public class HabitacionDAO {
 
         return rows;
     }
-    
+
     public int update(Habitacion huespedes) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -67,7 +69,7 @@ public class HabitacionDAO {
             stmt.setString(4, huespedes.getLimpieza());
             stmt.setString(5, huespedes.getTipo());
             stmt.setString(6, huespedes.getCantidad());
-            stmt.setString(7, huespedes.getId());            
+            stmt.setString(7, huespedes.getId());
 
             rows = stmt.executeUpdate();
 
@@ -81,9 +83,32 @@ public class HabitacionDAO {
         return rows;
     }
     
+    public int update2(Habitacion huespedes) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_UPDATE2);
+            stmt.setString(1, huespedes.getLimpieza());
+            stmt.setString(2, huespedes.getId());
+
+            rows = stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+
+        return rows;
+    }
+
     public List<Habitacion> select() {
 
-        String SQL_SELECT = "SELECT * FROM tbl_mantenimiento_habitacion WHERE PK_id_habitacion LIKE '%"+codigoAuxiliar+"%'";
+        String SQL_SELECT = "SELECT * FROM tbl_mantenimiento_habitacion WHERE PK_id_habitacion LIKE '%" + codigoAuxiliar + "%'";
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -125,7 +150,7 @@ public class HabitacionDAO {
 
         return huesped;
     }
-    
+
     public Habitacion query(Habitacion huespedes) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -146,7 +171,7 @@ public class HabitacionDAO {
                 String limpieza = rs.getString("estado_limpieza");
                 String tipo = rs.getString("tipo_de_habitacion");
                 String cantidad = rs.getString("cantidad_maxima_persona");
-                
+
                 huespedes = new Habitacion();
                 huespedes.setId(id);
                 huespedes.setPrecio(precio);
@@ -165,7 +190,7 @@ public class HabitacionDAO {
         }
         return huespedes;
     }
-    
+
     public int delete(Habitacion huespedes) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -186,5 +211,5 @@ public class HabitacionDAO {
 
         return rows;
     }
-    
+
 }

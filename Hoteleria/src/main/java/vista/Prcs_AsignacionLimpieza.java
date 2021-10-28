@@ -17,7 +17,7 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     AsignacionLimpieza gobernanta = new AsignacionLimpieza();
     AsignacionLimpiezaDAO cbxAsignacion = new AsignacionLimpiezaDAO();
-
+    
     /**
      * Creates new form Prcs_AsignacionGobernanta
      */
