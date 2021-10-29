@@ -20,7 +20,8 @@ INSERT INTO
 VALUES
 ('1', '100', 'Habitaciones pequeñas', '1'),
 ('2', '100', 'Habitaciones medianas', '1'),
-('3', '100', 'Habitaciones grandes', '1');
+('3', '100', 'Habitaciones grandes', '1'),
+('4', '10', 'Habitaciones presidenciales', '1');
 
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_horario` (
 `PK_id_horario` INT NOT NULL,
@@ -336,7 +337,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 INSERT INTO
 `empresarial`.`tbl_puesto`
 VALUES
-('1', 'Gobernanta', '1000'), ('2', 'Ama de Llave', '1000'), ('3', 'Seguridad', '1000');
+('1', 'Gobernanta', '1000'), 
+('2', 'Ama de Llave', '1000'), 
+('3', 'Seguridad', '1000');
 
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_empleado` (
 `PK_id_empleado` INT NOT NULL AUTO_INCREMENT,
@@ -357,7 +360,7 @@ VALUES
 ('2', 'Darlyn', 'Garcia', '12345', 'karolq@gmail.com', 'Gobernanta', '1', '2021-10-19'),
 ('3', 'Karla', 'Garcia', '12345', 'karolq@gmail.com', 'Ama de Llave', '0', '2021-10-19'),
 ('4', 'Esmeralda', 'Garcia', '12345', 'karolq@gmail.com', 'Ama de Llave', '1', '2021-10-19'),
-('5', 'Yury', 'Garcia', '12345', 'karolq@gmail.com', 'Gobernanta', '0', '2021-10-19');
+('5', 'Yury', 'Garcia', '12345', 'karolq@gmail.com', 'Gobernanta', '1', '2021-10-19');
 
 -- -----------------------------------------------------
 -- FIN MANTENIMIENTOS
@@ -451,6 +454,25 @@ PRIMARY KEY (`PK_id_detalle_limpieza`),
 FOREIGN KEY (`id_asignacion_gobernanta`) REFERENCES `tbl_asignacion_gobernanta`(`PK_id_asignacion_gobernanta`),
 FOREIGN KEY (`id_asignacion_limpieza`) REFERENCES `tbl_asignacion_limpieza`(`PK_id_asignacion_limpieza`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_objeto_perdido` (
+  `PK_id_objeto` INT NOT NULL AUTO_INCREMENT,
+  `PK_id_habitacion` INT DEFAULT NULL,
+  `PK_id_ama_de_llaves` INT DEFAULT NULL,
+  `fecha_encontrado` date NULL DEFAULT NULL,
+  `objeto` VARCHAR(50) NULL DEFAULT NULL,
+  `identificacion` VARCHAR(50) NULL DEFAULT NULL,
+  `nombre` VARCHAR(50) NULL DEFAULT NULL,
+  `estado` TINYINT NULL DEFAULT NULL,
+  PRIMARY KEY (`PK_id_objeto`),
+    FOREIGN KEY (`PK_id_habitacion`) REFERENCES `tbl_mantenimiento_habitacion`(`PK_id_habitacion`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+INSERT INTO `empresarial`.`tbl_objeto_perdido` (`PK_id_objeto`, `PK_id_habitacion`, `PK_id_ama_de_llaves`, `fecha_encontrado`, `objeto`, `identificacion`, `nombre`, `estado`) VALUES ('1', '1', '1', '2021-04-17', 'Telefono', '12345678', 'Luis', '2');
+INSERT INTO `empresarial`.`tbl_objeto_perdido` (`PK_id_objeto`, `PK_id_habitacion`, `PK_id_ama_de_llaves`, `fecha_encontrado`, `objeto`, `identificacion`, `nombre`, `estado`) VALUES ('2', '1', '1', '2021-04-18', 'Juguete', 'null', 'null', '1');
+INSERT INTO `empresarial`.`tbl_objeto_perdido` (`PK_id_objeto`, `PK_id_habitacion`, `PK_id_ama_de_llaves`, `fecha_encontrado`, `objeto`, `identificacion`, `nombre`, `estado`) VALUES ('3', '1', '1', '2021-04-19', 'Computadora', 'null', 'null', '1');
+INSERT INTO `empresarial`.`tbl_objeto_perdido` (`PK_id_objeto`, `PK_id_habitacion`, `PK_id_ama_de_llaves`, `fecha_encontrado`, `objeto`, `identificacion`, `nombre`, `estado`) VALUES ('4', '1', '1', '2021-04-20', 'Telefono', 'null', 'null', '1');
+INSERT INTO `empresarial`.`tbl_objeto_perdido` (`PK_id_objeto`, `PK_id_habitacion`, `PK_id_ama_de_llaves`, `fecha_encontrado`, `objeto`, `identificacion`, `nombre`, `estado`) VALUES ('5', '1', '1', '2021-04-21', 'Audifonos', '124345678', 'Juan', '2');
 
  CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_transporteruta` (
 `PK_codigo_transporteruta` INT  NOT NULL,
