@@ -685,7 +685,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
-        prcs_repetidos.imprimirReporte("Rpt_MantPisos.jrxml");
+        prcs_repetidos.imprimirReporte("Rpt_MantPisos.jrxml", "Reporte Pisos");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
 
