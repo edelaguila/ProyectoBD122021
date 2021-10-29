@@ -292,6 +292,9 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
         Btn_reporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_reporte.setText("Reporte");
         Btn_reporte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_reporteMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Btn_reporteMouseEntered(evt);
             }
@@ -807,6 +810,11 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         prcs_repetidos.imprimirAyuda("AyudaHuespedes.chm");
     }//GEN-LAST:event_Btn_ayudaMouseClicked
+
+    private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
+        // TODO add your handling code here:
+        prcs_repetidos.imprimirReporte("Rpt_MantHuesped.jrxml", "Reporte Huespedes");
+    }//GEN-LAST:event_Btn_reporteMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
