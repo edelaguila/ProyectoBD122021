@@ -32,7 +32,7 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
     }
 
     public void diseño() {
-        this.setTitle("Asignación Gobernanta de Piso");
+        this.setTitle("Asignación de Amas de Llaves a Gobernanta");
         Txt_buscar.setBorder(null);
         Rdb_Limpiar2.setVisible(false);
         prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar);
@@ -714,7 +714,7 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
-        prcs_repetidos.imprimirReporte("Rpt_MantPisos.jrxml");
+        prcs_repetidos.imprimirReporte("Rpt_MantPisos.jrxml", "Reporte Asignaciones Gobernanta");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -34,6 +34,8 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     private Prcs_AsignacionGobernanta form_Prcs_AsignacionGobernanta;
     private Prcs_AsignacionLimpieza form_Prcs_AsignacionLimpieza;
     private Prcs_ObjetoPerdido form_Objeto_perdido;
+    private Prcs_ConsultaLimpieza form_ConsultaLimpieza;
+    private Prcs_SupervisionLimpieza form_SupervisionLimpieza;
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     public static JLabel Jl_logo = new JLabel();
@@ -101,6 +103,9 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         MnI_reservacion = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         Sbm_herramientas = new javax.swing.JMenu();
         Sbm_ayuda = new javax.swing.JMenu();
@@ -238,6 +243,26 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
             }
         });
         Mnu_procesos.add(jMenuItem3);
+
+        jMenu1.setText("Consulta y Supervisión de Limpieza");
+
+        jMenuItem4.setText("Prcs. Consulta Limpieza");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
+
+        jMenuItem5.setText("Prcs. Supervisión Limpieza");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
+
+        Mnu_procesos.add(jMenu1);
 
         jMenuItem2.setText("Prcs. Objetos Perdidos");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -433,6 +458,28 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Prcs_AsignacionLimpieza.toFront();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        form_ConsultaLimpieza = new Prcs_ConsultaLimpieza();
+
+        Jdp_contenedor.add(form_ConsultaLimpieza);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_ConsultaLimpieza.getSize();
+        form_ConsultaLimpieza.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_ConsultaLimpieza.setVisible(true);
+        form_ConsultaLimpieza.toFront();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        form_SupervisionLimpieza = new Prcs_SupervisionLimpieza();
+
+        Jdp_contenedor.add(form_SupervisionLimpieza);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_SupervisionLimpieza.getSize();
+        form_SupervisionLimpieza.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_SupervisionLimpieza.setVisible(true);
+        form_SupervisionLimpieza.toFront();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -472,8 +519,11 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     public static javax.swing.JMenu Sbm_catalogo;
     public static javax.swing.JMenu Sbm_herramientas;
     public static javax.swing.JMenu Sbm_procesos;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     // End of variables declaration//GEN-END:variables
 }
