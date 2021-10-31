@@ -22,7 +22,6 @@ import seguridad.vista.Login_LD;
 public class Hoteleria_MDI extends javax.swing.JFrame {
 
     private Mnt_Servicios form_Mant_Servicios;
-    private Mnt_MetodoDePago form_Mnt_MetodoDePago;
     private Mnt_Pisos form_Mant_Pisos;
     private Mnt_Horarios form_Mant_Horarios;
     private Mnt_Habitaciones form_Mant_Habitaciones;
@@ -34,6 +33,8 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     private Prcs_AsignacionGobernanta form_Prcs_AsignacionGobernanta;
     private Prcs_AsignacionLimpieza form_Prcs_AsignacionLimpieza;
     private Prcs_ObjetoPerdido form_Objeto_perdido;
+    private Prcs_ConsultaLimpieza form_ConsultaLimpieza;
+    private Prcs_SupervisionLimpieza form_SupervisionLimpieza;
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     public static JLabel Jl_logo = new JLabel();
@@ -90,7 +91,6 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         Sbm_catalogo = new javax.swing.JMenu();
         Mnu_mantenimientos = new javax.swing.JMenu();
         MnI_servicios = new javax.swing.JMenuItem();
-        MnI_metodoDePago = new javax.swing.JMenuItem();
         MnI_piso = new javax.swing.JMenuItem();
         MnI_horario = new javax.swing.JMenuItem();
         MnI_huespedes = new javax.swing.JMenuItem();
@@ -98,9 +98,13 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         MnI_menu = new javax.swing.JMenuItem();
         MnI_tarifas = new javax.swing.JMenuItem();
         Sbm_procesos = new javax.swing.JMenu();
+        MnI_asingacionServiciosHabitacion = new javax.swing.JMenuItem();
         MnI_reservacion = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         Sbm_herramientas = new javax.swing.JMenu();
         Sbm_ayuda = new javax.swing.JMenu();
@@ -141,14 +145,6 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
             }
         });
         Mnu_mantenimientos.add(MnI_servicios);
-
-        MnI_metodoDePago.setText("Mant. Metodos de Pago");
-        MnI_metodoDePago.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnI_metodoDePagoActionPerformed(evt);
-            }
-        });
-        Mnu_mantenimientos.add(MnI_metodoDePago);
 
         MnI_piso.setText("Mant. Pisos");
         MnI_piso.addActionListener(new java.awt.event.ActionListener() {
@@ -239,6 +235,26 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         });
         Mnu_procesos.add(jMenuItem3);
 
+        jMenu1.setText("Consulta y Supervisión de Limpieza");
+
+        jMenuItem4.setText("Prcs. Consulta Limpieza");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
+
+        jMenuItem5.setText("Prcs. Supervisión Limpieza");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
+
+        Mnu_procesos.add(jMenu1);
+
         jMenuItem2.setText("Prcs. Objetos Perdidos");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,17 +310,6 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Mant_Servicios.setVisible(true);
         form_Mant_Servicios.toFront();
     }//GEN-LAST:event_MnI_serviciosActionPerformed
-
-    private void MnI_metodoDePagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_metodoDePagoActionPerformed
-        form_Mnt_MetodoDePago = new Mnt_MetodoDePago();
-
-        Jdp_contenedor.add(form_Mnt_MetodoDePago);
-        Dimension desktopSize = Jdp_contenedor.getSize();
-        Dimension FrameSize = form_Mnt_MetodoDePago.getSize();
-        form_Mnt_MetodoDePago.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-        form_Mnt_MetodoDePago.setVisible(true);
-        form_Mnt_MetodoDePago.toFront();
-    }//GEN-LAST:event_MnI_metodoDePagoActionPerformed
 
     private void MnI_pisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_pisoActionPerformed
         form_Mant_Pisos = new Mnt_Pisos();
@@ -433,6 +438,28 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Prcs_AsignacionLimpieza.toFront();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        form_ConsultaLimpieza = new Prcs_ConsultaLimpieza();
+
+        Jdp_contenedor.add(form_ConsultaLimpieza);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_ConsultaLimpieza.getSize();
+        form_ConsultaLimpieza.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_ConsultaLimpieza.setVisible(true);
+        form_ConsultaLimpieza.toFront();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        form_SupervisionLimpieza = new Prcs_SupervisionLimpieza();
+
+        Jdp_contenedor.add(form_SupervisionLimpieza);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_SupervisionLimpieza.getSize();
+        form_SupervisionLimpieza.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_SupervisionLimpieza.setVisible(true);
+        form_SupervisionLimpieza.toFront();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -454,14 +481,13 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JMenu Btn_cerrarSesion;
     private javax.swing.JDesktopPane Jdp_contenedor;
-    public static final javax.swing.JMenuItem MnI_asingacionServiciosHabitacion = new javax.swing.JMenuItem();
+    public static javax.swing.JMenuItem MnI_asingacionServiciosHabitacion;
     public static javax.swing.JMenuItem MnI_habitaciones;
     public static javax.swing.JMenuItem MnI_horario;
     public static javax.swing.JMenuItem MnI_huespedes;
     public static javax.swing.JMenuItem MnI_menu;
-    public static javax.swing.JMenuItem MnI_metodoDePago;
     public static javax.swing.JMenuItem MnI_piso;
-    private javax.swing.JMenuItem MnI_reservacion;
+    public static javax.swing.JMenuItem MnI_reservacion;
     public static javax.swing.JMenuItem MnI_servicios;
     public static javax.swing.JMenuItem MnI_tarifas;
     public static javax.swing.JMenuBar Mnb_menu;
@@ -472,8 +498,11 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     public static javax.swing.JMenu Sbm_catalogo;
     public static javax.swing.JMenu Sbm_herramientas;
     public static javax.swing.JMenu Sbm_procesos;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
+    public static javax.swing.JMenu jMenu1;
+    public static javax.swing.JMenuItem jMenuItem1;
+    public static javax.swing.JMenuItem jMenuItem2;
+    public static javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     // End of variables declaration//GEN-END:variables
 }
