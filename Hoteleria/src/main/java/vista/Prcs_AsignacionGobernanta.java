@@ -4,14 +4,9 @@ import dominio.ProcesosRepetidos;
 import dominio.AsignacionGobernanta;
 import datos.AsignacionGobernantaDAO;
 import java.awt.Color;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,10 +15,8 @@ import javax.swing.table.DefaultTableModel;
 public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
-    AsignacionGobernanta pisos = new AsignacionGobernanta();
+    AsignacionGobernanta gobernanta = new AsignacionGobernanta();
     AsignacionGobernantaDAO cbxAsignacionGobernanta = new AsignacionGobernantaDAO();
-    DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
-    DefaultTableModel modelo1, modelo2;
 
     /**
      * Creates new form Prcs_AsignacionGobernanta
@@ -31,15 +24,15 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
     public Prcs_AsignacionGobernanta() {
         initComponents();
         cbxAsignacionGobernanta.llenarCbx(Cbx_Gobernanta);
-        cbxAsignacionGobernanta.llenarCbx2(Cbx_Piso);
+        cbxAsignacionGobernanta.llenarCbx2(Cbx_AmaDeLlave);
+        ID.setVisible(false);
         diseño();
         actualizarTabla("");
         tabla1();
-        tabla2();
     }
 
     public void diseño() {
-        this.setTitle("Asignación de Gobernanta de Piso");
+        this.setTitle("Asignación de Amas de Llaves a Gobernanta");
         Txt_buscar.setBorder(null);
         Rdb_Limpiar2.setVisible(false);
         prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar);
@@ -51,100 +44,47 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
         ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
         AsignacionGobernantaDAO.codigoAuxiliar = codigo;
         AsignacionGobernantaDAO.nombreAuxiliar = codigo;
-        String columnas[] = {"ID", "ID GOBERNANTA", "NO. PISO", "ID AMA LLAVE", "NOM. AMA LLAVE", "ESTADO"};
+        String columnas[] = {"ID", "ID GOBERNANTA", "ID AMA LLAVE", "ESTADO"};
         int cantidadcolumnas = columnas.length;
         prcs_repetidos.llenarColumnas(columnas, cantidadcolumnas, Tbl_Datos);
         String datos[] = new String[cantidadcolumnas];
-        int tamaño[] = {30, 100, 30, 75, 120, 30};
-        AsignacionGobernantaDAO pisosdao = new AsignacionGobernantaDAO();
-        List<AsignacionGobernanta> piso = pisosdao.select();
-        for (AsignacionGobernanta listaServicio : piso) {
+        int tamaño[] = {50, 150, 150, 50};
+        AsignacionGobernantaDAO gobernantadao = new AsignacionGobernantaDAO();
+        List<AsignacionGobernanta> gobernanta = gobernantadao.select();
+        for (AsignacionGobernanta listaServicio : gobernanta) {
             datos[0] = String.valueOf(listaServicio.getIdAsignacionGobernanta());
             datos[1] = String.valueOf(listaServicio.getIdGobernanta());
-            datos[2] = String.valueOf(listaServicio.getIdPiso());
-            datos[3] = String.valueOf(listaServicio.getIdAmaDeLlave());
-            datos[4] = String.valueOf(listaServicio.getNombreAmaDeLlave());
+            datos[2] = String.valueOf(listaServicio.getIdAmaDeLlave());
             if (String.valueOf(listaServicio.getEstadoAsignacionGobernanta()).equals("1")) {
-                datos[5] = "Activo";
+                datos[3] = "Activo";
             } else {
-                datos[5] = "Inactivo";
+                datos[3] = "Inactivo";
             }
             prcs_repetidos.llenarFilas(datos, tamaño, Tbl_Datos);
         }
     }
 
     public void tabla1() {
-        modelo1 = new DefaultTableModel();
-        modelo1.addColumn("ID");
-        modelo1.addColumn("NOMBRE");
-        Tbl_AmaDeLlave.setModel(modelo1);
-
-        centro.setHorizontalAlignment(JLabel.CENTER);
-        Tbl_AmaDeLlave.getColumnModel().getColumn(0).setCellRenderer(centro);
-        Tbl_AmaDeLlave.getColumnModel().getColumn(1).setCellRenderer(centro);
-
-        Tbl_AmaDeLlave.getColumnModel().getColumn(0).setPreferredWidth(40);
-        Tbl_AmaDeLlave.getColumnModel().getColumn(1).setPreferredWidth(140);
-
-        String datos[] = new String[2];
-        AsignacionGobernantaDAO dao = new AsignacionGobernantaDAO();
-        List<AsignacionGobernanta> personas = dao.selectAmaDeLlave();
-        for (AsignacionGobernanta persona : personas) {
-            datos[0] = persona.getIdAmaDeLlave();
-            datos[1] = persona.getNombreAmaDeLlave();
-            modelo1.addRow(datos);
-            Tbl_AmaDeLlave.setModel(modelo1);
+        ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
+        String columnas[] = {"ID", "NOMBRE"};
+        int cantidadcolumnas = columnas.length;
+        prcs_repetidos.llenarColumnas(columnas, cantidadcolumnas, Tbl_AmaDeLlave);
+        String datos[] = new String[cantidadcolumnas];
+        int tamaño[] = {50, 150};
+        AsignacionGobernantaDAO gobernantadao = new AsignacionGobernantaDAO();
+        List<AsignacionGobernanta> gobernanta = gobernantadao.selectAmaDeLlave();
+        for (AsignacionGobernanta listaServicio : gobernanta) {
+            datos[0] = String.valueOf(listaServicio.getIdAmaDeLlave());
+            datos[1] = String.valueOf(listaServicio.getNombreAmaDeLlave());
+            prcs_repetidos.llenarFilas(datos, tamaño, Tbl_AmaDeLlave);
         }
-    }
-
-    public void tabla2() {
-        modelo2 = new DefaultTableModel();
-        modelo2.addColumn("ID");
-        modelo2.addColumn("NOMBRE");
-        Tbl_AmaDeLlaves2.setModel(modelo2);
-
-        centro.setHorizontalAlignment(JLabel.CENTER);
-        Tbl_AmaDeLlaves2.getColumnModel().getColumn(0).setCellRenderer(centro);
-        Tbl_AmaDeLlaves2.getColumnModel().getColumn(1).setCellRenderer(centro);
-
-        Tbl_AmaDeLlaves2.getColumnModel().getColumn(0).setPreferredWidth(40);
-        Tbl_AmaDeLlaves2.getColumnModel().getColumn(1).setPreferredWidth(140);
-    }
-
-    public void LimpiarTabla() {
-        modelo1 = new DefaultTableModel();
-        modelo1.addColumn("ID");
-        modelo1.addColumn("NOMBRE");
-        Tbl_AmaDeLlave.setModel(modelo1);
-
-        centro.setHorizontalAlignment(JLabel.CENTER);
-        Tbl_AmaDeLlave.getColumnModel().getColumn(0).setCellRenderer(centro);
-        Tbl_AmaDeLlave.getColumnModel().getColumn(1).setCellRenderer(centro);
-
-        Tbl_AmaDeLlave.getColumnModel().getColumn(0).setPreferredWidth(40);
-        Tbl_AmaDeLlave.getColumnModel().getColumn(1).setPreferredWidth(140);
-    }
-
-    public void LimpiarTabla2() {
-        modelo2 = new DefaultTableModel();
-        modelo2.addColumn("ID");
-        modelo2.addColumn("NOMBRE");
-        Tbl_AmaDeLlaves2.setModel(modelo2);
-
-        centro.setHorizontalAlignment(JLabel.CENTER);
-        Tbl_AmaDeLlaves2.getColumnModel().getColumn(0).setCellRenderer(centro);
-        Tbl_AmaDeLlaves2.getColumnModel().getColumn(1).setCellRenderer(centro);
-
-        Tbl_AmaDeLlaves2.getColumnModel().getColumn(0).setPreferredWidth(40);
-        Tbl_AmaDeLlaves2.getColumnModel().getColumn(1).setPreferredWidth(140);
     }
 
     public void Limpiar() {
         prcs_repetidos.Limpiar(Txt_buscar);
         Cbx_Gobernanta.setSelectedIndex(0);
-        Cbx_Piso.setSelectedIndex(0);
+        Cbx_AmaDeLlave.setSelectedIndex(0);
         Rdb_Limpiar2.setSelected(true);
-        LimpiarTabla2();
     }
 
     /**
@@ -159,7 +99,6 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
         BtnGp_tipo = new javax.swing.ButtonGroup();
         BtnGp_estado = new javax.swing.ButtonGroup();
         Pnl_ingresoDatos = new javax.swing.JPanel();
-        Lbl_nombre = new javax.swing.JLabel();
         Lbl_estado = new javax.swing.JLabel();
         Rdb_Activo = new javax.swing.JRadioButton();
         Rdb_Limpiar2 = new javax.swing.JRadioButton();
@@ -177,16 +116,14 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
         Btn_fondo_cancelar = new javax.swing.JPanel();
         Btn_cancelar = new javax.swing.JLabel();
         Cbx_Gobernanta = new javax.swing.JComboBox<>();
+        Lbl_estado1 = new javax.swing.JLabel();
         Lbl_nombre1 = new javax.swing.JLabel();
-        Cbx_Piso = new javax.swing.JComboBox<>();
+        Cbx_AmaDeLlave = new javax.swing.JComboBox<>();
+        Lbl_nombre2 = new javax.swing.JLabel();
+        ID = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         Tbl_AmaDeLlave = new javax.swing.JTable();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        Tbl_AmaDeLlaves2 = new javax.swing.JTable();
-        Lbl_estado1 = new javax.swing.JLabel();
-        Lbl_estado2 = new javax.swing.JLabel();
-        Btn_AsignarUno = new javax.swing.JButton();
-        Btn_QuitarUno = new javax.swing.JButton();
         Pnl_datos = new javax.swing.JPanel();
         Lbl_codigoNombre = new javax.swing.JLabel();
         Txt_buscar = new javax.swing.JTextField();
@@ -205,10 +142,6 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
 
         Pnl_ingresoDatos.setBackground(new java.awt.Color(36, 47, 65));
         Pnl_ingresoDatos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INGRESO DE DATOS:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
-
-        Lbl_nombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_nombre.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_nombre.setText("ID Gobernanta:");
 
         Lbl_estado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_estado.setForeground(new java.awt.Color(255, 255, 255));
@@ -398,9 +331,24 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
             .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
+        Lbl_estado1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_estado1.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_estado1.setText("Listado de Amas de Llaves");
+
         Lbl_nombre1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_nombre1.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_nombre1.setText("NO. PISO:");
+        Lbl_nombre1.setText("ID Ama de Llave:");
+
+        Lbl_nombre2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_nombre2.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_nombre2.setText("ID Gobernanta:");
+
+        jButton2.setText("VER GOBERNANTA");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         Tbl_AmaDeLlave.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -410,49 +358,7 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
 
             }
         ));
-        Tbl_AmaDeLlave.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Tbl_AmaDeLlaveMouseClicked(evt);
-            }
-        });
         jScrollPane3.setViewportView(Tbl_AmaDeLlave);
-
-        Tbl_AmaDeLlaves2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        Tbl_AmaDeLlaves2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Tbl_AmaDeLlaves2MouseClicked(evt);
-            }
-        });
-        jScrollPane4.setViewportView(Tbl_AmaDeLlaves2);
-
-        Lbl_estado1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_estado1.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_estado1.setText("Amas de Llave");
-
-        Lbl_estado2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_estado2.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_estado2.setText("Amas de Llaves Asignadas");
-
-        Btn_AsignarUno.setText(">");
-        Btn_AsignarUno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_AsignarUnoActionPerformed(evt);
-            }
-        });
-
-        Btn_QuitarUno.setText("<");
-        Btn_QuitarUno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_QuitarUnoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout Pnl_ingresoDatosLayout = new javax.swing.GroupLayout(Pnl_ingresoDatos);
         Pnl_ingresoDatos.setLayout(Pnl_ingresoDatosLayout);
@@ -461,7 +367,33 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addGap(107, 107, 107)
+                        .addGap(67, 67, 67)
+                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                    .addComponent(Lbl_nombre1)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(Cbx_AmaDeLlave, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(Cbx_Gobernanta, javax.swing.GroupLayout.Alignment.TRAILING, 0, 200, Short.MAX_VALUE)))
+                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                .addComponent(Lbl_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Rdb_Activo)
+                                .addGap(18, 18, 18)
+                                .addComponent(Rdb_Limpiar2)
+                                .addGap(18, 18, 18)
+                                .addComponent(Rdb_Inactivo))
+                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                .addGap(183, 183, 183)
+                                .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                        .addGap(173, 173, 173)
+                        .addComponent(Lbl_estado1))
+                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                        .addGap(82, 82, 82)
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Btn_fondoGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -472,54 +404,30 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Btn_fondo_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Btn_AsignarUno, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                                    .addComponent(Btn_QuitarUno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                .addGap(56, 56, 56)
-                                .addComponent(Lbl_estado1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(27, 27, 27)
-                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(Lbl_estado2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(Lbl_nombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Lbl_nombre1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Lbl_estado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(Cbx_Gobernanta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Cbx_Piso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                .addComponent(Rdb_Activo)
-                                .addGap(18, 18, 18)
-                                .addComponent(Rdb_Limpiar2)
-                                .addGap(18, 18, 18)
-                                .addComponent(Rdb_Inactivo)))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                            .addComponent(Btn_fondo_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(61, Short.MAX_VALUE))
+            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                    .addGap(77, 77, 77)
+                    .addComponent(Lbl_nombre2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(335, 335, 335)))
         );
         Pnl_ingresoDatosLayout.setVerticalGroup(
             Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
+                .addComponent(Cbx_Gobernanta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lbl_nombre)
-                    .addComponent(Cbx_Gobernanta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Cbx_Piso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lbl_nombre1))
-                .addGap(37, 37, 37)
+                    .addComponent(Lbl_nombre1)
+                    .addComponent(Cbx_AmaDeLlave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(Lbl_estado1)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(Rdb_Limpiar2)
@@ -529,21 +437,8 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                         .addComponent(Rdb_Inactivo)
                         .addGap(1, 1, 1)))
-                .addGap(27, 27, 27)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lbl_estado2)
-                    .addComponent(Lbl_estado1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addComponent(Btn_AsignarUno)
-                        .addGap(27, 27, 27)
-                        .addComponent(Btn_QuitarUno)
-                        .addGap(75, 75, 75)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Btn_fondo_ayuda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -554,6 +449,11 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
                     .addComponent(Btn_fondo_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
+            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                    .addGap(40, 40, 40)
+                    .addComponent(Lbl_nombre2)
+                    .addContainerGap(525, Short.MAX_VALUE)))
         );
 
         Pnl_datos.setBackground(new java.awt.Color(36, 47, 65));
@@ -642,7 +542,7 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
                                 .addComponent(Txt_buscar)
                                 .addComponent(Lbl_codigoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -729,25 +629,19 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
     private void Btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseClicked
         if (prcs_repetidos.isSelected(Rdb_Activo, Rdb_Inactivo)) {
             String cbxGobernanta = Cbx_Gobernanta.getSelectedItem().toString();
-            String cbxPiso = Cbx_Piso.getSelectedItem().toString();
+            String cbxAmaDeLlave = Cbx_AmaDeLlave.getSelectedItem().toString();
 
-            AsignacionGobernantaDAO pisosdao = new AsignacionGobernantaDAO();
+            AsignacionGobernantaDAO gobernantadao = new AsignacionGobernantaDAO();
 
-            pisos.setIdGobernanta(cbxGobernanta);
-            pisos.setIdPiso(cbxPiso);
-            for (int i = 0; i < Tbl_AmaDeLlaves2.getRowCount(); i++) {
-                String Vector[] = new String[2];
-                Vector[0] = Tbl_AmaDeLlaves2.getValueAt(i, 0).toString();
-                Vector[1] = Tbl_AmaDeLlaves2.getValueAt(i, 1).toString();
-                pisos.setIdAmaDeLlave(Vector[0]);
-                pisos.setNombreAmaDeLlave(Vector[1]);
-            }
+            gobernanta.setIdGobernanta(cbxGobernanta);
+            gobernanta.setIdAmaDeLlave(cbxAmaDeLlave);
+
             if (Rdb_Activo.isSelected()) {
-                pisos.setEstadoAsignacionGobernanta("1");
+                gobernanta.setEstadoAsignacionGobernanta("1");
             } else if (Rdb_Inactivo.isSelected()) {
-                pisos.setEstadoAsignacionGobernanta("0");
+                gobernanta.setEstadoAsignacionGobernanta("0");
             }
-            pisosdao.insert(pisos);
+            gobernantadao.insert(gobernanta);
             actualizarTabla("");
             prcs_repetidos.AlertaMensaje("guardado", "Asignación", "exitosamente");
             Limpiar();
@@ -757,55 +651,49 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_guardarMouseClicked
 
     private void Btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseClicked
-//        if (prcs_repetidos.isSelected(Rdb_Activo, Rdb_Inactivo)) {
-//            String cbxGobernanta = Cbx_Gobernanta.getSelectedItem().toString();
-//            String cbxLlave = Cbx_Piso.getSelectedItem().toString();
-//            AsignacionGobernantaDAO pisosdao = new AsignacionGobernantaDAO();
-//            pisos.setIdGobernanta(cbxGobernanta);
-//            pisos.setIdAmaDeLlave(cbxLlave);
-//            if (Rdb_Activo.isSelected()) {
-//                pisos.setEstadoAsignacionGobernanta("1");
-//            } else if (Rdb_Inactivo.isSelected()) {
-//                pisos.setEstadoAsignacionGobernanta("0");
-//            }
-//            pisosdao.update(pisos);
-//            actualizarTabla("");
-//            prcs_repetidos.AlertaMensaje("modificado", "Asignación", "exitosamente");
-//            Limpiar();
-//        }
+        if (prcs_repetidos.isSelected(Rdb_Activo, Rdb_Inactivo)) {
+            String cbxGobernanta = Cbx_Gobernanta.getSelectedItem().toString();
+            String cbxLlave = Cbx_AmaDeLlave.getSelectedItem().toString();
 
+            AsignacionGobernantaDAO pisosdao = new AsignacionGobernantaDAO();
+
+            gobernanta.setIdAsignacionGobernanta(ID.getText());
+            gobernanta.setIdGobernanta(cbxGobernanta);
+            gobernanta.setIdAmaDeLlave(cbxLlave);
+            if (Rdb_Activo.isSelected()) {
+                gobernanta.setEstadoAsignacionGobernanta("1");
+            } else if (Rdb_Inactivo.isSelected()) {
+                gobernanta.setEstadoAsignacionGobernanta("0");
+            }
+            pisosdao.update(gobernanta);
+            actualizarTabla("");
+            prcs_repetidos.AlertaMensaje("modificada", "Asignación", "exitosamente");
+            Limpiar();
+        }
     }//GEN-LAST:event_Btn_modificarMouseClicked
 
     private void Btn_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseClicked
-//        if (prcs_repetidos.ConfirmarEliminacion("eliminar", "Piso", this)) {
-//            AsignacionGobernantaDAO pisosdao = new AsignacionGobernantaDAO();
-//            String cbxGobernanta = Cbx_Gobernanta.getSelectedItem().toString();
-//            pisos.setIdAsignacionGobernanta(cbxGobernanta);
-//            pisosdao.delete(pisos);
-//            actualizarTabla("");
-//            prcs_repetidos.AlertaMensaje("eliminada", "Asignación", "exitosamente");
-//            Limpiar();
-//        } else {
-//            JOptionPane.showMessageDialog(null, "No se pudo eliminar la asignación.");
-//        }
-
+        if (prcs_repetidos.ConfirmarEliminacion("eliminar", "asignacion", this)) {
+            AsignacionGobernantaDAO pisosdao = new AsignacionGobernantaDAO();
+            gobernanta.setIdAsignacionGobernanta(ID.getText());
+            pisosdao.delete(gobernanta);
+            actualizarTabla("");
+            prcs_repetidos.AlertaMensaje("eliminada", "Asignación", "exitosamente");
+            Limpiar();
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo eliminar la asignación.");
+        }
     }//GEN-LAST:event_Btn_eliminarMouseClicked
 
     private void Tbl_DatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_DatosMouseClicked
         if (evt.getClickCount() == 2) {
-            int cadena1 = Integer.parseInt(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 1).toString());
-            int cadena2 = Integer.parseInt(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString());
-            int cadena3 = Integer.parseInt(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString());
+            int idGobernanta = Integer.parseInt(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 1).toString());
+            int idAmaDeLlave = Integer.parseInt(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString());
 
-            Cbx_Gobernanta.setSelectedItem(cadena1);
-            Cbx_Piso.setSelectedItem(cadena2);
-
-//            String Vector[] = new String[2];
-//            Vector[0] = Tbl_AmaDeLlave.getValueAt(filaSeleccionada, 0).toString();
-//            Vector[1] = Tbl_AmaDeLlave.getValueAt(filaSeleccionada, 1).toString();
-//            modelo2.addRow(Vector);
-
-            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 5).toString().equals("Activo")) {
+            ID.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 0).toString());
+            Cbx_Gobernanta.setSelectedItem(idGobernanta);
+            Cbx_AmaDeLlave.setSelectedItem(idAmaDeLlave);
+            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString().equals("Activo")) {
                 Rdb_Activo.setSelected(true);
             } else {
                 Rdb_Inactivo.setSelected(true);
@@ -826,47 +714,18 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
-        prcs_repetidos.imprimirReporte("Rpt_MantPisos.jrxml");
+        prcs_repetidos.imprimirReporte("Rpt_MantPisos.jrxml", "Reporte Asignaciones Gobernanta");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
-    private void Tbl_AmaDeLlaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_AmaDeLlaveMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Tbl_AmaDeLlaveMouseClicked
-
-    private void Tbl_AmaDeLlaves2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_AmaDeLlaves2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Tbl_AmaDeLlaves2MouseClicked
-
-    private void Btn_AsignarUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_AsignarUnoActionPerformed
-        int filaSeleccionada = Tbl_AmaDeLlave.getSelectedRow();
-        if (1 == 1) {
-            if (filaSeleccionada >= 0) {
-                String Vector[] = new String[2];
-                Vector[0] = Tbl_AmaDeLlave.getValueAt(filaSeleccionada, 0).toString();
-                Vector[1] = Tbl_AmaDeLlave.getValueAt(filaSeleccionada, 1).toString();
-                modelo2.addRow(Vector);
-                modelo1.removeRow(filaSeleccionada);
-            }
-        }
-    }//GEN-LAST:event_Btn_AsignarUnoActionPerformed
-
-    private void Btn_QuitarUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_QuitarUnoActionPerformed
-        int filaSeleccionada = Tbl_AmaDeLlaves2.getSelectedRow();
-        if (filaSeleccionada >= 0) {
-            String Vector[] = new String[2];
-            Vector[0] = Tbl_AmaDeLlaves2.getValueAt(filaSeleccionada, 0).toString();
-            Vector[1] = Tbl_AmaDeLlaves2.getValueAt(filaSeleccionada, 1).toString();
-            modelo1.addRow(Vector);
-            modelo2.removeRow(filaSeleccionada);
-        }
-    }//GEN-LAST:event_Btn_QuitarUnoActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Prcs_LimpiezaGobernanta abrir = new Prcs_LimpiezaGobernanta();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup BtnGp_estado;
     private javax.swing.ButtonGroup BtnGp_tipo;
-    private javax.swing.JButton Btn_AsignarUno;
-    private javax.swing.JButton Btn_QuitarUno;
     private javax.swing.JLabel Btn_ayuda;
     private javax.swing.JLabel Btn_buscar;
     private javax.swing.JLabel Btn_cancelar;
@@ -881,26 +740,25 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel Btn_guardar;
     private javax.swing.JLabel Btn_modificar;
     private javax.swing.JLabel Btn_reporte;
+    private javax.swing.JComboBox<String> Cbx_AmaDeLlave;
     private javax.swing.JComboBox<String> Cbx_Gobernanta;
-    private javax.swing.JComboBox<String> Cbx_Piso;
+    private javax.swing.JLabel ID;
     private javax.swing.JLabel Lbl_codigoNombre;
     private javax.swing.JLabel Lbl_estado;
     private javax.swing.JLabel Lbl_estado1;
-    private javax.swing.JLabel Lbl_estado2;
-    private javax.swing.JLabel Lbl_nombre;
     private javax.swing.JLabel Lbl_nombre1;
+    private javax.swing.JLabel Lbl_nombre2;
     private javax.swing.JPanel Pnl_datos;
     private javax.swing.JPanel Pnl_ingresoDatos;
     private javax.swing.JRadioButton Rdb_Activo;
     private javax.swing.JRadioButton Rdb_Inactivo;
     private javax.swing.JRadioButton Rdb_Limpiar2;
     private javax.swing.JTable Tbl_AmaDeLlave;
-    private javax.swing.JTable Tbl_AmaDeLlaves2;
     private javax.swing.JTable Tbl_Datos;
     private javax.swing.JTextField Txt_buscar;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator7;
     // End of variables declaration//GEN-END:variables
 }

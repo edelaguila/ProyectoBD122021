@@ -1,41 +1,40 @@
 package vista;
 
-import datos.PisoDAO;
 import dominio.ProcesosRepetidos;
-import dominio.Piso;
+import dominio.AsignacionLimpieza;
+import datos.AsignacionLimpiezaDAO;
 import java.awt.Color;
 import java.util.List;
-import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
-import java.io.File;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Jefferson Dávila
  */
-public class Mnt_Pisos extends javax.swing.JInternalFrame {
+public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
-    Piso pisos = new Piso();
-
+    AsignacionLimpieza gobernanta = new AsignacionLimpieza();
+    AsignacionLimpiezaDAO cbxAsignacion = new AsignacionLimpiezaDAO();
+    
     /**
-     * Creates new form Mnt_¨Pisos
+     * Creates new form Prcs_AsignacionGobernanta
      */
-    public Mnt_Pisos() {
+    public Prcs_AsignacionLimpieza() {
         initComponents();
+        cbxAsignacion.llenarCbxGobernanta(Cbx_Gobernanta);
+        cbxAsignacion.llenarCbxPiso(Cbx_Piso);
+        cbxAsignacion.llenarCbxHorario(Cbx_EHora);
+        ID.setVisible(false);
         diseño();
         actualizarTabla("");
     }
 
     public void diseño() {
-        this.setTitle("Mantenimiento de Pisos");
-        Txt_Id.setBorder(null);
-        Txt_NoHabitaciones.setBorder(null);
+        this.setTitle("Asignación Gobernanta de Piso");
         Txt_buscar.setBorder(null);
         Rdb_Limpiar2.setVisible(false);
-        Txt_Descripcion.setBorder(BorderFactory.createEmptyBorder());
-        Txt_Descripcion.setBorder(null);
         prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar);
         ImageIcon icono = new ImageIcon("src/main/java/assets/pisos.png");
         this.setFrameIcon(icono);
@@ -43,31 +42,34 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
 
     public void actualizarTabla(String codigo) {
         ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
-        PisoDAO.codigoAuxiliar = codigo;
-        PisoDAO.nombreAuxiliar = codigo;
-        String columnas[] = {"ID", "NO. HABITACIONES", "DESCRIPCION", "ESTADO"};
+        AsignacionLimpiezaDAO.codigoAuxiliar = codigo;
+        AsignacionLimpiezaDAO.nombreAuxiliar = codigo;
+        String columnas[] = {"ID", "ID GOBERNANTA", "ID PISO", "ID HORARIO", "ESTADO"};
         int cantidadcolumnas = columnas.length;
         prcs_repetidos.llenarColumnas(columnas, cantidadcolumnas, Tbl_Datos);
         String datos[] = new String[cantidadcolumnas];
-        int tamaño[] = {50, 250, 450, 150, 150, 150};
-        PisoDAO pisosdao = new PisoDAO();
-        List<Piso> piso = pisosdao.select();
-        for (Piso listaServicio : piso) {
-            datos[0] = String.valueOf(listaServicio.getIdPiso());
-            datos[1] = String.valueOf(listaServicio.getCantidadHabitacionesPiso());
-            datos[2] = listaServicio.getDescripcionPiso();
-            if (String.valueOf(listaServicio.getEstadoPiso()).equals("1")) {
-                datos[3] = "Activo";
+        int tamaño[] = {50, 75, 75, 75, 50};
+        AsignacionLimpiezaDAO gobernantadao = new AsignacionLimpiezaDAO();
+        List<AsignacionLimpieza> gobernanta = gobernantadao.select();
+        for (AsignacionLimpieza listaServicio : gobernanta) {
+            datos[0] = String.valueOf(listaServicio.getIdAsignacionLimpieza());
+            datos[1] = String.valueOf(listaServicio.getIdAsignacionGobernanta());
+            datos[2] = String.valueOf(listaServicio.getIdPiso());
+            datos[3] = String.valueOf(listaServicio.getIdHorario());
+            if (String.valueOf(listaServicio.getEstadoAsignacionLimpieza()).equals("1")) {
+                datos[4] = "Activo";
             } else {
-                datos[3] = "Inactivo";
+                datos[4] = "Inactivo";
             }
             prcs_repetidos.llenarFilas(datos, tamaño, Tbl_Datos);
         }
     }
 
     public void Limpiar() {
-        prcs_repetidos.Limpiar(Txt_Id, Txt_NoHabitaciones, Txt_buscar);
-        Txt_Descripcion.setText("");
+        prcs_repetidos.Limpiar(Txt_buscar);
+        Cbx_Gobernanta.setSelectedIndex(0);
+        Cbx_EHora.setSelectedIndex(0);
+        Cbx_Piso.setSelectedIndex(0);
         Rdb_Limpiar2.setSelected(true);
     }
 
@@ -83,16 +85,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         BtnGp_tipo = new javax.swing.ButtonGroup();
         BtnGp_estado = new javax.swing.ButtonGroup();
         Pnl_ingresoDatos = new javax.swing.JPanel();
-        Lbl_id = new javax.swing.JLabel();
-        Lbl_nombre = new javax.swing.JLabel();
-        Lbl_descripcion = new javax.swing.JLabel();
         Lbl_estado = new javax.swing.JLabel();
-        Txt_Id = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
-        Txt_NoHabitaciones = new javax.swing.JTextField();
-        jSeparator2 = new javax.swing.JSeparator();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        Txt_Descripcion = new javax.swing.JTextArea();
         Rdb_Activo = new javax.swing.JRadioButton();
         Rdb_Limpiar2 = new javax.swing.JRadioButton();
         Rdb_Inactivo = new javax.swing.JRadioButton();
@@ -108,6 +101,16 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         Btn_ayuda = new javax.swing.JLabel();
         Btn_fondo_cancelar = new javax.swing.JPanel();
         Btn_cancelar = new javax.swing.JLabel();
+        Cbx_Gobernanta = new javax.swing.JComboBox<>();
+        Lbl_nombre1 = new javax.swing.JLabel();
+        Cbx_Piso = new javax.swing.JComboBox<>();
+        Lbl_nombre2 = new javax.swing.JLabel();
+        ID = new javax.swing.JLabel();
+        Lbl_id2 = new javax.swing.JLabel();
+        Cbx_EHora = new javax.swing.JComboBox<>();
+        Lbl_id3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         Pnl_datos = new javax.swing.JPanel();
         Lbl_codigoNombre = new javax.swing.JLabel();
         Txt_buscar = new javax.swing.JTextField();
@@ -127,36 +130,9 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         Pnl_ingresoDatos.setBackground(new java.awt.Color(36, 47, 65));
         Pnl_ingresoDatos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INGRESO DE DATOS:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        Lbl_id.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_id.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_id.setText("ID:");
-
-        Lbl_nombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_nombre.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_nombre.setText("No. Habitaciones:");
-
-        Lbl_descripcion.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_descripcion.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_descripcion.setText("Descripción:");
-
         Lbl_estado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_estado.setForeground(new java.awt.Color(255, 255, 255));
         Lbl_estado.setText("Estado:");
-
-        Txt_Id.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_Id.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_Id.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        Txt_NoHabitaciones.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_NoHabitaciones.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_NoHabitaciones.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        Txt_Descripcion.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_Descripcion.setColumns(20);
-        Txt_Descripcion.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_Descripcion.setRows(5);
-        Txt_Descripcion.setBorder(null);
-        jScrollPane1.setViewportView(Txt_Descripcion);
 
         BtnGp_estado.add(Rdb_Activo);
         Rdb_Activo.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
@@ -227,7 +203,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         );
         Btn_fondo_eliminarLayout.setVerticalGroup(
             Btn_fondo_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Btn_fondo_modificar.setBackground(new java.awt.Color(97, 212, 195));
@@ -255,7 +231,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         );
         Btn_fondo_modificarLayout.setVerticalGroup(
             Btn_fondo_modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Btn_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         Btn_fondo_reporte.setBackground(new java.awt.Color(97, 212, 195));
@@ -342,36 +318,45 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
             .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
+        Lbl_nombre1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_nombre1.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_nombre1.setText("No. Piso:");
+
+        Lbl_nombre2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_nombre2.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_nombre2.setText("ID Gobernanta:");
+
+        Lbl_id2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_id2.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_id2.setText("ID Horario:");
+
+        Lbl_id3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_id3.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_id3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Lbl_id3.setText("Hora");
+
+        jButton2.setText("VER GOBERNANTA");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("VER HORARIOS");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout Pnl_ingresoDatosLayout = new javax.swing.GroupLayout(Pnl_ingresoDatos);
         Pnl_ingresoDatos.setLayout(Pnl_ingresoDatosLayout);
         Pnl_ingresoDatosLayout.setHorizontalGroup(
             Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
-                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Lbl_nombre))
-                                .addGap(18, 18, 18)
-                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Txt_NoHabitaciones, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jSeparator1)
-                                    .addComponent(Txt_Id)
-                                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                            .addComponent(Lbl_estado)
-                            .addGap(80, 80, 80)
-                            .addComponent(Rdb_Activo)
-                            .addGap(18, 18, 18)
-                            .addComponent(Rdb_Limpiar2)
-                            .addGap(18, 18, 18)
-                            .addComponent(Rdb_Inactivo))
-                        .addComponent(Lbl_descripcion))
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                        .addGap(82, 82, 82)
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Btn_fondoGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -382,38 +367,68 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Btn_fondo_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(37, Short.MAX_VALUE))
+                            .addComponent(Btn_fondo_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_ingresoDatosLayout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Lbl_estado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Lbl_nombre2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Lbl_id2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Lbl_nombre1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Cbx_Piso, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Cbx_EHora, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lbl_id3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                        .addGap(197, 197, 197)
+                                        .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(Cbx_Gobernanta, javax.swing.GroupLayout.Alignment.LEADING, 0, 200, Short.MAX_VALUE))
+                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(Rdb_Inactivo)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(Rdb_Activo)
+                                .addGap(18, 18, 18)
+                                .addComponent(Rdb_Limpiar2)))))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         Pnl_ingresoDatosLayout.setVerticalGroup(
             Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(36, 36, 36)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Txt_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lbl_id))
-                .addGap(3, 3, 3)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Lbl_nombre2)
+                    .addComponent(Cbx_Gobernanta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Txt_NoHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lbl_nombre))
-                .addGap(1, 1, 1)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(Lbl_descripcion)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Cbx_Piso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Lbl_nombre1))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(Lbl_id3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Cbx_EHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Lbl_id2))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Rdb_Limpiar2)
+                    .addComponent(Rdb_Inactivo)
+                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Lbl_estado)
-                        .addComponent(Rdb_Limpiar2)
-                        .addComponent(Rdb_Activo))
-                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addComponent(Rdb_Inactivo)
-                        .addGap(1, 1, 1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Rdb_Activo)))
+                .addGap(3, 3, 3)
+                .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Btn_fondo_ayuda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -422,7 +437,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Btn_fondoGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Btn_fondo_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -486,11 +501,10 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         Pnl_datosLayout.setHorizontalGroup(
             Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Pnl_datosLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(16, 16, 16)
                 .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
                     .addGroup(Pnl_datosLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
                         .addComponent(Lbl_codigoNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -513,7 +527,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
                                 .addComponent(Txt_buscar)
                                 .addComponent(Lbl_codigoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -598,73 +612,78 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_buscarMouseExited
 
     private void Btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_Id, Txt_NoHabitaciones) && Txt_Descripcion.getText() != "") {
-            if (prcs_repetidos.isSelected(Rdb_Activo, Rdb_Inactivo)) {
-                if (prcs_repetidos.isNumeric(Txt_Id.getText(), Txt_NoHabitaciones.getText())) {
-                    PisoDAO pisosdao = new PisoDAO();
-                    pisos.setIdPiso(Integer.parseInt(Txt_Id.getText()));
-                    pisos.setCantidadHabitacionesPiso(Integer.parseInt(Txt_NoHabitaciones.getText()));
-                    pisos.setDescripcionPiso(Txt_Descripcion.getText());
-                    if (Rdb_Activo.isSelected()) {
-                        pisos.setEstadoPiso("1");
-                    } else if (Rdb_Inactivo.isSelected()) {
-                        pisos.setEstadoPiso("0");
-                    }
-                    pisosdao.insert(pisos);
-                    actualizarTabla("");
-                    prcs_repetidos.AlertaMensaje("guardado", "Piso", "exitosamente");
-                    Limpiar();
-                } else {
-                }
+        if (prcs_repetidos.isSelected(Rdb_Activo, Rdb_Inactivo)) {
+            String cbxGobernanta = Cbx_Gobernanta.getSelectedItem().toString();
+            String cbxPiso = Cbx_Piso.getSelectedItem().toString();
+            String cbxHorario = Cbx_EHora.getSelectedItem().toString();
+
+            AsignacionLimpiezaDAO gobernantadao = new AsignacionLimpiezaDAO();
+
+            gobernanta.setIdAsignacionGobernanta(cbxGobernanta);
+            gobernanta.setIdPiso(cbxPiso);
+            gobernanta.setIdHorario(cbxHorario);
+            if (Rdb_Activo.isSelected()) {
+                gobernanta.setEstadoAsignacionLimpieza("1");
+            } else if (Rdb_Inactivo.isSelected()) {
+                gobernanta.setEstadoAsignacionLimpieza("0");
             }
+            gobernantadao.insert(gobernanta);
+            actualizarTabla("");
+            prcs_repetidos.AlertaMensaje("guardado", "Asignación", "exitosamente");
+            Limpiar();
+        } else {
         }
+
     }//GEN-LAST:event_Btn_guardarMouseClicked
 
     private void Btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_Id, Txt_NoHabitaciones) && Txt_Descripcion.getText() != "") {
-            if (prcs_repetidos.isSelected(Rdb_Activo, Rdb_Inactivo)) {
-                if (prcs_repetidos.isNumeric(Txt_Id.getText(), Txt_NoHabitaciones.getText())) {
-                    PisoDAO pisosdao = new PisoDAO();
-                    pisos.setIdPiso(Integer.parseInt(Txt_Id.getText()));
-                    pisos.setCantidadHabitacionesPiso(Integer.parseInt(Txt_NoHabitaciones.getText()));
-                    pisos.setDescripcionPiso(Txt_Descripcion.getText());
-                    if (Rdb_Activo.isSelected()) {
-                        pisos.setEstadoPiso("1");
-                    } else if (Rdb_Inactivo.isSelected()) {
-                        pisos.setEstadoPiso("0");
-                    }
-                    pisosdao.update(pisos);
-                    actualizarTabla("");
-                    prcs_repetidos.AlertaMensaje("modificado", "Piso", "exitosamente");
-                    Limpiar();
-                }
+        if (prcs_repetidos.isSelected(Rdb_Activo, Rdb_Inactivo)) {
+            String cbxGobernanta = Cbx_Gobernanta.getSelectedItem().toString();
+            String cbxPiso = Cbx_Piso.getSelectedItem().toString();
+            String cbxHorario = Cbx_EHora.getSelectedItem().toString();
+
+            AsignacionLimpiezaDAO pisosdao = new AsignacionLimpiezaDAO();
+
+            gobernanta.setIdAsignacionLimpieza(ID.getText());
+            gobernanta.setIdAsignacionGobernanta(cbxGobernanta);
+            gobernanta.setIdPiso(cbxPiso);
+            gobernanta.setIdHorario(cbxHorario);
+            if (Rdb_Activo.isSelected()) {
+                gobernanta.setEstadoAsignacionLimpieza("1");
+            } else if (Rdb_Inactivo.isSelected()) {
+                gobernanta.setEstadoAsignacionLimpieza("0");
             }
+            pisosdao.update(gobernanta);
+            actualizarTabla("");
+            prcs_repetidos.AlertaMensaje("modificada", "Asignación", "exitosamente");
+            Limpiar();
         }
     }//GEN-LAST:event_Btn_modificarMouseClicked
 
     private void Btn_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_Id)) {
-            if (prcs_repetidos.isNumeric(Txt_Id.getText())) {
-                if (prcs_repetidos.ConfirmarEliminacion("eliminar", "piso", this)) {
-                    PisoDAO pisosdao = new PisoDAO();
-                    pisos.setIdPiso(Integer.parseInt(Txt_Id.getText()));
-                    pisosdao.delete(pisos);
-                    actualizarTabla("");
-                    prcs_repetidos.AlertaMensaje("eliminado", "Piso", "exitosamente");
-                    Limpiar();
-                } else {
-                    JOptionPane.showMessageDialog(null, "No se pudo eliminar el piso");
-                }
-            }
+        if (prcs_repetidos.ConfirmarEliminacion("eliminar", "asignacion", this)) {
+            AsignacionLimpiezaDAO pisosdao = new AsignacionLimpiezaDAO();
+            gobernanta.setIdAsignacionLimpieza(ID.getText());
+            pisosdao.delete(gobernanta);
+            actualizarTabla("");
+            prcs_repetidos.AlertaMensaje("eliminada", "Asignación", "exitosamente");
+            Limpiar();
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo eliminar la asignación.");
         }
     }//GEN-LAST:event_Btn_eliminarMouseClicked
 
     private void Tbl_DatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_DatosMouseClicked
         if (evt.getClickCount() == 2) {
-            Txt_Id.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 0).toString());
-            Txt_NoHabitaciones.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 1).toString());
-            Txt_Descripcion.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString());
-            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString().equals("Activo")) {
+            int idAsignacionGobernanta = Integer.parseInt(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 1).toString());
+            int idPiso = Integer.parseInt(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString());
+            int idHorario = Integer.parseInt(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString());
+
+            ID.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 0).toString());
+            Cbx_Gobernanta.setSelectedItem(idAsignacionGobernanta);
+            Cbx_Piso.setSelectedItem(idPiso);
+            Cbx_EHora.setSelectedItem(idHorario);
+            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 4).toString().equals("Activo")) {
                 Rdb_Activo.setSelected(true);
             } else {
                 Rdb_Inactivo.setSelected(true);
@@ -685,8 +704,18 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
-        prcs_repetidos.imprimirReporte("Rpt_MantPisos.jrxml", "Reporte Pisos");
+        prcs_repetidos.imprimirReporte("Rpt_MantPisos.jrxml", "Reporte de Limpieza");
     }//GEN-LAST:event_Btn_reporteMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Prcs_LimpiezaHorario abrir = new Prcs_LimpiezaHorario();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Prcs_LimpiezaGobernanta abrir = new Prcs_LimpiezaGobernanta();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -706,25 +735,26 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel Btn_guardar;
     private javax.swing.JLabel Btn_modificar;
     private javax.swing.JLabel Btn_reporte;
+    private javax.swing.JComboBox<String> Cbx_EHora;
+    private javax.swing.JComboBox<String> Cbx_Gobernanta;
+    private javax.swing.JComboBox<String> Cbx_Piso;
+    private javax.swing.JLabel ID;
     private javax.swing.JLabel Lbl_codigoNombre;
-    private javax.swing.JLabel Lbl_descripcion;
     private javax.swing.JLabel Lbl_estado;
-    private javax.swing.JLabel Lbl_id;
-    private javax.swing.JLabel Lbl_nombre;
+    private javax.swing.JLabel Lbl_id2;
+    private javax.swing.JLabel Lbl_id3;
+    private javax.swing.JLabel Lbl_nombre1;
+    private javax.swing.JLabel Lbl_nombre2;
     private javax.swing.JPanel Pnl_datos;
     private javax.swing.JPanel Pnl_ingresoDatos;
     private javax.swing.JRadioButton Rdb_Activo;
     private javax.swing.JRadioButton Rdb_Inactivo;
     private javax.swing.JRadioButton Rdb_Limpiar2;
     private javax.swing.JTable Tbl_Datos;
-    private javax.swing.JTextArea Txt_Descripcion;
-    private javax.swing.JTextField Txt_Id;
-    private javax.swing.JTextField Txt_NoHabitaciones;
     private javax.swing.JTextField Txt_buscar;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator7;
     // End of variables declaration//GEN-END:variables
 }
