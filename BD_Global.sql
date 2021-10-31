@@ -38,6 +38,7 @@ VALUES
 ('1', '8 am', '8 pm', '8', 'Horario matutino', '1'),
 ('2', '12 am', '12 pm', '1', 'Horario de tarde', '1'),
 ('3', '9 am', '9 pm', '5', 'Horario nocturno', '1');
+ALTER TABLE `empresarial`.`tbl_horario` DROP COLUMN `horas_extras_horario`;
 
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_metodo_de_pago` (
 `PK_id_metodo` INT NOT NULL,
