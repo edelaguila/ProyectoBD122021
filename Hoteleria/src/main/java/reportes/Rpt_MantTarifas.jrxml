@@ -15,25 +15,19 @@
 	</style>
 	<parameter name="usuario" class="java.lang.String"/>
 	<parameter name="logo" class="java.lang.String"/>
-	<queryString language="SQL">
-		<![CDATA[SELECT PK_id_servicio, nombre_servicio, descripcion_servicio, precio_servicio, tipo_servicio, estado_servicio FROM tbl_servicio;]]>
+	<queryString>
+		<![CDATA[SELECT * FROM tbl_tarifa;]]>
 	</queryString>
-	<field name="PK_id_servicio" class="java.lang.Integer">
+	<field name="PK_id_tarifa" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="nombre_servicio" class="java.lang.String">
+	<field name="id_habitacion_tarifa" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="descripcion_servicio" class="java.lang.String">
+	<field name="nombre_tarifa" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="precio_servicio" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="tipo_servicio" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="estado_servicio" class="java.lang.Integer">
+	<field name="estado_tarifa" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -56,7 +50,7 @@
 					<textElement textAlignment="Right">
 						<font size="22" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Mantenimiento Servicio]]></text>
+					<text><![CDATA[Mantenimiento Tarifas]]></text>
 				</staticText>
 				<image>
 					<reportElement x="0" y="0" width="66" height="66" uuid="c6411f10-02b9-417a-8609-e3df05a4ef05"/>
@@ -88,96 +82,61 @@
 	<columnHeader>
 		<band height="18" splitType="Stretch">
 			<staticText>
-				<reportElement style="Column header" mode="Opaque" x="0" y="0" width="83" height="18" forecolor="#FFFFFF" backcolor="#000000" uuid="efb5c1bc-2e01-4e92-b021-78e1da8dcabb"/>
+				<reportElement style="Column header" mode="Opaque" x="0" y="0" width="150" height="18" forecolor="#FFFFFF" backcolor="#000000" uuid="efb5c1bc-2e01-4e92-b021-78e1da8dcabb"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[ID:]]></text>
+				<text><![CDATA[ID TARIFA:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" mode="Opaque" x="83" y="0" width="181" height="18" forecolor="#FFFFFF" backcolor="#000000" uuid="e40eeb39-c532-4afa-a232-70886924cf9a"/>
+				<reportElement style="Column header" mode="Opaque" x="150" y="0" width="181" height="18" forecolor="#FFFFFF" backcolor="#000000" uuid="e40eeb39-c532-4afa-a232-70886924cf9a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[ID HABITACIÓN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Opaque" x="331" y="0" width="267" height="18" forecolor="#FFFFFF" backcolor="#000000" uuid="9e0a41df-e088-4728-8324-aa7eb5da1ebf"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[NOMBRE:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" mode="Opaque" x="501" y="0" width="106" height="18" forecolor="#FFFFFF" backcolor="#000000" uuid="d770c54e-fd99-41b5-9edd-542b5be67952"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="false"/>
-				</textElement>
-				<text><![CDATA[PRECIO:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" mode="Opaque" x="607" y="0" width="92" height="18" forecolor="#FFFFFF" backcolor="#000000" uuid="9e0a41df-e088-4728-8324-aa7eb5da1ebf"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="false"/>
-				</textElement>
-				<text><![CDATA[TIPO:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" mode="Opaque" x="699" y="0" width="103" height="18" forecolor="#FFFFFF" backcolor="#000000" uuid="1c3f67b8-e58c-40df-a1e7-ab99fdd78210"/>
+				<reportElement style="Column header" mode="Opaque" x="598" y="0" width="204" height="18" forecolor="#FFFFFF" backcolor="#000000" uuid="1c3f67b8-e58c-40df-a1e7-ab99fdd78210"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[ESTADO:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" mode="Opaque" x="264" y="0" width="236" height="18" forecolor="#FFFFFF" backcolor="#000000" uuid="cb512192-5af7-472a-9f78-210e4f64f373"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="false"/>
-				</textElement>
-				<text><![CDATA[DESCRIPCIÓN:]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="42" splitType="Stretch">
 			<frame>
-				<reportElement style="Row" mode="Opaque" x="0" y="0" width="802" height="31" uuid="c9ada46b-ae87-437f-973d-a000f0ba88f7"/>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="83" y="0" width="181" height="31" uuid="da7be867-7ab6-468d-ab70-1e64603a36fb"/>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="802" height="42" uuid="c9ada46b-ae87-437f-973d-a000f0ba88f7"/>
+				<textField>
+					<reportElement x="0" y="0" width="150" height="42" uuid="eea19109-b4f5-400a-ad5f-97b821d8f5ce"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="14"/>
+						<font isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{nombre_servicio}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{PK_id_tarifa}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="264" y="0" width="236" height="31" uuid="df23e40a-8e5f-49e7-94ba-4807efd2249d"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{descripcion_servicio}]]></textFieldExpression>
+				<textField>
+					<reportElement x="150" y="0" width="181" height="42" uuid="81bc6ebe-8daf-4504-b092-130cbc3e8789"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{id_habitacion_tarifa}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="500" y="0" width="106" height="31" uuid="f7aac876-e7dd-40e1-b7c0-0a30f7d3e39b"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{precio_servicio}]]></textFieldExpression>
+				<textField>
+					<reportElement x="331" y="0" width="267" height="42" uuid="a1f5d801-22e7-45bc-94e0-0ed62440f972"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{nombre_tarifa}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="606" y="0" width="93" height="31" uuid="6a8e2af5-6899-49cb-9143-98782ee03425"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($F{tipo_servicio}.equals(1)?
-"basico" : "adicional" )]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="699" y="0" width="103" height="31" uuid="8b18261f-97b2-4d9c-b649-58fa1f7319d2"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[($F{estado_servicio}.equals(1)?
+				<textField>
+					<reportElement x="598" y="0" width="204" height="42" uuid="0730e009-b2a4-49cd-9119-cdf7a688046c"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[($F{estado_tarifa}.equals(1)?
 "activo" : "inactivo" )]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="0" width="83" height="31" uuid="5bf758fe-edb1-4f53-837f-cd771290aa86"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{PK_id_servicio}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

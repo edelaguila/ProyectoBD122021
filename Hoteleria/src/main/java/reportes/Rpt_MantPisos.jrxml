@@ -16,7 +16,7 @@
 	<parameter name="logo" class="java.lang.String"/>
 	<parameter name="usuario" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT * FROM hoteleria.tbl_piso;]]>
+		<![CDATA[SELECT * FROM empresarial.tbl_piso;]]>
 	</queryString>
 	<field name="PK_id_piso" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
