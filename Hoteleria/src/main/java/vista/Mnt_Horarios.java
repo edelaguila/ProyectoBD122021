@@ -8,16 +8,50 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login_LD;
 
 /**
  *
- * @author Jefferson Dávila
+ * @author Jeff
  */
 public class Mnt_Horarios extends javax.swing.JInternalFrame {
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     HorarioDAO horariosdao = new HorarioDAO();
     Horario horarios = new Horario();
+    
+    void habilitarAcciones() {
+
+        var codigoAplicacion = 2002;
+        var usuario = Login_LD.usuario;
+
+        Btn_guardar.setVisible(false);
+        Btn_modificar.setVisible(false);
+        Btn_eliminar.setVisible(false);
+        Btn_buscar.setVisible(false);
+        
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[5];
+
+        for (int i = 0; i < 5; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[0].equals("1")) {
+            Btn_guardar.setVisible(true);
+        }
+        if (permisosApp[1].equals("1")) {
+            Btn_buscar.setVisible(true);
+        }
+        if (permisosApp[2].equals("1")) {
+            Btn_modificar.setVisible(true);
+        }
+        if (permisosApp[3].equals("1")) {
+            Btn_eliminar.setVisible(true);
+        }
+    }
 
     /**
      * Creates new form Mnt_Horarios
