@@ -68,9 +68,87 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
     }
 
     public void validarHorarios(int h1, int h2, String cbx1, String cbx2, String cbx3, String cbx4) {
-
         int total = h1 + 8;
         if (total == h2) {
+
+            if (cbx2 == "pm") {
+                if (cbx1.equals("13")) {
+                    cbx1 = "1";
+                }
+                if (cbx1.equals("14")) {
+                    cbx1 = "2";
+                }
+                if (cbx1.equals("15")) {
+                    cbx1 = "3";
+                }
+                if (cbx1.equals("16")) {
+                    cbx1 = "4";
+                }
+                if (cbx1.equals("17")) {
+                    cbx1 = "5";
+                }
+                if (cbx1.equals("18")) {
+                    cbx1 = "6";
+                }
+                if (cbx1.equals("19")) {
+                    cbx1 = "7";
+                }
+                if (cbx1.equals("20")) {
+                    cbx1 = "8";
+                }
+                if (cbx1.equals("21")) {
+                    cbx1 = "9";
+                }
+                if (cbx1.equals("22")) {
+                    cbx1 = "10";
+                }
+                if (cbx1.equals("23")) {
+                    cbx1 = "11";
+                }
+                if (cbx1.equals("24")) {
+                    cbx1 = "12";
+                }
+            }
+
+            if (cbx4 == "pm") {
+                if (cbx3.equals("13")) {
+                    cbx3 = "1";
+                }
+                if (cbx3.equals("14")) {
+                    cbx3 = "2";
+                }
+                if (cbx3.equals("15")) {
+                    cbx3 = "3";
+                }
+                if (cbx3.equals("16")) {
+                    cbx3 = "4";
+                }
+                if (cbx3.equals("17")) {
+                    cbx3 = "5";
+                }
+                if (cbx3.equals("18")) {
+                    cbx3 = "6";
+                }
+                if (cbx3.equals("19")) {
+                    cbx3 = "7";
+                }
+                if (cbx3.equals("20")) {
+                    cbx3 = "8";
+                }
+                if (cbx3.equals("21")) {
+                    cbx3 = "9";
+                }
+                if (cbx3.equals("22")) {
+                    cbx3 = "10";
+                }
+                if (cbx3.equals("23")) {
+                    cbx3 = "11";
+                }
+                if (cbx3.equals("24")) {
+                    cbx3 = "12";
+                }
+            }
+
             horarios.setIdHorario(Txt_Id.getText());
             horarios.setEntradaHorario(cbx1 + " " + cbx2);
             horarios.setSalidaHorario(cbx3 + " " + cbx4);
@@ -80,10 +158,6 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
             } else if (Rdb_inactivo.isSelected()) {
                 horarios.setEstadoHorario("0");
             }
-            horariosdao.insert(horarios);
-            actualizarTabla("");
-            prcs_repetidos.AlertaMensaje("guardado", "Horario", "exitosamente");
-            Limpiar();
         } else {
             JOptionPane.showMessageDialog(null, "El horario asignado es invalido");
         }
@@ -731,22 +805,93 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
             if (prcs_repetidos.isSelected(Rdb_activo, Rdb_inactivo)) {
                 if (prcs_repetidos.isNumeric(Txt_Id.getText())) {
 
-                    HorarioDAO horariosdao = new HorarioDAO();
                     String cbx_Ehora = Cbx_EHora.getSelectedItem().toString();
                     String cbx_Ejornada = Cbx_EJornada.getSelectedItem().toString();
                     String cbx_Shora = Cbx_SHora.getSelectedItem().toString();
                     String cbx_Sjornada = Cbx_SJornada.getSelectedItem().toString();
 
-                    horarios.setIdHorario(Txt_Id.getText());
-                    horarios.setEntradaHorario(cbx_Ehora + " " + cbx_Ejornada);
-                    horarios.setSalidaHorario(cbx_Shora + " " + cbx_Sjornada);
-//                    horarios.setHorasExtrasHorario(Txt_Extras.getText());
-                    horarios.setDescripcionHorario(Txt_descripcion.getText());
-                    if (Rdb_activo.isSelected()) {
-                        horarios.setEstadoHorario("1");
-                    } else if (Rdb_inactivo.isSelected()) {
-                        horarios.setEstadoHorario("0");
+                    if (cbx_Ejornada == "pm") {
+                        if (cbx_Ehora.equals("1")) {
+                            cbx_Ehora = "13";
+                        }
+                        if (cbx_Ehora.equals("2")) {
+                            cbx_Ehora = "14";
+                        }
+                        if (cbx_Ehora.equals("3")) {
+                            cbx_Ehora = "15";
+                        }
+                        if (cbx_Ehora.equals("4")) {
+                            cbx_Ehora = "16";
+                        }
+                        if (cbx_Ehora.equals("5")) {
+                            cbx_Ehora = "17";
+                        }
+                        if (cbx_Ehora.equals("6")) {
+                            cbx_Ehora = "18";
+                        }
+                        if (cbx_Ehora.equals("7")) {
+                            cbx_Ehora = "19";
+                        }
+                        if (cbx_Ehora.equals("8")) {
+                            cbx_Ehora = "20";
+                        }
+                        if (cbx_Ehora.equals("9")) {
+                            cbx_Ehora = "21";
+                        }
+                        if (cbx_Ehora.equals("10")) {
+                            cbx_Ehora = "22";
+                        }
+                        if (cbx_Ehora.equals("11")) {
+                            cbx_Ehora = "23";
+                        }
+                        if (cbx_Ehora.equals("12")) {
+                            cbx_Ehora = "24";
+                        }
                     }
+
+                    if (cbx_Sjornada == "pm") {
+                        if (cbx_Shora.equals("1")) {
+                            cbx_Shora = "13";
+                        }
+                        if (cbx_Shora.equals("2")) {
+                            cbx_Shora = "14";
+                        }
+                        if (cbx_Shora.equals("3")) {
+                            cbx_Shora = "15";
+                        }
+                        if (cbx_Shora.equals("4")) {
+                            cbx_Shora = "16";
+                        }
+                        if (cbx_Shora.equals("5")) {
+                            cbx_Shora = "17";
+                        }
+                        if (cbx_Shora.equals("6")) {
+                            cbx_Shora = "18";
+                        }
+                        if (cbx_Shora.equals("7")) {
+                            cbx_Shora = "19";
+                        }
+                        if (cbx_Shora.equals("8")) {
+                            cbx_Shora = "20";
+                        }
+                        if (cbx_Shora.equals("9")) {
+                            cbx_Shora = "21";
+                        }
+                        if (cbx_Shora.equals("10")) {
+                            cbx_Shora = "22";
+                        }
+                        if (cbx_Shora.equals("11")) {
+                            cbx_Shora = "23";
+                        }
+                        if (cbx_Shora.equals("12")) {
+                            cbx_Shora = "24";
+                        }
+                    }
+
+                    int hora1 = Integer.parseInt(cbx_Ehora);
+                    int hora2 = Integer.parseInt(cbx_Shora);
+
+                    validarHorarios(hora1, hora2, cbx_Ehora, cbx_Ejornada, cbx_Shora, cbx_Sjornada);
                     horariosdao.update(horarios);
                     actualizarTabla("");
                     prcs_repetidos.AlertaMensaje("modificado", "Horario", "exitosamente");
@@ -879,21 +1024,12 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
 
                     int hora1 = Integer.parseInt(cbx_Ehora);
                     int hora2 = Integer.parseInt(cbx_Shora);
-                    validarHorarios(hora1, hora2, cbx_Ehora, cbx_Ejornada, cbx_Shora, cbx_Sjornada);
 
-//                    horarios.setIdHorario(Txt_Id.getText());
-//                    horarios.setEntradaHorario(cbx_Ehora + " " + cbx_Ejornada);
-//                    horarios.setSalidaHorario(cbx_Shora + " " + cbx_Sjornada);
-//                    horarios.setDescripcionHorario(Txt_descripcion.getText());
-//                    if (Rdb_activo.isSelected()) {
-//                        horarios.setEstadoHorario("1");
-//                    } else if (Rdb_inactivo.isSelected()) {
-//                        horarios.setEstadoHorario("0");
-//                    }
-//                    horariosdao.insert(horarios);
-//                    actualizarTabla("");
-//                    prcs_repetidos.AlertaMensaje("guardado", "Horario", "exitosamente");
-//                    Limpiar();
+                    validarHorarios(hora1, hora2, cbx_Ehora, cbx_Ejornada, cbx_Shora, cbx_Sjornada);
+                    horariosdao.insert(horarios);
+                    actualizarTabla("");
+                    prcs_repetidos.AlertaMensaje("guardado", "Horario", "exitosamente");
+                    Limpiar();
                 } else {
                 }
             }
