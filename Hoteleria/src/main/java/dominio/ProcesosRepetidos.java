@@ -231,5 +231,16 @@ public class ProcesosRepetidos {
             Conexion.close(conn);
         }
     }
+    
+    public static boolean cbxNoneSelected(JComboBox... jComboBoxes) {
+        for (JComboBox jComboBox : jComboBoxes) {
+            String cbx = jComboBox.getSelectedItem().toString();
+            if (cbx.equals("Seleccionar...")) {
+                JOptionPane.showMessageDialog(null, "Existen campos vacios, revise e intente de nuevo");
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
