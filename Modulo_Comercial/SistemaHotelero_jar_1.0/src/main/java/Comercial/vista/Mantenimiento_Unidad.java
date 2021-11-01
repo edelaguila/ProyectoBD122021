@@ -171,7 +171,7 @@ public class Mantenimiento_Unidad extends javax.swing.JInternalFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel5.setText("Estatus");
+        jLabel5.setText("Estatus Unidad");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
