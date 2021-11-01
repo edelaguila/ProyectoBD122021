@@ -356,7 +356,6 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
          Map p = new HashMap();
                 JasperReport report;
                 JasperPrint print;
-        
                 try {
                     connection = Conexion.getConnection();
                     report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
