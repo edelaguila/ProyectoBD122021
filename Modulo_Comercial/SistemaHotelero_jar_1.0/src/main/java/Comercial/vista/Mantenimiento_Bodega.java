@@ -6,11 +6,21 @@
 package Comercial.vista;
 
 import Comercial.datos.BodegaDAO;
+import Comercial.datos.Conexion;
 import Comercial.dominio.Bodega;
 import java.io.File;
+import Comercial.datos.Conexion;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -339,10 +349,26 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
         llenadoDeTablas();
         limpiar();
     }//GEN-LAST:event_Btn_EliminarActionPerformed
-
+    
+    private Connection connection = null;
     private void Btn_ReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ReporteActionPerformed
         // TODO add your handling code here:
-
+         Map p = new HashMap();
+                JasperReport report;
+                JasperPrint print;
+        
+                try {
+                    connection = Conexion.getConnection();
+                    report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                            + "/src/main/java/Comercial/reportes/bodega.jrxml");
+                    print = JasperFillManager.fillReport(report, p, connection);
+                    JasperViewer view = new JasperViewer(print, false);
+                    view.setTitle("Reporte de Proceso Productos");
+                    view.setVisible(true);
+        
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
     }//GEN-LAST:event_Btn_ReporteActionPerformed
 
     private void Btn_AyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_AyudaActionPerformed
