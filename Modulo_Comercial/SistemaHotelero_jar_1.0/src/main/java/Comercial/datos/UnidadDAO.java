@@ -22,13 +22,18 @@ import javax.swing.JOptionPane;
  */
 public class UnidadDAO {
     
-      private static final String SQL_SELECT = "SELECT PK_codigo_unidad, unidad_entrada, unidad_salida FROM tbl_unidad";
-    private static final String SQL_INSERT = "INSERT INTO tbl_unidad (PK_codigo_unidad, unidad_entrada, unidad_salida) VALUES(?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_unidad SET  unidad_entrada= ?, unidad_salida= ? WHERE PK_codigo_unidad=?";
-    private static final String SQL_QUERY = "SELECT PK_codigo_unidad, unidad_entrada, unidad_salida FROM tbl_unidad WHERE PK_codigo_unidad=?";
+    private static final String SQL_SELECT = "SELECT PK_codigo_unidad, nombre_unidad, medida_acronimo, estatus_unidad"
+            + " FROM tbl_unidad";
+    private static final String SQL_INSERT = "INSERT INTO tbl_unidad (PK_codigo_unidad, nombre_unidad, medida_acronimo,"
+            + " estatus_unidad)"
+            + " VALUES(?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_unidad SET  nombre_unidad= ?, medida_acronimo= ?,"
+            + " estatus_unidad=?"
+            + " WHERE PK_codigo_unidad=?";
+    private static final String SQL_QUERY = "SELECT PK_codigo_unidad, nombre_unidad, medida_acronimo, estatus_unidad"
+            + " FROM tbl_unidad WHERE PK_codigo_unidad=?";
     private static final String SQL_DELETE = "DELETE FROM tbl_unidad WHERE PK_codigo_unidad=?";
-      public static final String SQL_QUERY2 = "SELECT PK_codigo_unidad FROM tbl_unidad";
-    
+
     public List<Unidad> select() {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -42,14 +47,15 @@ public class UnidadDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 String PKcodigoUnidad = rs.getString("PK_codigo_unidad");
-                String unidadEntrada = rs.getString("unidad_entrada");
-                String unidadSalida = rs.getString("unidad_salida");
+                String nombre_unidad = rs.getString("nombre_unidad");
+                String medida_acronimo = rs.getString("medida_acronimo");
+                String estatus_unidad = rs.getString("estatus_unidad");
 
                 unidad = new Unidad();
                 unidad.setPKcodigoUnidad(PKcodigoUnidad);
-                unidad.setUnidadEntrada(unidadEntrada);
-                unidad.setUnidadSalida(unidadSalida);
-
+                unidad.setNombre_unidad(nombre_unidad);
+                unidad.setMedida_acronimo(medida_acronimo);
+                unidad.setEstatus_unidad(estatus_unidad);
                 unidades.add(unidad);
             }
 
@@ -72,9 +78,9 @@ public class UnidadDAO {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setString(1, unidad.getPKcodigoUnidad());
-            stmt.setString(2, unidad.getUnidadEntrada());
-            stmt.setString(3, unidad.getUnidadSalida());
-
+            stmt.setString(2, unidad.getNombre_unidad());
+            stmt.setString(3, unidad.getMedida_acronimo());
+            stmt.setString(4, unidad.getEstatus_unidad());
             //System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
             //System.out.println("Registros afectados:" + rows);
@@ -98,10 +104,11 @@ public class UnidadDAO {
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            
+
             stmt.setString(1, unidad.getPKcodigoUnidad());
-            stmt.setString(2, unidad.getUnidadEntrada());
-            stmt.setString(3, unidad.getUnidadSalida());
+            stmt.setString(2, unidad.getNombre_unidad());
+            stmt.setString(3, unidad.getMedida_acronimo());
+            stmt.setString(4, unidad.getEstatus_unidad());
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
 
@@ -115,12 +122,11 @@ public class UnidadDAO {
         return rows;
     }
 
-  
     public Unidad query(Unidad unidad) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        List<Bodega> bodegas = new ArrayList<Bodega>();
+        List<Unidad> unidades = new ArrayList<Unidad>();
         int rows = 0;
 
         try {
@@ -129,16 +135,19 @@ public class UnidadDAO {
             stmt = conn.prepareStatement(SQL_QUERY);
             stmt.setString(1, unidad.getPKcodigoUnidad());
             rs = stmt.executeQuery();
-            
+
             while (rs.next()) {
                 String PKcodigoUnidad = rs.getString("PK_codigo_unidad");
-                String unidadEntrada = rs.getString("unidad_entrada");
-                String unidadSalida = rs.getString("unidad_salida");
+                String nombre_unidad = rs.getString("nombre_unidad");
+                String medida_acronimo = rs.getString("medida_acronimo");
+                String estatus_unidad = rs.getString("estatus_unidad");
 
                 unidad = new Unidad();
+
                 unidad.setPKcodigoUnidad(PKcodigoUnidad);
-                unidad.setUnidadEntrada(unidadEntrada);
-                unidad.setUnidadSalida(unidadSalida);
+                unidad.setNombre_unidad(nombre_unidad);
+                unidad.setMedida_acronimo(medida_acronimo);
+                unidad.setEstatus_unidad(estatus_unidad);
 
                 //empleados.add(empleado); // Si se utiliza un ArrayList
             }
@@ -177,30 +186,4 @@ public class UnidadDAO {
 
         return rows;
     }
-
- public void query2(JComboBox cbxUnidad) {
-
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        try {
-            conn = Conexion.getConnection();
-            //System.out.println("Ejecutando query:" + SQL_QUERY);
-            stmt = conn.prepareStatement(SQL_QUERY2);
-            //stmt.setInt(1, aplicacion.getId_ModuloCbx());
-            rs = stmt.executeQuery();
-            cbxUnidad.addItem("Seleccionar...");        
-            while (rs.next()) {
-                cbxUnidad.addItem(rs.getInt("PK_codigo_unidad"));
-                
-            }
-            //System.out.println("Registros buscado:" + aplicacion);
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Conexion.close(rs);
-            Conexion.close(stmt);
-            Conexion.close(conn);
-        }
-}
  }

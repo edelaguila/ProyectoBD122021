@@ -6,6 +6,7 @@
     <Property name="iconifiable" type="boolean" value="true"/>
     <Property name="maximizable" type="boolean" value="true"/>
     <Property name="resizable" type="boolean" value="true"/>
+    <Property name="selected" type="boolean" value="true"/>
     <Property name="visible" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
@@ -125,21 +126,19 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                                           <Component id="Btn_Guardar" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                           <Component id="Btn_Modificar" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                                           <Component id="Btn_Eliminar" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="Btn_Reporte" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="Txt_linea" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="Txt_marca" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="Txt_bodega" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="Txt_unidad" alignment="0" pref="152" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="Cbx_linea" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="Cbx_marca" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="Cbx_bodega" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="Cbx_unidad" alignment="0" pref="152" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -178,24 +177,24 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="Txt_linea" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Cbx_linea" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="Txt_marca" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Cbx_marca" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="Txt_bodega" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Cbx_bodega" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="Txt_unidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Cbx_unidad" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="8" max="32767" attributes="0"/>
+                          <EmptySpace pref="24" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -355,6 +354,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Reporte"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Btn_ReporteActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="Btn_Buscar">
           <Properties>
@@ -399,13 +401,45 @@
             <Property name="text" type="java.lang.String" value="Unidad"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="Txt_linea">
+        <Component class="javax.swing.JComboBox" name="Cbx_linea">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="Txt_marca">
+        <Component class="javax.swing.JComboBox" name="Cbx_marca">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="Txt_bodega">
+        <Component class="javax.swing.JComboBox" name="Cbx_bodega">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="Txt_unidad">
+        <Component class="javax.swing.JComboBox" name="Cbx_unidad">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
@@ -474,6 +508,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Ayuda"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Btn_AyudaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
