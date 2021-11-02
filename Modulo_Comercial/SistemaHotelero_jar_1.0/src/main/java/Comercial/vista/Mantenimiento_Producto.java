@@ -5,11 +5,34 @@
  */
 package Comercial.vista;
 
-import Comercial.datos.ProductoDAO;
+import Comercial.datos.LineaDAO;
+import Comercial.datos.LineaDAO;
+import Comercial.dominio.Linea;
+import Comercial.datos.MarcaDAO;
+import Comercial.datos.MarcaDAO;
+import Comercial.dominio.Marca;
+import Comercial.datos.BodegaDAO;
+import Comercial.datos.BodegaDAO;
+import Comercial.datos.Conexion;
+import Comercial.dominio.Bodega;
+import Comercial.datos.UnidadDAO;
+import Comercial.datos.UnidadDAO;
+import Comercial.dominio.Unidad;
 import Comercial.dominio.Producto;
+import Comercial.datos.ProductoDAO;
+import java.io.File;
+import Comercial.datos.Conexion;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -20,7 +43,59 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
     /**
      * Creates new form Mantenimiento_Producto
      */
-       public void llenadoDeTablas() {
+    LineaDAO Producto = new LineaDAO();
+    Linea producto1 = new Linea();
+
+    MarcaDAO Product = new MarcaDAO();
+    Marca produc1 = new Marca();
+
+    BodegaDAO Produc = new BodegaDAO();
+    Bodega produ1 = new Bodega();
+
+    UnidadDAO Prod = new UnidadDAO();
+    Unidad prod1 = new Unidad();
+
+    public void llenadoDeCombos2() {
+
+        List<Linea> producto1 = Producto.select();
+        Cbx_linea.addItem("Seleccione:");
+        for (int i = 0; i < producto1.size(); i++) {
+            Cbx_linea.addItem(producto1.get(i).getNombre_Linea());
+            String valor = Cbx_linea.getSelectedItem().toString();
+        }
+    }
+
+    public void llenadoDeCombos3() {
+
+        List<Marca> produc1 = Product.select();
+        Cbx_marca.addItem("Seleccione:");
+        for (int i = 0; i < produc1.size(); i++) {
+            Cbx_marca.addItem(produc1.get(i).getNombre_Marca());
+            String valor = Cbx_marca.getSelectedItem().toString();
+        }
+    }
+
+    public void llenadoDeCombos4() {
+
+        List<Bodega> produ1 = Produc.select();
+        Cbx_bodega.addItem("Seleccione:");
+        for (int i = 0; i < produ1.size(); i++) {
+            Cbx_bodega.addItem(produ1.get(i).getNombreBodega());
+            String valor = Cbx_bodega.getSelectedItem().toString();
+        }
+    }
+
+    public void llenadoDeCombos5() {
+
+        List<Unidad> prod1 = Prod.select();
+        Cbx_unidad.addItem("Seleccione:");
+        for (int i = 0; i < prod1.size(); i++) {
+            Cbx_unidad.addItem(prod1.get(i).getNombre_unidad());
+            String valor = Cbx_unidad.getSelectedItem().toString();
+        }
+    }
+
+    public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID Producto");
         modelo.addColumn("Nombre Producto");
@@ -30,7 +105,7 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
         modelo.addColumn("Estatus Producto");
         modelo.addColumn("Producto Linea");
         modelo.addColumn("Producto Marca");
-        modelo.addColumn("Bodega");
+        modelo.addColumn("Producto Bodega");
         modelo.addColumn("Producto Unidad");
         ProductoDAO productoDAO = new ProductoDAO();
 
@@ -48,7 +123,7 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
             dato[7] = producto.get(i).getMarcaProducto();
             dato[8] = producto.get(i).getBodegaProducto();
             dato[9] = producto.get(i).getUnidadProducto();
-            
+
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
@@ -65,11 +140,14 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
         Txt_precioproducto.setText(String.valueOf(productoAConsultar.getPrecioProducto()));
         Txt_costoproducto.setText(productoAConsultar.getCostoProducto());
         Txt_estadoproducto.setText(productoAConsultar.getEstatusProducto());
-        Txt_linea.setText(productoAConsultar.getLineaProducto());
-        Txt_marca.setText(productoAConsultar.getMarcaProducto());
-        Txt_bodega.setText(productoAConsultar.getBodegaProducto());
-        Txt_unidad.setText(productoAConsultar.getUnidadProducto());
-//        cbx_bodega.setSelectedItem(String.valueOf(0));
+//        Txt_linea.setText(productoAConsultar.getLineaProducto());
+//        Txt_marca.setText(productoAConsultar.getMarcaProducto());
+//        Txt_bodega.setText(productoAConsultar.getBodegaProducto());
+//        Txt_unidad.setText(productoAConsultar.getUnidadProducto());
+//        Cbx_linea.setSelectedItem(String.valueOf(0));
+//        Cbx_marca.setSelectedItem(String.valueOf(0));
+//        Cbx_bodega.setSelectedItem(String.valueOf(0));
+//        Cbx_unidad.setSelectedItem(String.valueOf(0));
     }
 
     public void limpiar() {
@@ -79,15 +157,18 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
         Txt_precioproducto.setText("");
         Txt_costoproducto.setText("");
         Txt_estadoproducto.setText("");
-        Txt_linea.setText("");
-        Txt_marca.setText("");
-        Txt_bodega.setText("");
-        Txt_unidad.setText("");
-
-//        cbx_bodega.setSelectedIndex(0);
+        Cbx_linea.setSelectedIndex(0);
+        Cbx_marca.setSelectedIndex(0);
+        Cbx_bodega.setSelectedIndex(0);
+        Cbx_unidad.setSelectedIndex(0);
     }
+
     public Mantenimiento_Producto() {
         initComponents();
+        llenadoDeCombos2();
+        llenadoDeCombos3();
+        llenadoDeCombos4();
+        llenadoDeCombos5();
     }
 
     /**
@@ -121,10 +202,10 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        Txt_linea = new javax.swing.JTextField();
-        Txt_marca = new javax.swing.JTextField();
-        Txt_bodega = new javax.swing.JTextField();
-        Txt_unidad = new javax.swing.JTextField();
+        Cbx_linea = new javax.swing.JComboBox<>();
+        Cbx_marca = new javax.swing.JComboBox<>();
+        Cbx_bodega = new javax.swing.JComboBox<>();
+        Cbx_unidad = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tbl_tablaproducto = new javax.swing.JTable();
@@ -135,6 +216,11 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        try {
+            setSelected(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
         setVisible(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle Producto"));
@@ -195,6 +281,11 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
 
         Btn_Reporte.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         Btn_Reporte.setText("Reporte");
+        Btn_Reporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_ReporteActionPerformed(evt);
+            }
+        });
 
         Btn_Buscar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         Btn_Buscar.setText("Buscar");
@@ -262,18 +353,17 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(46, 46, 46)
                                         .addComponent(Btn_Guardar)
-                                        .addGap(56, 56, 56)
+                                        .addGap(28, 28, 28)
                                         .addComponent(Btn_Modificar)
-                                        .addGap(18, 18, 18)
+                                        .addGap(37, 37, 37)
                                         .addComponent(Btn_Eliminar)))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(Btn_Reporte)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(Txt_linea)
-                                        .addComponent(Txt_marca)
-                                        .addComponent(Txt_bodega)
-                                        .addComponent(Txt_unidad, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)))))))
+                                    .addComponent(Cbx_linea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(Cbx_marca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(Cbx_bodega, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(Cbx_unidad, 0, 152, Short.MAX_VALUE))))))
                 .addContainerGap(91, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -300,20 +390,20 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(Txt_linea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Cbx_linea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(Txt_marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Cbx_marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(Txt_bodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Cbx_bodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(Txt_unidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)))
+                            .addComponent(Cbx_unidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(Txt_precioproducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -370,6 +460,11 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
 
         Btn_Ayuda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         Btn_Ayuda.setText("Ayuda");
+        Btn_Ayuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_AyudaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -407,22 +502,20 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
 
     private void Btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_GuardarActionPerformed
         // TODO add your handling code here:
-
+        
         ProductoDAO productoDAO = new ProductoDAO();
         Producto productoAInsertar = new Producto();
+        String cbxlinea = Cbx_linea.getSelectedItem().toString();
         productoAInsertar.setPKcodigoProducto(String.valueOf(Txt_id.getText()));
         productoAInsertar.setNombreProducto(Txt_nombreproducto.getText());
         productoAInsertar.setDescripcionProducto(Txt_descipcionproducto.getText());
         productoAInsertar.setPrecioProducto(Txt_precioproducto.getText());
         productoAInsertar.setCostoProducto(Txt_costoproducto.getText());
         productoAInsertar.setEstatusProducto(Txt_estadoproducto.getText());
-        productoAInsertar.setLineaProducto(Txt_linea.getText());
-        productoAInsertar.setMarcaProducto(Txt_marca.getText());
-        productoAInsertar.setBodegaProducto(Txt_bodega.getText());
-        productoAInsertar.setUnidadProducto(Txt_unidad.getText());
         productoDAO.insert(productoAInsertar);
-
+        JOptionPane.showMessageDialog(null, "Registro Exitoso.");
         llenadoDeTablas();
+
         limpiar();
     }//GEN-LAST:event_Btn_GuardarActionPerformed
 
@@ -436,10 +529,6 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
         productoAActualizar.setPrecioProducto(Txt_precioproducto.getText());
         productoAActualizar.setCostoProducto(Txt_costoproducto.getText());
         productoAActualizar.setEstatusProducto(Txt_estadoproducto.getText());
-        productoAActualizar.setLineaProducto(Txt_linea.getText());
-        productoAActualizar.setMarcaProducto(Txt_marca.getText());
-        productoAActualizar.setBodegaProducto(Txt_bodega.getText());
-        productoAActualizar.setUnidadProducto(Txt_unidad.getText());
         productoDAO.update(productoAActualizar);
         JOptionPane.showMessageDialog(null, "Modificación Exitosa.");
         llenadoDeTablas();
@@ -463,6 +552,42 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
         buscar();
     }//GEN-LAST:event_Btn_BuscarActionPerformed
 
+    private void Btn_AyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_AyudaActionPerformed
+        // TODO add your handling code here:
+        try {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaMantemientoProducto.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaMantemientoProducto.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_Btn_AyudaActionPerformed
+ private Connection connection = null;
+    private void Btn_ReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ReporteActionPerformed
+        // TODO add your handling code here:
+        Map p = new HashMap();
+                JasperReport report;
+                JasperPrint print;
+                try {
+                    connection = Conexion.getConnection();
+                    report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                            + "/src/main/java/Comercial/reportes/producto.jrxml");
+                    print = JasperFillManager.fillReport(report, p, connection);
+                    JasperViewer view = new JasperViewer(print, false);
+                    view.setTitle("Reporte de Proceso Productos");
+                    view.setVisible(true);
+        
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+    }//GEN-LAST:event_Btn_ReporteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_Ayuda;
@@ -471,17 +596,17 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
     private javax.swing.JButton Btn_Guardar;
     private javax.swing.JButton Btn_Modificar;
     private javax.swing.JButton Btn_Reporte;
+    private javax.swing.JComboBox<String> Cbx_bodega;
+    private javax.swing.JComboBox<String> Cbx_linea;
+    private javax.swing.JComboBox<String> Cbx_marca;
+    private javax.swing.JComboBox<String> Cbx_unidad;
     private javax.swing.JTable Tbl_tablaproducto;
-    private javax.swing.JTextField Txt_bodega;
     private javax.swing.JTextField Txt_costoproducto;
     private javax.swing.JTextField Txt_descipcionproducto;
     private javax.swing.JTextField Txt_estadoproducto;
     private javax.swing.JTextField Txt_id;
-    private javax.swing.JTextField Txt_linea;
-    private javax.swing.JTextField Txt_marca;
     private javax.swing.JTextField Txt_nombreproducto;
     private javax.swing.JTextField Txt_precioproducto;
-    private javax.swing.JTextField Txt_unidad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

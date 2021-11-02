@@ -5,12 +5,21 @@
  */
 package Comercial.vista;
 
+import Comercial.datos.Conexion;
 import Comercial.dominio.Transporte;
 import Comercial.datos.TransporteDAO;
 import java.io.File;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -24,21 +33,32 @@ public class Mantenimiento_Transporte extends javax.swing.JInternalFrame {
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID Transporte");
-        modelo.addColumn("Nombre Transporte");
+        modelo.addColumn("Clase Transporte");
+        modelo.addColumn("Marca Transporte");
+        modelo.addColumn("Modelo Transporte");
         modelo.addColumn("Tipo Transporte");
+        modelo.addColumn("Placa Transporte");
+        modelo.addColumn("Color Transporte");
+        modelo.addColumn("Estado Transporte");
+        modelo.addColumn("Motor Transporte");
         modelo.addColumn("Estatus Transporte");
         TransporteDAO transporteDAO = new TransporteDAO();
 
         List<Transporte> transporte = transporteDAO.select();
 
         Tbl_Transporte.setModel(modelo);
-        String[] dato = new String[4];
+        String[] dato = new String[10];
         for (int i = 0; i < transporte.size(); i++) {
-            dato[0] = Integer.toString(transporte.get(i).getPKcodigoTransporte());
-            dato[1] = transporte.get(i).getNombreTransporte();
-            dato[2] = transporte.get(i).getTipoTransporte();
-            dato[3] = transporte.get(i).getEstatusTransporte();
-
+            dato[0] = transporte.get(i).getPK_codigo_transporte();
+            dato[1] = transporte.get(i).getClase_transporte();
+            dato[2] = transporte.get(i).getMarca_transporte();
+            dato[3] = transporte.get(i).getModelo_transporte();
+            dato[4] = transporte.get(i).getTipo_transporte();
+            dato[5] = transporte.get(i).getPlaca_transporte();
+            dato[6] = transporte.get(i).getColor_transporte();
+            dato[7] = transporte.get(i).getEstado_transporte();
+            dato[8] = transporte.get(i).getNumero_motor_transporte();
+            dato[9] = transporte.get(i).getEstatus_transporte();
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
@@ -47,19 +67,30 @@ public class Mantenimiento_Transporte extends javax.swing.JInternalFrame {
     public void buscar() {
         Transporte transporteAConsultar = new Transporte();
         TransporteDAO transporteDAO = new TransporteDAO();
-        transporteAConsultar.setPKcodigoTransporte(Integer.parseInt(Txt_id.getText()));
+        transporteAConsultar.setPK_codigo_transporte(Txt_id.getText());
         transporteAConsultar = transporteDAO.query(transporteAConsultar);
-        Txt_nombretrasnporte.setText(transporteAConsultar.getNombreTransporte());
-        Txt_tipotrasnporte.setText(String.valueOf(transporteAConsultar.getTipoTransporte()));
-        Txt_estatustransporte.setText(String.valueOf(transporteAConsultar.getEstatusTransporte()));
-
+        Txt_clase.setText(transporteAConsultar.getClase_transporte());
+        Txt_marca.setText(String.valueOf(transporteAConsultar.getMarca_transporte()));
+        Txt_modelo.setText(String.valueOf(transporteAConsultar.getModelo_transporte()));
+        Txt_tipo.setText(String.valueOf(transporteAConsultar.getTipo_transporte()));
+        Txt_placa.setText(String.valueOf(transporteAConsultar.getPlaca_transporte()));
+        Txt_color.setText(String.valueOf(transporteAConsultar.getColor_transporte()));
+        Txt_estadoactual.setText(String.valueOf(transporteAConsultar.getEstado_transporte()));
+        Txt_motor.setText(String.valueOf(transporteAConsultar.getNumero_motor_transporte()));
+        Txt_estatus.setText(String.valueOf(transporteAConsultar.getEstatus_transporte()));
     }
 
     public void limpiar() {
         Txt_id.setText("");
-        Txt_nombretrasnporte.setText("");
-        Txt_tipotrasnporte.setText("");
-        Txt_estatustransporte.setText("");
+        Txt_clase.setText("");
+        Txt_marca.setText("");
+        Txt_modelo.setText("");
+        Txt_tipo.setText("");
+        Txt_placa.setText("");
+        Txt_color.setText("");
+        Txt_estadoactual.setText("");
+        Txt_motor.setText("");
+        Txt_estatus.setText("");
 
     }
     public Mantenimiento_Transporte() {
@@ -75,25 +106,37 @@ public class Mantenimiento_Transporte extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel5 = new javax.swing.JLabel();
+        Btn_Ayuda = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         Txt_id = new javax.swing.JTextField();
-        Txt_nombretrasnporte = new javax.swing.JTextField();
-        Txt_tipotrasnporte = new javax.swing.JTextField();
-        Txt_estatustransporte = new javax.swing.JTextField();
+        Txt_clase = new javax.swing.JTextField();
+        Txt_marca = new javax.swing.JTextField();
+        Txt_modelo = new javax.swing.JTextField();
         Btn_Guardar = new javax.swing.JButton();
         Btn_Modificar = new javax.swing.JButton();
         Btn_Eliminar = new javax.swing.JButton();
         Btn_Reporte = new javax.swing.JButton();
         Btn_Buscar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        Txt_tipo = new javax.swing.JTextField();
+        Txt_placa = new javax.swing.JTextField();
+        Txt_color = new javax.swing.JTextField();
+        Txt_estadoactual = new javax.swing.JTextField();
+        Txt_estatus = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        Txt_motor = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tbl_Transporte = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
-        Btn_Ayuda = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -101,27 +144,38 @@ public class Mantenimiento_Transporte extends javax.swing.JInternalFrame {
         setResizable(true);
         setVisible(true);
 
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel5.setText("Mantenimiento Transporte");
+
+        Btn_Ayuda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Btn_Ayuda.setText("Ayuda");
+        Btn_Ayuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_AyudaActionPerformed(evt);
+            }
+        });
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle Transporte"));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setText("ID");
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel2.setText("Nombre Trasnporte");
+        jLabel2.setText("Clase Trasnporte");
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel3.setText("Tipo Transporte");
+        jLabel3.setText("Marca Transporte");
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel4.setText("Estatud Transporte");
+        jLabel4.setText("Modelo Transporte");
 
         Txt_id.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        Txt_nombretrasnporte.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Txt_clase.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        Txt_tipotrasnporte.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Txt_marca.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        Txt_estatustransporte.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Txt_modelo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         Btn_Guardar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         Btn_Guardar.setText("Guardar");
@@ -149,6 +203,11 @@ public class Mantenimiento_Transporte extends javax.swing.JInternalFrame {
 
         Btn_Reporte.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         Btn_Reporte.setText("Reporte");
+        Btn_Reporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_ReporteActionPerformed(evt);
+            }
+        });
 
         Btn_Buscar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         Btn_Buscar.setText("Buscar");
@@ -158,6 +217,24 @@ public class Mantenimiento_Transporte extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel6.setText("Tipo Transporte");
+
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel7.setText("Placa Transporte");
+
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel8.setText("Color Transporte");
+
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel9.setText("Estado Transporte");
+
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel10.setText("Estatus Transporte");
+
+        jLabel11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel11.setText("Motor Transporte");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -165,32 +242,63 @@ public class Mantenimiento_Transporte extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
+                        .addGap(142, 142, 142)
                         .addComponent(Btn_Guardar)
                         .addGap(18, 18, 18)
-                        .addComponent(Btn_Modificar)
-                        .addGap(27, 27, 27)
-                        .addComponent(Btn_Eliminar))
+                        .addComponent(Btn_Modificar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addComponent(jLabel2)))
+                                .addComponent(jLabel2)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)))))
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Txt_id)
-                            .addComponent(Txt_nombretrasnporte)
-                            .addComponent(Txt_tipotrasnporte)
-                            .addComponent(Txt_estatustransporte, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(Txt_clase)
+                            .addComponent(Txt_marca)
+                            .addComponent(Txt_modelo, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                            .addComponent(Txt_tipo))))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Btn_Buscar)
-                    .addComponent(Btn_Reporte))
-                .addContainerGap(99, Short.MAX_VALUE))
+                    .addComponent(Btn_Eliminar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Btn_Reporte)
+                        .addGap(93, 93, 93))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel7))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel11)
+                                        .addComponent(jLabel9))
+                                    .addGap(2, 2, 2)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Txt_placa, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Txt_color, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Txt_estadoactual, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Txt_motor, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(86, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(Txt_estatus, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,20 +307,34 @@ public class Mantenimiento_Transporte extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(Txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Btn_Buscar))
+                    .addComponent(Btn_Buscar)
+                    .addComponent(jLabel7)
+                    .addComponent(Txt_placa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(Txt_nombretrasnporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Txt_clase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(Txt_color, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(Txt_tipotrasnporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Txt_marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(Txt_estadoactual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(Txt_estatustransporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                    .addComponent(Txt_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(Txt_motor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(Txt_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(Txt_estatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Btn_Guardar)
                     .addComponent(Btn_Modificar)
@@ -253,34 +375,22 @@ public class Mantenimiento_Transporte extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel5.setText("Mantenimiento Transporte");
-
-        Btn_Ayuda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        Btn_Ayuda.setText("Ayuda");
-        Btn_Ayuda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_AyudaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(jLabel5)
-                        .addGap(61, 61, 61)
-                        .addComponent(Btn_Ayuda)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(177, 177, 177)
+                .addComponent(Btn_Ayuda)
+                .addGap(124, 124, 124))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,63 +399,15 @@ public class Mantenimiento_Transporte extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(Btn_Ayuda))
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void Btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_GuardarActionPerformed
-        // TODO add your handling code here:
-        String id = "0";
-        Mantenimiento_Transporte mnttransporteDAO = new Mantenimiento_Transporte();
-        TransporteDAO transporteDAO = new TransporteDAO();
-        Transporte transporteAInsertar = new Transporte();
-        //String cbxbodega = cbx_bodega.getSelectedItem().toString();
-        transporteAInsertar.setPKcodigoTransporte((int) Integer.parseInt(Txt_id.getText()));
-        transporteAInsertar.setNombreTransporte(Txt_nombretrasnporte.getText());
-        transporteAInsertar.setTipoTransporte(Txt_tipotrasnporte.getText());
-        transporteAInsertar.setEstatusTransporte(Txt_estatustransporte.getText());
-        transporteDAO.insert(transporteAInsertar);
-        llenadoDeTablas();
-        limpiar();
-    }//GEN-LAST:event_Btn_GuardarActionPerformed
-
-    private void Btn_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ModificarActionPerformed
-        // TODO add your handling code here:
-        TransporteDAO transporteDAO = new TransporteDAO();
-        Transporte transporteAActualizar = new Transporte();
-        transporteAActualizar.setPKcodigoTransporte(Integer.parseInt(Txt_id.getText()));
-        transporteAActualizar.setNombreTransporte(Txt_nombretrasnporte.getText());
-        transporteAActualizar.setTipoTransporte(Txt_tipotrasnporte.getText());
-        transporteAActualizar.setEstatusTransporte(Txt_estatustransporte.getText());
-        transporteDAO.update(transporteAActualizar);
-        JOptionPane.showMessageDialog(null, "Modificación Exitosa.");
-
-        llenadoDeTablas();
-        limpiar();
-    }//GEN-LAST:event_Btn_ModificarActionPerformed
-
-    private void Btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EliminarActionPerformed
-        // TODO add your handling code here:
-        TransporteDAO transporteDAO = new TransporteDAO();
-        Transporte transporteAEliminar = new Transporte();
-        transporteAEliminar.setPKcodigoTransporte(Integer.parseInt(Txt_id.getText()));
-        transporteDAO.delete(transporteAEliminar);
-        JOptionPane.showMessageDialog(null, "Registro Eliminado.");
-
-        llenadoDeTablas();
-        limpiar();
-    }//GEN-LAST:event_Btn_EliminarActionPerformed
-
-    private void Btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_BuscarActionPerformed
-        // TODO add your handling code here:
-        buscar ();
-    }//GEN-LAST:event_Btn_BuscarActionPerformed
 
     private void Btn_AyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_AyudaActionPerformed
         // TODO add your handling code here:
@@ -364,6 +426,86 @@ public class Mantenimiento_Transporte extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_Btn_AyudaActionPerformed
 
+    private void Btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_GuardarActionPerformed
+        // TODO add your handling code here:
+        String id = "0";
+        Mantenimiento_Transporte mnttransporteDAO = new Mantenimiento_Transporte();
+        TransporteDAO transporteDAO = new TransporteDAO();
+        Transporte transporteAInsertar = new Transporte();
+        //String cbxbodega = cbx_bodega.getSelectedItem().toString();
+        transporteAInsertar.setPK_codigo_transporte(Txt_id.getText());
+        transporteAInsertar.setClase_transporte(Txt_clase.getText());
+        transporteAInsertar.setMarca_transporte(Txt_marca.getText());
+        transporteAInsertar.setModelo_transporte(Txt_modelo.getText());
+        transporteAInsertar.setTipo_transporte(Txt_tipo.getText());
+        transporteAInsertar.setPlaca_transporte(Txt_placa.getText());
+        transporteAInsertar.setColor_transporte(Txt_color.getText());
+        transporteAInsertar.setEstado_transporte(Txt_estadoactual.getText());
+        transporteAInsertar.setNumero_motor_transporte(Txt_motor.getText());
+        transporteAInsertar.setEstatus_transporte(Txt_estatus.getText());
+
+        transporteDAO.insert(transporteAInsertar);
+        llenadoDeTablas();
+        limpiar();
+    }//GEN-LAST:event_Btn_GuardarActionPerformed
+
+    private void Btn_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ModificarActionPerformed
+        // TODO add your handling code here:
+        TransporteDAO transporteDAO = new TransporteDAO();
+        Transporte transporteAActualizar = new Transporte();
+        transporteAActualizar.setPK_codigo_transporte(Txt_id.getText());
+        transporteAActualizar.setClase_transporte(Txt_clase.getText());
+        transporteAActualizar.setMarca_transporte(Txt_marca.getText());
+        transporteAActualizar.setModelo_transporte(Txt_modelo.getText());
+        transporteAActualizar.setTipo_transporte(Txt_tipo.getText());
+        transporteAActualizar.setPlaca_transporte(Txt_placa.getText());
+        transporteAActualizar.setColor_transporte(Txt_color.getText());
+        transporteAActualizar.setEstado_transporte(Txt_estadoactual.getText());
+        transporteAActualizar.setNumero_motor_transporte(Txt_motor.getText());
+        transporteAActualizar.setEstatus_transporte(Txt_estatus.getText());
+        transporteDAO.update(transporteAActualizar);
+        JOptionPane.showMessageDialog(null, "Modificación Exitosa.");
+
+        llenadoDeTablas();
+        limpiar();
+    }//GEN-LAST:event_Btn_ModificarActionPerformed
+
+    private void Btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EliminarActionPerformed
+        // TODO add your handling code here:
+        TransporteDAO transporteDAO = new TransporteDAO();
+        Transporte transporteAEliminar = new Transporte();
+        transporteAEliminar.setPK_codigo_transporte(Txt_id.getText());
+        transporteDAO.delete(transporteAEliminar);
+        JOptionPane.showMessageDialog(null, "Registro Eliminado.");
+
+        llenadoDeTablas();
+        limpiar();
+    }//GEN-LAST:event_Btn_EliminarActionPerformed
+
+    private void Btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_BuscarActionPerformed
+        // TODO add your handling code here:
+        buscar();
+    }//GEN-LAST:event_Btn_BuscarActionPerformed
+
+    private void Btn_ReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ReporteActionPerformed
+        // TODO add your handling code here:
+         Map p = new HashMap();
+                JasperReport report;
+                JasperPrint print;
+                try {
+                    connection = Conexion.getConnection();
+                    report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                            + "/src/main/java/Comercial/reportes/transporte.jrxml");
+                    print = JasperFillManager.fillReport(report, p, connection);
+                    JasperViewer view = new JasperViewer(print, false);
+                    view.setTitle("Reporte de Proceso Productos");
+                    view.setVisible(true);
+        
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+    }//GEN-LAST:event_Btn_ReporteActionPerformed
+    private Connection connection = null;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_Ayuda;
@@ -373,15 +515,27 @@ public class Mantenimiento_Transporte extends javax.swing.JInternalFrame {
     private javax.swing.JButton Btn_Modificar;
     private javax.swing.JButton Btn_Reporte;
     private javax.swing.JTable Tbl_Transporte;
-    private javax.swing.JTextField Txt_estatustransporte;
+    private javax.swing.JTextField Txt_clase;
+    private javax.swing.JTextField Txt_color;
+    private javax.swing.JTextField Txt_estadoactual;
+    private javax.swing.JTextField Txt_estatus;
     private javax.swing.JTextField Txt_id;
-    private javax.swing.JTextField Txt_nombretrasnporte;
-    private javax.swing.JTextField Txt_tipotrasnporte;
+    private javax.swing.JTextField Txt_marca;
+    private javax.swing.JTextField Txt_modelo;
+    private javax.swing.JTextField Txt_motor;
+    private javax.swing.JTextField Txt_placa;
+    private javax.swing.JTextField Txt_tipo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
