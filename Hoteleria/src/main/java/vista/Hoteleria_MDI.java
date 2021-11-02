@@ -32,7 +32,8 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     private Prcs_Reservacion form_Prcs_Reservacion;
     private Prcs_AsignacionGobernanta form_Prcs_AsignacionGobernanta;
     private Prcs_AsignacionLimpieza form_Prcs_AsignacionLimpieza;
-    private Prcs_ObjetoPerdido form_Objeto_perdido;
+    private Prcs_RegistroObjetoPerdido form_Objeto_perdido;
+    private Prcs_EntregaObjetoPerdido form_E_Objeto_perdido;
     private Prcs_ConsultaLimpieza form_ConsultaLimpieza;
     private Prcs_SupervisionLimpieza form_SupervisionLimpieza;
 
@@ -106,6 +107,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         Sbm_herramientas = new javax.swing.JMenu();
         Sbm_ayuda = new javax.swing.JMenu();
         Btn_cerrarSesion = new javax.swing.JMenu();
@@ -263,6 +265,14 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         });
         Mnu_procesos.add(jMenuItem2);
 
+        jMenuItem6.setText("Prcs. Entrega Objetos Perdidos");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        Mnu_procesos.add(jMenuItem6);
+
         Sbm_procesos.add(Mnu_procesos);
 
         Mnb_menu.add(Sbm_procesos);
@@ -417,7 +427,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        form_Objeto_perdido = new Prcs_ObjetoPerdido();
+        form_Objeto_perdido = new Prcs_RegistroObjetoPerdido();
 
         Jdp_contenedor.add(form_Objeto_perdido);
         Dimension desktopSize = Jdp_contenedor.getSize();
@@ -459,6 +469,18 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_SupervisionLimpieza.setVisible(true);
         form_SupervisionLimpieza.toFront();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        form_E_Objeto_perdido = new Prcs_EntregaObjetoPerdido();
+
+        Jdp_contenedor.add(form_E_Objeto_perdido);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_E_Objeto_perdido.getSize();
+        form_E_Objeto_perdido.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_E_Objeto_perdido.setVisible(true);
+        form_E_Objeto_perdido.toFront();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -504,5 +526,6 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     public static javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     // End of variables declaration//GEN-END:variables
 }
