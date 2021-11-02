@@ -11,6 +11,7 @@ package Comercial.dominio;
  */
 public class Producto {
     String PKcodigoProducto;
+    String linea;
     String nombreProducto;
     String descripcionProducto;
     String precioProducto;
@@ -101,6 +102,22 @@ public class Producto {
         this.unidadProducto = unidadProducto;
     }
 
-    
-    
+    public String getLinea() {
+        return linea;
+    }
+
+    public void setLinea(String linea) {
+        this.linea = linea;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" + "PKcodigoProducto=" + PKcodigoProducto +
+                ", linea=" + linea + ", nombreProducto=" + nombreProducto +
+                ", descripcionProducto=" + descripcionProducto + ", precioProducto=" + 
+                precioProducto + ", costoProducto=" + costoProducto + ", estatusProducto=" + 
+                estatusProducto + ", lineaProducto=" + lineaProducto + ", marcaProducto=" +
+                marcaProducto + ", bodegaProducto=" + bodegaProducto + ", unidadProducto=" +
+                unidadProducto + '}';
+    }
 }
