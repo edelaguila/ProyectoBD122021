@@ -16,9 +16,9 @@ import java.util.List;
 public class HorarioDAO {
 
     public static String codigoAuxiliar, nombreAuxiliar;
-    private static final String SQL_INSERT = "insert into tbl_horario values(?,?,?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_horario SET entrada_horario=?, salida_horario=?, horas_extras_horario=?, descripcion_horario=?, estado_horario=? WHERE PK_id_horario=?";
-    private static final String SQL_QUERY = "SELECT PK_id_horario, entrada_horario, salida_horario, horas_extras_horario, descripcion_horario, estado_horario FROM tbl_horario WHERE PK_id_horario = ?";
+    private static final String SQL_INSERT = "insert into tbl_horario values(?,?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_horario SET entrada_horario=?, salida_horario=?, descripcion_horario=?, estado_horario=? WHERE PK_id_horario=?";
+    private static final String SQL_QUERY = "SELECT PK_id_horario, entrada_horario, salida_horario, descripcion_horario, estado_horario FROM tbl_horario WHERE PK_id_horario = ?";
     private static final String SQL_DELETE = "delete from tbl_horario where PK_id_horario = ?";
 
     public int insert(Horario horario) {
@@ -31,13 +31,11 @@ public class HorarioDAO {
             stmt.setString(1, horario.getIdHorario());
             stmt.setString(2, horario.getEntradaHorario());
             stmt.setString(3, horario.getSalidaHorario());
-            stmt.setString(4, horario.getHorasExtrasHorario());
-            stmt.setString(5, horario.getDescripcionHorario());
-            stmt.setString(6, horario.getEstadoHorario());
+//            stmt.setString(4, horario.getHorasExtrasHorario());
+            stmt.setString(4, horario.getDescripcionHorario());
+            stmt.setString(5, horario.getEstadoHorario());
 
-            //System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
-            //System.out.println("Registros afectados:" + rows);
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
@@ -55,14 +53,13 @@ public class HorarioDAO {
 
         try {
             conn = Conexion.getConnection();
-//          System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, horario.getEntradaHorario());
             stmt.setString(2, horario.getSalidaHorario());
-            stmt.setString(3, horario.getHorasExtrasHorario());
-            stmt.setString(4, horario.getDescripcionHorario());
-            stmt.setString(5, horario.getEstadoHorario());
-            stmt.setString(6, horario.getIdHorario());
+//            stmt.setString(3, horario.getHorasExtrasHorario());
+            stmt.setString(3, horario.getDescripcionHorario());
+            stmt.setString(4, horario.getEstadoHorario());
+            stmt.setString(5, horario.getIdHorario());
 
             rows = stmt.executeUpdate();
 
@@ -94,7 +91,7 @@ public class HorarioDAO {
                 String id = rs.getString("PK_id_horario");
                 String entrada = rs.getString("entrada_horario");
                 String salida = rs.getString("salida_horario");
-                String horas = rs.getString("horas_extras_horario");
+//                String horas = rs.getString("horas_extras_horario");
                 String descripcion = rs.getString("descripcion_horario");
                 String estado = rs.getString("estado_horario");
 
@@ -102,7 +99,7 @@ public class HorarioDAO {
                 horario.setIdHorario(id);
                 horario.setEntradaHorario(entrada);
                 horario.setSalidaHorario(salida);
-                horario.setHorasExtrasHorario(horas);
+//                horario.setHorasExtrasHorario(horas);
                 horario.setDescripcionHorario(descripcion);
                 horario.setEstadoHorario(estado);
 
@@ -128,7 +125,6 @@ public class HorarioDAO {
 
         try {
             conn = Conexion.getConnection();
-            //System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
             stmt.setString(1, horario.getIdHorario());
             rs = stmt.executeQuery();
@@ -136,7 +132,7 @@ public class HorarioDAO {
                 String id = rs.getString("PK_id_horario");
                 String entrada = rs.getString("entrada_horario");
                 String salida = rs.getString("salida_horario");
-                String horas = rs.getString("horas_extras_horario");
+//                String horas = rs.getString("horas_extras_horario");
                 String descripcion = rs.getString("descripcion_horario");
                 String estado = rs.getString("estado_horario");
 
@@ -144,7 +140,7 @@ public class HorarioDAO {
                 horario.setIdHorario(id);
                 horario.setEntradaHorario(entrada);
                 horario.setSalidaHorario(salida);
-                horario.setHorasExtrasHorario(horas);
+//                horario.setHorasExtrasHorario(horas);
                 horario.setDescripcionHorario(descripcion);
                 horario.setEstadoHorario(estado);
             }
@@ -164,11 +160,9 @@ public class HorarioDAO {
         int rows = 0;
         try {
             conn = Conexion.getConnection();
-            //System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setString(1, horario.getIdHorario());
             rows = stmt.executeUpdate();
-            //System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
