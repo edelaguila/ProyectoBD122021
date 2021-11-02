@@ -12,31 +12,46 @@ package Comercial.dominio;
 public class Unidad {
     
     String PKcodigoUnidad;
-    String unidadEntrada;
-    String unidadSalida;
+    String nombre_unidad;
+    String medida_acronimo;
+    String estatus_unidad;
 
     public String getPKcodigoUnidad() {
         return PKcodigoUnidad;
     }
 
-    public String getUnidadEntrada() {
-        return unidadEntrada;
+    public String getNombre_unidad() {
+        return nombre_unidad;
     }
 
-    public String getUnidadSalida() {
-        return unidadSalida;
+    public String getMedida_acronimo() {
+        return medida_acronimo;
+    }
+
+    public String getEstatus_unidad() {
+        return estatus_unidad;
     }
 
     public void setPKcodigoUnidad(String PKcodigoUnidad) {
         this.PKcodigoUnidad = PKcodigoUnidad;
     }
 
-    public void setUnidadEntrada(String unidadEntrada) {
-        this.unidadEntrada = unidadEntrada;
+    public void setNombre_unidad(String nombre_unidad) {
+        this.nombre_unidad = nombre_unidad;
     }
 
-    public void setUnidadSalida(String unidadSalida) {
-        this.unidadSalida = unidadSalida;
+    public void setMedida_acronimo(String medida_acronimo) {
+        this.medida_acronimo = medida_acronimo;
     }
+
+    public void setEstatus_unidad(String estatus_unidad) {
+        this.estatus_unidad = estatus_unidad;
+    }
+
+    @Override
+    public String toString() {
+        return "Unidad{" + "PKcodigoUnidad=" + PKcodigoUnidad + ", nombre_unidad=" + nombre_unidad + ", medida_acronimo=" + medida_acronimo + ", estatus_unidad=" + estatus_unidad + '}';
+    }
+
     
 }
