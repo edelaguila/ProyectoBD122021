@@ -18,11 +18,11 @@ import java.util.List;
  * @author leelu
  */
 public class ObjetoPerdidoDAO {
-    public static String codigoAuxiliar, nombreAuxiliar;
+public static String codigoAuxiliar, nombreAuxiliar;
     private static final String SQL_INSERT = "insert into tbl_objeto_perdido values(?,?,?,?,?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_objeto_perdido SET Pk_id_habitacion=?,Pk_id_ama_de_llaves=?, fecha_encontrado=?, objeto=?, identificacion=?, nombre=?, estado=? WHERE PK_id_objeto=?";
-    private static final String SQL_SELECT = "SELECT Pk_id_objeto, PK_id_habitacion, Pk_id_ama_de_llaves, fecha_encontrado, objeto, identificacion, nombre, estado FROM tbl_objeto_perdido";
-    private static final String SQL_QUERY = "SELECT Pk_id_objeto, PK_id_habitacion, Pk_id_ama_de_llaves, fecha_encontrado, objeto, identificacion, nombre, estado FROM tbl_objeto_perdido WHERE PK_id_objeto = ?";
+    private static final String SQL_UPDATE = "UPDATE tbl_objeto_perdido SET Pk_id_habitacion=?,Pk_id_ama_de_llaves=?, fecha_entregado=?, objeto=?, identificacion=?, estado=?, fecha_entregado=? WHERE PK_id_objeto=?";
+    private static final String SQL_SELECT = "SELECT Pk_id_objeto, PK_id_habitacion, Pk_id_ama_de_llaves, fecha_encontrado, objeto, identificacion, estado, fecha_entregado FROM tbl_objeto_perdido";
+    private static final String SQL_QUERY = "SELECT Pk_id_objeto, PK_id_habitacion, Pk_id_ama_de_llaves, fecha_encontrado, objeto, identificacion, estado, fecha_entregado FROM tbl_objeto_perdido WHERE PK_id_objeto = ?";
     private static final String SQL_DELETE = "delete from tbl_objeto_perdido where PK_id_objeto = ?";
     
     public int insert(ObjetoPerdido huespedes) {
@@ -38,8 +38,8 @@ public class ObjetoPerdidoDAO {
             stmt.setString(4, huespedes.getFecha());
             stmt.setString(5, huespedes.getObjeto());
             stmt.setString(6, huespedes.getDpi());
-            stmt.setString(7, huespedes.getNombre());
-            stmt.setString(8, huespedes.getEstado());
+            stmt.setString(7, huespedes.getEstado());
+            stmt.setString(8, huespedes.getFechae());
            
 
             //System.out.println("ejecutando query:" + SQL_INSERT);
@@ -70,8 +70,8 @@ public class ObjetoPerdidoDAO {
             stmt.setString(3, huespedes.getFecha());
             stmt.setString(4, huespedes.getObjeto());
             stmt.setString(5, huespedes.getDpi());
-            stmt.setString(6, huespedes.getNombre());
-            stmt.setString(7, huespedes.getEstado());
+            stmt.setString(6, huespedes.getEstado());
+            stmt.setString(7, huespedes.getFechae());
 
             rows = stmt.executeUpdate();
             
@@ -104,11 +104,11 @@ public class ObjetoPerdidoDAO {
                 String idobjeto = rs.getString("PK_id_Objeto");
                 String habitacion = rs.getString("PK_id_habitacion");
                 String ama = rs.getString("PK_id_ama_de_llaves");
-                String fecha = rs.getString("fecha_Encontrado");
+                String fecha = rs.getString("fecha_encontrado");
                 String objeto = rs.getString("objeto");
                 String dpi = rs.getString("identificacion");
-                String nombre = rs.getString("nombre");
                 String estado = rs.getString("estado");
+                String fechae = rs.getString("fecha_entregado");
                 
                 
                 huespedes = new ObjetoPerdido();
@@ -118,8 +118,8 @@ public class ObjetoPerdidoDAO {
                 huespedes.setFecha(fecha);
                 huespedes.setObjeto(objeto);
                 huespedes.setDpi(dpi);
-                huespedes.setNombre(nombre);
                 huespedes.setEstado(estado);
+                huespedes.setFechae(fechae);
                 
                 
                 
@@ -146,7 +146,7 @@ public class ObjetoPerdidoDAO {
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_QUERY);
+            //System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
             stmt.setString(1, huespedes.getIdobjeto());
             rs = stmt.executeQuery();
@@ -154,11 +154,11 @@ public class ObjetoPerdidoDAO {
                 String idobjeto = rs.getString("PK_id_Objeto");
                 String habitacion = rs.getString("PK_id_habitacion");
                 String ama = rs.getString("PK_id_ama_de_llaves");
-                String fecha = rs.getString("fecha_Encontrado");
+                String fecha = rs.getString("fecha_encontrado");
                 String objeto = rs.getString("objeto");
                 String dpi = rs.getString("identificacion");
-                String nombre = rs.getString("nombre");
                 String estado = rs.getString("estado");
+                String fechae = rs.getString("fecha_entregado");
                 
                 
                 huespedes = new ObjetoPerdido();
@@ -168,8 +168,8 @@ public class ObjetoPerdidoDAO {
                 huespedes.setFecha(fecha);
                 huespedes.setObjeto(objeto);
                 huespedes.setDpi(dpi);
-                huespedes.setNombre(nombre);
                 huespedes.setEstado(estado);
+                huespedes.setFecha(fechae);
                 System.out.println(huespedes.getHabitacion());
             }
         } catch (SQLException ex) {
