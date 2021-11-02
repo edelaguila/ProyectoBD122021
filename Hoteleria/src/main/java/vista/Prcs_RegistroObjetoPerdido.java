@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
  *
  * @author leelu
  */
-public class Prcs_ObjetoPerdido extends javax.swing.JInternalFrame {
+public class Prcs_RegistroObjetoPerdido extends javax.swing.JInternalFrame {
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     ObjetoPerdido ObjetosPerdidos = new ObjetoPerdido();
     SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
@@ -35,11 +35,12 @@ public class Prcs_ObjetoPerdido extends javax.swing.JInternalFrame {
     /**
      * Creates new form ObjetosPerdidos
      */
-    public Prcs_ObjetoPerdido() {
+    public Prcs_RegistroObjetoPerdido() {
         initComponents();
         diseño();
         actualizarTabla("");
         fecha_actual();
+        cargar_habitaciones();
     }
     
     public void fecha_actual() {
@@ -83,9 +84,20 @@ public class Prcs_ObjetoPerdido extends javax.swing.JInternalFrame {
     }
 
     public void Limpiar() {
-        prcs_repetidos.Limpiar(Txt_ama, Txt_objeto, Txt_buscar,id,txt_habitacion);
+        prcs_repetidos.Limpiar(Txt_ama, Txt_objeto, Txt_buscar,id);
+        txt_habitacion.setSelectedItem("Seleccionar...");
         fecha_actual();
     }
+    
+            public void cargar_habitaciones() {
+        txt_habitacion.addItem("Seleccionar...");
+        HabitacionDAO personaDAO = new HabitacionDAO();
+        HabitacionDAO.codigoAuxiliar="";
+        List<Habitacion> habitaciones = personaDAO.select();
+        for (Habitacion habitacion : habitaciones) {
+            txt_habitacion.addItem(String.valueOf(habitacion.getId()));   
+            }
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -123,7 +135,7 @@ public class Prcs_ObjetoPerdido extends javax.swing.JInternalFrame {
         Lbl_precio1 = new javax.swing.JLabel();
         id = new javax.swing.JTextField();
         jSeparator5 = new javax.swing.JSeparator();
-        txt_habitacion = new javax.swing.JTextField();
+        txt_habitacion = new javax.swing.JComboBox<>();
         Pnl_datos = new javax.swing.JPanel();
         Lbl_codigoNombre = new javax.swing.JLabel();
         Txt_buscar = new javax.swing.JTextField();
@@ -138,6 +150,8 @@ public class Prcs_ObjetoPerdido extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setMinimumSize(new java.awt.Dimension(1170, 620));
+        setPreferredSize(new java.awt.Dimension(1170, 620));
 
         Pnl_ingresoDatos.setBackground(new java.awt.Color(36, 47, 65));
         Pnl_ingresoDatos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INGRESO DE DATOS:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -345,10 +359,6 @@ public class Prcs_ObjetoPerdido extends javax.swing.JInternalFrame {
         id.setForeground(new java.awt.Color(255, 255, 255));
         id.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        txt_habitacion.setBackground(new java.awt.Color(36, 47, 65));
-        txt_habitacion.setForeground(new java.awt.Color(255, 255, 255));
-        txt_habitacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         javax.swing.GroupLayout Pnl_ingresoDatosLayout = new javax.swing.GroupLayout(Pnl_ingresoDatos);
         Pnl_ingresoDatos.setLayout(Pnl_ingresoDatosLayout);
         Pnl_ingresoDatosLayout.setHorizontalGroup(
@@ -395,10 +405,11 @@ public class Prcs_ObjetoPerdido extends javax.swing.JInternalFrame {
                             .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Txt_ama, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Txt_objeto, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_habitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txt_habitacion, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Pnl_ingresoDatosLayout.setVerticalGroup(
@@ -421,8 +432,8 @@ public class Prcs_ObjetoPerdido extends javax.swing.JInternalFrame {
                     .addComponent(Lbl_nombre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(19, 19, 19)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Lbl_descripcion)
                     .addComponent(txt_habitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -433,7 +444,7 @@ public class Prcs_ObjetoPerdido extends javax.swing.JInternalFrame {
                     .addComponent(Lbl_precio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Btn_fondo_ayuda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -508,7 +519,7 @@ public class Prcs_ObjetoPerdido extends javax.swing.JInternalFrame {
             .addGroup(Pnl_datosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
                     .addGroup(Pnl_datosLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(Lbl_codigoNombre)
@@ -533,7 +544,7 @@ public class Prcs_ObjetoPerdido extends javax.swing.JInternalFrame {
                                 .addComponent(Txt_buscar)
                                 .addComponent(Lbl_codigoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -562,13 +573,13 @@ public class Prcs_ObjetoPerdido extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(id,Txt_ama, Txt_objeto,txt_habitacion) && fecha.getDate()!=null) {
+        if (prcs_repetidos.isNoneEmpty(id,Txt_ama, Txt_objeto) && fecha.getDate()!=null) {
                 if (prcs_repetidos.isNumeric(id.getText(),Txt_ama.getText())) {
                     ObjetoPerdidoDAO serviciosdao = new ObjetoPerdidoDAO();
                     ObjetosPerdidos.setIdobjeto(id.getText());
                     ObjetosPerdidos.setAma(Txt_ama.getText());
                     ObjetosPerdidos.setObjeto(Txt_objeto.getText());
-                    ObjetosPerdidos.setHabitacion(txt_habitacion.getText());
+                    ObjetosPerdidos.setHabitacion(txt_habitacion.getSelectedItem().toString());
                     String fechaactual = new SimpleDateFormat("yyyy-MM-dd").format(fecha.getDate());
             ObjetosPerdidos.setFecha(fechaactual);
             ObjetosPerdidos.setEstado("1");
@@ -616,14 +627,14 @@ public class Prcs_ObjetoPerdido extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_eliminarMouseExited
 
     private void Btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(id,Txt_ama, Txt_objeto, txt_habitacion) && fecha.getDate()!=null) {
+        if (prcs_repetidos.isNoneEmpty(id,Txt_ama, Txt_objeto) && fecha.getDate()!=null) {
                 if (prcs_repetidos.isNumeric(id.getText(),Txt_ama.getText())) {
                         ObjetoPerdidoDAO serviciosdao = new ObjetoPerdidoDAO();
 
                                             ObjetosPerdidos.setIdobjeto(id.getText());
                     ObjetosPerdidos.setAma(Txt_ama.getText());
                     ObjetosPerdidos.setObjeto(Txt_objeto.getText());
-                    ObjetosPerdidos.setHabitacion(txt_habitacion.getText());
+                    ObjetosPerdidos.setHabitacion(txt_habitacion.getSelectedItem().toString());
                     String fechaactual = new SimpleDateFormat("yyyy-MM-dd").format(fecha.getDate());
             ObjetosPerdidos.setFecha(fechaactual);
             ObjetosPerdidos.setEstado("1");
@@ -680,7 +691,7 @@ public class Prcs_ObjetoPerdido extends javax.swing.JInternalFrame {
         if (evt.getClickCount() == 2) {
        
             id.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 0).toString());
-            txt_habitacion.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 1).toString());
+            txt_habitacion.setSelectedItem(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 1).toString());
             Txt_ama.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString());
             try {
                 fechaCumpleaños=formato.parse(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString());
@@ -741,6 +752,6 @@ public class Prcs_ObjetoPerdido extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JTextField txt_habitacion;
+    private javax.swing.JComboBox<String> txt_habitacion;
     // End of variables declaration//GEN-END:variables
 }

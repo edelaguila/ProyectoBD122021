@@ -32,12 +32,12 @@ CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_horario` (
 `estado_horario` TINYINT NULL DEFAULT NULL,
 PRIMARY KEY (`PK_id_horario`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+ALTER TABLE `empresarial`.`tbl_horario` DROP COLUMN `horas_extras_horario`;
 INSERT INTO 
 `empresarial`.`tbl_horario` 
 VALUES 
-('1', '8 am', '8 pm', '8', 'Horario matutino', '1'),
-('2', '12 am', '12 pm', '1', 'Horario de tarde', '1'),
-('3', '9 am', '9 pm', '5', 'Horario nocturno', '1');
+('1', '1 am', '9 am', 'Horario matutino', '1'),
+('2', '8 am', '4 pm', 'Horario de tarde', '1');
 
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_metodo_de_pago` (
 `PK_id_metodo` INT NOT NULL,
