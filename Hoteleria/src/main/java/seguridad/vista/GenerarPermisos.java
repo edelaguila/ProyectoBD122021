@@ -73,6 +73,7 @@ public class GenerarPermisos {
                 Hoteleria_MDI.MnI_tarifas.setVisible(false);
                 
                 Hoteleria_MDI.MnI_asingacionServiciosHabitacion.setVisible(false);
+                Hoteleria_MDI.MnI_RegistroObjetoPerdido.setVisible(false);
                 
                 ejecutarPermisos.ejecutarBusqueda(usuario);
                 for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
@@ -96,6 +97,7 @@ public class GenerarPermisos {
                                 Hoteleria_MDI.Mnu_procesos.setVisible(true);
                         switch (varApp) {
                             case 2201:Hoteleria_MDI.MnI_asingacionServiciosHabitacion.setVisible(true);break;
+                            case 2202:Hoteleria_MDI.MnI_RegistroObjetoPerdido.setVisible(true);break;
                         }
                     }
                 }
