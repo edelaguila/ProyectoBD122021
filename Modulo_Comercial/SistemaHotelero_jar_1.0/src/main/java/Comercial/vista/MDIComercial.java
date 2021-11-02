@@ -32,6 +32,9 @@ public class MDIComercial extends javax.swing.JFrame {
     private Mantenimiento_Cliente Mantenimiento_Cliente;
     private Mantenimiento_Cobrador Mantenimiento_Cobrador;
     private Mantenimiento_Vendedor Mantenimiento_Vendedor;
+    
+    private Proceso_Inventario Proceso_Inventario;
+    private Proceso_Existencia Proceso_Existencia;
     public static JLabel logo = new JLabel();
 
     public MDIComercial() throws UnknownHostException {
@@ -96,6 +99,7 @@ public class MDIComercial extends javax.swing.JFrame {
         FacturaCompras = new javax.swing.JMenuItem();
         P_producto = new javax.swing.JMenu();
         ProcesoInventario = new javax.swing.JMenuItem();
+        Proceso_existencia = new javax.swing.JCheckBoxMenuItem();
         jMenu12 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -264,6 +268,15 @@ public class MDIComercial extends javax.swing.JFrame {
         });
         P_producto.add(ProcesoInventario);
 
+        Proceso_existencia.setSelected(true);
+        Proceso_existencia.setText("Proceso Existencia");
+        Proceso_existencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Proceso_existenciaActionPerformed(evt);
+            }
+        });
+        P_producto.add(Proceso_existencia);
+
         jMenu4.add(P_producto);
 
         jMenuBar1.add(jMenu4);
@@ -398,6 +411,16 @@ public class MDIComercial extends javax.swing.JFrame {
 
     private void ProcesoInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProcesoInventarioActionPerformed
         // TODO add your handling code here:
+         Proceso_Inventario = new Proceso_Inventario();
+
+        jdpescritorio.add(Proceso_Inventario);
+        Dimension desktopSize = jdpescritorio.getSize();
+        Dimension FrameSize = Proceso_Inventario.getSize();
+        Proceso_Inventario.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        Proceso_Inventario.show();
+        logo.setVisible(true);
+        Proceso_Inventario.setVisible(true);
+        
 //       
 
     }//GEN-LAST:event_ProcesoInventarioActionPerformed
@@ -484,6 +507,20 @@ public class MDIComercial extends javax.swing.JFrame {
         MantenimientoTransporte.setVisible(true);
     }//GEN-LAST:event_Item_MnttransporteActionPerformed
 
+    private void Proceso_existenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Proceso_existenciaActionPerformed
+        // TODO add your handling code here:
+        Proceso_Existencia = new Proceso_Existencia();
+
+        jdpescritorio.add(Proceso_Existencia);
+        Dimension desktopSize = jdpescritorio.getSize();
+        Dimension FrameSize = Proceso_Existencia.getSize();
+        Proceso_Existencia.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        Proceso_Existencia.show();
+        logo.setVisible(true);
+        Proceso_Existencia.setVisible(true);
+        
+    }//GEN-LAST:event_Proceso_existenciaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -529,6 +566,7 @@ public class MDIComercial extends javax.swing.JFrame {
     public static javax.swing.JMenu P_ventas;
     public static javax.swing.JMenuItem ProcesoCompra;
     public static javax.swing.JMenuItem ProcesoInventario;
+    private javax.swing.JCheckBoxMenuItem Proceso_existencia;
     public static javax.swing.JMenu cerrar_sesion;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu11;

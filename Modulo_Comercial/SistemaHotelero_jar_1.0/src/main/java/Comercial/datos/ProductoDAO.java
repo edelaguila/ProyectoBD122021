@@ -23,7 +23,7 @@ public class ProductoDAO {
 
    private static final String SQL_INSERT = "INSERT INTO tbl_producto(PK_codigo_producto, nombre_prodcuto,"
             + " descripcion_producto, precio_producto, costo_producto, estatus_producto,"
-            + " codigo_linea, codigo_marca, codigo_bodega, codigo_unidad) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+            + " codigo_linea, codigo_marca, codigo_bodega, codigo_unidad) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     private static final String SQL_SELECT = "SELECT PK_codigo_producto,nombre_prodcuto, descripcion_producto,"
             + " precio_producto, costo_producto, estatus_producto, "
             + "codigo_linea, codigo_marca, codigo_bodega, codigo_unidad FROM tbl_producto";
@@ -56,6 +56,7 @@ public class ProductoDAO {
                  * busqueda de datos de la bitacocora en la de usuarios
                  */
                 String codigoProducto = rs.getString("PK_codigo_producto");
+//                String line = rs.getString("linea")
                 String nombreProducto = rs.getString("nombre_prodcuto");
                 String descripcionProducto = rs.getString("descripcion_producto");
                 String precioProducto = rs.getString("precio_producto");
@@ -71,6 +72,7 @@ public class ProductoDAO {
                  */
                 producto = new Producto();
                 producto.setPKcodigoProducto(codigoProducto);
+//                producto.setLinea(line);
                 producto.setNombreProducto(nombreProducto);
                 producto.setDescripcionProducto(descripcionProducto);
                 producto.setPrecioProducto(precioProducto);
