@@ -106,7 +106,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        MnI_RegistroObjetoPerdido = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         Sbm_herramientas = new javax.swing.JMenu();
         Sbm_ayuda = new javax.swing.JMenu();
@@ -257,13 +257,13 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
 
         Mnu_procesos.add(jMenu1);
 
-        jMenuItem2.setText("Prcs. Objetos Perdidos");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        MnI_RegistroObjetoPerdido.setText("Prcs. Objetos Perdidos");
+        MnI_RegistroObjetoPerdido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                MnI_RegistroObjetoPerdidoActionPerformed(evt);
             }
         });
-        Mnu_procesos.add(jMenuItem2);
+        Mnu_procesos.add(MnI_RegistroObjetoPerdido);
 
         jMenuItem6.setText("Prcs. Entrega Objetos Perdidos");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
@@ -425,7 +425,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Prcs_AsignacionGobernanta.toFront();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void MnI_RegistroObjetoPerdidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_RegistroObjetoPerdidoActionPerformed
         // TODO add your handling code here:
         form_Objeto_perdido = new Prcs_RegistroObjetoPerdido();
 
@@ -435,7 +435,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Objeto_perdido.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         form_Objeto_perdido.setVisible(true);
         form_Objeto_perdido.toFront();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_MnI_RegistroObjetoPerdidoActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         form_Prcs_AsignacionLimpieza = new Prcs_AsignacionLimpieza();
@@ -503,6 +503,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JMenu Btn_cerrarSesion;
     private javax.swing.JDesktopPane Jdp_contenedor;
+    public static javax.swing.JMenuItem MnI_RegistroObjetoPerdido;
     public static javax.swing.JMenuItem MnI_asingacionServiciosHabitacion;
     public static javax.swing.JMenuItem MnI_habitaciones;
     public static javax.swing.JMenuItem MnI_horario;
@@ -522,7 +523,6 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     public static javax.swing.JMenu Sbm_procesos;
     public static javax.swing.JMenu jMenu1;
     public static javax.swing.JMenuItem jMenuItem1;
-    public static javax.swing.JMenuItem jMenuItem2;
     public static javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
