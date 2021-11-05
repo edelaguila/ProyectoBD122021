@@ -7,9 +7,11 @@ package vista;
 
 import datos.DetalleReservacionDAO;
 import datos.ReservacionDAO;
+import datos.TarifaDAO;
 import dominio.DetalleReservacion;
 import dominio.ProcesosRepetidos;
 import dominio.Reservacion;
+import dominio.Tarifa;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -18,7 +20,7 @@ import javax.swing.JOptionPane;
  *
  * @author Herbert Leonel Dominguez Chavez
  */
-public class Prcs_DetalleReservación extends javax.swing.JInternalFrame {
+public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     DetalleReservacion detalleReservacion = new DetalleReservacion();
@@ -26,34 +28,55 @@ public class Prcs_DetalleReservación extends javax.swing.JInternalFrame {
     /**
      * Creates new form Prcs_DetalleReservación
      */
-    public Prcs_DetalleReservación() {
+    public Prcs_DetalleReservacion() {
         initComponents();
+        tablaTarifas("");
     }
 
     public void tablaAsignaciones() {
-
+        ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
+        String columnas[] = {"CORRELATIVO", "ID RESERVACIÓN", "ID TARIFA"};
+        int cantidadcolumnas = columnas.length;
+        prcs_repetidos.llenarColumnas(columnas, cantidadcolumnas, Tbl_Asignaciones);
+        String datos[] = new String[cantidadcolumnas];
+        int tamaño[] = {100, 100, 100};
+        DetalleReservacionDAO detalleDAO = new DetalleReservacionDAO();
+        List<DetalleReservacion> detalle = detalleDAO.select();
+        for (DetalleReservacion listaDetalle : detalle) {
+                if (listaDetalle.getIdReservacion().equals(Txt_codigo.getText())) {
+                datos[0] = listaDetalle.getCorrelativo();
+                datos[1] = listaDetalle.getIdReservacion();
+                datos[2] = listaDetalle.getIdTarifa();
+            prcs_repetidos.llenarFilas(datos, tamaño, Tbl_Asignaciones);
+            }
+        }
     }
 
-    public void tablaTarifas() {
-
+    public void tablaTarifas(String dato) {
+        TarifaDAO.codigoAuxiliar = dato;
+        TarifaDAO.nombreAuxiliar = dato;
+        ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
+        String columnas[] = {"ID", "HABITACIÓN", "NOMBRE"};
+        int cantidadcolumnas = columnas.length;
+        prcs_repetidos.llenarColumnas(columnas, cantidadcolumnas, Tbl_Tarifas);
+        String datos[] = new String[cantidadcolumnas];
+        int tamaño[] = {50, 150, 450, 150};
+        TarifaDAO tarifadao = new TarifaDAO();
+        List<Tarifa> tarifa = tarifadao.select();
+        for (Tarifa listaTarifa : tarifa) {
+            if (listaTarifa.getEstado().equals("1")) {
+                datos[0] = listaTarifa.getId_tarifa();
+                datos[1] = listaTarifa.getId_habitacion();
+                datos[2] = listaTarifa.getNombre();
+            }
+            prcs_repetidos.llenarFilas(datos, tamaño, Tbl_Tarifas);
+        }
     }
 
     public void Limpiar() {
 
     }
 
-    public void prueba() {
-        ReservacionDAO reservaciondao = new ReservacionDAO();
-        Reservacion reservacion = new Reservacion();
-        reservacion.setIdReservacion(Txt_codigo.getText());
-        reservacion = reservaciondao.query(reservacion);
-        
-        if (reservacion.getEstadoReservacion()!=null) {
-            if (reservacion.getEstadoReservacion().equals(1)) {
-                
-            }
-        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,10 +104,15 @@ public class Prcs_DetalleReservación extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         Tbl_Asignaciones = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
-        Tbl_Servicios = new javax.swing.JTable();
+        Tbl_Tarifas = new javax.swing.JTable();
         Btn_fondoBuscar = new javax.swing.JPanel();
         Btn_buscar = new javax.swing.JLabel();
         Lbl_cliente = new javax.swing.JLabel();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
 
         Pnl_ingresoDatos.setBackground(new java.awt.Color(36, 47, 65));
         Pnl_ingresoDatos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INGRESO DE DATOS:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -254,7 +282,7 @@ public class Prcs_DetalleReservación extends javax.swing.JInternalFrame {
         ));
         jScrollPane3.setViewportView(Tbl_Asignaciones);
 
-        Tbl_Servicios.setModel(new javax.swing.table.DefaultTableModel(
+        Tbl_Tarifas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -265,7 +293,7 @@ public class Prcs_DetalleReservación extends javax.swing.JInternalFrame {
                 "ID", "SERVICIO", "PRECIO"
             }
         ));
-        jScrollPane4.setViewportView(Tbl_Servicios);
+        jScrollPane4.setViewportView(Tbl_Tarifas);
 
         Btn_fondoBuscar.setBackground(new java.awt.Color(97, 212, 195));
 
@@ -389,21 +417,24 @@ public class Prcs_DetalleReservación extends javax.swing.JInternalFrame {
 
     private void Btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseClicked
         boolean duplicada = true;
-        int filaSeleccionada = Tbl_Servicios.getSelectedRow();
+        int filaSeleccionada = Tbl_Tarifas.getSelectedRow();
         if (filaSeleccionada >= 0) {   //SI EXISTE UNA FILA SELECCIONADA REALIZARA EL TRASPASO
 
             DetalleReservacionDAO detalledao = new DetalleReservacionDAO();
-            List<DetalleReservacion> detalle = detalledao.select();
-            for (DetalleReservacion listaasignacion : detalle) {
-                if (listaasignacion.getIdReservacion().equals(Txt_codigo.getText()) && listaasignacion.getIdTarifa().equals(Tbl_Servicios.getValueAt(filaSeleccionada, 0).toString())) {
-                    duplicada = false;
-                }
+            detalleReservacion.setIdReservacion(Txt_codigo.getText());
+            detalleReservacion.setIdTarifa(Tbl_Tarifas.getValueAt(filaSeleccionada, 0).toString());
+            detalleReservacion = detalledao.getProcesoAlmacenado(detalleReservacion);
+            
+            if (DetalleReservacionDAO.validacionReservacion==null) {
+            }else{
+                duplicada=false;
+                JOptionPane.showMessageDialog(null, "Tarifa ya reservada para los dias de esta reservación");
             }
 
             if (duplicada) {
                 detalleReservacion.setCorrelativo("0");
                 detalleReservacion.setIdReservacion(Txt_codigo.getText());
-                detalleReservacion.setIdTarifa(Tbl_Servicios.getValueAt(filaSeleccionada, 0).toString());
+                detalleReservacion.setIdTarifa(Tbl_Tarifas.getValueAt(filaSeleccionada, 0).toString());
                 detalledao.insert(detalleReservacion);
                 tablaAsignaciones();
             }
@@ -449,7 +480,7 @@ public class Prcs_DetalleReservación extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_eliminarMouseExited
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
-
+        prcs_repetidos.imprimirReporte("Rpt_PrcsDetalleReservación.jrxml", "Reporte Proceso Detalles Reservacion");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
     private void Btn_reporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseEntered
@@ -493,7 +524,6 @@ public class Prcs_DetalleReservación extends javax.swing.JInternalFrame {
                 reservacion = reservaciondao.query(reservacion);
                 if (reservacion.getEstadoReservacion() != null) {
                     if (reservacion.getEstadoReservacion().equals("1")) {
-                        tablaTarifas();
                         tablaAsignaciones();
                     }
                 } else {
@@ -529,7 +559,7 @@ public class Prcs_DetalleReservación extends javax.swing.JInternalFrame {
     private javax.swing.JLabel Lbl_idReservación;
     private javax.swing.JPanel Pnl_ingresoDatos;
     private javax.swing.JTable Tbl_Asignaciones;
-    private javax.swing.JTable Tbl_Servicios;
+    private javax.swing.JTable Tbl_Tarifas;
     private javax.swing.JTextField Txt_codigo;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
