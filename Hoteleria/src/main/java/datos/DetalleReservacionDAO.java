@@ -8,6 +8,7 @@ package datos;
 import dominio.DetalleReservacion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.List;
  * @author leone
  */
 public class DetalleReservacionDAO {
-
+    public static String validacionReservacion;
     private static final String SQL_INSERT = "insert into tbl_detalle_reservacion values(?,?,?)";
     private static final String SQL_UPDATE = "UPDATE tbl_detalle_reservacion SET id_reservacion_detalle=?, id_tarifa_detalle=? WHERE Pk_correlativo_detalle=?";
     private static final String SQL_QUERY = "SELECT * FROM tbl_detalle_reservacion WHERE Pk_correlativo_detalle=? AND id_tarifa_detalle=?";
@@ -80,13 +81,17 @@ public class DetalleReservacionDAO {
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
+                
                 String correlativo = rs.getString("Pk_correlativo_detalle");
                 String id_reservacion = rs.getString("id_reservacion_detalle");
                 String id_tarifa = rs.getString("id_tarifa_detalle");
+                
                 detalleRes = new DetalleReservacion();
+                
                 detalleRes.setCorrelativo(correlativo);
                 detalleRes.setIdReservacion(id_reservacion);
                 detalleRes.setIdTarifa(id_tarifa);
+                
                 detalleReservacion.add(detalleRes);
             }
         } catch (SQLException ex) {
@@ -150,5 +155,33 @@ public class DetalleReservacionDAO {
             Conexion.close(conn);
         }
         return rows;
+    }
+    
+    public DetalleReservacion getProcesoAlmacenado(DetalleReservacion detalleRes){
+        Connection conn = null;
+        CallableStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = Conexion.getConnection();
+            String sql = "{call getValidarReservacion (?, ?, ?)}";
+            stmt = conn.prepareCall(sql);
+            stmt.setString(1, detalleRes.getIdReservacion());
+            
+            stmt.setString(2, detalleRes.getIdTarifa());
+            
+            stmt.registerOutParameter(3, java.sql.Types.INTEGER);
+            
+            stmt.execute();
+            
+            validacionReservacion = stmt.getString(3);
+            System.out.println(detalleRes.getIdReservacion() + " " + detalleRes.getIdTarifa() + " " + stmt.getString(3));
+            stmt.close();
+            conn.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return detalleRes;
     }
 }

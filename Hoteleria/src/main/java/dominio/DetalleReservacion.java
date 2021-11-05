@@ -10,7 +10,7 @@ package dominio;
  * @author leone
  */
 public class DetalleReservacion {
-    private String correlativo, idReservacion, idTarifa;
+    private String correlativo, idReservacion, idTarifa, validacion;
 
     public String getCorrelativo() {
         return correlativo;
@@ -34,6 +34,14 @@ public class DetalleReservacion {
 
     public void setIdTarifa(String idTarifa) {
         this.idTarifa = idTarifa;
+    }
+
+    public String getValidacion() {
+        return validacion;
+    }
+
+    public void setValidacion(String validacion) {
+        this.validacion = validacion;
     }
 
 }
