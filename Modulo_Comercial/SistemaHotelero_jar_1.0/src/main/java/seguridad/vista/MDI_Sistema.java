@@ -1,6 +1,6 @@
 package seguridad.vista;
 
-import com.formdev.flatlaf.FlatDarkLaf;
+//import com.formdev.flatlaf.FlatDarkLaf;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -318,7 +318,7 @@ public class MDI_Sistema extends javax.swing.JFrame {
     public static void main(String args[]) {
 
         try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
+//            UIManager.setLookAndFeel(new FlatDarkLaf());
         } catch (Exception ex) {
             System.out.println(ex);
         }

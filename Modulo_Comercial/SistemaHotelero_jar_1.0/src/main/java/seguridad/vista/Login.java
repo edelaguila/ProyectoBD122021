@@ -6,8 +6,8 @@
 package seguridad.vista;
 
 import Comercial.vista.MDIComercial;
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLightLaf;
+//import com.formdev.flatlaf.FlatDarkLaf;
+//import com.formdev.flatlaf.FlatLightLaf;
 import seguridad.datos.UsuarioDAO;
 import java.awt.HeadlessException;
 import java.net.UnknownHostException;
@@ -150,9 +150,9 @@ public class Login extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)
                                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(126, 126, 126)
+                                .addGap(105, 105, 105)
                                 .addComponent(btnAceptar)
-                                .addGap(18, 18, 18)
+                                .addGap(31, 31, 31)
                                 .addComponent(btnCancelar)))
                         .addGap(0, 68, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -176,10 +176,10 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(btncambiodecontra, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar)
+                    .addComponent(btnAceptar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(btncambiodecontra)
                 .addContainerGap())
         );
 
@@ -317,7 +317,7 @@ public class Login extends javax.swing.JFrame {
     public static void main(String args[]) {
         //FLATLAF
         try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
+//            UIManager.setLookAndFeel(new FlatDarkLaf());
         } catch (Exception ex) {
             System.out.println(ex);
         }
