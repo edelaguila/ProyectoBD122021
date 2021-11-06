@@ -460,11 +460,16 @@ DEFAULT CHARACTER SET = utf8mb4;
 INSERT INTO
 `empresarial`.`tbl_empleado`
 VALUES
-('1', 'Karol', 'Garcia', '12345', 'karol@gmail.com', '2', '1', '2021-10-19'),
-('2', 'Darlyn', 'Garcia', '12345', 'karolq@gmail.com', '1', '1', '2021-10-19'),
-('3', 'Karla', 'Garcia', '12345', 'karolq@gmail.com', '2', '0', '2021-10-19'),
+('1', 'Karol', 'Garcia', '12345', 'karol@gmail.com', '1', '1', '2021-10-19'),
+('2', 'Darlyn', 'Garcia', '12345', 'karolq@gmail.com', '2', '1', '2021-10-19'),
+('3', 'Karla', 'Garcia', '12345', 'karolq@gmail.com', '2', '1', '2021-10-19'),
 ('4', 'Esmeralda', 'Garcia', '12345', 'karolq@gmail.com', '2', '1', '2021-10-19'),
-('5', 'Yury', 'Garcia', '12345', 'karolq@gmail.com', '1', '1', '2021-10-19');
+('5', 'Yury', 'Garcia', '12345', 'karolq@gmail.com', '2', '1', '2021-10-19'),
+('6', 'karmen', 'Garcia', '12345', 'karol@gmail.com', '1', '1', '2021-10-19'),
+('7', 'tulio', 'Garcia', '12345', 'karolq@gmail.com', '2', '1', '2021-10-19'),
+('8', 'herbert', 'Garcia', '12345', 'karolq@gmail.com', '2', '1', '2021-10-19'),
+('9', 'luis', 'Garcia', '12345', 'karolq@gmail.com', '2', '1', '2021-10-19'),
+('10', 'nicolas', 'Garcia', '12345', 'karolq@gmail.com', '1', '1', '2021-10-19');
 
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_tarifa` (
 `PK_id_tarifa` INT AUTO_INCREMENT NOT NULL,
@@ -509,11 +514,21 @@ FOREIGN KEY (id_reservacion_detalle) REFERENCES tbl_reservacion(PK_id_reservacio
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 INSERT INTO `tbl_detalle_reservacion` VALUES ('1', '1', '1'), ('2', '1', '2'), ('3', '2', '3'), ('4', '2', '4');
 
+CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_detalle_servicioextra` (
+`Pk_correlativo_detalle` INT AUTO_INCREMENT NOT NULL,
+`id_reservacion` INT NOT NULL,
+`id_servicio` INT NOT NULL,
+PRIMARY KEY (`Pk_correlativo_detalle`),
+FOREIGN KEY (id_reservacion) REFERENCES tbl_reservacion(PK_id_reservacion),
+FOREIGN KEY (id_servicio) REFERENCES tbl_servicio(PK_id_servicio)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_menu_orden_encabezado`(
 `PK_id_orden_encabezado` INT AUTO_INCREMENT,
 `id_habitacion` INT NOT NULL,
 `mesa_orden` VARCHAR(10) NOT NULL,
-`estado_orden` TINYINT NOT NULL,
+`fecha_orden` DATE NOT NULL,
+`horario_orden` TIME NOT NULL,
 PRIMARY KEY (`PK_id_orden_encabezado`),
 FOREIGN KEY (id_habitacion) REFERENCES tbl_mantenimiento_habitacion(PK_id_habitacion)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
@@ -523,8 +538,6 @@ CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_menu_orden_detalle`(
 `id_orden_encabezado` INT NOT NULL,
 `id_menu` INT NOT NULL,
 `cantidad_orden` INT NOT NULL,
-`fecha_orden` VARCHAR(10) NOT NULL,
-`horario_orden` VARCHAR(10) NOT NULL,
 `estado_orden` TINYINT NOT NULL,
 PRIMARY KEY (`PK_id_orden_detalle`),
 FOREIGN KEY (id_orden_encabezado) REFERENCES tbl_menu_orden_encabezado(PK_id_orden_encabezado),
@@ -550,6 +563,7 @@ PRIMARY KEY (`PK_id_asignacion_gobernanta`),
 FOREIGN KEY (`PK_id_gobernanta`) REFERENCES `tbl_empleado`(`PK_id_empleado`),
 FOREIGN KEY (`PK_id_ama_de_llave`) REFERENCES `tbl_empleado`(`PK_id_empleado`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+INSERT INTO `tbl_asignacion_gobernanta` VALUES ('1', '5', '1', '1'), ('2', '2', '4', '1'), ('3', '3', '3', '1'), ('4', '5', '2', '1'), ('5', '5', '5', '1');
 
 CREATE TABLE `empresarial`.`tbl_asignacion_limpieza` (
 `PK_id_asignacion_limpieza` INT NOT NULL AUTO_INCREMENT,
@@ -1199,7 +1213,116 @@ CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_NotasDeDebito` (
     FOREIGN KEY (`NumeroDeCuenta`) REFERENCES `bl_cuentabancaria` (`Numero_CuentaBancaria`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
+-- --------------------------------------------------------
+-- Estructura de tabla para la tabla `ConciliacionBancaria`
+-- --------------------------------------------------------
 
+CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_ConciBancariaEncabezado` (
+`No_ConciliacionBan` INT NOT NULL AUTO_INCREMENT,
+`NumeroDeCuenta` INT NOT NULL,
+`FechaInicio` DATE NOT NULL,
+`FechaFinal` DATE NOT NULL,
+`Codigo_Banco` INT NOT NULL,
+`SaldoCuenta` VARCHAR(100) NOT NULL,
+`TotalDebito` FLOAT NOT NULL,
+`TotalCredito` FLOAT NOT NULL,
+`SaldoContable` FLOAT NOT NULL,
+PRIMARY KEY (`No_ConciliacionBan`),
+FOREIGN KEY (`NumeroDeCuenta`)REFERENCES `empresarial`.`tbl_cuentabancaria` (`Numero_CuentaBancaria`),
+FOREIGN KEY (`Codigo_Banco`) REFERENCES `empresarial`.`tbl_banco` (`Codigo_Banco`)
+
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_ConciBancariaDetalle` (
+`No_ConciliacionBdet` INT NOT NULL AUTO_INCREMENT,
+`Codigo_concepto` VARCHAR(100) NOT NULL,
+`Fecha` DATE NOT NULL,
+`Movimiento` INT NOT NULL,
+`CreditoC` VARCHAR(100) NOT NULL,
+`DebitoC` VARCHAR(100) NOT NULL,
+`SaldoConciliacion` FLOAT NOT NULL,
+PRIMARY KEY (`No_ConciliacionBdet`),
+FOREIGN KEY(`No_ConciliacionBdet`) REFERENCES `tbl_ConciBancariaEncabezado` (`No_ConciliacionBan`),
+FOREIGN KEY (`Movimiento`) REFERENCES `tbl_MovimientoBancarioEncabezado` (`id_movEnc`)
+
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 -- FIN PROCESOS
 -- -----------------------------------------------------
+
+-- ---------------------
+-- PROCESOS ALMACENADOS
+-- ---------------------
+-- ----------------------------------------------1
+DELIMITER $$
+USE `empresarial`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getValidarReservacion`(IN no_reservacion INT, IN no_tarifa INT, OUT validacion INT)
+BEGIN
+DECLARE fecha_inicio, fecha_fin DATE;
+SELECT
+tbl_reservacion.fecha_entrada_reservacion, tbl_reservacion.fecha_salida_reservacion
+INTO
+fecha_inicio, fecha_fin
+FROM 
+empresarial.tbl_reservacion
+WHERE
+tbl_reservacion.PK_id_reservacion=no_reservacion;
+SELECT
+SUM(if(tbl_detalle_reservacion.id_reservacion_detalle != no_reservacion 
+OR tbl_detalle_reservacion.id_tarifa_detalle=no_tarifa, 1, 0)) INTO validacion
+FROM 
+empresarial.tbl_detalle_reservacion, empresarial.tbl_reservacion
+WHERE
+tbl_detalle_reservacion.id_tarifa_detalle=no_tarifa AND
+tbl_detalle_reservacion.id_reservacion_detalle = tbl_reservacion.PK_id_reservacion AND
+(tbl_reservacion.fecha_entrada_reservacion BETWEEN fecha_inicio AND fecha_fin) OR 
+(tbl_reservacion.fecha_salida_reservacion BETWEEN fecha_inicio AND fecha_fin) AND
+tbl_detalle_reservacion.id_tarifa_detalle=no_tarifa AND
+tbl_detalle_reservacion.id_reservacion_detalle = tbl_reservacion.PK_id_reservacion
+;
+END$$
+DELIMITER ;
+
+-- ----------------------------------------------2
+DELIMITER $$
+USE `empresarial`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getValidacionGobernanta`(IN idGobernanta INT, OUT validacion BOOLEAN)
+BEGIN 
+DECLARE cantidadAsignaciones INT; 
+SELECT if(COUNT(PK_id_gobernanta)  < 5, TRUE, FALSE)
+INTO validacion
+FROM empresarial.tbl_asignacion_gobernanta 
+WHERE PK_id_gobernanta=idGobernanta;
+END$$
+DELIMITER ;
+
+-- -------------------------
+-- FUNCIONES ALMACENADAS
+-- -------------------------
+DELIMITER $$
+USE `empresarial`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `getImpuestoTarifa`(no_tarifa INT) RETURNS float
+BEGIN
+DECLARE ImpuestoTarifa, totalServicios, totalHabitacion, noTarifa FLOAT;
+SELECT 
+tbl_tarifa.PK_id_tarifa, 
+sum(tbl_servicio.precio_servicio) as total_servicios, 
+max(tbl_mantenimiento_habitacion.precio_habitacion) as total_habitacion
+INTO noTarifa, totalServicios, totalHabitacion
+FROM empresarial.tbl_tarifa, empresarial.tbl_paquete_servicios, 
+empresarial.tbl_servicio, empresarial.tbl_mantenimiento_habitacion
+
+WHERE tbl_tarifa.PK_id_tarifa=no_tarifa AND tbl_paquete_servicios.id_tarifa_paquete = PK_id_tarifa
+AND tbl_servicio.PK_id_servicio = tbl_paquete_servicios.id_servicio_paquete 
+AND tbl_mantenimiento_habitacion.PK_id_habitacion = tbl_tarifa.id_habitacion_tarifa
+GROUP BY PK_id_tarifa;
+
+SELECT sum(totalServicios+totalHabitacion)*0.10 into ImpuestoTarifa;
+RETURN ImpuestoTarifa;
+END$$
+
+DELIMITER ;
