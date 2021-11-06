@@ -8,15 +8,50 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login_LD;
 
 /**
  *
- * @author Jefferson Dávila
+ * @author Jeff
  */
 public class Mnt_Horarios extends javax.swing.JInternalFrame {
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
+    HorarioDAO horariosdao = new HorarioDAO();
     Horario horarios = new Horario();
+    
+    void habilitarAcciones() {
+
+        var codigoAplicacion = 2002;
+        var usuario = Login_LD.usuario;
+
+        Btn_guardar.setVisible(false);
+        Btn_modificar.setVisible(false);
+        Btn_eliminar.setVisible(false);
+        Btn_buscar.setVisible(false);
+        
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[5];
+
+        for (int i = 0; i < 5; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[0].equals("1")) {
+            Btn_guardar.setVisible(true);
+        }
+        if (permisosApp[1].equals("1")) {
+            Btn_buscar.setVisible(true);
+        }
+        if (permisosApp[2].equals("1")) {
+            Btn_modificar.setVisible(true);
+        }
+        if (permisosApp[3].equals("1")) {
+            Btn_eliminar.setVisible(true);
+        }
+    }
 
     /**
      * Creates new form Mnt_Horarios
@@ -30,7 +65,7 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
     public void diseño() {
         this.setTitle("Mantenimiento de Horarios");
         Txt_Id.setBorder(null);
-        Txt_Extras.setBorder(null);
+//        Txt_Extras.setBorder(null);
         Txt_buscar.setBorder(null);
         Rdb_limpiar2.setVisible(false);
         Txt_descripcion.setBorder(BorderFactory.createEmptyBorder());
@@ -44,30 +79,126 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
         ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
         HorarioDAO.codigoAuxiliar = codigo;
         HorarioDAO.nombreAuxiliar = codigo;
-        String columnas[] = {"ID", "ENTRADA", "SALIDA", "H. EXTRAS", "DESCRIPCION", "ESTADO"};
+        String columnas[] = {"ID", "ENTRADA", "SALIDA", "DESCRIPCION", "ESTADO"};
         int cantidadcolumnas = columnas.length;
         prcs_repetidos.llenarColumnas(columnas, cantidadcolumnas, Tbl_Datos);
         String datos[] = new String[cantidadcolumnas];
-        int tamaño[] = {50, 250, 450, 150, 150, 150};
+        int tamaño[] = {50, 250, 450, 150, 150};
         HorarioDAO serviciosdao = new HorarioDAO();
         List<Horario> servicio = serviciosdao.select();
         for (Horario listaServicio : servicio) {
             datos[0] = listaServicio.getIdHorario();
             datos[1] = listaServicio.getEntradaHorario();
             datos[2] = listaServicio.getSalidaHorario();
-            datos[3] = listaServicio.getHorasExtrasHorario();
-            datos[4] = listaServicio.getDescripcionHorario();
+//            datos[3] = listaServicio.getHorasExtrasHorario();
+            datos[3] = listaServicio.getDescripcionHorario();
             if (listaServicio.getEstadoHorario().equals("1")) {
-                datos[5] = "Activo";
+                datos[4] = "Activo";
             } else {
-                datos[5] = "Inactivo";
+                datos[4] = "Inactivo";
             }
             prcs_repetidos.llenarFilas(datos, tamaño, Tbl_Datos);
         }
     }
 
+    public void validarHorarios(int h1, int h2, String cbx1, String cbx2, String cbx3, String cbx4) {
+        int total = h1 + 8;
+        if (total == h2) {
+
+            if (cbx2 == "pm") {
+                if (cbx1.equals("13")) {
+                    cbx1 = "1";
+                }
+                if (cbx1.equals("14")) {
+                    cbx1 = "2";
+                }
+                if (cbx1.equals("15")) {
+                    cbx1 = "3";
+                }
+                if (cbx1.equals("16")) {
+                    cbx1 = "4";
+                }
+                if (cbx1.equals("17")) {
+                    cbx1 = "5";
+                }
+                if (cbx1.equals("18")) {
+                    cbx1 = "6";
+                }
+                if (cbx1.equals("19")) {
+                    cbx1 = "7";
+                }
+                if (cbx1.equals("20")) {
+                    cbx1 = "8";
+                }
+                if (cbx1.equals("21")) {
+                    cbx1 = "9";
+                }
+                if (cbx1.equals("22")) {
+                    cbx1 = "10";
+                }
+                if (cbx1.equals("23")) {
+                    cbx1 = "11";
+                }
+                if (cbx1.equals("24")) {
+                    cbx1 = "12";
+                }
+            }
+
+            if (cbx4 == "pm") {
+                if (cbx3.equals("13")) {
+                    cbx3 = "1";
+                }
+                if (cbx3.equals("14")) {
+                    cbx3 = "2";
+                }
+                if (cbx3.equals("15")) {
+                    cbx3 = "3";
+                }
+                if (cbx3.equals("16")) {
+                    cbx3 = "4";
+                }
+                if (cbx3.equals("17")) {
+                    cbx3 = "5";
+                }
+                if (cbx3.equals("18")) {
+                    cbx3 = "6";
+                }
+                if (cbx3.equals("19")) {
+                    cbx3 = "7";
+                }
+                if (cbx3.equals("20")) {
+                    cbx3 = "8";
+                }
+                if (cbx3.equals("21")) {
+                    cbx3 = "9";
+                }
+                if (cbx3.equals("22")) {
+                    cbx3 = "10";
+                }
+                if (cbx3.equals("23")) {
+                    cbx3 = "11";
+                }
+                if (cbx3.equals("24")) {
+                    cbx3 = "12";
+                }
+            }
+
+            horarios.setIdHorario(Txt_Id.getText());
+            horarios.setEntradaHorario(cbx1 + " " + cbx2);
+            horarios.setSalidaHorario(cbx3 + " " + cbx4);
+            horarios.setDescripcionHorario(Txt_descripcion.getText());
+            if (Rdb_activo.isSelected()) {
+                horarios.setEstadoHorario("1");
+            } else if (Rdb_inactivo.isSelected()) {
+                horarios.setEstadoHorario("0");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "El horario asignado es invalido");
+        }
+    }
+
     public void Limpiar() {
-        prcs_repetidos.Limpiar(Txt_Id, Txt_Extras, Txt_buscar);
+        prcs_repetidos.Limpiar(Txt_Id, Txt_buscar);
         Txt_descripcion.setText("");
         Rdb_limpiar2.setSelected(true);
         Cbx_EHora.setSelectedIndex(0);
@@ -90,14 +221,11 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
         Pnl_ingresoDatos = new javax.swing.JPanel();
         Lbl_id = new javax.swing.JLabel();
         Lbl_descripcion = new javax.swing.JLabel();
-        Lbl_precio = new javax.swing.JLabel();
         Lbl_estado = new javax.swing.JLabel();
         Txt_Id = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         Txt_descripcion = new javax.swing.JTextArea();
-        Txt_Extras = new javax.swing.JTextField();
-        jSeparator4 = new javax.swing.JSeparator();
         Rdb_activo = new javax.swing.JRadioButton();
         Rdb_limpiar2 = new javax.swing.JRadioButton();
         Rdb_inactivo = new javax.swing.JRadioButton();
@@ -151,10 +279,6 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
         Lbl_descripcion.setForeground(new java.awt.Color(255, 255, 255));
         Lbl_descripcion.setText("Descripción:");
 
-        Lbl_precio.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_precio.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_precio.setText("H. Extras:");
-
         Lbl_estado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_estado.setForeground(new java.awt.Color(255, 255, 255));
         Lbl_estado.setText("Estado:");
@@ -169,10 +293,6 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
         Txt_descripcion.setRows(5);
         Txt_descripcion.setBorder(null);
         jScrollPane1.setViewportView(Txt_descripcion);
-
-        Txt_Extras.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_Extras.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_Extras.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         BtnGp_estado.add(Rdb_activo);
         Rdb_activo.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
@@ -408,66 +528,66 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
         Pnl_ingresoDatosLayout.setHorizontalGroup(
             Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Btn_fondoGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(Btn_fondo_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Btn_fondo_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Btn_fondo_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                .addComponent(Lbl_descripcion)
+                                .addGap(219, 219, 219))
+                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                .addComponent(Lbl_estado)
+                                .addGap(80, 80, 80)
+                                .addComponent(Rdb_activo)
+                                .addGap(18, 18, 18)
+                                .addComponent(Rdb_limpiar2)
+                                .addGap(18, 18, 18)
+                                .addComponent(Rdb_inactivo))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                                 .addComponent(Lbl_id3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Lbl_id4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8))
-                            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(Lbl_id1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Lbl_id2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Lbl_id5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Lbl_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Lbl_descripcion, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jSeparator1)
-                                            .addComponent(Txt_Id, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_ingresoDatosLayout.createSequentialGroup()
-                                            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(Lbl_id6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(Cbx_EHora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(Cbx_SHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(Cbx_EJornada, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(Cbx_SJornada, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(Lbl_id7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Txt_Extras, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                    .addComponent(Lbl_estado)
-                                    .addGap(80, 80, 80)
-                                    .addComponent(Rdb_activo)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(Rdb_limpiar2)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(Rdb_inactivo))
-                                .addComponent(jScrollPane1))))
-                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Btn_fondoGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21)
-                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(Btn_fondo_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Btn_fondo_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Btn_fondo_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(31, Short.MAX_VALUE))
+                                .addComponent(Lbl_id4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Lbl_id1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lbl_id2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lbl_id5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jSeparator1)
+                                        .addComponent(Txt_Id, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_ingresoDatosLayout.createSequentialGroup()
+                                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(Lbl_id6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Cbx_EHora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Cbx_SHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(Cbx_EJornada, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(Cbx_SJornada, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(Lbl_id7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         Pnl_ingresoDatosLayout.setVerticalGroup(
             Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -499,12 +619,6 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
                     .addComponent(Cbx_SHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Cbx_SJornada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lbl_precio)
-                    .addComponent(Txt_Extras, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
                 .addComponent(Lbl_descripcion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -617,7 +731,7 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
                                 .addComponent(Txt_buscar)
                                 .addComponent(Lbl_codigoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -659,7 +773,7 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
             String[] parts = cadena1.split(" ");
             String part1 = parts[0];
             String part2 = parts[1];
-            
+
             String cadena2 = Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString();
             String[] parts2 = cadena2.split(" ");
             String part3 = parts2[0];
@@ -670,9 +784,9 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
             Cbx_EJornada.setSelectedItem(part2);
             Cbx_SHora.setSelectedItem(part3);
             Cbx_SJornada.setSelectedItem(part4);
-            Txt_Extras.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString());
-            Txt_descripcion.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 4).toString());
-            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 5).toString().equals("Activo")) {
+//            Txt_Extras.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString());
+            Txt_descripcion.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString());
+            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 4).toString().equals("Activo")) {
                 Rdb_activo.setSelected(true);
             } else {
                 Rdb_inactivo.setSelected(true);
@@ -721,26 +835,97 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_modificarMouseEntered
 
     private void Btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_Id, Txt_Extras) && Txt_descripcion.getText() != "") {
+        if (prcs_repetidos.isNoneEmpty(Txt_Id) && Txt_descripcion.getText() != "") {
             if (prcs_repetidos.isSelected(Rdb_activo, Rdb_inactivo)) {
-                if (prcs_repetidos.isNumeric(Txt_Id.getText(), Txt_Extras.getText())) {
+                if (prcs_repetidos.isNumeric(Txt_Id.getText())) {
 
-                    HorarioDAO horariosdao = new HorarioDAO();
                     String cbx_Ehora = Cbx_EHora.getSelectedItem().toString();
                     String cbx_Ejornada = Cbx_EJornada.getSelectedItem().toString();
                     String cbx_Shora = Cbx_SHora.getSelectedItem().toString();
                     String cbx_Sjornada = Cbx_SJornada.getSelectedItem().toString();
 
-                    horarios.setIdHorario(Txt_Id.getText());
-                    horarios.setEntradaHorario(cbx_Ehora + " " + cbx_Ejornada);
-                    horarios.setSalidaHorario(cbx_Shora + " " + cbx_Sjornada);
-                    horarios.setHorasExtrasHorario(Txt_Extras.getText());
-                    horarios.setDescripcionHorario(Txt_descripcion.getText());
-                    if (Rdb_activo.isSelected()) {
-                        horarios.setEstadoHorario("1");
-                    } else if (Rdb_inactivo.isSelected()) {
-                        horarios.setEstadoHorario("0");
+                    if (cbx_Ejornada == "pm") {
+                        if (cbx_Ehora.equals("1")) {
+                            cbx_Ehora = "13";
+                        }
+                        if (cbx_Ehora.equals("2")) {
+                            cbx_Ehora = "14";
+                        }
+                        if (cbx_Ehora.equals("3")) {
+                            cbx_Ehora = "15";
+                        }
+                        if (cbx_Ehora.equals("4")) {
+                            cbx_Ehora = "16";
+                        }
+                        if (cbx_Ehora.equals("5")) {
+                            cbx_Ehora = "17";
+                        }
+                        if (cbx_Ehora.equals("6")) {
+                            cbx_Ehora = "18";
+                        }
+                        if (cbx_Ehora.equals("7")) {
+                            cbx_Ehora = "19";
+                        }
+                        if (cbx_Ehora.equals("8")) {
+                            cbx_Ehora = "20";
+                        }
+                        if (cbx_Ehora.equals("9")) {
+                            cbx_Ehora = "21";
+                        }
+                        if (cbx_Ehora.equals("10")) {
+                            cbx_Ehora = "22";
+                        }
+                        if (cbx_Ehora.equals("11")) {
+                            cbx_Ehora = "23";
+                        }
+                        if (cbx_Ehora.equals("12")) {
+                            cbx_Ehora = "24";
+                        }
                     }
+
+                    if (cbx_Sjornada == "pm") {
+                        if (cbx_Shora.equals("1")) {
+                            cbx_Shora = "13";
+                        }
+                        if (cbx_Shora.equals("2")) {
+                            cbx_Shora = "14";
+                        }
+                        if (cbx_Shora.equals("3")) {
+                            cbx_Shora = "15";
+                        }
+                        if (cbx_Shora.equals("4")) {
+                            cbx_Shora = "16";
+                        }
+                        if (cbx_Shora.equals("5")) {
+                            cbx_Shora = "17";
+                        }
+                        if (cbx_Shora.equals("6")) {
+                            cbx_Shora = "18";
+                        }
+                        if (cbx_Shora.equals("7")) {
+                            cbx_Shora = "19";
+                        }
+                        if (cbx_Shora.equals("8")) {
+                            cbx_Shora = "20";
+                        }
+                        if (cbx_Shora.equals("9")) {
+                            cbx_Shora = "21";
+                        }
+                        if (cbx_Shora.equals("10")) {
+                            cbx_Shora = "22";
+                        }
+                        if (cbx_Shora.equals("11")) {
+                            cbx_Shora = "23";
+                        }
+                        if (cbx_Shora.equals("12")) {
+                            cbx_Shora = "24";
+                        }
+                    }
+
+                    int hora1 = Integer.parseInt(cbx_Ehora);
+                    int hora2 = Integer.parseInt(cbx_Shora);
+
+                    validarHorarios(hora1, hora2, cbx_Ehora, cbx_Ejornada, cbx_Shora, cbx_Sjornada);
                     horariosdao.update(horarios);
                     actualizarTabla("");
                     prcs_repetidos.AlertaMensaje("modificado", "Horario", "exitosamente");
@@ -784,26 +969,97 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_guardarMouseEntered
 
     private void Btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_Id, Txt_Extras) && Txt_descripcion.getText() != "") {
+        if (prcs_repetidos.isNoneEmpty(Txt_Id) && Txt_descripcion.getText() != "") {
             if (prcs_repetidos.isSelected(Rdb_activo, Rdb_inactivo)) {
-                if (prcs_repetidos.isNumeric(Txt_Id.getText(), Txt_Extras.getText())) {
+                if (prcs_repetidos.isNumeric(Txt_Id.getText())) {
 
-                    HorarioDAO horariosdao = new HorarioDAO();
                     String cbx_Ehora = Cbx_EHora.getSelectedItem().toString();
                     String cbx_Ejornada = Cbx_EJornada.getSelectedItem().toString();
                     String cbx_Shora = Cbx_SHora.getSelectedItem().toString();
                     String cbx_Sjornada = Cbx_SJornada.getSelectedItem().toString();
 
-                    horarios.setIdHorario(Txt_Id.getText());
-                    horarios.setEntradaHorario(cbx_Ehora + " " + cbx_Ejornada);
-                    horarios.setSalidaHorario(cbx_Shora + " " + cbx_Sjornada);
-                    horarios.setHorasExtrasHorario(Txt_Extras.getText());
-                    horarios.setDescripcionHorario(Txt_descripcion.getText());
-                    if (Rdb_activo.isSelected()) {
-                        horarios.setEstadoHorario("1");
-                    } else if (Rdb_inactivo.isSelected()) {
-                        horarios.setEstadoHorario("0");
+                    if (cbx_Ejornada == "pm") {
+                        if (cbx_Ehora.equals("1")) {
+                            cbx_Ehora = "13";
+                        }
+                        if (cbx_Ehora.equals("2")) {
+                            cbx_Ehora = "14";
+                        }
+                        if (cbx_Ehora.equals("3")) {
+                            cbx_Ehora = "15";
+                        }
+                        if (cbx_Ehora.equals("4")) {
+                            cbx_Ehora = "16";
+                        }
+                        if (cbx_Ehora.equals("5")) {
+                            cbx_Ehora = "17";
+                        }
+                        if (cbx_Ehora.equals("6")) {
+                            cbx_Ehora = "18";
+                        }
+                        if (cbx_Ehora.equals("7")) {
+                            cbx_Ehora = "19";
+                        }
+                        if (cbx_Ehora.equals("8")) {
+                            cbx_Ehora = "20";
+                        }
+                        if (cbx_Ehora.equals("9")) {
+                            cbx_Ehora = "21";
+                        }
+                        if (cbx_Ehora.equals("10")) {
+                            cbx_Ehora = "22";
+                        }
+                        if (cbx_Ehora.equals("11")) {
+                            cbx_Ehora = "23";
+                        }
+                        if (cbx_Ehora.equals("12")) {
+                            cbx_Ehora = "24";
+                        }
                     }
+
+                    if (cbx_Sjornada == "pm") {
+                        if (cbx_Shora.equals("1")) {
+                            cbx_Shora = "13";
+                        }
+                        if (cbx_Shora.equals("2")) {
+                            cbx_Shora = "14";
+                        }
+                        if (cbx_Shora.equals("3")) {
+                            cbx_Shora = "15";
+                        }
+                        if (cbx_Shora.equals("4")) {
+                            cbx_Shora = "16";
+                        }
+                        if (cbx_Shora.equals("5")) {
+                            cbx_Shora = "17";
+                        }
+                        if (cbx_Shora.equals("6")) {
+                            cbx_Shora = "18";
+                        }
+                        if (cbx_Shora.equals("7")) {
+                            cbx_Shora = "19";
+                        }
+                        if (cbx_Shora.equals("8")) {
+                            cbx_Shora = "20";
+                        }
+                        if (cbx_Shora.equals("9")) {
+                            cbx_Shora = "21";
+                        }
+                        if (cbx_Shora.equals("10")) {
+                            cbx_Shora = "22";
+                        }
+                        if (cbx_Shora.equals("11")) {
+                            cbx_Shora = "23";
+                        }
+                        if (cbx_Shora.equals("12")) {
+                            cbx_Shora = "24";
+                        }
+                    }
+
+                    int hora1 = Integer.parseInt(cbx_Ehora);
+                    int hora2 = Integer.parseInt(cbx_Shora);
+
+                    validarHorarios(hora1, hora2, cbx_Ehora, cbx_Ejornada, cbx_Shora, cbx_Sjornada);
                     horariosdao.insert(horarios);
                     actualizarTabla("");
                     prcs_repetidos.AlertaMensaje("guardado", "Horario", "exitosamente");
@@ -823,7 +1079,7 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
-        prcs_repetidos.imprimirReporte("Rpt_MantHorario.jrxml");
+        prcs_repetidos.imprimirReporte("Rpt_MantHorario.jrxml", "Reporte Horarios");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
 
@@ -859,21 +1115,18 @@ public class Mnt_Horarios extends javax.swing.JInternalFrame {
     private javax.swing.JLabel Lbl_id5;
     private javax.swing.JLabel Lbl_id6;
     private javax.swing.JLabel Lbl_id7;
-    private javax.swing.JLabel Lbl_precio;
     private javax.swing.JPanel Pnl_datos;
     private javax.swing.JPanel Pnl_ingresoDatos;
     private javax.swing.JRadioButton Rdb_activo;
     private javax.swing.JRadioButton Rdb_inactivo;
     private javax.swing.JRadioButton Rdb_limpiar2;
     private javax.swing.JTable Tbl_Datos;
-    private javax.swing.JTextField Txt_Extras;
     private javax.swing.JTextField Txt_Id;
     private javax.swing.JTextField Txt_buscar;
     private javax.swing.JTextArea Txt_descripcion;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator7;
     // End of variables declaration//GEN-END:variables
 }

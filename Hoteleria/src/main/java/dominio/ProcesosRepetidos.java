@@ -180,21 +180,20 @@ public class ProcesosRepetidos {
 
     private Connection connection = null;
 
-    public void imprimirReporte(String nombreReporte) {
+    public void imprimirReporte(String nombreReporte, String titulo) {
         Map p = new HashMap();
-        System.out.println(Login_LD.usuario);
         JasperReport report;
         JasperPrint print;
 
         try {
             connection = Conexion.getConnection();
             report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-                    + "/src/main/java/reportes/"+ nombreReporte + "");
+                    + "/src/main/java/reportes/"+ nombreReporte);
             p.put("usuario", Login_LD.usuario);
             p.put("logo", new File("").getAbsolutePath() + "/src/main/java/reportes/hotel.png");
             print = JasperFillManager.fillReport(report, p, connection);
             JasperViewer view = new JasperViewer(print, false);
-            view.setTitle("Reporte de Servicios");
+            view.setTitle(titulo);
             view.setVisible(true);
 
         } catch (Exception e) {
@@ -231,6 +230,17 @@ public class ProcesosRepetidos {
             Conexion.close(stmt);
             Conexion.close(conn);
         }
+    }
+    
+    public static boolean cbxNoneSelected(JComboBox... jComboBoxes) {
+        for (JComboBox jComboBox : jComboBoxes) {
+            String cbx = jComboBox.getSelectedItem().toString();
+            if (cbx.equals("Seleccionar...")) {
+                JOptionPane.showMessageDialog(null, "Existen campos vacios, revise e intente de nuevo");
+                return false;
+            }
+        }
+        return true;
     }
 
 }

@@ -7,17 +7,50 @@ import java.awt.Color;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
-import java.io.File;
 import javax.swing.ImageIcon;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login_LD;
 
 /**
  *
- * @author Jefferson Dávila
+ * @author Jeff
  */
 public class Mnt_Pisos extends javax.swing.JInternalFrame {
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     Piso pisos = new Piso();
+    
+    void habilitarAcciones() {
+
+        var codigoAplicacion = 2004;
+        var usuario = Login_LD.usuario;
+
+        Btn_guardar.setVisible(false);
+        Btn_modificar.setVisible(false);
+        Btn_eliminar.setVisible(false);
+        Btn_buscar.setVisible(false);
+        
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[5];
+
+        for (int i = 0; i < 5; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[0].equals("1")) {
+            Btn_guardar.setVisible(true);
+        }
+        if (permisosApp[1].equals("1")) {
+            Btn_buscar.setVisible(true);
+        }
+        if (permisosApp[2].equals("1")) {
+            Btn_modificar.setVisible(true);
+        }
+        if (permisosApp[3].equals("1")) {
+            Btn_eliminar.setVisible(true);
+        }
+    }
 
     /**
      * Creates new form Mnt_¨Pisos
@@ -685,7 +718,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
-        prcs_repetidos.imprimirReporte("Rpt_MantPisos.jrxml");
+        prcs_repetidos.imprimirReporte("Rpt_MantPisos.jrxml", "Reporte Pisos");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
 
