@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Comercial.vista;
+
 import Comercial.datos.MarcaDAO;
 import Comercial.datos.Conexion;
 import Comercial.dominio.Marca;
@@ -22,6 +23,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+
 /**
  *
  * @author SipaqueRitaMaria
@@ -31,7 +33,6 @@ public class Mantenimiento_Marca extends javax.swing.JInternalFrame {
     /**
      * Creates new form Mantenimiento_Marca
      */
-    
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Codigo");
@@ -69,8 +70,7 @@ public class Mantenimiento_Marca extends javax.swing.JInternalFrame {
         Txt_estado.setText("");
 
     }
-    
-    
+
     public Mantenimiento_Marca() {
         initComponents();
         llenadoDeTablas();
@@ -300,11 +300,11 @@ public class Mantenimiento_Marca extends javax.swing.JInternalFrame {
 
     private void Btn_AyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_AyudaActionPerformed
         // TODO add your handling code here:
-         try {
+        try {
             if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaMantemientoMarca.chm")).exists()) {
                 Process p = Runtime
-                .getRuntime()
-                .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaMantemientoMarca.chm");
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaMantemientoMarca.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
@@ -315,17 +315,17 @@ public class Mantenimiento_Marca extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_Btn_AyudaActionPerformed
-private Connection connection = null;
+    private Connection connection = null;
     private void Btn_ReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ReporteActionPerformed
         // TODO add your handling code here:
-         Map p = new HashMap();
+        Map p = new HashMap();
         JasperReport report;
         JasperPrint print;
 
         try {
             connection = Conexion.getConnection();
             report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-                + "/src/main/java/Comercial/reportes/marca.jrxml");
+                    + "/src/main/java/Comercial/reportes/marca.jrxml");
             print = JasperFillManager.fillReport(report, p, connection);
             JasperViewer view = new JasperViewer(print, false);
             view.setTitle("Reporte Mantenimiento marca");
@@ -334,7 +334,7 @@ private Connection connection = null;
         } catch (Exception e) {
             e.printStackTrace();
         }
-                                   
+
     }//GEN-LAST:event_Btn_ReporteActionPerformed
 
     private void Btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_GuardarActionPerformed
