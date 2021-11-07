@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="85637867-e1cf-462d-805f-bbdbb5cb01e1">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="86a51d29-c5cc-4a4c-9254-827947444464">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT * FROM administracion.tbl_marca;]]>
+		<![CDATA[SELECT * FROM empresarial.tbl_marca;]]>
 	</queryString>
 	<field name="PK_codigo_marca" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -21,60 +21,52 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<image>
-				<reportElement x="55" y="0" width="109" height="79" uuid="8153d3b6-a1e5-4215-876c-f9c1d02014d7"/>
-				<imageExpression><![CDATA["C:\\Users\\SipaqueRitaMaria.LAPTOP-TII06UQE\\Desktop\\programas\\uno\\SistemaHotelero\\src\\main\\java\\Comercial\\vista\\Captura.PNG"]]></imageExpression>
+				<reportElement x="34" y="0" width="110" height="79" uuid="49a65f44-b7c5-47d1-95e3-0c4c5d9098cf"/>
+				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\6\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
 			</image>
-			<staticText>
-				<reportElement x="145" y="0" width="539" height="56" uuid="80df4de5-1c4f-4376-909a-98c0401b5fa6"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="30" isBold="true" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Mantenimiento Marca]]></text>
-			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="126" y="0" width="302" height="32" uuid="d76daf6c-d8f1-468d-af77-11ab5f745f57"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MANTENIMIENTO MARCA]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="61" splitType="Stretch">
 			<staticText>
-				<reportElement x="55" y="31" width="100" height="20" uuid="dea9bbbf-1ffc-4181-9535-39ec4c9d6c8e"/>
-				<text><![CDATA[Codigo Marca]]></text>
+				<reportElement x="34" y="41" width="100" height="20" uuid="ad5a4c3f-1fb6-47dd-abe1-0fa6d9e7d855"/>
+				<text><![CDATA[PK_codigo_marca]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="214" y="31" width="100" height="20" uuid="b2fe4c6c-f1ff-45e8-843a-895cf041e290"/>
-				<text><![CDATA[Nombre Marca]]></text>
+				<reportElement x="171" y="41" width="100" height="20" uuid="f11b5e76-7907-49cb-858f-d618bc87db98"/>
+				<text><![CDATA[nombre_marca]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="376" y="31" width="100" height="20" uuid="3105d529-70db-4947-aa31-1dcd764e6810"/>
-				<text><![CDATA[Estatus Marca]]></text>
+				<reportElement x="328" y="41" width="100" height="20" uuid="9cb3081b-a83e-4851-a301-8680d0a3a3ec"/>
+				<text><![CDATA[estatus_marca]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="125" splitType="Stretch">
 			<textField>
-				<reportElement x="64" y="21" width="100" height="20" uuid="b8c4b151-be8d-4c56-88fe-8848093e4d73"/>
+				<reportElement x="34" y="0" width="100" height="20" uuid="bb27ef85-8d63-4dc3-acb8-eacf48cd242e"/>
 				<textFieldExpression><![CDATA[$F{PK_codigo_marca}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="214" y="21" width="100" height="20" uuid="a2781690-1240-49fc-8346-ae102e1753a0"/>
+				<reportElement x="171" y="0" width="100" height="20" uuid="e96409ef-b356-4ab7-b8cf-55feb18df7f6"/>
 				<textFieldExpression><![CDATA[$F{nombre_marca}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="376" y="21" width="100" height="20" uuid="c8b5d79e-f120-4868-a12e-c784ac916151"/>
+				<reportElement x="328" y="0" width="100" height="20" uuid="35cbb17a-f485-447b-b27a-674e1518b769"/>
 				<textFieldExpression><![CDATA[$F{estatus_marca}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement x="0" y="0" width="802" height="1" uuid="dd88e111-5f17-4ce8-a7e2-e2bc29f87e08"/>
-			</line>
-			<line>
-				<reportElement x="0" y="0" width="802" height="1" uuid="e43414c8-de16-4f50-9f68-00ce5b776084"/>
-			</line>
-			<line>
-				<reportElement x="10" y="1" width="802" height="1" uuid="b01e9f99-215f-4f02-a023-55bc856f35c2"/>
-			</line>
 		</band>
 	</detail>
 	<columnFooter>

@@ -141,7 +141,7 @@ public class ReservacionDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 String idReservacion = rs.getString("PK_id_reservacion");
-                String fechaReservacion = rs.getString("fehca_reservacion");
+                String fechaReservacion = rs.getString("fecha_reservacion");
                 String fechaIngreso = rs.getString("fecha_entrada_reservacion");
                 String fechaEgreso = rs.getString("fecha_salida_reservacion");
                 String idCliente = rs.getString("identificacion_huesped_reservacion");
