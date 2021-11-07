@@ -5,9 +5,11 @@
  */
 package vista;
 
+import datos.Check_In_OutDAO;
 import datos.DetalleReservacionDAO;
 import datos.ReservacionDAO;
 import datos.TarifaDAO;
+import dominio.Check_In_Out;
 import dominio.DetalleReservacion;
 import dominio.ProcesosRepetidos;
 import dominio.Reservacion;
@@ -24,6 +26,7 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     DetalleReservacion detalleReservacion = new DetalleReservacion();
+    Check_In_Out checkinout = new Check_In_Out();
 
     /**
      * Creates new form Prcs_DetalleReservación
@@ -421,6 +424,7 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
         if (filaSeleccionada >= 0) {   //SI EXISTE UNA FILA SELECCIONADA REALIZARA EL TRASPASO
 
             DetalleReservacionDAO detalledao = new DetalleReservacionDAO();
+            Check_In_OutDAO checkdao = new Check_In_OutDAO();
             detalleReservacion.setIdReservacion(Txt_codigo.getText());
             detalleReservacion.setIdTarifa(Tbl_Tarifas.getValueAt(filaSeleccionada, 0).toString());
             detalleReservacion = detalledao.getProcesoAlmacenado(detalleReservacion);
@@ -435,7 +439,12 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
                 detalleReservacion.setCorrelativo("0");
                 detalleReservacion.setIdReservacion(Txt_codigo.getText());
                 detalleReservacion.setIdTarifa(Tbl_Tarifas.getValueAt(filaSeleccionada, 0).toString());
+                checkinout.setCorrelativo("0");
+                checkinout.setReservacion(Txt_codigo.getText());
+                checkinout.setTarifa(Tbl_Tarifas.getValueAt(filaSeleccionada, 0).toString());
+                checkinout.setEstado("0");
                 detalledao.insert(detalleReservacion);
+                checkdao.insert(checkinout);
                 tablaAsignaciones();
             }
         }
@@ -453,11 +462,14 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
         int filaSeleccionada = Tbl_Asignaciones.getSelectedRow();
         if (filaSeleccionada >= 0) {   //SI EXISTE UNA FILA SELECCIONADA REALIZARA LA ELIMINACIÓN
             DetalleReservacionDAO detalledao = new DetalleReservacionDAO();
+            Check_In_OutDAO checkdao = new Check_In_OutDAO();
             if (prcs_repetidos.isNoneEmpty(Txt_codigo)) {
                 if (prcs_repetidos.isNumeric(Txt_codigo.getText())) {
                     if (prcs_repetidos.ConfirmarEliminacion("eliminar", "asignación", this)) {
                         detalleReservacion.setCorrelativo(Tbl_Asignaciones.getValueAt(filaSeleccionada, 0).toString());
+                        checkinout.setCorrelativo(Tbl_Asignaciones.getValueAt(filaSeleccionada, 0).toString());
                         detalledao.delete(detalleReservacion);
+                        checkdao.delete(checkinout);
                         tablaAsignaciones();
                         prcs_repetidos.AlertaMensaje("eliminada", "Asignación", "exitosamente");
                         Limpiar();
