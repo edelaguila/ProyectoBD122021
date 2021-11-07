@@ -18,28 +18,63 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login_LD;
 
 /**
  *
  * @author leelu
  */
 public class Mnt_Huespedes extends javax.swing.JInternalFrame {
+
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     Huesped huespedes = new Huesped();
     SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
     Date fechaCumpleaños = null;
-            String fechaCumpleañosAux="";
-    
+    String fechaCumpleañosAux = "";
 
     /**
      * Creates new form Mnt_Huespedes
      */
+    void habilitarAcciones() {
+
+        var codigoAplicacion = 2003;
+        var usuario = Login_LD.usuario;
+
+        Btn_guardar.setVisible(false);
+        Btn_modificar.setVisible(false);
+        Btn_eliminar.setVisible(false);
+        Btn_buscar.setVisible(false);
+
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[5];
+
+        for (int i = 0; i < 5; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[0].equals("1")) {
+            Btn_guardar.setVisible(true);
+        }
+        if (permisosApp[1].equals("1")) {
+            Btn_buscar.setVisible(true);
+        }
+        if (permisosApp[2].equals("1")) {
+            Btn_modificar.setVisible(true);
+        }
+        if (permisosApp[3].equals("1")) {
+            Btn_eliminar.setVisible(true);
+        }
+    }
+
     public Mnt_Huespedes() {
         initComponents();
+        habilitarAcciones();
         diseño();
         actualizarTabla("");
     }
-    
+
     public void diseño() {
         this.setTitle("Mantenimiento de Huespedes");
         Txt_codigo.setBorder(null);
@@ -56,13 +91,13 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
         ImageIcon icono = new ImageIcon("src/main/java/assets/cliente.png");
         this.setFrameIcon(icono);
     }
-    
+
     public void actualizarTabla(String codigo) {
         ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
         HuespedDAO.codigoAuxiliar = codigo;
         HuespedDAO.nombreAuxiliar = codigo;
         HuespedDAO.apellidoAuxiliar = codigo;
-        String columnas[] = {"PASAPORTE", "NOMBRE", "APELLIDO","SEXO", "NACIONALIDAD", "TELEFONO", "CORREO", "CUMPLEAÑOS"};
+        String columnas[] = {"PASAPORTE", "NOMBRE", "APELLIDO", "SEXO", "NACIONALIDAD", "TELEFONO", "CORREO", "CUMPLEAÑOS"};
         int cantidadcolumnas = columnas.length;
         prcs_repetidos.llenarColumnas(columnas, cantidadcolumnas, Tbl_Datos);
         String datos[] = new String[cantidadcolumnas];
@@ -199,10 +234,15 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
         Rdb_Femenino.setText("Femenino");
 
         Btn_fondoGuardar.setBackground(new java.awt.Color(97, 212, 195));
+        Btn_fondoGuardar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondoGuardar.setMinimumSize(new java.awt.Dimension(104, 40));
 
         Btn_guardar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_guardar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_guardar.setText("Insertar");
+        Btn_guardar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_guardar.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_guardar.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_guardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_guardarMouseClicked(evt);
@@ -231,10 +271,16 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
         );
 
         Btn_fondo_eliminar.setBackground(new java.awt.Color(97, 212, 195));
+        Btn_fondo_eliminar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_eliminar.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_eliminar.setPreferredSize(new java.awt.Dimension(104, 40));
 
         Btn_eliminar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_eliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_eliminar.setText("Eliminar");
+        Btn_eliminar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_eliminar.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_eliminar.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_eliminarMouseClicked(evt);
@@ -251,18 +297,24 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
         Btn_fondo_eliminar.setLayout(Btn_fondo_eliminarLayout);
         Btn_fondo_eliminarLayout.setHorizontalGroup(
             Btn_fondo_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Btn_fondo_eliminarLayout.setVerticalGroup(
             Btn_fondo_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Btn_fondo_modificar.setBackground(new java.awt.Color(97, 212, 195));
+        Btn_fondo_modificar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_modificar.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_modificar.setPreferredSize(new java.awt.Dimension(104, 40));
 
         Btn_modificar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_modificar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_modificar.setText("Modificar");
+        Btn_modificar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_modificar.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_modificar.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_modificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_modificarMouseClicked(evt);
@@ -287,10 +339,16 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
         );
 
         Btn_fondo_reporte.setBackground(new java.awt.Color(97, 212, 195));
+        Btn_fondo_reporte.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_reporte.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_reporte.setPreferredSize(new java.awt.Dimension(104, 40));
 
         Btn_reporte.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_reporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_reporte.setText("Reporte");
+        Btn_reporte.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_reporte.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_reporte.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_reporte.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_reporteMouseClicked(evt);
@@ -315,10 +373,16 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
         );
 
         Btn_fondo_ayuda.setBackground(new java.awt.Color(253, 255, 182));
+        Btn_fondo_ayuda.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_ayuda.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_ayuda.setPreferredSize(new java.awt.Dimension(104, 40));
 
         Btn_ayuda.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_ayuda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_ayuda.setText("Ayuda");
+        Btn_ayuda.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_ayuda.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_ayuda.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_ayuda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_ayudaMouseClicked(evt);
@@ -343,10 +407,16 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
         );
 
         Btn_fondo_cancelar.setBackground(new java.awt.Color(255, 128, 115));
+        Btn_fondo_cancelar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_cancelar.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_cancelar.setPreferredSize(new java.awt.Dimension(104, 40));
 
         Btn_cancelar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_cancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_cancelar.setText("Cancelar");
+        Btn_cancelar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_cancelar.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_cancelar.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_cancelarMouseClicked(evt);
@@ -363,11 +433,11 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
         Btn_fondo_cancelar.setLayout(Btn_fondo_cancelarLayout);
         Btn_fondo_cancelarLayout.setHorizontalGroup(
             Btn_fondo_cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Btn_fondo_cancelarLayout.setVerticalGroup(
             Btn_fondo_cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Lbl_precio1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
@@ -657,7 +727,7 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
             Txt_telefono.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 5).toString());
             Txt_correo.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 6).toString());
             try {
-                fechaCumpleaños=formato.parse(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 7).toString());
+                fechaCumpleaños = formato.parse(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 7).toString());
             } catch (ParseException ex) {
                 Logger.getLogger(Mnt_Huespedes.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -714,30 +784,30 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_modificarMouseEntered
 
     private void Btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_nombre, Txt_apellido, Txt_nacionalidad, Txt_telefono, Txt_correo)&&Txt_cumple.getDate()!=null) {
+        if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_nombre, Txt_apellido, Txt_nacionalidad, Txt_telefono, Txt_correo) && Txt_cumple.getDate() != null) {
             if (prcs_repetidos.isSelected(Rdb_Masculino, Rdb_Femenino)) {
                 if (prcs_repetidos.isNumeric(Txt_codigo.getText(), Txt_telefono.getText())) {
                     if (ProcesosRepetidos.ValidarEmail(Txt_correo.getText())) {
 
-                    HuespedDAO serviciosdao = new HuespedDAO();
+                        HuespedDAO serviciosdao = new HuespedDAO();
 
-                    huespedes.setPasaporte(Txt_codigo.getText());
-                    huespedes.setNombre(Txt_nombre.getText());
-                    huespedes.setApellido(Txt_apellido.getText());
-                    if (Rdb_Masculino.isSelected()) {
-                        huespedes.setSexo("M");
-                    } else if (Rdb_Femenino.isSelected()) {
-                        huespedes.setSexo("F");
-                    }
-                    huespedes.setNacionalidad(Txt_nacionalidad.getText());
-                    huespedes.setTelefono(Txt_telefono.getText());
-                    huespedes.setDireccion(Txt_correo.getText());
-                    fechaCumpleañosAux=new SimpleDateFormat("yyyy-MM-dd").format(Txt_cumple.getDate());
-                    huespedes.setCumple(fechaCumpleañosAux);
-                    serviciosdao.update(huespedes);
-                    actualizarTabla("");
-                    prcs_repetidos.AlertaMensaje("modificado", "huesped", "exitosamente");
-                    Limpiar();
+                        huespedes.setPasaporte(Txt_codigo.getText());
+                        huespedes.setNombre(Txt_nombre.getText());
+                        huespedes.setApellido(Txt_apellido.getText());
+                        if (Rdb_Masculino.isSelected()) {
+                            huespedes.setSexo("M");
+                        } else if (Rdb_Femenino.isSelected()) {
+                            huespedes.setSexo("F");
+                        }
+                        huespedes.setNacionalidad(Txt_nacionalidad.getText());
+                        huespedes.setTelefono(Txt_telefono.getText());
+                        huespedes.setDireccion(Txt_correo.getText());
+                        fechaCumpleañosAux = new SimpleDateFormat("yyyy-MM-dd").format(Txt_cumple.getDate());
+                        huespedes.setCumple(fechaCumpleañosAux);
+                        serviciosdao.update(huespedes);
+                        actualizarTabla("");
+                        prcs_repetidos.AlertaMensaje("modificado", "huesped", "exitosamente");
+                        Limpiar();
                     }
                 }
             }
@@ -778,28 +848,28 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_guardarMouseEntered
 
     private void Btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_nombre, Txt_apellido, Txt_nacionalidad, Txt_telefono, Txt_correo)&&Txt_cumple.getDate()!=null) {
+        if (prcs_repetidos.isNoneEmpty(Txt_codigo, Txt_nombre, Txt_apellido, Txt_nacionalidad, Txt_telefono, Txt_correo) && Txt_cumple.getDate() != null) {
             if (prcs_repetidos.isSelected(Rdb_Masculino, Rdb_Femenino)) {
                 if (prcs_repetidos.isNumeric(Txt_codigo.getText(), Txt_telefono.getText())) {
                     if (ProcesosRepetidos.ValidarEmail(Txt_correo.getText())) {
-                    HuespedDAO serviciosdao = new HuespedDAO();
-                    huespedes.setPasaporte(Txt_codigo.getText());
-                    huespedes.setNombre(Txt_nombre.getText());
-                    huespedes.setApellido(Txt_apellido.getText());
-                    if (Rdb_Masculino.isSelected()) {
-                        huespedes.setSexo("M");
-                    } else if (Rdb_Femenino.isSelected()) {
-                        huespedes.setSexo("F");
-                    }
-                    huespedes.setNacionalidad(Txt_nacionalidad.getText());
-                    huespedes.setTelefono(Txt_telefono.getText());
-                    huespedes.setDireccion(Txt_correo.getText());
-                    fechaCumpleañosAux=new SimpleDateFormat("yyyy-MM-dd").format(Txt_cumple.getDate());
-                    huespedes.setCumple(fechaCumpleañosAux);
-                    serviciosdao.insert(huespedes);
-                    actualizarTabla("");
-                    prcs_repetidos.AlertaMensaje("guardado", "huesped", "exitosamente");
-                    Limpiar();
+                        HuespedDAO serviciosdao = new HuespedDAO();
+                        huespedes.setPasaporte(Txt_codigo.getText());
+                        huespedes.setNombre(Txt_nombre.getText());
+                        huespedes.setApellido(Txt_apellido.getText());
+                        if (Rdb_Masculino.isSelected()) {
+                            huespedes.setSexo("M");
+                        } else if (Rdb_Femenino.isSelected()) {
+                            huespedes.setSexo("F");
+                        }
+                        huespedes.setNacionalidad(Txt_nacionalidad.getText());
+                        huespedes.setTelefono(Txt_telefono.getText());
+                        huespedes.setDireccion(Txt_correo.getText());
+                        fechaCumpleañosAux = new SimpleDateFormat("yyyy-MM-dd").format(Txt_cumple.getDate());
+                        huespedes.setCumple(fechaCumpleañosAux);
+                        serviciosdao.insert(huespedes);
+                        actualizarTabla("");
+                        prcs_repetidos.AlertaMensaje("guardado", "huesped", "exitosamente");
+                        Limpiar();
                     }
                 }
             }

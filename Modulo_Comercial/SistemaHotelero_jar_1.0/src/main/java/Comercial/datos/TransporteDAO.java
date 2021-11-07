@@ -37,6 +37,7 @@ public class TransporteDAO {
     private static final String SQL_QUERY = "SELECT PK_codigo_transporte, clase_transporte, marca_transporte,"
             + " modelo_transporte, tipo_transporte, placa_transporte, color_transporte, estado_transporte,"
             + "numero_motor_transporte, estatus_transporte FROM tbl_transporte WHERE PK_codigo_transporte=?";
+    
     private static final String SQL_DELETE = "DELETE FROM tbl_transporte WHERE PK_codigo_transporte=?";
 
     public List<Transporte> select() {
@@ -63,6 +64,7 @@ public class TransporteDAO {
                 String estatus_transporte = rs.getString("estatus_transporte");
                 
                 transporte = new Transporte();
+                transporte.setPK_codigo_transporte(PK_codigo_transporte);
                 transporte.setClase_transporte(clase_transporte);
                 transporte.setMarca_transporte(marca_transporte);
                 transporte.setModelo_transporte(modelo_transporte);
@@ -179,6 +181,7 @@ public class TransporteDAO {
                 String estatus_transporte = rs.getString("estatus_transporte");
                 
                 transporte = new Transporte();
+                transporte.setPK_codigo_transporte(PKcodigoTransporte);
                 transporte.setClase_transporte(clase_transporte);
                 transporte.setMarca_transporte(marca_transporte);
                 transporte.setModelo_transporte(modelo_transporte);

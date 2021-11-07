@@ -20,13 +20,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login_LD;
 
 /**
  *
  * @author leelu
  */
 public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
-        ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
+
+    ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     ObjetoPerdido asignacion = new ObjetoPerdido();
     DefaultTableModel modelo1;
     DefaultTableModel modelo2;
@@ -35,6 +38,36 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
     /**
      * Creates new form Prcs_EntregaObjetoPerdido
      */
+    void habilitarAcciones() {
+
+        var codigoAplicacion = 2003;
+        var usuario = Login_LD.usuario;
+
+        Btn_PasUno.setEnabled(false);
+        Btn_PasTodo.setEnabled(false);
+        Btn_QuitUno.setEnabled(false);
+        Btn_QuitTodo.setEnabled(false);
+        Btn_buscar.setVisible(false);
+
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[5];
+
+        for (int i = 0; i < 5; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[1].equals("1")) {
+            Btn_buscar.setVisible(true);
+        }
+        if (permisosApp[2].equals("1")) {
+            Btn_PasUno.setEnabled(true);
+        Btn_PasTodo.setEnabled(true);
+        Btn_QuitUno.setEnabled(true);
+        Btn_QuitTodo.setEnabled(true);
+        }
+    }
+
     public Prcs_EntregaObjetoPerdido() {
         initComponents();
         diseño();
@@ -43,35 +76,35 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         imprimir_Objetos();
         imprimir_Objetos_entregar();
     }
-    
-            public void diseño() {
+
+    public void diseño() {
         this.setTitle("Entrega Objetos Perdidos");
         ImageIcon icono = new ImageIcon("src/main/java/assets/package.png");
         this.setFrameIcon(icono);
         Txt_codigo2.setBorder(null);
         prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_guardar2, Btn_reporte, Btn_buscar, Tbl_Servicios, Tbl_Asignaciones);
     }
-            
-            public void cargar_habitaciones() {
+
+    public void cargar_habitaciones() {
         txt_habitacion.addItem("Seleccionar...");
         HabitacionDAO personaDAO = new HabitacionDAO();
-        HabitacionDAO.codigoAuxiliar="";
+        HabitacionDAO.codigoAuxiliar = "";
         List<Habitacion> habitaciones = personaDAO.select();
         for (Habitacion habitacion : habitaciones) {
-            txt_habitacion.addItem(String.valueOf(habitacion.getId()));   
-            }
-        }
-            
-            private static boolean isNumeric(String cadena){
-        try {
-                Integer.parseInt(cadena);
-                return true;
-        } catch (NumberFormatException nfe){
-                return false;
+            txt_habitacion.addItem(String.valueOf(habitacion.getId()));
         }
     }
-            
-            public void imprimir_Objetos() {
+
+    private static boolean isNumeric(String cadena) {
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
+
+    public void imprimir_Objetos() {
         modelo1 = new DefaultTableModel();
         modelo1.addColumn("ID");
         modelo1.addColumn("Habitacion");
@@ -93,10 +126,10 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         Tbl_Servicios.getColumnModel().getColumn(3).setPreferredWidth(50);
         Tbl_Servicios.getColumnModel().getColumn(4).setPreferredWidth(50);
     }
-            
-            public void imprimir_Objetos_entregar() {
-                ObjetoPerdidoDAO.codigoAuxiliar="";
-                ObjetoPerdidoDAO.nombreAuxiliar="";
+
+    public void imprimir_Objetos_entregar() {
+        ObjetoPerdidoDAO.codigoAuxiliar = "";
+        ObjetoPerdidoDAO.nombreAuxiliar = "";
         modelo2 = new DefaultTableModel();
         modelo2.addColumn("ID");
         modelo2.addColumn("Habitacion");
@@ -111,30 +144,32 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         Tbl_Asignaciones.getColumnModel().getColumn(2).setCellRenderer(centro);
         Tbl_Asignaciones.getColumnModel().getColumn(3).setCellRenderer(centro);
         Tbl_Asignaciones.getColumnModel().getColumn(4).setCellRenderer(centro);
-        
+
         Tbl_Asignaciones.getColumnModel().getColumn(0).setPreferredWidth(50);
         Tbl_Asignaciones.getColumnModel().getColumn(1).setPreferredWidth(50);
         Tbl_Asignaciones.getColumnModel().getColumn(2).setPreferredWidth(50);
         Tbl_Asignaciones.getColumnModel().getColumn(3).setPreferredWidth(50);
         Tbl_Asignaciones.getColumnModel().getColumn(4).setPreferredWidth(50);
     }
-            private void limpiar(){
+
+    private void limpiar() {
         Txt_codigo2.setText("");
         txt_habitacion.setSelectedItem("Seleccionar...");
         imprimir_Objetos();
         imprimir_Objetos_entregar();
     }
-            
-            private void limpiart(){
+
+    private void limpiart() {
         imprimir_Objetos();
         imprimir_Objetos_entregar();
-    }       
-            
-            public void fecha_actual() {
+    }
+
+    public void fecha_actual() {
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         fecha.setDate(date);
-    }            
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -165,10 +200,10 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         txt_habitacion = new javax.swing.JComboBox<>();
         Lbl_id3 = new javax.swing.JLabel();
         Txt_codigo2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        Btn_QuitTodo = new javax.swing.JButton();
+        Btn_QuitUno = new javax.swing.JButton();
+        Btn_PasTodo = new javax.swing.JButton();
+        Btn_PasUno = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(36, 47, 65));
         setClosable(true);
@@ -363,31 +398,35 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         Lbl_id3.setForeground(new java.awt.Color(255, 255, 255));
         Lbl_id3.setText("Habitacion:");
 
-        jButton1.setText("<<");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Btn_QuitTodo.setBackground(new java.awt.Color(97, 212, 195));
+        Btn_QuitTodo.setText("<<");
+        Btn_QuitTodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Btn_QuitTodoActionPerformed(evt);
             }
         });
 
-        jButton2.setText("<");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Btn_QuitUno.setBackground(new java.awt.Color(97, 212, 195));
+        Btn_QuitUno.setText("<");
+        Btn_QuitUno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Btn_QuitUnoActionPerformed(evt);
             }
         });
 
-        jButton3.setText(">>");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Btn_PasTodo.setBackground(new java.awt.Color(97, 212, 195));
+        Btn_PasTodo.setText(">>");
+        Btn_PasTodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                Btn_PasTodoActionPerformed(evt);
             }
         });
 
-        jButton4.setText(">");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        Btn_PasUno.setBackground(new java.awt.Color(97, 212, 195));
+        Btn_PasUno.setText(">");
+        Btn_PasUno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                Btn_PasUnoActionPerformed(evt);
             }
         });
 
@@ -416,10 +455,10 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
                             .addComponent(Btn_fondo_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Btn_fondo_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(Btn_QuitTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Btn_QuitUno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Btn_PasTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Btn_PasUno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(Pnl_ingresoDatos2Layout.createSequentialGroup()
@@ -449,13 +488,13 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
                 .addGroup(Pnl_ingresoDatos2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_ingresoDatos2Layout.createSequentialGroup()
                         .addGap(0, 21, Short.MAX_VALUE)
-                        .addComponent(jButton4)
+                        .addComponent(Btn_PasUno)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
+                        .addComponent(Btn_PasTodo)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(Btn_QuitUno)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addComponent(Btn_QuitTodo)
                         .addGap(76, 76, 76)
                         .addComponent(Btn_fondoGuardar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -490,39 +529,38 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_guardar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardar2MouseClicked
-if (Prcs_EntregaObjetoPerdido.isNumeric(txt_habitacion.getSelectedItem().toString())) {
-            if (txt_habitacion.getSelectedItem().toString().length()!=0&&Txt_codigo2.getText().length()!=0) {
-        ObjetoPerdidoDAO modulosDAO = new ObjetoPerdidoDAO();
-                ObjetoPerdidoDAO.codigoAuxiliar="";
-                ObjetoPerdidoDAO.nombreAuxiliar="";
-        String Vector[]=new String[5];
-            ObjetoPerdido moduloInsertar = new ObjetoPerdido();
-            for (int i = 0; i < Tbl_Asignaciones.getRowCount(); i++) {
-             
-           
-           Vector[0]=(String) Tbl_Asignaciones.getValueAt(i, 0);
-           Vector[1]=(String) Tbl_Asignaciones.getValueAt(i, 1);
-           Vector[2]=(String) Tbl_Asignaciones.getValueAt(i, 2);
-           Vector[3]=(String) Tbl_Asignaciones.getValueAt(i, 3);
-           Vector[4]=(String) Tbl_Asignaciones.getValueAt(i, 4);
-            
-            moduloInsertar.setIdobjeto(Vector[0]);           
-            moduloInsertar.setAma(Vector[2]);
-            moduloInsertar.setHabitacion(Vector[1]);
-            String fechaactual = new SimpleDateFormat("yyyy-MM-dd").format(fecha.getDate());
-            moduloInsertar.setFechae(fechaactual);
-            moduloInsertar.setObjeto(Vector[4]);
-            moduloInsertar.setDpi(Txt_codigo2.getText());
-            moduloInsertar.setEstado("2");
-            
-            modulosDAO.update(moduloInsertar);   
-        }
-            
-            JOptionPane.showMessageDialog(null, "Objeto Entregado");
-            }else{
-            JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
-        }
-        }else{
+        if (Prcs_EntregaObjetoPerdido.isNumeric(txt_habitacion.getSelectedItem().toString())) {
+            if (txt_habitacion.getSelectedItem().toString().length() != 0 && Txt_codigo2.getText().length() != 0) {
+                ObjetoPerdidoDAO modulosDAO = new ObjetoPerdidoDAO();
+                ObjetoPerdidoDAO.codigoAuxiliar = "";
+                ObjetoPerdidoDAO.nombreAuxiliar = "";
+                String Vector[] = new String[5];
+                ObjetoPerdido moduloInsertar = new ObjetoPerdido();
+                for (int i = 0; i < Tbl_Asignaciones.getRowCount(); i++) {
+
+                    Vector[0] = (String) Tbl_Asignaciones.getValueAt(i, 0);
+                    Vector[1] = (String) Tbl_Asignaciones.getValueAt(i, 1);
+                    Vector[2] = (String) Tbl_Asignaciones.getValueAt(i, 2);
+                    Vector[3] = (String) Tbl_Asignaciones.getValueAt(i, 3);
+                    Vector[4] = (String) Tbl_Asignaciones.getValueAt(i, 4);
+
+                    moduloInsertar.setIdobjeto(Vector[0]);
+                    moduloInsertar.setAma(Vector[2]);
+                    moduloInsertar.setHabitacion(Vector[1]);
+                    String fechaactual = new SimpleDateFormat("yyyy-MM-dd").format(fecha.getDate());
+                    moduloInsertar.setFechae(fechaactual);
+                    moduloInsertar.setObjeto(Vector[4]);
+                    moduloInsertar.setDpi(Txt_codigo2.getText());
+                    moduloInsertar.setEstado("2");
+
+                    modulosDAO.update(moduloInsertar);
+                }
+
+                JOptionPane.showMessageDialog(null, "Objeto Entregado");
+            } else {
+                JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "Seleccione una habitacion");
         }
         limpiar();
@@ -561,7 +599,7 @@ if (Prcs_EntregaObjetoPerdido.isNumeric(txt_habitacion.getSelectedItem().toStrin
     }//GEN-LAST:event_Btn_ayudaMouseExited
 
     private void Btn_cancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelarMouseClicked
-limpiar();
+        limpiar();
     }//GEN-LAST:event_Btn_cancelarMouseClicked
 
     private void Btn_cancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelarMouseEntered
@@ -573,44 +611,42 @@ limpiar();
     }//GEN-LAST:event_Btn_cancelarMouseExited
 
     private void Btn_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseClicked
-limpiart();
-        String combobox=txt_habitacion.getSelectedItem().toString();
-        int validar=Integer.parseInt(combobox);        
+        limpiart();
+        String combobox = txt_habitacion.getSelectedItem().toString();
+        int validar = Integer.parseInt(combobox);
         String datos[] = new String[5];
         ObjetoPerdidoDAO dao = new ObjetoPerdidoDAO();
-        ObjetoPerdidoDAO.codigoAuxiliar="";
-                ObjetoPerdidoDAO.nombreAuxiliar="";
+        ObjetoPerdidoDAO.codigoAuxiliar = "";
+        ObjetoPerdidoDAO.nombreAuxiliar = "";
         List<ObjetoPerdido> personas = dao.select();
         for (ObjetoPerdido persona : personas) {
-            if (validar==Integer.parseInt(persona.getHabitacion())) {
+            if (validar == Integer.parseInt(persona.getHabitacion())) {
                 if (persona.getEstado().equals("1")) {
-                    
-                
-            datos[0] = persona.getIdobjeto();
-            datos[1] = persona.getHabitacion();
-            datos[2] = persona.getAma();
-            datos[3] = persona.getFecha();
-            datos[4] = persona.getObjeto();
-            
-            modelo1.addRow(datos);
-            Tbl_Servicios.setModel(modelo1);
+
+                    datos[0] = persona.getIdobjeto();
+                    datos[1] = persona.getHabitacion();
+                    datos[2] = persona.getAma();
+                    datos[3] = persona.getFecha();
+                    datos[4] = persona.getObjeto();
+
+                    modelo1.addRow(datos);
+                    Tbl_Servicios.setModel(modelo1);
                 }
             }
         }
         for (ObjetoPerdido persona : personas) {
-                if (persona.getEstado().equals("2")&&persona.getDpi().equals(Txt_codigo2.getText())) {
-                    
-                
-            datos[0] = persona.getIdobjeto();
-            datos[1] = persona.getHabitacion();
-            datos[2] = persona.getAma();
-            datos[3] = persona.getFecha();
-            datos[4] = persona.getObjeto();
-            
-            modelo2.addRow(datos);
-            Tbl_Asignaciones.setModel(modelo2);
-                }
+            if (persona.getEstado().equals("2") && persona.getDpi().equals(Txt_codigo2.getText())) {
+
+                datos[0] = persona.getIdobjeto();
+                datos[1] = persona.getHabitacion();
+                datos[2] = persona.getAma();
+                datos[3] = persona.getFecha();
+                datos[4] = persona.getObjeto();
+
+                modelo2.addRow(datos);
+                Tbl_Asignaciones.setModel(modelo2);
             }
+        }
     }//GEN-LAST:event_Btn_buscarMouseClicked
 
     private void Btn_buscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseEntered
@@ -621,7 +657,7 @@ limpiart();
         Btn_fondoBuscar.setBackground(new Color(97, 212, 195));
     }//GEN-LAST:event_Btn_buscarMouseExited
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void Btn_PasUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_PasUnoActionPerformed
         // TODO add your handling code here:
         int filaSeleccionada = Tbl_Servicios.getSelectedRow();
         if (1 == 1) {
@@ -636,9 +672,9 @@ limpiart();
                 modelo1.removeRow(filaSeleccionada);
             }
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_Btn_PasUnoActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void Btn_PasTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_PasTodoActionPerformed
         // TODO add your handling code here:
         for (int i = 0; i < Tbl_Servicios.getRowCount(); i++) {
             String Vector[] = new String[5];
@@ -650,9 +686,9 @@ limpiart();
             modelo2.addRow(Vector);
         }
         imprimir_Objetos();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_Btn_PasTodoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void Btn_QuitUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_QuitUnoActionPerformed
         // TODO add your handling code here:
         int filaSeleccionada = Tbl_Asignaciones.getSelectedRow();
         if (1 == 1) {
@@ -667,9 +703,9 @@ limpiart();
                 modelo2.removeRow(filaSeleccionada);
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_Btn_QuitUnoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Btn_QuitTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_QuitTodoActionPerformed
         // TODO add your handling code here:
         for (int i = 0; i < Tbl_Asignaciones.getRowCount(); i++) {
             String Vector[] = new String[5];
@@ -681,45 +717,33 @@ limpiart();
             modelo1.addRow(Vector);
         }
         imprimir_Objetos();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Btn_QuitTodoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Btn_PasTodo;
+    private javax.swing.JButton Btn_PasUno;
+    private javax.swing.JButton Btn_QuitTodo;
+    private javax.swing.JButton Btn_QuitUno;
     private javax.swing.JLabel Btn_ayuda;
     private javax.swing.JLabel Btn_buscar;
     private javax.swing.JLabel Btn_cancelar;
     private javax.swing.JPanel Btn_fondoBuscar;
-    private javax.swing.JPanel Btn_fondoGuardar;
-    private javax.swing.JPanel Btn_fondoGuardar1;
     private javax.swing.JPanel Btn_fondoGuardar2;
     private javax.swing.JPanel Btn_fondo_ayuda;
     private javax.swing.JPanel Btn_fondo_cancelar;
     private javax.swing.JPanel Btn_fondo_reporte;
-    private javax.swing.JLabel Btn_guardar;
-    private javax.swing.JLabel Btn_guardar1;
     private javax.swing.JLabel Btn_guardar2;
     private javax.swing.JLabel Btn_reporte;
-    private javax.swing.JLabel Lbl_id;
-    private javax.swing.JLabel Lbl_id1;
     private javax.swing.JLabel Lbl_id2;
     private javax.swing.JLabel Lbl_id3;
-    private javax.swing.JPanel Pnl_ingresoDatos;
-    private javax.swing.JPanel Pnl_ingresoDatos1;
     private javax.swing.JPanel Pnl_ingresoDatos2;
     private javax.swing.JTable Tbl_Asignaciones;
     private javax.swing.JTable Tbl_Servicios;
-    private javax.swing.JTextField Txt_codigo;
-    private javax.swing.JTextField Txt_codigo1;
     private javax.swing.JTextField Txt_codigo2;
     private com.toedter.calendar.JDateChooser fecha;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JComboBox<String> txt_habitacion;
     // End of variables declaration//GEN-END:variables
