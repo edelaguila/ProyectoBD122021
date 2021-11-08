@@ -5,7 +5,6 @@ import dominio.ProcesosRepetidos;
 import dominio.OrdenRestaurante;
 import java.awt.Color;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import seguridad.vista.GenerarPermisos;
 import seguridad.vista.Login_LD;
@@ -27,7 +26,6 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
 
         Btn_guardar.setVisible(false);
         Btn_modificar.setVisible(false);
-        Btn_eliminar.setVisible(false);
         Btn_buscar.setVisible(false);
 
         GenerarPermisos permisos = new GenerarPermisos();
@@ -47,58 +45,80 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
         if (permisosApp[2].equals("1")) {
             Btn_modificar.setVisible(true);
         }
-        if (permisosApp[3].equals("1")) {
-            Btn_eliminar.setVisible(true);
-        }
     }
 
     public Prcs_OrdenDeRestaurante() {
         initComponents();
         diseño();
+        fechaActual();
+        horaActual();
+        Lbl_mesa.setVisible(false);
+        Txt_NoMesa.setVisible(false);
+        jSeparator3.setVisible(false);
+        ID_Encabezado.setVisible(false);
         actualizarTabla("");
     }
 
     public void diseño() {
         this.setTitle("Ordenes de Restaurante");
-        Txt_CantidadPlatos.setBorder(null);
-        Txt_Menu.setBorder(null);
-        Txt_Precio.setBorder(null);
         Txt_Habitacion.setBorder(null);
         Txt_NoMesa.setBorder(null);
-        Txt_Total.setBorder(null);
         Txt_buscar.setBorder(null);
-        prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar, Btn_Total, Btn_catalogo, Btn_precio);
+        Txt_Hora.setBorder(null);
+        Txt_Fecha.setBorder(null);
+        prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar, Btn_catalogo);
         ImageIcon icono = new ImageIcon("src/main/java/assets/menu.png");
         this.setFrameIcon(icono);
     }
 
     public void actualizarTabla(String codigo) {
-//        ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
-//        AsignacionOrdenDAO.codigoAuxiliar = codigo;
-//        AsignacionOrdenDAO.nombreAuxiliar = codigo;
-//        String columnas[] = {"ID", "MENU", "HABITACIÒN", "CANTIDAD", "MESA/HABITACIÒN", "HORA", "FECHA", "TOTAL"};
-//        int cantidadcolumnas = columnas.length;
-//        prcs_repetidos.llenarColumnas(columnas, cantidadcolumnas, Tbl_Datos);
-//        String datos[] = new String[cantidadcolumnas];
-//        int tamaño[] = {50, 60, 75, 75, 175, 60, 60, 60};
-//        AsignacionOrdenDAO restaurantedao = new AsignacionOrdenDAO();
-//        List<OrdenRestaurante> restaurante = restaurantedao.select();
-//        for (OrdenRestaurante listaServicio : restaurante) {
-//            datos[0] = String.valueOf(listaServicio.getIdOrden());
-//            datos[1] = String.valueOf(listaServicio.getIdMenu());
-//            datos[2] = String.valueOf(listaServicio.getIdHabitacion());
-//            datos[3] = String.valueOf(listaServicio.getCantidadOrden());
-//            datos[4] = String.valueOf(listaServicio.getMesaOrden());
-//            datos[5] = String.valueOf(listaServicio.getHoraOrden());
-//            datos[6] = String.valueOf(listaServicio.getFechaOrden());
-//            datos[7] = String.valueOf(listaServicio.getTotalOrden());
-//            prcs_repetidos.llenarFilas(datos, tamaño, Tbl_Datos);
-//        }
+        ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
+        AsignacionOrdenDAO.codigoAuxiliar = codigo;
+        AsignacionOrdenDAO.nombreAuxiliar = codigo;
+        String columnas[] = {"ID", "HABITACION", "NO. MESA/HABITACION", "FECHA", "HORA"};
+        int cantidadcolumnas = columnas.length;
+        prcs_repetidos.llenarColumnas(columnas, cantidadcolumnas, Tbl_Datos);
+        String datos[] = new String[cantidadcolumnas];
+        int tamaño[] = {50, 70, 200, 70, 70};
+        AsignacionOrdenDAO restaurantedao = new AsignacionOrdenDAO();
+        List<OrdenRestaurante> restaurante = restaurantedao.select();
+        for (OrdenRestaurante listaServicio : restaurante) {
+            datos[0] = String.valueOf(listaServicio.getIdEncabezado());
+            datos[1] = String.valueOf(listaServicio.getIdHabitacion());
+            datos[2] = String.valueOf(listaServicio.getMesaOrden());
+            datos[3] = String.valueOf(listaServicio.getFechaOrden());
+            datos[4] = String.valueOf(listaServicio.getHoraOrden());
+            prcs_repetidos.llenarFilas(datos, tamaño, Tbl_Datos);
+        }
+    }
+
+    public void fechaActual() {
+        LocalDateTime locaDate = LocalDateTime.now();
+        int anio = locaDate.getYear();
+        int mes = locaDate.getMonthValue();
+        int dia = locaDate.getDayOfMonth();
+        String fechaOrden = String.valueOf(anio + "-" + mes + "-" + dia);
+        Txt_Fecha.setText(fechaOrden);
+    }
+
+    public void horaActual() {
+        LocalDateTime locaDate = LocalDateTime.now();
+        int horas = locaDate.getHour();
+        int minutos = locaDate.getMinute();
+        int segundos = locaDate.getSecond();
+        String horaOrden = String.valueOf(horas + ":" + minutos + ":" + segundos);
+        Txt_Hora.setText(horaOrden);
     }
 
     public void Limpiar() {
-        prcs_repetidos.Limpiar(Txt_CantidadPlatos, Txt_Habitacion, Txt_buscar, Txt_NoMesa, Txt_Total, Txt_Precio);
+        prcs_repetidos.Limpiar(Txt_buscar, Txt_NoMesa, Txt_Habitacion, Txt_Hora, Txt_Fecha);
         Cbx_Servicio.setSelectedIndex(0);
+        fechaActual();
+        horaActual();
+        Txt_NoMesa.setEditable(false);
+        Lbl_mesa.setVisible(false);
+        Txt_NoMesa.setVisible(false);
+        jSeparator3.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -108,17 +128,9 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
         BtnGp_tipo = new javax.swing.ButtonGroup();
         BtnGp_estado = new javax.swing.ButtonGroup();
         Pnl_ingresoDatos = new javax.swing.JPanel();
-        Lbl_id = new javax.swing.JLabel();
-        Lbl_nombre = new javax.swing.JLabel();
         Lbl_descripcion = new javax.swing.JLabel();
-        Txt_CantidadPlatos = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
-        Txt_Habitacion = new javax.swing.JTextField();
-        jSeparator2 = new javax.swing.JSeparator();
         Btn_fondoGuardar = new javax.swing.JPanel();
         Btn_guardar = new javax.swing.JLabel();
-        Btn_fondo_eliminar = new javax.swing.JPanel();
-        Btn_eliminar = new javax.swing.JLabel();
         Btn_fondo_modificar = new javax.swing.JPanel();
         Btn_modificar = new javax.swing.JLabel();
         Btn_fondo_reporte = new javax.swing.JPanel();
@@ -127,26 +139,22 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
         Btn_ayuda = new javax.swing.JLabel();
         Btn_fondo_cancelar = new javax.swing.JPanel();
         Btn_cancelar = new javax.swing.JLabel();
-        Lbl_nombre1 = new javax.swing.JLabel();
+        Lbl_mesa = new javax.swing.JLabel();
         Txt_NoMesa = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        Btn_fondo_cancelar1 = new javax.swing.JPanel();
-        Btn_Total = new javax.swing.JLabel();
-        Lbl_nombre2 = new javax.swing.JLabel();
-        Txt_Total = new javax.swing.JTextField();
-        jSeparator4 = new javax.swing.JSeparator();
         Cbx_Servicio = new javax.swing.JComboBox<>();
         Lbl_nombre3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        ID_Encabezado = new javax.swing.JLabel();
         Btn_fondo_reporte1 = new javax.swing.JPanel();
         Btn_catalogo = new javax.swing.JLabel();
-        Txt_Precio = new javax.swing.JTextField();
-        jSeparator5 = new javax.swing.JSeparator();
-        Lbl_id1 = new javax.swing.JLabel();
-        Txt_Menu = new javax.swing.JTextField();
+        Txt_Habitacion = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
-        Btn_fondo_reporte2 = new javax.swing.JPanel();
-        Btn_precio = new javax.swing.JLabel();
+        Txt_Hora = new javax.swing.JTextField();
+        jSeparator4 = new javax.swing.JSeparator();
+        Lbl_nombre2 = new javax.swing.JLabel();
+        Lbl_nombre4 = new javax.swing.JLabel();
+        Txt_Fecha = new javax.swing.JTextField();
+        jSeparator5 = new javax.swing.JSeparator();
         Pnl_datos = new javax.swing.JPanel();
         Lbl_codigoNombre = new javax.swing.JLabel();
         Txt_buscar = new javax.swing.JTextField();
@@ -166,25 +174,9 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
         Pnl_ingresoDatos.setBackground(new java.awt.Color(36, 47, 65));
         Pnl_ingresoDatos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INGRESO DE DATOS:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        Lbl_id.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_id.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_id.setText("Cantidad Platos:");
-
-        Lbl_nombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_nombre.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_nombre.setText("No. Habitación:");
-
         Lbl_descripcion.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_descripcion.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_descripcion.setText("No. Plato");
-
-        Txt_CantidadPlatos.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_CantidadPlatos.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_CantidadPlatos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        Txt_Habitacion.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_Habitacion.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_Habitacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Lbl_descripcion.setText("No. Habitación:");
 
         Btn_fondoGuardar.setBackground(new java.awt.Color(97, 212, 195));
 
@@ -216,34 +208,6 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
             .addGap(0, 40, Short.MAX_VALUE)
             .addGroup(Btn_fondoGuardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(Btn_guardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
-        );
-
-        Btn_fondo_eliminar.setBackground(new java.awt.Color(97, 212, 195));
-
-        Btn_eliminar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Btn_eliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Btn_eliminar.setText("Eliminar");
-        Btn_eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Btn_eliminarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                Btn_eliminarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                Btn_eliminarMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout Btn_fondo_eliminarLayout = new javax.swing.GroupLayout(Btn_fondo_eliminar);
-        Btn_fondo_eliminar.setLayout(Btn_fondo_eliminarLayout);
-        Btn_fondo_eliminarLayout.setHorizontalGroup(
-            Btn_fondo_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-        );
-        Btn_fondo_eliminarLayout.setVerticalGroup(
-            Btn_fondo_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         Btn_fondo_modificar.setBackground(new java.awt.Color(97, 212, 195));
@@ -295,7 +259,7 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
         Btn_fondo_reporte.setLayout(Btn_fondo_reporteLayout);
         Btn_fondo_reporteLayout.setHorizontalGroup(
             Btn_fondo_reporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Btn_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
         );
         Btn_fondo_reporteLayout.setVerticalGroup(
             Btn_fondo_reporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,7 +287,7 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
         Btn_fondo_ayuda.setLayout(Btn_fondo_ayudaLayout);
         Btn_fondo_ayudaLayout.setHorizontalGroup(
             Btn_fondo_ayudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Btn_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
         );
         Btn_fondo_ayudaLayout.setVerticalGroup(
             Btn_fondo_ayudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,9 +322,9 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
             .addComponent(Btn_cancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        Lbl_nombre1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_nombre1.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_nombre1.setText("No. Mesa:");
+        Lbl_mesa.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_mesa.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_mesa.setText("No. Mesa:");
 
         Txt_NoMesa.setEditable(false);
         Txt_NoMesa.setBackground(new java.awt.Color(36, 47, 65));
@@ -369,47 +333,6 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
         Txt_NoMesa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Txt_NoMesaActionPerformed(evt);
-            }
-        });
-
-        Btn_fondo_cancelar1.setBackground(new java.awt.Color(255, 128, 115));
-
-        Btn_Total.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Btn_Total.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Btn_Total.setText("Total");
-        Btn_Total.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Btn_TotalMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                Btn_TotalMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                Btn_TotalMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout Btn_fondo_cancelar1Layout = new javax.swing.GroupLayout(Btn_fondo_cancelar1);
-        Btn_fondo_cancelar1.setLayout(Btn_fondo_cancelar1Layout);
-        Btn_fondo_cancelar1Layout.setHorizontalGroup(
-            Btn_fondo_cancelar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_Total, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-        );
-        Btn_fondo_cancelar1Layout.setVerticalGroup(
-            Btn_fondo_cancelar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_Total, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-        );
-
-        Lbl_nombre2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_nombre2.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_nombre2.setText("Total:");
-
-        Txt_Total.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_Total.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_Total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Txt_Total.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Txt_TotalActionPerformed(evt);
             }
         });
 
@@ -423,15 +346,13 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
 
         Lbl_nombre3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_nombre3.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_nombre3.setText("Servicio:");
-
-        jLabel1.setText("jLabel1");
+        Lbl_nombre3.setText("Tipo de servicio:");
 
         Btn_fondo_reporte1.setBackground(new java.awt.Color(97, 212, 195));
 
         Btn_catalogo.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_catalogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Btn_catalogo.setText("CATALOGO DE PLATOS");
+        Btn_catalogo.setText("LISTADO HABITACIONES");
         Btn_catalogo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_catalogoMouseClicked(evt);
@@ -455,45 +376,37 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
             .addComponent(Btn_catalogo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
         );
 
-        Txt_Precio.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_Precio.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_Precio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Txt_Habitacion.setBackground(new java.awt.Color(36, 47, 65));
+        Txt_Habitacion.setForeground(new java.awt.Color(255, 255, 255));
+        Txt_Habitacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        Lbl_id1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Lbl_id1.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_id1.setText("Precio:");
-
-        Txt_Menu.setBackground(new java.awt.Color(36, 47, 65));
-        Txt_Menu.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_Menu.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        Btn_fondo_reporte2.setBackground(new java.awt.Color(97, 212, 195));
-
-        Btn_precio.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        Btn_precio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Btn_precio.setText("PRECIO");
-        Btn_precio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Btn_precioMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                Btn_precioMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                Btn_precioMouseExited(evt);
+        Txt_Hora.setEditable(false);
+        Txt_Hora.setBackground(new java.awt.Color(36, 47, 65));
+        Txt_Hora.setForeground(new java.awt.Color(255, 255, 255));
+        Txt_Hora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Txt_Hora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Txt_HoraActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout Btn_fondo_reporte2Layout = new javax.swing.GroupLayout(Btn_fondo_reporte2);
-        Btn_fondo_reporte2.setLayout(Btn_fondo_reporte2Layout);
-        Btn_fondo_reporte2Layout.setHorizontalGroup(
-            Btn_fondo_reporte2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_precio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        Btn_fondo_reporte2Layout.setVerticalGroup(
-            Btn_fondo_reporte2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_precio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-        );
+        Lbl_nombre2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_nombre2.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_nombre2.setText("Hora Actual:");
+
+        Lbl_nombre4.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Lbl_nombre4.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_nombre4.setText("Fecha Actual:");
+
+        Txt_Fecha.setEditable(false);
+        Txt_Fecha.setBackground(new java.awt.Color(36, 47, 65));
+        Txt_Fecha.setForeground(new java.awt.Color(255, 255, 255));
+        Txt_Fecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Txt_Fecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Txt_FechaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout Pnl_ingresoDatosLayout = new javax.swing.GroupLayout(Pnl_ingresoDatos);
         Pnl_ingresoDatos.setLayout(Pnl_ingresoDatosLayout);
@@ -503,109 +416,86 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
                 .addGap(28, 28, 28)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(Lbl_nombre3, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                                .addComponent(Lbl_descripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(ID_Encabezado))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(Btn_fondo_reporte1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jSeparator6)
+                                .addComponent(Txt_Habitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Cbx_Servicio, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                .addComponent(Lbl_nombre2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(4, 4, 4))
-                            .addComponent(Lbl_nombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Lbl_nombre3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Lbl_nombre)
-                            .addComponent(jLabel1)
-                            .addComponent(Lbl_id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Btn_fondoGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(Btn_fondoGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Lbl_mesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Lbl_nombre4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Lbl_nombre2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                                 .addGap(15, 15, 15)
-                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(Btn_fondo_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(Btn_fondo_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Btn_fondo_ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(Btn_fondo_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                                 .addGap(17, 17, 17)
-                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jSeparator4)
-                                    .addComponent(Txt_Total)
-                                    .addComponent(Btn_fondo_cancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Txt_NoMesa)
-                                    .addComponent(jSeparator3)
-                                    .addComponent(Cbx_Servicio, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Txt_Habitacion, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jSeparator2)
-                                    .addComponent(Txt_CantidadPlatos)
-                                    .addComponent(jSeparator1)
-                                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                            .addComponent(Lbl_id1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                            .addComponent(Txt_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Pnl_ingresoDatosLayout.createSequentialGroup()
-                            .addComponent(Lbl_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(33, 33, 33)
-                            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(Btn_fondo_reporte1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jSeparator6, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-                                .addComponent(Txt_Menu, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-                                .addComponent(Btn_fondo_reporte2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(Txt_Fecha)
+                                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(Txt_NoMesa)
+                                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(Txt_Hora)
+                                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Pnl_ingresoDatosLayout.setVerticalGroup(
             Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(43, 43, 43)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Lbl_descripcion)
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addComponent(Txt_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Txt_Habitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)
                         .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Btn_fondo_reporte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Btn_fondo_reporte2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Txt_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lbl_id1))
-                .addGap(3, 3, 3)
-                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Txt_CantidadPlatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lbl_id))
-                .addGap(3, 3, 3)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Txt_Habitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lbl_nombre))
-                .addGap(2, 2, 2)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Btn_fondo_reporte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ID_Encabezado))
+                .addGap(18, 18, 18)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cbx_Servicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Lbl_nombre3))
                 .addGap(18, 18, 18)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Lbl_mesa)
+                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                        .addComponent(Txt_NoMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Lbl_nombre4)
+                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
+                        .addComponent(Txt_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(7, 7, 7)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Txt_NoMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lbl_nombre1))
-                .addGap(2, 2, 2)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Btn_fondo_cancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Txt_Total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Txt_Hora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Lbl_nombre2))
-                .addGap(3, 3, 3)
+                .addGap(2, 2, 2)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Btn_fondo_ayuda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -613,7 +503,6 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Btn_fondoGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Btn_fondo_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -705,7 +594,7 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
                                 .addComponent(Txt_buscar)
                                 .addComponent(Lbl_codigoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -745,10 +634,6 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
         Btn_fondoGuardar.setBackground(new Color(114, 243, 227));
     }//GEN-LAST:event_Btn_guardarMouseEntered
 
-    private void Btn_eliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseEntered
-        Btn_fondo_eliminar.setBackground(new Color(114, 243, 227));
-    }//GEN-LAST:event_Btn_eliminarMouseEntered
-
     private void Btn_modificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseEntered
         Btn_fondo_modificar.setBackground(new Color(114, 243, 227));
     }//GEN-LAST:event_Btn_modificarMouseEntered
@@ -756,10 +641,6 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
     private void Btn_guardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseExited
         Btn_fondoGuardar.setBackground(new Color(97, 212, 195));
     }//GEN-LAST:event_Btn_guardarMouseExited
-
-    private void Btn_eliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseExited
-        Btn_fondo_eliminar.setBackground(new Color(97, 212, 195));
-    }//GEN-LAST:event_Btn_eliminarMouseExited
 
     private void Btn_modificarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseExited
         Btn_fondo_modificar.setBackground(new Color(97, 212, 195));
@@ -790,39 +671,26 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_buscarMouseExited
 
     private void Btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseClicked
-        if (prcs_repetidos.isNoneEmpty(Txt_CantidadPlatos, Txt_Habitacion, Txt_Total)) {
+        if (prcs_repetidos.isNoneEmpty(Txt_Habitacion)) {
             if (prcs_repetidos.cbxNoneSelected(Cbx_Servicio)) {
-                if (prcs_repetidos.isNumeric(Txt_CantidadPlatos.getText(), Txt_Habitacion.getText())) {
-//                    String cbxServicio = Cbx_Servicio.getSelectedItem().toString();
-//                    LocalDateTime locaDate = LocalDateTime.now();
-//                    /*Tiempo*/
-//                    int horas = locaDate.getHour();
-//                    int minutos = locaDate.getMinute();
-//                    int segundos = locaDate.getSecond();
-//                    String horaOrden = String.valueOf(horas + ":" + minutos + ":" + segundos);
-//                    /*Dias*/
-//                    int anio = locaDate.getYear();
-//                    int mes = locaDate.getMonthValue();
-//                    int dia = locaDate.getDayOfMonth();
-//                    String fechaOrden = String.valueOf(anio + "-" + mes + "-" + dia);
-//
-//                    AsignacionOrdenDAO restauranteDAO = new AsignacionOrdenDAO();
-//                    restaurante.setIdMenu(Txt_Menu.getText());
-//                    restaurante.setIdHabitacion(Txt_Habitacion.getText());
-//                    restaurante.setCantidadOrden(Txt_CantidadPlatos.getText());
-//                    if (cbxServicio.equals("Habitación")) {
-//                        restaurante.setMesaOrden("Habitación");
-//                    } else {
-//                        restaurante.setMesaOrden(Txt_NoMesa.getText());
-//                    }
-//                    restaurante.setHoraOrden(horaOrden);
-//                    restaurante.setFechaOrden(fechaOrden);
-//                    restaurante.setTotalOrden(Txt_Total.getText());
-//
-//                    restauranteDAO.insert(restaurante);
-//                    actualizarTabla("");
-//                    prcs_repetidos.AlertaMensaje("registrada", "Orden", "exitosamente");
-//                    Limpiar();
+                if (prcs_repetidos.isNumeric(Txt_Habitacion.getText())) {
+                    String cbxServicio = Cbx_Servicio.getSelectedItem().toString();
+//                    String fecha = Txt_Fecha.getText();
+//                    String hora = Txt_Hora.getText();
+                    AsignacionOrdenDAO restauranteDAO = new AsignacionOrdenDAO();
+                    restaurante.setIdHabitacion(Txt_Habitacion.getText());
+                    if (cbxServicio.equals("Habitación")) {
+                        restaurante.setMesaOrden("Habitación");
+                    } else {
+                        restaurante.setMesaOrden(Txt_NoMesa.getText());
+                    }
+                    restaurante.setHoraOrden(Txt_Hora.getText());
+                    restaurante.setFechaOrden(Txt_Fecha.getText());
+
+                    restauranteDAO.insert(restaurante);
+                    actualizarTabla("");
+                    prcs_repetidos.AlertaMensaje("registrada", "Orden", "exitosamente");
+                    Limpiar();
                 } else {
                 }
             }
@@ -830,57 +698,47 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_guardarMouseClicked
 
     private void Btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseClicked
-//        if (prcs_repetidos.isNoneEmpty(Txt_Platos, Txt_NoHabitacion) && Txt_Descripcion.getText() != "") {
-//            if (prcs_repetidos.isSelected(Rdb_Activo, Rdb_Inactivo)) {
-//                if (prcs_repetidos.isNumeric(Txt_Platos.getText(), Txt_NoHabitacion.getText())) {
-//                    PisoDAO pisosdao = new PisoDAO();
-//                    pisos.setIdPiso(Integer.parseInt(Txt_Platos.getText()));
-//                    pisos.setCantidadHabitacionesPiso(Integer.parseInt(Txt_NoHabitacion.getText()));
-//                    pisos.setDescripcionPiso(Txt_Descripcion.getText());
-//                    if (Rdb_Activo.isSelected()) {
-//                        pisos.setEstadoPiso("1");
-//                    } else if (Rdb_Inactivo.isSelected()) {
-//                        pisos.setEstadoPiso("0");
-//                    }
-//                    pisosdao.update(pisos);
-//                    actualizarTabla("");
-//                    prcs_repetidos.AlertaMensaje("modificado", "Piso", "exitosamente");
-//                    Limpiar();
-//                }
-//            }
-//        }
+        if (prcs_repetidos.isNoneEmpty(Txt_Habitacion)) {
+            if (prcs_repetidos.cbxNoneSelected(Cbx_Servicio)) {
+                if (prcs_repetidos.isNumeric(Txt_Habitacion.getText())) {
+                    AsignacionOrdenDAO restauranteDAO = new AsignacionOrdenDAO();
+                    String cbxServicio = Cbx_Servicio.getSelectedItem().toString();
+                    restaurante.setIdEncabezado(ID_Encabezado.getText());
+                    restaurante.setIdHabitacion(Txt_Habitacion.getText());
+                    if (cbxServicio.equals("Habitación")) {
+                        restaurante.setMesaOrden("Habitación");
+                    } else {
+                        restaurante.setMesaOrden(Txt_NoMesa.getText());
+                    }
+                    restaurante.setFechaOrden(Txt_Fecha.getText());
+                    restaurante.setHoraOrden(Txt_Hora.getText());
+                    
+                    restauranteDAO.update(restaurante);
+                    actualizarTabla("");
+                    prcs_repetidos.AlertaMensaje("modificada", "Orden", "exitosamente");
+                    Limpiar();
+                }
+            }
+        }
     }//GEN-LAST:event_Btn_modificarMouseClicked
-
-    private void Btn_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseClicked
-//        if (prcs_repetidos.isNoneEmpty(Txt_Platos)) {
-//            if (prcs_repetidos.isNumeric(Txt_Platos.getText())) {
-//                if (prcs_repetidos.ConfirmarEliminacion("eliminar", "piso", this)) {
-//                    PisoDAO pisosdao = new PisoDAO();
-//                    pisos.setIdPiso(Integer.parseInt(Txt_Platos.getText()));
-//                    pisosdao.delete(pisos);
-//                    actualizarTabla("");
-//                    prcs_repetidos.AlertaMensaje("eliminado", "Piso", "exitosamente");
-//                    Limpiar();
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "No se pudo eliminar el piso");
-//                }
-//            }
-//        }
-    }//GEN-LAST:event_Btn_eliminarMouseClicked
 
     private void Tbl_DatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_DatosMouseClicked
         if (evt.getClickCount() == 2) {
-            Txt_Menu.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 0).toString());
-            Txt_Precio.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 1).toString());
-            Txt_CantidadPlatos.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString());
-            Txt_Habitacion.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString());
-            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 4).toString().equals("Habitación")) {
+            ID_Encabezado.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 0).toString());
+            Txt_Habitacion.setEditable(false);
+            Txt_Habitacion.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 1).toString());
+            if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString().equals("Habitación")) {
                 Cbx_Servicio.setSelectedIndex(2);
             } else {
                 Cbx_Servicio.setSelectedIndex(1);
-                Txt_NoMesa.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 4).toString());
+                Lbl_mesa.setVisible(true);
+                Txt_NoMesa.setEditable(true);
+                Txt_NoMesa.setVisible(true);
+                jSeparator3.setVisible(true);
+                Txt_NoMesa.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString());
             }
-            Txt_Total.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 7).toString());
+            Txt_Fecha.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 3).toString());
+            Txt_Hora.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 4).toString());
         }
     }//GEN-LAST:event_Tbl_DatosMouseClicked
 
@@ -904,28 +762,18 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Txt_NoMesaActionPerformed
 
-    private void Btn_TotalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_TotalMouseClicked
-
-    }//GEN-LAST:event_Btn_TotalMouseClicked
-
-    private void Btn_TotalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_TotalMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Btn_TotalMouseEntered
-
-    private void Btn_TotalMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_TotalMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Btn_TotalMouseExited
-
-    private void Txt_TotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_TotalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Txt_TotalActionPerformed
-
     private void Cbx_ServicioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_Cbx_ServicioItemStateChanged
         String cbxServicio = Cbx_Servicio.getSelectedItem().toString();
         if (cbxServicio.equals("Restaurante")) {
             Txt_NoMesa.setEditable(true);
+            Lbl_mesa.setVisible(true);
+            Txt_NoMesa.setVisible(true);
+            jSeparator3.setVisible(true);
         } else if (cbxServicio.equals("Habitación")) {
             Txt_NoMesa.setEditable(false);
+            Lbl_mesa.setVisible(false);
+            Txt_NoMesa.setVisible(false);
+            jSeparator3.setVisible(false);
         }
     }//GEN-LAST:event_Cbx_ServicioItemStateChanged
 
@@ -941,65 +789,49 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_catalogoMouseExited
 
-    private void Btn_precioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_precioMouseClicked
+    private void Txt_HoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_HoraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Btn_precioMouseClicked
+    }//GEN-LAST:event_Txt_HoraActionPerformed
 
-    private void Btn_precioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_precioMouseEntered
+    private void Txt_FechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_FechaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Btn_precioMouseEntered
-
-    private void Btn_precioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_precioMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Btn_precioMouseExited
+    }//GEN-LAST:event_Txt_FechaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup BtnGp_estado;
     private javax.swing.ButtonGroup BtnGp_tipo;
-    private javax.swing.JLabel Btn_Total;
     private javax.swing.JLabel Btn_ayuda;
     private javax.swing.JLabel Btn_buscar;
     private javax.swing.JLabel Btn_cancelar;
     private javax.swing.JLabel Btn_catalogo;
-    private javax.swing.JLabel Btn_eliminar;
     private javax.swing.JPanel Btn_fondoGuardar;
     private javax.swing.JPanel Btn_fondo_ayuda;
     private javax.swing.JPanel Btn_fondo_buscar;
     private javax.swing.JPanel Btn_fondo_cancelar;
-    private javax.swing.JPanel Btn_fondo_cancelar1;
-    private javax.swing.JPanel Btn_fondo_eliminar;
     private javax.swing.JPanel Btn_fondo_modificar;
     private javax.swing.JPanel Btn_fondo_reporte;
     private javax.swing.JPanel Btn_fondo_reporte1;
-    private javax.swing.JPanel Btn_fondo_reporte2;
     private javax.swing.JLabel Btn_guardar;
     private javax.swing.JLabel Btn_modificar;
-    private javax.swing.JLabel Btn_precio;
     private javax.swing.JLabel Btn_reporte;
     private javax.swing.JComboBox<String> Cbx_Servicio;
+    private javax.swing.JLabel ID_Encabezado;
     private javax.swing.JLabel Lbl_codigoNombre;
     private javax.swing.JLabel Lbl_descripcion;
-    private javax.swing.JLabel Lbl_id;
-    private javax.swing.JLabel Lbl_id1;
-    private javax.swing.JLabel Lbl_nombre;
-    private javax.swing.JLabel Lbl_nombre1;
+    private javax.swing.JLabel Lbl_mesa;
     private javax.swing.JLabel Lbl_nombre2;
     private javax.swing.JLabel Lbl_nombre3;
+    private javax.swing.JLabel Lbl_nombre4;
     private javax.swing.JPanel Pnl_datos;
     private javax.swing.JPanel Pnl_ingresoDatos;
     private javax.swing.JTable Tbl_Datos;
-    private javax.swing.JTextField Txt_CantidadPlatos;
+    private javax.swing.JTextField Txt_Fecha;
     private javax.swing.JTextField Txt_Habitacion;
-    private javax.swing.JTextField Txt_Menu;
+    private javax.swing.JTextField Txt_Hora;
     private javax.swing.JTextField Txt_NoMesa;
-    private javax.swing.JTextField Txt_Precio;
-    private javax.swing.JTextField Txt_Total;
     private javax.swing.JTextField Txt_buscar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
