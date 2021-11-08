@@ -43,10 +43,7 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         var codigoAplicacion = 2003;
         var usuario = Login_LD.usuario;
 
-        Btn_PasUno.setEnabled(false);
-        Btn_PasTodo.setEnabled(false);
-        Btn_QuitUno.setEnabled(false);
-        Btn_QuitTodo.setEnabled(false);
+        Btn_guardar2.setVisible(false);
         Btn_buscar.setVisible(false);
 
         GenerarPermisos permisos = new GenerarPermisos();
@@ -56,15 +53,13 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         for (int i = 0; i < 5; i++) {
             permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
         }
+        
+        if (permisosApp[0].equals("1")) {
+            Btn_guardar2.setVisible(true);
+        }
 
         if (permisosApp[1].equals("1")) {
             Btn_buscar.setVisible(true);
-        }
-        if (permisosApp[2].equals("1")) {
-            Btn_PasUno.setEnabled(true);
-        Btn_PasTodo.setEnabled(true);
-        Btn_QuitUno.setEnabled(true);
-        Btn_QuitTodo.setEnabled(true);
         }
     }
 
@@ -75,6 +70,7 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         cargar_habitaciones();
         imprimir_Objetos();
         imprimir_Objetos_entregar();
+        habilitarAcciones();
     }
 
     public void diseño() {
@@ -221,10 +217,15 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         fecha.setEnabled(false);
 
         Btn_fondoGuardar2.setBackground(new java.awt.Color(97, 212, 195));
+        Btn_fondoGuardar2.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondoGuardar2.setMinimumSize(new java.awt.Dimension(104, 40));
 
         Btn_guardar2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_guardar2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Btn_guardar2.setText("Insertar");
+        Btn_guardar2.setText("Entregar");
+        Btn_guardar2.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_guardar2.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_guardar2.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_guardar2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_guardar2MouseClicked(evt);
@@ -253,10 +254,16 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         );
 
         Btn_fondo_reporte.setBackground(new java.awt.Color(97, 212, 195));
+        Btn_fondo_reporte.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_reporte.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_reporte.setPreferredSize(new java.awt.Dimension(104, 40));
 
         Btn_reporte.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_reporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_reporte.setText("Reporte");
+        Btn_reporte.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_reporte.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_reporte.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_reporte.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_reporteMouseClicked(evt);
@@ -277,14 +284,20 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         );
         Btn_fondo_reporteLayout.setVerticalGroup(
             Btn_fondo_reporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Btn_fondo_ayuda.setBackground(new java.awt.Color(253, 255, 182));
+        Btn_fondo_ayuda.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_ayuda.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_ayuda.setPreferredSize(new java.awt.Dimension(104, 40));
 
         Btn_ayuda.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_ayuda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_ayuda.setText("Ayuda");
+        Btn_ayuda.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_ayuda.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_ayuda.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_ayuda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_ayudaMouseClicked(evt);
@@ -305,14 +318,19 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         );
         Btn_fondo_ayudaLayout.setVerticalGroup(
             Btn_fondo_ayudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Btn_fondo_cancelar.setBackground(new java.awt.Color(255, 128, 115));
+        Btn_fondo_cancelar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_cancelar.setMinimumSize(new java.awt.Dimension(104, 40));
 
         Btn_cancelar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_cancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_cancelar.setText("Cancelar");
+        Btn_cancelar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_cancelar.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_cancelar.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_cancelarMouseClicked(evt);
@@ -329,11 +347,11 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         Btn_fondo_cancelar.setLayout(Btn_fondo_cancelarLayout);
         Btn_fondo_cancelarLayout.setHorizontalGroup(
             Btn_fondo_cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Btn_fondo_cancelarLayout.setVerticalGroup(
             Btn_fondo_cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Tbl_Asignaciones.setModel(new javax.swing.table.DefaultTableModel(
@@ -632,19 +650,6 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
                     modelo1.addRow(datos);
                     Tbl_Servicios.setModel(modelo1);
                 }
-            }
-        }
-        for (ObjetoPerdido persona : personas) {
-            if (persona.getEstado().equals("2") && persona.getDpi().equals(Txt_codigo2.getText())) {
-
-                datos[0] = persona.getIdobjeto();
-                datos[1] = persona.getHabitacion();
-                datos[2] = persona.getAma();
-                datos[3] = persona.getFecha();
-                datos[4] = persona.getObjeto();
-
-                modelo2.addRow(datos);
-                Tbl_Asignaciones.setModel(modelo2);
             }
         }
     }//GEN-LAST:event_Btn_buscarMouseClicked
