@@ -5,6 +5,7 @@
  */
 package vista;
 
+import datos.GuardarBitacora;
 import datos.HuespedDAO;
 import dominio.ProcesosRepetidos;
 import dominio.Huesped;
@@ -32,6 +33,7 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
     SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
     Date fechaCumpleaños = null;
     String fechaCumpleañosAux = "";
+    GuardarBitacora bitacora = new GuardarBitacora();
 
     /**
      * Creates new form Mnt_Huespedes
@@ -732,11 +734,13 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
                 Logger.getLogger(Mnt_Huespedes.class.getName()).log(Level.SEVERE, null, ex);
             }
             Txt_cumple.setDate(fechaCumpleaños);
+            bitacora.GuardarEnBitacora("Buscar", "2003");
         }
     }//GEN-LAST:event_Tbl_DatosMouseClicked
 
     private void Btn_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseClicked
         actualizarTabla(Txt_buscar.getText());
+        bitacora.GuardarEnBitacora("Buscar", "2003");
     }//GEN-LAST:event_Btn_buscarMouseClicked
 
     private void Btn_buscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseEntered
@@ -806,6 +810,7 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
                         huespedes.setCumple(fechaCumpleañosAux);
                         serviciosdao.update(huespedes);
                         actualizarTabla("");
+                        bitacora.GuardarEnBitacora("Modificar", "2003");
                         prcs_repetidos.AlertaMensaje("modificado", "huesped", "exitosamente");
                         Limpiar();
                     }
@@ -830,6 +835,7 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
                     huespedes.setPasaporte(Txt_codigo.getText());
                     huespedesdao.delete(huespedes);
                     actualizarTabla("");
+                    bitacora.GuardarEnBitacora("Eliminar", "2003");
                     prcs_repetidos.AlertaMensaje("eliminado", "huesped", "exitosamente");
                     Limpiar();
                 } else {
@@ -868,6 +874,7 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
                         huespedes.setCumple(fechaCumpleañosAux);
                         serviciosdao.insert(huespedes);
                         actualizarTabla("");
+                        bitacora.GuardarEnBitacora("Guardar", "2003");
                         prcs_repetidos.AlertaMensaje("guardado", "huesped", "exitosamente");
                         Limpiar();
                     }
@@ -879,11 +886,13 @@ public class Mnt_Huespedes extends javax.swing.JInternalFrame {
     private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
         // TODO add your handling code here:
         prcs_repetidos.imprimirAyuda("AyudaHuespedes.chm");
+        bitacora.GuardarEnBitacora("Ayuda", "2003");
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
         // TODO add your handling code here:
         prcs_repetidos.imprimirReporte("Rpt_MantHuesped.jrxml", "Reporte Huespedes");
+        bitacora.GuardarEnBitacora("Reporte", "2003");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
 
