@@ -5,6 +5,7 @@
  */
 package vista;
 
+import datos.GuardarBitacora;
 import datos.HabitacionDAO;
 import datos.ObjetoPerdidoDAO;
 import dominio.Habitacion;
@@ -34,13 +35,14 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
     DefaultTableModel modelo1;
     DefaultTableModel modelo2;
     DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
+    GuardarBitacora bitacora = new GuardarBitacora();
 
     /**
      * Creates new form Prcs_EntregaObjetoPerdido
      */
     void habilitarAcciones() {
 
-        var codigoAplicacion = 2003;
+        var codigoAplicacion = 2203;
         var usuario = Login_LD.usuario;
 
         Btn_guardar2.setVisible(false);
@@ -53,7 +55,7 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         for (int i = 0; i < 5; i++) {
             permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
         }
-        
+
         if (permisosApp[0].equals("1")) {
             Btn_guardar2.setVisible(true);
         }
@@ -575,6 +577,7 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
                 }
 
                 JOptionPane.showMessageDialog(null, "Objeto Entregado");
+                bitacora.GuardarEnBitacora("Modificado", "2203");
             } else {
                 JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
             }
@@ -593,7 +596,8 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_guardar2MouseExited
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
-
+prcs_repetidos.imprimirReporte("Rpt_PrcsObjetoPerdido.jrxml", "Reporte Objeto Perdido");
+        bitacora.GuardarEnBitacora("Reporte", "2203");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
     private void Btn_reporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseEntered
@@ -606,6 +610,7 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
 
     private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
         prcs_repetidos.imprimirAyuda("AyudaMantenimientoServicios.chm");
+        bitacora.GuardarEnBitacora("Ayuda", "2203");
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_ayudaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseEntered
@@ -649,6 +654,7 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
 
                     modelo1.addRow(datos);
                     Tbl_Servicios.setModel(modelo1);
+                    bitacora.GuardarEnBitacora("Buscar", "2203");
                 }
             }
         }

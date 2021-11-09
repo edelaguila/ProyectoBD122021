@@ -5,6 +5,7 @@
  */
 package vista;
 
+import datos.GuardarBitacora;
 import datos.HabitacionDAO;
 import datos.ObjetoPerdidoDAO;
 import dominio.Habitacion;
@@ -33,6 +34,8 @@ public class Prcs_RegistroObjetoPerdido extends javax.swing.JInternalFrame {
     SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
     Date fechaCumpleaños = null;
             String fechaCumpleañosAux="";
+            GuardarBitacora bitacora = new GuardarBitacora();
+            
 
     /**
      * Creates new form ObjetosPerdidos
@@ -333,6 +336,9 @@ public class Prcs_RegistroObjetoPerdido extends javax.swing.JInternalFrame {
         Btn_reporte.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_reporte.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_reporte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_reporteMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Btn_reporteMouseEntered(evt);
             }
@@ -657,6 +663,7 @@ public class Prcs_RegistroObjetoPerdido extends javax.swing.JInternalFrame {
                     serviciosdao.insert(ObjetosPerdidos);
                     actualizarTabla("");
                     prcs_repetidos.AlertaMensaje("guardado", "Objeto", "exitosamente");
+                    bitacora.GuardarEnBitacora("Guardado", "2202");
                     Limpiar();
                 } else {
                 }
@@ -681,6 +688,7 @@ public class Prcs_RegistroObjetoPerdido extends javax.swing.JInternalFrame {
                     serviciosdao.delete(ObjetosPerdidos);
                     actualizarTabla("");
                     prcs_repetidos.AlertaMensaje("eliminado", "Objeto", "exitosamente");
+                    bitacora.GuardarEnBitacora("Eliminado", "2202");
                     Limpiar();
                 } else {
                     JOptionPane.showMessageDialog(null, "No se pudo eliminar el objeto");
@@ -713,6 +721,7 @@ public class Prcs_RegistroObjetoPerdido extends javax.swing.JInternalFrame {
                         serviciosdao.update(ObjetosPerdidos);
                         actualizarTabla("");
                         prcs_repetidos.AlertaMensaje("modificado", "Objeto", "exitosamente");
+                        bitacora.GuardarEnBitacora("Modificado", "2202");
                         Limpiar();
                 }
                     }
@@ -736,6 +745,7 @@ public class Prcs_RegistroObjetoPerdido extends javax.swing.JInternalFrame {
 
     private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
         prcs_repetidos.imprimirAyuda("AyudaMantenimientoServicios.chm");
+        bitacora.GuardarEnBitacora("Ayuda", "2202");
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_ayudaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseEntered
@@ -771,11 +781,13 @@ public class Prcs_RegistroObjetoPerdido extends javax.swing.JInternalFrame {
             }
             fecha.setDate(fechaCumpleaños);
             Txt_objeto.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 4).toString());
+            bitacora.GuardarEnBitacora("Buscar", "2202");
         }
     }//GEN-LAST:event_Tbl_DatosMouseClicked
 
     private void Btn_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseClicked
         actualizarTabla(Txt_buscar.getText());
+        bitacora.GuardarEnBitacora("Buscar", "2202");
     }//GEN-LAST:event_Btn_buscarMouseClicked
 
     private void Btn_buscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseEntered
@@ -785,6 +797,12 @@ public class Prcs_RegistroObjetoPerdido extends javax.swing.JInternalFrame {
     private void Btn_buscarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseExited
         Btn_fondo_buscar.setBackground(new Color(97, 212, 195));
     }//GEN-LAST:event_Btn_buscarMouseExited
+
+    private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
+        // TODO add your handling code here:
+        prcs_repetidos.imprimirReporte("Rpt_PrcsObjetoPerdido.jrxml", "Reporte Objeto Perdido");
+        bitacora.GuardarEnBitacora("Reporte", "2202");
+    }//GEN-LAST:event_Btn_reporteMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

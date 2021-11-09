@@ -5,6 +5,7 @@
  */
 package vista;
 
+import datos.GuardarBitacora;
 import datos.MenuDAO;
 import dominio.Menu;
 import dominio.ProcesosRepetidos;
@@ -24,6 +25,7 @@ public class Mnt_Menu extends javax.swing.JInternalFrame {
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     Menu menu = new Menu();
+    GuardarBitacora bitacora = new GuardarBitacora();
 
     /**
      * Creates new form Mnt_Menu
@@ -340,6 +342,9 @@ public class Mnt_Menu extends javax.swing.JInternalFrame {
         Btn_reporte.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_reporte.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_reporte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_reporteMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 Btn_reporteMouseEntered(evt);
             }
@@ -657,6 +662,7 @@ public class Mnt_Menu extends javax.swing.JInternalFrame {
                     serviciosdao.insert(menu);
                     actualizarTabla("");
                     prcs_repetidos.AlertaMensaje("guardado", "Plato", "exitosamente");
+                    bitacora.GuardarEnBitacora("Guardado", "2006");
                     Limpiar();
                 } else {
                 }
@@ -681,6 +687,7 @@ public class Mnt_Menu extends javax.swing.JInternalFrame {
                     serviciosdao.delete(menu);
                     actualizarTabla("");
                     prcs_repetidos.AlertaMensaje("eliminado", "Plato", "exitosamente");
+                    bitacora.GuardarEnBitacora("Eliminado", "2006");
                     Limpiar();
                 } else {
                     JOptionPane.showMessageDialog(null, "No se pudo eliminar el´plato");
@@ -717,6 +724,7 @@ public class Mnt_Menu extends javax.swing.JInternalFrame {
                     serviciosdao.update(menu);
                     actualizarTabla("");
                     prcs_repetidos.AlertaMensaje("modificado", "Menu", "exitosamente");
+                    bitacora.GuardarEnBitacora("Modificado", "2003");
                     Limpiar();
 
                 }
@@ -769,13 +777,15 @@ public class Mnt_Menu extends javax.swing.JInternalFrame {
             if (Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 4).toString().equals("Activo")) {
                 Rdb_activo.setSelected(true);
             } else {
-                Rdb_inactivo.setSelected(true);
+                Rdb_inactivo.setSelected(true);                
             }
+            bitacora.GuardarEnBitacora("Buscar", "2006");
         }
     }//GEN-LAST:event_Tbl_DatosMouseClicked
 
     private void Btn_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseClicked
         actualizarTabla(Txt_buscar.getText());
+        bitacora.GuardarEnBitacora("Buscar", "2006");
     }//GEN-LAST:event_Btn_buscarMouseClicked
 
     private void Btn_buscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseEntered
@@ -790,6 +800,12 @@ public class Mnt_Menu extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         prcs_repetidos.imprimirAyuda("AyudaMenu.chm");
     }//GEN-LAST:event_Btn_ayudaMouseClicked
+
+    private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
+        // TODO add your handling code here:
+        prcs_repetidos.imprimirReporte("Rpt_MantMenu.jrxml", "Reporte Menu");
+        bitacora.GuardarEnBitacora("Reporte", "2006");
+    }//GEN-LAST:event_Btn_reporteMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
