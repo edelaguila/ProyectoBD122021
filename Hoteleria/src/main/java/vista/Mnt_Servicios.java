@@ -5,24 +5,15 @@
  */
 package vista;
 
-import datos.Conexion;
+import datos.GuardarBitacora;
 import datos.ServicioDAO;
 import dominio.ProcesosRepetidos;
 import dominio.Servicio;
 import java.awt.Color;
-import java.io.File;
-import java.sql.Connection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
 import seguridad.vista.GenerarPermisos;
 import seguridad.vista.Login_LD;
 
@@ -34,8 +25,9 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     Servicio servicios = new Servicio();
-    
-     void habilitarAcciones() {
+    GuardarBitacora bitacora = new GuardarBitacora();
+
+    void habilitarAcciones() {
 
         var codigoAplicacion = 2005;
         var usuario = Login_LD.usuario;
@@ -44,7 +36,7 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
         Btn_modificar.setVisible(false);
         Btn_eliminar.setVisible(false);
         Btn_buscar.setVisible(false);
-        
+
         GenerarPermisos permisos = new GenerarPermisos();
 
         String[] permisosApp = new String[5];
@@ -767,6 +759,7 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
                         }
                         servicios.setPrecio(Txt_precio.getText());
                         serviciosdao.insert(servicios);
+                        bitacora.GuardarEnBitacora("insertar", "2005");
                         actualizarTabla("");
                         prcs_repetidos.AlertaMensaje("guardado", "Servicio", "exitosamente");
                         Limpiar();
@@ -801,6 +794,7 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
                             servicios.setEstado("0");
                         }
                         serviciosdao.update(servicios);
+                        bitacora.GuardarEnBitacora("modificar", "2005");
                         actualizarTabla("");
                         prcs_repetidos.AlertaMensaje("modificado", "Servicio", "exitosamente");
                         Limpiar();
@@ -817,6 +811,7 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
                     ServicioDAO serviciosdao = new ServicioDAO();
                     servicios.setId(Txt_codigo.getText());
                     serviciosdao.delete(servicios);
+                    bitacora.GuardarEnBitacora("eliminar", "2005");
                     actualizarTabla("");
                     prcs_repetidos.AlertaMensaje("eliminado", "Servicio", "exitosamente");
                     Limpiar();
@@ -843,6 +838,7 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
             } else {
                 Rdb_inactivo.setSelected(true);
             }
+            bitacora.GuardarEnBitacora("buscar", "2005");
         }
     }//GEN-LAST:event_Tbl_DatosMouseClicked
 
@@ -856,10 +852,12 @@ public class Mnt_Servicios extends javax.swing.JInternalFrame {
 
     private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
         prcs_repetidos.imprimirAyuda("AyudaMantenimientoServicios.chm");
+        bitacora.GuardarEnBitacora("ayuda", "2005");
     }//GEN-LAST:event_Btn_ayudaMouseClicked
-   
+
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
-    prcs_repetidos.imprimirReporte("Rpt_MantServicios.jrxml", "Reporte de Servicios");
+        prcs_repetidos.imprimirReporte("Rpt_MantServicios.jrxml", "Reporte de Servicios");
+        bitacora.GuardarEnBitacora("reportes", "2005");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
 
