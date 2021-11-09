@@ -147,7 +147,6 @@ public class BitacoraDao extends Conexion {
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
             stmt.setString(1, usuario.getId_Usuario());
             rs = stmt.executeQuery();
@@ -221,10 +220,7 @@ public class BitacoraDao extends Conexion {
             stmt.setString(6, insertar.getCodigoAplicacion());
             stmt.setString(7, insertar.getIp());
             stmt.setString(8, insertar.getModulo());
-
-            System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
-            System.out.println("Registros afectados:" + rows);
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
