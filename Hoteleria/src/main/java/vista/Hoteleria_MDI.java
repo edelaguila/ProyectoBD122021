@@ -6,6 +6,7 @@
 package vista;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import datos.GuardarBitacora;
 import dominio.ProcesosRepetidos;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -43,6 +44,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     public static JLabel Jl_logo = new JLabel();
+    GuardarBitacora bitacora = new GuardarBitacora();
 
     /**
      * Creates new form Hoteleria_MDI
@@ -55,7 +57,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         var usuario = Login_LD.usuario;
         var modulo = "Hotelero";
         generarPermisos.getPermisos(modulo, usuario);
-
+        
         Diseño();
     }
 
@@ -364,6 +366,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Mant_Servicios.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         form_Mant_Servicios.setVisible(true);
         form_Mant_Servicios.toFront();
+        bitacora.GuardarEnBitacora("log","2005");
     }//GEN-LAST:event_MnI_serviciosActionPerformed
 
     private void MnI_pisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_pisoActionPerformed
@@ -375,6 +378,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Mant_Pisos.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         form_Mant_Pisos.setVisible(true);
         form_Mant_Pisos.toFront();
+        bitacora.GuardarEnBitacora("log","2004");
     }//GEN-LAST:event_MnI_pisoActionPerformed
 
     private void MnI_horarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_horarioActionPerformed
@@ -386,6 +390,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Mant_Horarios.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         form_Mant_Horarios.setVisible(true);
         form_Mant_Horarios.toFront();
+        bitacora.GuardarEnBitacora("log","2002");
     }//GEN-LAST:event_MnI_horarioActionPerformed
 
     private void MnI_huespedesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_huespedesActionPerformed
@@ -398,6 +403,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Mant_Huespedes.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         form_Mant_Huespedes.setVisible(true);
         form_Mant_Huespedes.toFront();
+        bitacora.GuardarEnBitacora("log","2003");
     }//GEN-LAST:event_MnI_huespedesActionPerformed
 
     private void MnI_habitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_habitacionesActionPerformed
@@ -410,6 +416,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Mant_Habitaciones.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         form_Mant_Habitaciones.setVisible(true);
         form_Mant_Habitaciones.toFront();
+        bitacora.GuardarEnBitacora("log","2001");
     }//GEN-LAST:event_MnI_habitacionesActionPerformed
 
     private void MnI_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_menuActionPerformed
@@ -422,6 +429,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Mant_Menu.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         form_Mant_Menu.setVisible(true);
         form_Mant_Menu.toFront();
+        bitacora.GuardarEnBitacora("log","2006");
     }//GEN-LAST:event_MnI_menuActionPerformed
 
     private void MnI_tarifasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_tarifasActionPerformed
@@ -434,6 +442,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Mant_Tarifas.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         form_Mant_Tarifas.setVisible(true);
         form_Mant_Tarifas.toFront();
+        bitacora.GuardarEnBitacora("log","2007");
     }//GEN-LAST:event_MnI_tarifasActionPerformed
 
     private void MnI_asingacionServiciosHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_asingacionServiciosHabitacionActionPerformed
@@ -446,6 +455,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Prcs_AsignacionServicios.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         form_Prcs_AsignacionServicios.setVisible(true);
         form_Prcs_AsignacionServicios.toFront();
+        bitacora.GuardarEnBitacora("log","2201");
     }//GEN-LAST:event_MnI_asingacionServiciosHabitacionActionPerformed
 
     private void MnI_reservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_reservacionActionPerformed
@@ -480,6 +490,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Objeto_perdido.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         form_Objeto_perdido.setVisible(true);
         form_Objeto_perdido.toFront();
+        bitacora.GuardarEnBitacora("log","2202");
     }//GEN-LAST:event_MnI_RegistroObjetoPerdidoActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
