@@ -6,6 +6,7 @@
 package vista;
 
 import datos.Check_In_OutDAO;
+import datos.GuardarBitacora;
 import datos.ReservacionDAO;
 import dominio.Check_In_Out;
 import dominio.DetalleReservacion;
@@ -33,6 +34,8 @@ public class Prcs_Check_Out extends javax.swing.JInternalFrame {
     DetalleReservacion detalleReservacion = new DetalleReservacion();
     Check_In_Out checkinout = new Check_In_Out();
     Date fechaentrada = null, fechasalida = null;
+    GuardarBitacora bitacora = new GuardarBitacora();
+    
 
     /**
      * Creates new form Prcs_Check_Out
@@ -40,7 +43,7 @@ public class Prcs_Check_Out extends javax.swing.JInternalFrame {
     
     void habilitarAcciones() {
 
-        var codigoAplicacion = 2005;
+        var codigoAplicacion = 2205;
         var usuario = Login_LD.usuario;
 
         Btn_guardar.setVisible(false);
@@ -560,6 +563,7 @@ public class Prcs_Check_Out extends javax.swing.JInternalFrame {
             checkdao.update(checkinout);
             tablaAsignaciones(Txt_codigo.getText());
             tablaTarifas(Txt_codigo.getText());
+            bitacora.GuardarEnBitacora("Modificado", "2205");
         } else {
             JOptionPane.showMessageDialog(null, "Debe de seleccionar una fila de la tabla de asignaciones (LADO IZQUIERDO)");
         }
@@ -586,6 +590,7 @@ public class Prcs_Check_Out extends javax.swing.JInternalFrame {
             checkdao.update(checkinout);
             tablaAsignaciones(Txt_codigo.getText());
             tablaTarifas(Txt_codigo.getText());
+            bitacora.GuardarEnBitacora("Modificado", "2205");
         } else {
             JOptionPane.showMessageDialog(null, "Debe de seleccionar una fila de la tabla de asignaciones (LADO DERECHO)");
         }
@@ -600,7 +605,8 @@ public class Prcs_Check_Out extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_eliminarMouseExited
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
-        prcs_repetidos.imprimirReporte("Rpt_PrcsDetalleReservación.jrxml", "Reporte Proceso Detalles Reservacion");
+        prcs_repetidos.imprimirReporte("Rpt_PrcsCheck.jrxml", "Reporte Check");
+        bitacora.GuardarEnBitacora("Reporte", "2205");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
     private void Btn_reporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseEntered
@@ -613,6 +619,7 @@ public class Prcs_Check_Out extends javax.swing.JInternalFrame {
 
     private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
         prcs_repetidos.imprimirAyuda("AyudaMantenimientoServicios.chm");
+        bitacora.GuardarEnBitacora("Ayuda", "2205");
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_ayudaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseEntered
@@ -657,6 +664,7 @@ public class Prcs_Check_Out extends javax.swing.JInternalFrame {
                             if (prcs_repetidos.isNumeric(Txt_codigo.getText())) {
                                 tablaAsignaciones(Txt_codigo.getText());
                                 tablaTarifas(Txt_codigo.getText());
+                                bitacora.GuardarEnBitacora("Buscar", "2205");
                             }
                         }
                     }
