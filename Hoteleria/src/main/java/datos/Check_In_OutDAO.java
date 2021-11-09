@@ -20,8 +20,8 @@ import java.util.List;
 public class Check_In_OutDAO {
     public static String codigoAuxiliar;
     private static final String SQL_INSERT = "insert into tbl_check_in_out values(?,?,?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_check_in_out SET PK_id_reservacion=?, validacion_entrada=?, validacion_salida=?, id_tarifa=?, id_habitacion=?, estado=? WHERE PK_correlativo=?";
-    private static final String SQL_QUERY = "SELECT PK_correlativo, PK_id_reservacion, validacion_entrada, validacion_salida, id_tarifa, id_habitacion, estado FROM tbl_check_in_out WHERE PK_correlativo = ?";
+    private static final String SQL_UPDATE = "UPDATE tbl_check_in_out SET validacion_entrada=?, validacion_salida=?, estado=? WHERE PK_correlativo=?";
+    private static final String SQL_QUERY = "SELECT PK_correlativo, id_reservacion_detalle, validacion_entrada, validacion_salida, id_tarifa_detalle, estado FROM tbl_check_in_out WHERE PK_correlativo = ?";
     private static final String SQL_DELETE = "delete from tbl_check_in_out where PK_correlativo = ?";
     
     public int insert(Check_In_Out huespedes) {
@@ -60,12 +60,10 @@ public class Check_In_OutDAO {
             conn = Conexion.getConnection();
 //          System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(6, huespedes.getCorrelativo());
-            stmt.setString(1, huespedes.getReservacion());
-            stmt.setString(2, huespedes.getEntrada());
-            stmt.setString(3, huespedes.getSalida());
-            stmt.setString(4, huespedes.getTarifa());
-            stmt.setString(5, huespedes.getEstado());
+            stmt.setString(4, huespedes.getCorrelativo());
+            stmt.setString(1, huespedes.getEntrada());
+            stmt.setString(2, huespedes.getSalida());
+            stmt.setString(3, huespedes.getEstado());
 
             rows = stmt.executeUpdate();
 
@@ -81,7 +79,7 @@ public class Check_In_OutDAO {
     
     public List<Check_In_Out> select() {
 
-        String SQL_SELECT = "SELECT * FROM tbl_check_in_out WHERE PK_correlativo LIKE '%"+codigoAuxiliar+"%'";
+        String SQL_SELECT = "SELECT * FROM tbl_check_in_out WHERE id_reservacion_detalle = '"+codigoAuxiliar+"'";
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -95,10 +93,10 @@ public class Check_In_OutDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 String correlativo = rs.getString("PK_correlativo");
-                String reservacion = rs.getString("PK_id_reservacion");
+                String reservacion = rs.getString("id_reservacion_detalle");
                 String entrada = rs.getString("validacion_entrada");
                 String salida = rs.getString("validacion_salida");
-                String tarifa = rs.getString("id_tarifa");
+                String tarifa = rs.getString("id_tarifa_detalle");
                 String estado = rs.getString("estado");
                 huespedes = new Check_In_Out();
                 huespedes.setCorrelativo(correlativo);
@@ -136,10 +134,10 @@ public class Check_In_OutDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 String correlativo = rs.getString("PK_correlativo");
-                String reservacion = rs.getString("PK_id_reservacion");
+                String reservacion = rs.getString("id_reservacion_detalle");
                 String entrada = rs.getString("validacion_entrada");
                 String salida = rs.getString("validacion_salida");
-                String tarifa = rs.getString("id_tarifa");
+                String tarifa = rs.getString("id_tarifa_detalle");
                 String estado = rs.getString("estado");
                 huespedes = new Check_In_Out();
                 huespedes.setCorrelativo(correlativo);
