@@ -20,6 +20,7 @@ public class Prcs_LimpiezaHorario extends javax.swing.JFrame {
     public Prcs_LimpiezaHorario() {
         initComponents();
         actualizarTabla("");
+        Txt_buscar.setBorder(null);
     }
     
     
@@ -27,23 +28,22 @@ public class Prcs_LimpiezaHorario extends javax.swing.JFrame {
         ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
         HorarioDAO.codigoAuxiliar = codigo;
         HorarioDAO.nombreAuxiliar = codigo;
-        String columnas[] = {"ID", "ENTRADA", "SALIDA", "EXTRAS", "DESCRIPCION", "ESTADO"};
+        String columnas[] = {"ID", "ENTRADA", "SALIDA", "DESCRIPCION", "ESTADO"};
         int cantidadcolumnas = columnas.length;
         prcs_repetidos.llenarColumnas(columnas, cantidadcolumnas, Tbl_Datos);
         String datos[] = new String[cantidadcolumnas];
-        int tamaño[] = {50, 75, 75, 75, 175, 50};
+        int tamaño[] = {50, 75, 75, 175, 50};
         HorarioDAO gobernantadao = new HorarioDAO();
         List<Horario> gobernanta = gobernantadao.select();
         for (Horario listaServicio : gobernanta) {
             datos[0] = String.valueOf(listaServicio.getIdHorario());
             datos[1] = String.valueOf(listaServicio.getEntradaHorario());
             datos[2] = String.valueOf(listaServicio.getSalidaHorario());
-            datos[3] = String.valueOf(listaServicio.getSalidaHorario());
-            datos[4] = String.valueOf(listaServicio.getHorasExtrasHorario());
+            datos[3] = String.valueOf(listaServicio.getDescripcionHorario());
             if (String.valueOf(listaServicio.getEstadoHorario()).equals("1")) {
-                datos[5] = "Activo";
+                datos[4] = "Activo";
             } else {
-                datos[5] = "Inactivo";
+                datos[4] = "Inactivo";
             }
             prcs_repetidos.llenarFilas(datos, tamaño, Tbl_Datos);
         }
