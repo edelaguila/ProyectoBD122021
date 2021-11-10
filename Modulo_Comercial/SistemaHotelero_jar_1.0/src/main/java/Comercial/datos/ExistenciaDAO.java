@@ -20,20 +20,21 @@ import javax.swing.JOptionPane;
  */
 public class ExistenciaDAO {
 
-    private static final String SQL_SELECT = "SELECT Pk_codigo_existencia, Pk_codigo_producto, Pk_codigo_bodega, cantidad_existencia,"
+    private static final String SQL_SELECT = "SELECT  Pk_codigo_producto, Pk_codigo_bodega, cantidad_existencia,"
             + "fecha_entrada_existencia, fecha_salida_existencia, estatus_existencia FROM tbl_existencia";
 
-    private static final String SQL_INSERT = "INSERT INTO tbl_existencia (Pk_codigo_existencia, Pk_codigo_producto, Pk_codigo_bodega, cantidad_existencia,"
-            + "fecha_entrada_existencia, fecha_salida_existencia, estatus_existencia) VALUES(?,?,?,?,?,?,?,?)";
+    private static final String SQL_INSERT = "INSERT INTO tbl_existencia ( Pk_codigo_producto, Pk_codigo_bodega, cantidad_existencia,"
+            + "fecha_entrada_existencia, fecha_salida_existencia, estatus_existencia) VALUES(?,?,?,?,?,?,?)";
 
-    private static final String SQL_UPDATE = "UPDATE tbl_existencia SET  Pk_codigo_existencia,"
-            + " cantidad_existencia= ?, fecha_entrada_existencia= ?, fecha_salida_existencia=?, estatus_existencia=? WHERE PK_codigo_bodega";
+    private static final String SQL_UPDATE = "UPDATE tbl_existencia SET,"
+            + "  cantidad_existencia=?, fecha_entrada_existencia=?, fecha_salida_existencia=?, estatus_existencia=?"
+            + " WHERE Pk_codigo_producto=?";
 
-    private static final String SQL_QUERY = "SELECT SELECT Pk_codigo_existencia, Pk_codigo_producto, Pk_codigo_bodega, cantidad_existencia,"
+    private static final String SQL_QUERY = "SELECT Pk_codigo_producto, Pk_codigo_bodega, cantidad_existencia,"
             + "fecha_entrada_existencia, fecha_salida_existencia, estatus_existencia"
-            + " FROM tbl_existencia WHERE Pk_codigo_existencia=?";
+            + " FROM tbl_existencia WHERE Pk_codigo_producto=?";
 
-    private static final String SQL_DELETE = "DELETE FROM tbl_existencia WHERE Pk_codigo_existencia=?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_existencia WHERE Pk_codigo_producto=?";
 
     public List<Existencia> select() {
         Connection conn = null;
@@ -47,7 +48,7 @@ public class ExistenciaDAO {
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                String Pk_codigo_existencia = rs.getString("Pk_codigo_existencia");
+
                 String Pk_codigo_producto = rs.getString("Pk_codigo_producto");
                 String Pk_codigo_bodega = rs.getString("Pk_codigo_bodega");
                 String cantidad_existencia = rs.getString("cantidad_existencia");
@@ -56,7 +57,7 @@ public class ExistenciaDAO {
                 String estatus_existencia = rs.getString("estatus_existencia");
 
                 existencia = new Existencia();
-                existencia.setPk_codigo_existencia(Pk_codigo_existencia);
+
                 existencia.setPk_codigo_producto(Pk_codigo_producto);
                 existencia.setPk_codigo_bodega(Pk_codigo_bodega);
                 existencia.setCantidad_existencia(cantidad_existencia);
@@ -85,11 +86,12 @@ public class ExistenciaDAO {
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1, existencia.getPk_codigo_existencia());
-            stmt.setString(2, existencia.getCantidad_existencia());
-            stmt.setString(3, existencia.getFecha_entrada_existencia());
-            stmt.setString(4, existencia.getFecha_salida_existencia());
-            stmt.setString(5, existencia.getEstatus_existencia());
+            stmt.setString(1, existencia.getPk_codigo_producto());
+            stmt.setString(2, existencia.getPk_codigo_bodega());
+            stmt.setString(3, existencia.getCantidad_existencia());
+            stmt.setString(4, existencia.getFecha_entrada_existencia());
+            stmt.setString(5, existencia.getFecha_salida_existencia());
+            stmt.setString(6, existencia.getEstatus_existencia());
 
             //System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -114,12 +116,13 @@ public class ExistenciaDAO {
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-
-            stmt.setString(1, existencia.getPk_codigo_existencia());
+            
+            stmt.setString(1, existencia.getPk_codigo_bodega());
             stmt.setString(2, existencia.getCantidad_existencia());
             stmt.setString(3, existencia.getFecha_entrada_existencia());
             stmt.setString(4, existencia.getFecha_salida_existencia());
             stmt.setString(5, existencia.getEstatus_existencia());
+            stmt.setString(6, existencia.getPk_codigo_producto());
 
             rows = stmt.executeUpdate();
             //System.out.println("Registros actualizado:" + rows);
@@ -145,20 +148,18 @@ public class ExistenciaDAO {
             conn = Conexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setString(1, existencia.getPk_codigo_existencia());
+            stmt.setString(1, existencia.getPk_codigo_producto());
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                String Pk_codigo_existencia = rs.getString("Pk_codigo_existencia");
                 String Pk_codigo_producto = rs.getString("Pk_codigo_producto");
                 String Pk_codigo_bodega = rs.getString("Pk_codigo_bodega");
                 String cantidad_existencia = rs.getString("cantidad_existencia");
                 String fecha_entrada_existencia = rs.getString("fecha_entrada_existencia");
                 String fecha_salida_existencia = rs.getString("fecha_salida_existencia");
                 String estatus_existencia = rs.getString("estatus_existencia");
-
                 existencia = new Existencia();
-                existencia.setPk_codigo_existencia(Pk_codigo_existencia);
+
                 existencia.setPk_codigo_producto(Pk_codigo_producto);
                 existencia.setPk_codigo_bodega(Pk_codigo_bodega);
                 existencia.setCantidad_existencia(cantidad_existencia);
@@ -191,7 +192,7 @@ public class ExistenciaDAO {
             conn = Conexion.getConnection();
             //System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setString(1, existencia.getPk_codigo_existencia());
+            stmt.setString(1, existencia.getPk_codigo_producto());
             rows = stmt.executeUpdate();
             //System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {

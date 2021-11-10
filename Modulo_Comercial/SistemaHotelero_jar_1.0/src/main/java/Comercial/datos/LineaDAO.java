@@ -21,7 +21,7 @@ public class LineaDAO {
     
     private static final String SQL_SELECT = "SELECT PK_codigo_linea, nombre_linea,  estatus_linea FROM tbl_linea";
     private static final String SQL_INSERT = "INSERT INTO tbl_linea(PK_codigo_linea, nombre_linea, estatus_linea) VALUES(?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_linea SET PK_codigo_linea=?, nombre_linea=?, estatus_linea=? WHERE PK_codigo_linea";
+    private static final String SQL_UPDATE = "UPDATE tbl_linea SET  nombre_linea=?, estatus_linea=? WHERE PK_codigo_linea=?";
     private static final String SQL_DELETE = "DELETE FROM tbl_linea WHERE PK_codigo_linea =?";
     private static final String SQL_QUERY = "SELECT PK_codigo_linea, nombre_linea, estatus_linea FROM tbl_linea WHERE PK_codigo_linea = ?";
     
@@ -101,10 +101,10 @@ public class LineaDAO {
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             
-            stmt.setString(1, linea.getPK_codigo_Linea());
-            stmt.setString(2, linea.getNombre_Linea());
-            stmt.setString(3, linea.getEstatus_Linea());
             
+            stmt.setString(1, linea.getNombre_Linea());
+            stmt.setString(2, linea.getEstatus_Linea());
+            stmt.setString(3, linea.getPK_codigo_Linea());
             
             
             

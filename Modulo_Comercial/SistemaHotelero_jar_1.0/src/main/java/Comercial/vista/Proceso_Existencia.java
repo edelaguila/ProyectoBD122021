@@ -32,7 +32,7 @@ public class Proceso_Existencia extends javax.swing.JInternalFrame {
      */
        public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("ID Existencia");
+       
         modelo.addColumn("Producto");
         modelo.addColumn("Bodega");
         modelo.addColumn("Cantidad Existencia");
@@ -45,13 +45,13 @@ public class Proceso_Existencia extends javax.swing.JInternalFrame {
         Tbl_existencia.setModel(modelo);
         String[] dato = new String[7];
         for (int i = 0; i < existencia.size(); i++) {
-            dato[0] = existencia.get(i).getPk_codigo_existencia();
-            dato[1] = existencia.get(i).getPk_codigo_producto();
-            dato[2] = existencia.get(i).getPk_codigo_bodega();
-            dato[3] = existencia.get(i).getCantidad_existencia();
-            dato[4] = existencia.get(i).getFecha_entrada_existencia();
-            dato[5] = existencia.get(i).getFecha_salida_existencia();
-            dato[6] = existencia.get(i).getEstatus_existencia();
+            
+            dato[0] = existencia.get(i).getPk_codigo_producto();
+            dato[1] = existencia.get(i).getPk_codigo_bodega();
+            dato[2] = existencia.get(i).getCantidad_existencia();
+            dato[3] = existencia.get(i).getFecha_entrada_existencia();
+            dato[4] = existencia.get(i).getFecha_salida_existencia();
+            dato[5] = existencia.get(i).getEstatus_existencia();
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
@@ -60,9 +60,9 @@ public class Proceso_Existencia extends javax.swing.JInternalFrame {
     public void buscar() {
         Existencia existenciaAConsultar = new Existencia();
         ExistenciaDAO existenciaDAO = new ExistenciaDAO();
-        existenciaAConsultar.setPk_codigo_existencia(Txt_id.getText());
+        existenciaAConsultar.setPk_codigo_producto(Tbx_producto.getText());
         existenciaAConsultar = existenciaDAO.query(existenciaAConsultar);
-        Tbx_producto.setText(existenciaAConsultar.getPk_codigo_producto());
+       
         Tbx_bodega.setText(existenciaAConsultar.getPk_codigo_bodega());
         Txt_cantidad.setText(existenciaAConsultar.getCantidad_existencia());
         Txt_fechaentrada.setText(String.valueOf(existenciaAConsultar.getFecha_entrada_existencia()));
@@ -72,7 +72,7 @@ public class Proceso_Existencia extends javax.swing.JInternalFrame {
     }
 
     public void limpiar() {
-        Txt_id.setText("");
+        
         Tbx_producto.setText("");
         Tbx_bodega.setText("");
         Txt_cantidad.setText("");
@@ -84,6 +84,7 @@ public class Proceso_Existencia extends javax.swing.JInternalFrame {
     
     public Proceso_Existencia() {
         initComponents();
+        llenadoDeTablas();
     }
 
     /**
@@ -97,8 +98,6 @@ public class Proceso_Existencia extends javax.swing.JInternalFrame {
 
         jButton6 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        Txt_id = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -131,16 +130,11 @@ public class Proceso_Existencia extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle Existencia"));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel1.setText("ID existencia");
-
-        Txt_id.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
         jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel2.setText("Producto codigo");
+        jLabel2.setText("Codigo Producto");
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel3.setText("Bodega Codigo");
+        jLabel3.setText("Codigo Bodega");
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel4.setText("Cantidad Existencia");
@@ -212,80 +206,71 @@ public class Proceso_Existencia extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel4))
-                                .addGap(30, 30, 30)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Txt_id, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                                    .addComponent(Txt_cantidad)
-                                    .addComponent(Tbx_bodega)
-                                    .addComponent(Tbx_producto)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(Btn_guardar)
-                                .addGap(9, 9, 9)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(140, 140, 140)
-                                .addComponent(jLabel6))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(Btn_Modificar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Btn_Eliminar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Btn_Reporte)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(Btn_Buscar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel5))))))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Txt_cantidad)
+                            .addComponent(Tbx_bodega)
+                            .addComponent(Tbx_producto, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jLabel7)))
+                        .addGap(197, 197, 197)
+                        .addComponent(Btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Btn_Buscar)
+                        .addGap(86, 86, 86)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Btn_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(Btn_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Txt_fechaentrada)
-                    .addComponent(Txt_fechasalida)
-                    .addComponent(Txt_estatus, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Txt_fechaentrada, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Txt_fechasalida, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Txt_estatus, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btn_Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(Txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Btn_Buscar)
                     .addComponent(jLabel5)
-                    .addComponent(Txt_fechaentrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Txt_fechaentrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel6)
-                    .addComponent(Txt_fechasalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Tbx_producto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel7)
-                    .addComponent(Txt_estatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tbx_bodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(Txt_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Tbx_bodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(Txt_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Txt_fechasalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Txt_estatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Btn_guardar)
                     .addComponent(Btn_Modificar)
@@ -313,10 +298,10 @@ public class Proceso_Existencia extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,18 +318,16 @@ public class Proceso_Existencia extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(227, 227, 227)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(196, 196, 196)
-                .addComponent(jButton6)
-                .addGap(62, 62, 62))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,8 +353,8 @@ public class Proceso_Existencia extends javax.swing.JInternalFrame {
         ExistenciaDAO existenciaDAO = new ExistenciaDAO();
         Existencia existenciaAInsertar = new Existencia();
         //        String cbxproducto = Cbx_producto.getSelectedItem().toString();
-        existenciaAInsertar.setPk_codigo_existencia(Txt_id.getText());
         existenciaAInsertar.setPk_codigo_producto(Tbx_producto.getText());
+     
         existenciaAInsertar.setPk_codigo_bodega(Tbx_bodega.getText());
         existenciaAInsertar.setCantidad_existencia(Txt_cantidad.getText());
         existenciaAInsertar.setFecha_entrada_existencia(Txt_fechaentrada.getText());
@@ -388,8 +371,8 @@ public class Proceso_Existencia extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         ExistenciaDAO existenciaDAO = new ExistenciaDAO();
         Existencia existenciaAActualizar = new Existencia();
-        existenciaAActualizar.setPk_codigo_existencia(Txt_id.getText());
         existenciaAActualizar.setPk_codigo_producto(Tbx_producto.getText());
+        
         existenciaAActualizar.setPk_codigo_bodega(Tbx_bodega.getText());
         existenciaAActualizar.setCantidad_existencia(Txt_cantidad.getText());
         existenciaAActualizar.setFecha_entrada_existencia(Txt_fechaentrada.getText());
@@ -410,7 +393,7 @@ public class Proceso_Existencia extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         ExistenciaDAO existenciaDAO = new ExistenciaDAO();
         Existencia existenciaAEliminar = new Existencia();
-        existenciaAEliminar.setPk_codigo_existencia(Txt_id.getText());
+        existenciaAEliminar.setPk_codigo_producto(Tbx_producto.getText());
         existenciaDAO.delete(existenciaAEliminar);
         JOptionPane.showMessageDialog(null, "Registro Eliminado.");
 
@@ -451,9 +434,7 @@ public class Proceso_Existencia extends javax.swing.JInternalFrame {
     private javax.swing.JTextField Txt_estatus;
     private javax.swing.JTextField Txt_fechaentrada;
     private javax.swing.JTextField Txt_fechasalida;
-    private javax.swing.JTextField Txt_id;
     private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

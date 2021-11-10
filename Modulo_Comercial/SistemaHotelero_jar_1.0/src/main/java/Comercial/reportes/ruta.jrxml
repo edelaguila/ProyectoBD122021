@@ -38,22 +38,21 @@
 	</background>
 	<title>
 		<band height="79" splitType="Stretch">
-			<image>
-				<reportElement x="53" y="0" width="84" height="79" uuid="2a2e49f1-254c-4af8-933f-375f45ef29a7"/>
-				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\6\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
-			</image>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch">
 			<staticText>
-				<reportElement x="229" y="1" width="303" height="34" uuid="0a1f2ffb-ed0a-4f12-a413-80a58a7fdd7f"/>
+				<reportElement x="229" y="45" width="303" height="34" uuid="0a1f2ffb-ed0a-4f12-a413-80a58a7fdd7f"/>
 				<textElement>
 					<font size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[MANTENIMIENTO RUTA]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="108" height="79" uuid="65be5905-b206-4dd1-9245-79af5be49f06"/>
+				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\7\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
+			</image>
 		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
 		<band height="61" splitType="Stretch">
