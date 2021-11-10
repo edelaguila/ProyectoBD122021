@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT * FROM empresarial.tbl_bodega;]]>
 	</queryString>
 	<field name="PK_codigo_bodega" class="java.lang.Integer">
@@ -21,16 +21,16 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<image>
-				<reportElement x="46" y="0" width="97" height="79" uuid="d654d59d-09f0-4548-811c-b9b866d7abee"/>
-				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\6\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
+				<reportElement x="0" y="0" width="99" height="79" uuid="163f2efd-68d4-44f2-a112-609833c900d4"/>
+				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\7\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch">
 			<staticText>
-				<reportElement x="100" y="0" width="321" height="35" uuid="18e78187-8f06-49d4-b18d-a7fc9dd75478"/>
-				<textElement>
+				<reportElement x="131" y="0" width="321" height="35" uuid="18e78187-8f06-49d4-b18d-a7fc9dd75478"/>
+				<textElement verticalAlignment="Middle">
 					<font size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[MANTENIMIENTO BODEGA]]></text>

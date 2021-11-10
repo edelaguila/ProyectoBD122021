@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class MarcaDAO {
     private static final String SQL_SELECT = "SELECT PK_codigo_marca, nombre_marca,  estatus_marca FROM tbl_marca";
     private static final String SQL_INSERT = "INSERT INTO tbl_marca(PK_codigo_marca, nombre_marca, estatus_marca) VALUES(?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_marca SET PK_codigo_marca=?, nombre_marca=?, estatus_marca=? WHERE PK_codigo_marca";
+    private static final String SQL_UPDATE = "UPDATE tbl_marca SET  nombre_marca=?, estatus_marca=? WHERE PK_codigo_marca=?";
     private static final String SQL_DELETE = "DELETE FROM tbl_marca WHERE PK_codigo_marca =?";
     private static final String SQL_QUERY = "SELECT PK_codigo_marca, nombre_marca, estatus_marca FROM tbl_marca WHERE PK_codigo_marca = ?";
     
@@ -98,11 +98,10 @@ public int update(Marca marca) {
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            
-            stmt.setString(1, marca.getPK_codigo_Marca());
-            stmt.setString(2, marca.getNombre_Marca());
-            stmt.setString(3, marca.getEstatus_Marca());
-            
+         
+            stmt.setString(1, marca.getNombre_Marca());
+            stmt.setString(2, marca.getEstatus_Marca());
+            stmt.setString(3, marca.getPK_codigo_Marca());
             
             
             

@@ -100,6 +100,11 @@ public class Prcs_SupervisionLimpieza extends javax.swing.JInternalFrame {
         prcs_repetidos.Limpiar(Txt_habitacion);
         Rdb_Limpiar2.setSelected(true);
     }
+    
+    public void Limpiar2() {
+        prcs_repetidos.Limpiar(Txt_habitacion);
+        Rdb_Limpiar2.setSelected(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -272,7 +277,7 @@ public class Prcs_SupervisionLimpieza extends javax.swing.JInternalFrame {
         );
         Btn_fondo_modificarLayout.setVerticalGroup(
             Btn_fondo_modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+            .addComponent(Btn_modificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout Pnl_datosLayout = new javax.swing.GroupLayout(Pnl_datos);
@@ -318,7 +323,7 @@ public class Prcs_SupervisionLimpieza extends javax.swing.JInternalFrame {
                                 .addComponent(Rdb_Inactivo))
                             .addComponent(Txt_habitacion)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(48, 48, 48)
+                        .addGap(18, 18, 18)
                         .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -338,28 +343,24 @@ public class Prcs_SupervisionLimpieza extends javax.swing.JInternalFrame {
                         .addComponent(jSeparator7, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                         .addGap(59, 59, 59))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_datosLayout.createSequentialGroup()
-                        .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Btn_fondo_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(Pnl_datosLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(Pnl_datosLayout.createSequentialGroup()
-                                .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Btn_fondo_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(Pnl_datosLayout.createSequentialGroup()
-                                        .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(Pnl_datosLayout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addComponent(jLabel2))
-                                            .addComponent(Txt_habitacion, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                                .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel1)
-                                        .addComponent(Rdb_Activo))
-                                    .addComponent(Rdb_Limpiar2)
-                                    .addComponent(Rdb_Inactivo))))
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jLabel2))
+                                    .addComponent(Txt_habitacion, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel1)
+                                .addComponent(Rdb_Activo))
+                            .addComponent(Rdb_Limpiar2)
+                            .addComponent(Rdb_Inactivo))
                         .addGap(34, 34, 34)))
                 .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Lbl_codigoNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -424,7 +425,7 @@ public class Prcs_SupervisionLimpieza extends javax.swing.JInternalFrame {
     private void Btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseClicked
         HabitacionDAO habitacionDAO = new HabitacionDAO();
         Habitacion habitacion = new Habitacion();
-        
+
         habitacion.setId(Txt_habitacion.getText());
         if (Rdb_Activo.isSelected()) {
             habitacion.setLimpieza("1");
@@ -432,10 +433,10 @@ public class Prcs_SupervisionLimpieza extends javax.swing.JInternalFrame {
             habitacion.setLimpieza("2");
         }
         habitacionDAO.update2(habitacion);
-//        actualizarTabla("");
-//        actualizarTabla2("");
+        actualizarTabla(Txt_buscar.getText());
+        actualizarTabla2(Txt_buscar.getText());
         prcs_repetidos.AlertaMensaje("confirmada", "Supervisión", "exitosamente");
-        Limpiar();
+        Limpiar2();
     }//GEN-LAST:event_Btn_modificarMouseClicked
 
     private void Btn_modificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseEntered

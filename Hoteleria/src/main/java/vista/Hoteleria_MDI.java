@@ -42,6 +42,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     private Prcs_Check_In form_Prcs_CheckIn;
     private Prcs_Check_Out form_Prcs_CheckOut;
     private Prcs_ServiciosExtras form_Prcs_ServiciosExtras;
+    private Prcs_DetalleRestaurante form_DetalleRestaurante;
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     public static JLabel Jl_logo = new JLabel();
@@ -117,6 +118,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jmenuEfectuarOrden = new javax.swing.JMenuItem();
         MnI_RegistroObjetoPerdido = new javax.swing.JMenuItem();
         MnI_ObjetosPerdidosE = new javax.swing.JMenuItem();
         MnI_CheckIn = new javax.swing.JMenuItem();
@@ -295,6 +297,14 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem2);
+
+        jmenuEfectuarOrden.setText("Prcs. Efectuar Orden");
+        jmenuEfectuarOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmenuEfectuarOrdenActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmenuEfectuarOrden);
 
         Mnu_procesos.add(jMenu2);
 
@@ -608,6 +618,17 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         bitacora.GuardarEnBitacora("log", "2207");
     }//GEN-LAST:event_MnI_serviciosExtrasActionPerformed
 
+    private void jmenuEfectuarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuEfectuarOrdenActionPerformed
+        form_DetalleRestaurante = new Prcs_DetalleRestaurante();
+        Jdp_contenedor.add(form_DetalleRestaurante);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_DetalleRestaurante.getSize();
+        form_DetalleRestaurante.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_DetalleRestaurante.setVisible(true);
+        form_DetalleRestaurante.toFront();
+        bitacora.GuardarEnBitacora("log", "2207");
+    }//GEN-LAST:event_jmenuEfectuarOrdenActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -659,5 +680,6 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     public static javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jmenuEfectuarOrden;
     // End of variables declaration//GEN-END:variables
 }
