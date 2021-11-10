@@ -24,15 +24,15 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="145" y="16" width="307" height="34" uuid="633fb026-87a6-4af7-9807-8ca7872172d8"/>
+				<reportElement x="135" y="45" width="307" height="34" uuid="633fb026-87a6-4af7-9807-8ca7872172d8"/>
 				<textElement verticalAlignment="Bottom">
 					<font size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[MANTENIMIENTO UNIDAD]]></text>
 			</staticText>
 			<image>
-				<reportElement x="19" y="0" width="87" height="79" uuid="fe589995-5fea-48d1-a3e9-39a140f6fc0b"/>
-				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\6\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
+				<reportElement x="3" y="0" width="99" height="79" uuid="c1c49c52-2d9a-4bae-8370-d32d3fb79a1f"/>
+				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\7\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>

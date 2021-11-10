@@ -35,7 +35,7 @@
                       <Component id="Btn_Ayuda" min="-2" pref="104" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="Pnl_detalle18" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="Pnl_datos" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -56,8 +56,9 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="Pnl_datos" min="-2" pref="218" max="-2" attributes="0"/>
-              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="Pnl_detalle18" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="28" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -108,11 +109,11 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="Txt_nombre" alignment="1" max="32767" attributes="0"/>
-                              <Component id="Txt_estado" alignment="1" pref="289" max="32767" attributes="0"/>
-                              <Component id="Txt_codigo" max="32767" attributes="0"/>
+                              <Component id="Txt_nombre" alignment="0" max="32767" attributes="0"/>
+                              <Component id="Txt_estado" alignment="0" max="32767" attributes="0"/>
+                              <Component id="Txt_codigo" alignment="0" pref="198" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="Btn_Buscar" min="-2" pref="104" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -126,7 +127,7 @@
                           <Component id="Btn_Reporte" min="-2" pref="104" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="50" max="32767" attributes="0"/>
+                  <EmptySpace pref="58" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -136,20 +137,20 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="Lbl_codigo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Txt_codigo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Txt_codigo" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                       <Component id="Btn_Buscar" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="Lbl_nombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Txt_nombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Txt_nombre" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Txt_estado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Txt_estado" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                       <Component id="Lbl_estado" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="Btn_Reporte" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                       <Component id="Btn_Guardar" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
@@ -319,6 +320,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Tbl_DatosMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="76c4dca2-67dd-4cab-8f1e-3dfe4c18b5dc">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM empresarial.tbl_existencia;]]>
+	</queryString>
+	<field name="Pk_codigo_producto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Pk_codigo_bodega" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad_existencia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_entrada_existencia" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_salida_existencia" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estatus_existencia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="21" y="0" width="118" height="79" uuid="41518e5a-056a-4d6e-8c4e-f8ed6ad21193"/>
+				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\7\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="317" y="10" width="161" height="41" uuid="ab78c124-5313-40e2-8c93-96e6ecf8da2e"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXISTENCIA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="41" width="100" height="20" uuid="8d8cb352-c079-4718-836b-090275ca0adf"/>
+				<text><![CDATA[Pk_codigo_producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="106" y="41" width="100" height="20" uuid="628a76a6-1b59-4cb3-a857-011476ae7bdd"/>
+				<text><![CDATA[Pk_codigo_bodega]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="41" width="100" height="20" uuid="d373c891-e7b6-4eab-a265-5c93bdd6f4ad"/>
+				<text><![CDATA[cantidad_existencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="41" width="72" height="20" uuid="a895b9cf-ce3a-4af7-9816-f68a625ed1f2"/>
+				<text><![CDATA[fecha_entrada_existencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="41" width="62" height="20" uuid="ce5181e2-f498-4926-95f2-d5ba2f9cdb3d"/>
+				<text><![CDATA[fecha_salida_existencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="558" y="41" width="100" height="20" uuid="03329933-aaf5-402f-b489-4ea570e1556d"/>
+				<text><![CDATA[estatus_existencia]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="da24e267-78cd-4c21-af90-f2c25d24cab0"/>
+				<textFieldExpression><![CDATA[$F{Pk_codigo_producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="106" y="0" width="100" height="20" uuid="11eaa050-1c6b-490a-bc84-caf5acdb2cbc"/>
+				<textFieldExpression><![CDATA[$F{Pk_codigo_bodega}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="217" y="0" width="100" height="20" uuid="5d01242c-5256-4d9a-96c9-89fd15b6276f"/>
+				<textFieldExpression><![CDATA[$F{cantidad_existencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="0" width="89" height="20" uuid="01074455-780e-45ce-b5aa-aa60f2f0b10e"/>
+				<textFieldExpression><![CDATA[$F{fecha_entrada_existencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="453" y="0" width="82" height="20" uuid="471c9285-4429-48ff-87a6-d2a417ecb220"/>
+				<textFieldExpression><![CDATA[$F{fecha_salida_existencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="558" y="0" width="100" height="20" uuid="94b1e38a-3dd8-43a9-8d21-0dee2c49d402"/>
+				<textFieldExpression><![CDATA[$F{estatus_existencia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

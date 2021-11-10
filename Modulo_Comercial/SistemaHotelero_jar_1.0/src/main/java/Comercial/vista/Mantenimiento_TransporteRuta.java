@@ -92,6 +92,7 @@ public class Mantenimiento_TransporteRuta extends javax.swing.JInternalFrame {
      
     public Mantenimiento_TransporteRuta() {
         initComponents();
+        llenadoDeTablas();
     }
 
     /**

@@ -1,6 +1,6 @@
 package Comercial.vista;
 
-//import seguridad.vista.*;
+import seguridad.vista.*;
 //import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Dimension;
 import java.io.File;
