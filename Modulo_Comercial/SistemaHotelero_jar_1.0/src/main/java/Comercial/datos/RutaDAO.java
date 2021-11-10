@@ -32,7 +32,8 @@ public class RutaDAO {
     
     private static final String SQL_UPDATE = "UPDATE tbl_transporteruta SET nombre_conductoruta= ?, "
             + "nombre_transporteruta= ?, tipo_transporteruta=?, ubicacion_transporteruta=?, direccion_transporteruta=?,"
-            + "hora_salida_transporteruta=?, hora_entrada_transporteruta=?, estatus_transporteruta=? WHERE PK_codigo_transporteruta";
+            + "hora_salida_transporteruta=?, hora_entrada_transporteruta=?, estatus_transporteruta=? "
+            + "WHERE PK_codigo_transporteruta=?";
     
     private static final String SQL_QUERY = "SELECT  PK_codigo_transporteruta, nombre_conductoruta, "
             + "nombre_transporteruta, tipo_transporteruta, ubicacion_transporteruta, direccion_transporteruta,"
@@ -129,15 +130,15 @@ public class RutaDAO {
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             
-            stmt.setString(1, ruta.getPK_codigo_transporteruta());
-            stmt.setString(2, ruta.getNombre_conductoruta());
-            stmt.setString(3, ruta.getNombre_transporteruta());
-            stmt.setString(4, ruta.getTipo_transporteruta());
-            stmt.setString(5, ruta.getUbicacion_transporteruta());
-            stmt.setString(6, ruta.getDireccion_transporteruta());
-            stmt.setString(7, ruta.getHora_entrada_transporteruta());
-            stmt.setString(8, ruta.getHora_salida_transporteruta());
-            stmt.setString(9, ruta.getEstatus_transporteruta());
+            stmt.setString(1, ruta.getNombre_conductoruta());
+            stmt.setString(2, ruta.getNombre_transporteruta());
+            stmt.setString(3, ruta.getTipo_transporteruta());
+            stmt.setString(4, ruta.getUbicacion_transporteruta());
+            stmt.setString(5, ruta.getDireccion_transporteruta());
+            stmt.setString(6, ruta.getHora_entrada_transporteruta());
+            stmt.setString(7, ruta.getHora_salida_transporteruta());
+            stmt.setString(8, ruta.getEstatus_transporteruta());
+            stmt.setString(9, ruta.getPK_codigo_transporteruta());
             
             rows = stmt.executeUpdate();
             //System.out.println("Registros actualizado:" + rows);

@@ -41,17 +41,17 @@
 	</background>
 	<title>
 		<band height="79" splitType="Stretch">
-			<image>
-				<reportElement x="42" y="-2" width="124" height="81" uuid="94d50151-1da5-4262-b03c-cc0ceaf5af1b"/>
-				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\6\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
-			</image>
 			<staticText>
-				<reportElement x="184" y="16" width="369" height="48" uuid="e2d8d533-b6f3-40ec-b24e-83ea8f0bf829"/>
-				<textElement>
+				<reportElement x="184" y="31" width="369" height="48" uuid="e2d8d533-b6f3-40ec-b24e-83ea8f0bf829"/>
+				<textElement verticalAlignment="Bottom">
 					<font size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[MANTENIMIENTO PRODUCTO]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="101" height="79" uuid="35b75fc6-4569-4075-9f0a-d313d06ab17f"/>
+				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\7\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

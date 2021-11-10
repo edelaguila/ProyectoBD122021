@@ -41,17 +41,17 @@
 	</background>
 	<title>
 		<band height="79" splitType="Stretch">
-			<image>
-				<reportElement x="42" y="0" width="89" height="79" uuid="736df23c-5918-4cd5-b54a-f32500c96440"/>
-				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\6\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="185" y="26" width="411" height="53" uuid="d8dcf840-420a-42e8-99db-86800d178224"/>
-				<textElement>
+				<textElement verticalAlignment="Bottom">
 					<font size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[MANTENIMIENTO TRANSPORTE]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="119" height="79" uuid="207443a4-7f2f-446e-ab46-3c4cb138307c"/>
+				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\7\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

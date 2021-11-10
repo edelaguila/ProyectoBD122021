@@ -5,8 +5,8 @@
  */
 package vista;
 
-import datos.AsignacionGobernantaDAO;
-import dominio.AsignacionGobernanta;
+import datos.HabitacionDAO;
+import dominio.Habitacion;
 import dominio.ProcesosRepetidos;
 import java.awt.Color;
 import java.util.List;
@@ -15,34 +15,42 @@ import java.util.List;
  *
  * @author JEFF
  */
-public class Prcs_LimpiezaGobernanta extends javax.swing.JFrame {
+public class Prcs_HabitacionOrden extends javax.swing.JFrame {
     
-    public Prcs_LimpiezaGobernanta() {
+    public Prcs_HabitacionOrden() {
         initComponents();
         actualizarTabla("");
+        diseño();
         Txt_buscar.setBorder(null);
     }
     
-    
+    public void diseño() {
+        this.setTitle("Descripción de las habitaciones");
+    }
     public void actualizarTabla(String codigo) {
         ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
-        AsignacionGobernantaDAO.codigoAuxiliar = codigo;
-        AsignacionGobernantaDAO.nombreAuxiliar = codigo;
-        String columnas[] = {"ID", "NOMBRE COMPLETO", "ESTADO"};
+        HabitacionDAO.codigoAuxiliar = codigo;
+        String columnas[] = {"ID", "PISO", "ESTADO", "TIPO"};
         int cantidadcolumnas = columnas.length;
         prcs_repetidos.llenarColumnas(columnas, cantidadcolumnas, Tbl_Datos);
         String datos[] = new String[cantidadcolumnas];
-        int tamaño[] = {50, 100, 50};
-        AsignacionGobernantaDAO gobernantadao = new AsignacionGobernantaDAO();
-        List<AsignacionGobernanta> gobernanta = gobernantadao.selectGobernanta();
-        for (AsignacionGobernanta listaServicio : gobernanta) {
-            datos[0] = String.valueOf(listaServicio.getIdGobernanta());
-            datos[1] = String.valueOf(listaServicio.getNombreGobernanta());
-            if (String.valueOf(listaServicio.getEstadoGobernanta()).equals("1")) {
-                datos[2] = "Activo";
+        int tamaño[] = {150, 250, 100, 100, 100};
+        HabitacionDAO serviciosdao = new HabitacionDAO();
+        List<Habitacion> servicio = serviciosdao.select();
+        for (Habitacion listaServicio : servicio) {
+            datos[0] = listaServicio.getId();
+            datos[1] = listaServicio.getPiso();
+            if (listaServicio.getEstado().equals("1")) {
+                datos[2] = "Disponible";
             } else {
-                datos[2] = "Inactivo";
+                datos[2] = "Ocupada";
             }
+            if (listaServicio.getTipo().equals("1")) {
+                datos[3] = "Familiar";
+            } else {
+                datos[3] = "Individual";
+            }
+
             prcs_repetidos.llenarFilas(datos, tamaño, Tbl_Datos);
         }
     }
@@ -65,14 +73,14 @@ public class Prcs_LimpiezaGobernanta extends javax.swing.JFrame {
         Btn_buscar = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
 
-        setTitle("Descripción de asignaciones de Gobernanta");
+        setTitle("Descripción de horarios");
 
         Pnl_datos.setBackground(new java.awt.Color(36, 47, 65));
         Pnl_datos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
 
         Lbl_codigoNombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_codigoNombre.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_codigoNombre.setText("Código:");
+        Lbl_codigoNombre.setText("CÓDIGO:");
 
         Txt_buscar.setBackground(new java.awt.Color(36, 47, 65));
         Txt_buscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -98,7 +106,7 @@ public class Prcs_LimpiezaGobernanta extends javax.swing.JFrame {
 
         Btn_buscar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_buscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Btn_buscar.setText("Buscar");
+        Btn_buscar.setText("BUSCAR");
         Btn_buscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_buscarMouseClicked(evt);
@@ -129,7 +137,7 @@ public class Prcs_LimpiezaGobernanta extends javax.swing.JFrame {
             .addGroup(Pnl_datosLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
                     .addGroup(Pnl_datosLayout.createSequentialGroup()
                         .addComponent(Lbl_codigoNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -204,14 +212,38 @@ public class Prcs_LimpiezaGobernanta extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Prcs_LimpiezaGobernanta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Prcs_HabitacionOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Prcs_LimpiezaGobernanta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Prcs_HabitacionOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Prcs_LimpiezaGobernanta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Prcs_HabitacionOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Prcs_LimpiezaGobernanta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Prcs_HabitacionOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -224,7 +256,7 @@ public class Prcs_LimpiezaGobernanta extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Prcs_LimpiezaGobernanta().setVisible(true);
+                new Prcs_HabitacionOrden().setVisible(true);
             }
         });
     }

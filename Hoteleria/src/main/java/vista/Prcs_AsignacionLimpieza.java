@@ -35,7 +35,7 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
         this.setTitle("Asignación Gobernanta de Piso");
         Txt_buscar.setBorder(null);
         Rdb_Limpiar2.setVisible(false);
-        prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar);
+        prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar, Btn_cancelar2, Btn_cancelar3);
         ImageIcon icono = new ImageIcon("src/main/java/assets/pisos.png");
         this.setFrameIcon(icono);
     }
@@ -109,8 +109,10 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
         Lbl_id2 = new javax.swing.JLabel();
         Cbx_EHora = new javax.swing.JComboBox<>();
         Lbl_id3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        Btn_fondo_cancelar2 = new javax.swing.JPanel();
+        Btn_cancelar2 = new javax.swing.JLabel();
+        Btn_fondo_cancelar3 = new javax.swing.JPanel();
+        Btn_cancelar3 = new javax.swing.JLabel();
         Pnl_datos = new javax.swing.JPanel();
         Lbl_codigoNombre = new javax.swing.JLabel();
         Txt_buscar = new javax.swing.JTextField();
@@ -132,7 +134,7 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
 
         Lbl_estado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_estado.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_estado.setText("Estado:");
+        Lbl_estado.setText("ESTADO:");
 
         BtnGp_estado.add(Rdb_Activo);
         Rdb_Activo.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
@@ -231,7 +233,7 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
         );
         Btn_fondo_modificarLayout.setVerticalGroup(
             Btn_fondo_modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_modificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         Btn_fondo_reporte.setBackground(new java.awt.Color(97, 212, 195));
@@ -287,7 +289,9 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
         );
         Btn_fondo_ayudaLayout.setVerticalGroup(
             Btn_fondo_ayudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Btn_fondo_ayudaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Btn_ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         Btn_fondo_cancelar.setBackground(new java.awt.Color(255, 128, 115));
@@ -315,39 +319,81 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
         );
         Btn_fondo_cancelarLayout.setVerticalGroup(
             Btn_fondo_cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_cancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Lbl_nombre1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_nombre1.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_nombre1.setText("No. Piso:");
+        Lbl_nombre1.setText("NO. PISO:");
 
         Lbl_nombre2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_nombre2.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_nombre2.setText("ID Gobernanta:");
+        Lbl_nombre2.setText("ID GOBERNANTA:");
 
         Lbl_id2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_id2.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_id2.setText("ID Horario:");
+        Lbl_id2.setText("ID HORARIO:");
 
         Lbl_id3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_id3.setForeground(new java.awt.Color(255, 255, 255));
         Lbl_id3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Lbl_id3.setText("Hora");
 
-        jButton2.setText("VER GOBERNANTA");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        Btn_fondo_cancelar2.setBackground(new java.awt.Color(255, 128, 115));
+
+        Btn_cancelar2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Btn_cancelar2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Btn_cancelar2.setText("VER GOBERNANTA");
+        Btn_cancelar2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_cancelar2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Btn_cancelar2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Btn_cancelar2MouseExited(evt);
             }
         });
 
-        jButton1.setText("VER HORARIOS");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        javax.swing.GroupLayout Btn_fondo_cancelar2Layout = new javax.swing.GroupLayout(Btn_fondo_cancelar2);
+        Btn_fondo_cancelar2.setLayout(Btn_fondo_cancelar2Layout);
+        Btn_fondo_cancelar2Layout.setHorizontalGroup(
+            Btn_fondo_cancelar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Btn_cancelar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        Btn_fondo_cancelar2Layout.setVerticalGroup(
+            Btn_fondo_cancelar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Btn_cancelar2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        Btn_fondo_cancelar3.setBackground(new java.awt.Color(255, 128, 115));
+
+        Btn_cancelar3.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Btn_cancelar3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Btn_cancelar3.setText("VER HORARIO");
+        Btn_cancelar3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_cancelar3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Btn_cancelar3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Btn_cancelar3MouseExited(evt);
             }
         });
+
+        javax.swing.GroupLayout Btn_fondo_cancelar3Layout = new javax.swing.GroupLayout(Btn_fondo_cancelar3);
+        Btn_fondo_cancelar3.setLayout(Btn_fondo_cancelar3Layout);
+        Btn_fondo_cancelar3Layout.setHorizontalGroup(
+            Btn_fondo_cancelar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Btn_cancelar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        Btn_fondo_cancelar3Layout.setVerticalGroup(
+            Btn_fondo_cancelar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Btn_cancelar3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout Pnl_ingresoDatosLayout = new javax.swing.GroupLayout(Pnl_ingresoDatos);
         Pnl_ingresoDatos.setLayout(Pnl_ingresoDatosLayout);
@@ -356,7 +402,7 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addGap(82, 82, 82)
+                        .addGap(34, 34, 34)
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Btn_fondoGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -369,7 +415,7 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
                             .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Btn_fondo_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addGap(56, 56, 56)
+                        .addGap(35, 35, 35)
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Lbl_estado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Lbl_nombre2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -386,17 +432,19 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
                                         .addGap(197, 197, 197)
                                         .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(Btn_fondo_cancelar2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(Cbx_Gobernanta, javax.swing.GroupLayout.Alignment.LEADING, 0, 200, Short.MAX_VALUE))
-                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(Rdb_Inactivo)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(Btn_fondo_cancelar3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Pnl_ingresoDatosLayout.createSequentialGroup()
+                                            .addGap(122, 122, 122)
+                                            .addComponent(Rdb_Inactivo)))))
                             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(Rdb_Activo)
                                 .addGap(18, 18, 18)
                                 .addComponent(Rdb_Limpiar2)))))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         Pnl_ingresoDatosLayout.setVerticalGroup(
             Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,7 +454,7 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
                     .addComponent(Lbl_nombre2)
                     .addComponent(Cbx_Gobernanta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Btn_fondo_cancelar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cbx_Piso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -418,8 +466,8 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
                     .addComponent(Cbx_EHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Lbl_id2))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addComponent(Btn_fondo_cancelar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Rdb_Limpiar2)
                     .addComponent(Rdb_Inactivo)
@@ -428,11 +476,11 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
                         .addComponent(Rdb_Activo)))
                 .addGap(3, 3, 3)
                 .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Btn_fondo_ayuda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Btn_fondo_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Btn_fondo_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Btn_fondoGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -503,7 +551,7 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
             .addGroup(Pnl_datosLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
                     .addGroup(Pnl_datosLayout.createSequentialGroup()
                         .addComponent(Lbl_codigoNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -527,7 +575,7 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
                                 .addComponent(Txt_buscar)
                                 .addComponent(Lbl_codigoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -709,15 +757,31 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
         prcs_repetidos.imprimirReporte("Rpt_MantPisos.jrxml", "Reporte de Limpieza");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Prcs_LimpiezaHorario abrir = new Prcs_LimpiezaHorario();
-        abrir.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void Btn_cancelar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelar2MouseClicked
         Prcs_LimpiezaGobernanta abrir = new Prcs_LimpiezaGobernanta();
         abrir.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_Btn_cancelar2MouseClicked
+
+    private void Btn_cancelar2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelar2MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_cancelar2MouseEntered
+
+    private void Btn_cancelar2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelar2MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_cancelar2MouseExited
+
+    private void Btn_cancelar3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelar3MouseClicked
+        Prcs_LimpiezaHorario abrir = new Prcs_LimpiezaHorario();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_Btn_cancelar3MouseClicked
+
+    private void Btn_cancelar3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelar3MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_cancelar3MouseEntered
+
+    private void Btn_cancelar3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_cancelar3MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_cancelar3MouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -726,11 +790,17 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
     private javax.swing.JLabel Btn_ayuda;
     private javax.swing.JLabel Btn_buscar;
     private javax.swing.JLabel Btn_cancelar;
+    private javax.swing.JLabel Btn_cancelar1;
+    private javax.swing.JLabel Btn_cancelar2;
+    private javax.swing.JLabel Btn_cancelar3;
     private javax.swing.JLabel Btn_eliminar;
     private javax.swing.JPanel Btn_fondoGuardar;
     private javax.swing.JPanel Btn_fondo_ayuda;
     private javax.swing.JPanel Btn_fondo_buscar;
     private javax.swing.JPanel Btn_fondo_cancelar;
+    private javax.swing.JPanel Btn_fondo_cancelar1;
+    private javax.swing.JPanel Btn_fondo_cancelar2;
+    private javax.swing.JPanel Btn_fondo_cancelar3;
     private javax.swing.JPanel Btn_fondo_eliminar;
     private javax.swing.JPanel Btn_fondo_modificar;
     private javax.swing.JPanel Btn_fondo_reporte;
@@ -754,8 +824,6 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton Rdb_Limpiar2;
     private javax.swing.JTable Tbl_Datos;
     private javax.swing.JTextField Txt_buscar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator7;
     // End of variables declaration//GEN-END:variables
