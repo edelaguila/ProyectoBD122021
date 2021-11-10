@@ -7,6 +7,7 @@ package vista;
 
 import datos.Check_In_OutDAO;
 import datos.DetalleReservacionDAO;
+import datos.GuardarBitacora;
 import datos.ReservacionDAO;
 import datos.TarifaDAO;
 import dominio.Check_In_Out;
@@ -17,6 +18,9 @@ import dominio.Tarifa;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login_LD;
 
 /**
  *
@@ -28,14 +32,52 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
     DetalleReservacion detalleReservacion = new DetalleReservacion();
     Check_In_Out checkinout = new Check_In_Out();
 
+    GuardarBitacora bitacora = new GuardarBitacora();
+
+    void habilitarAcciones() {
+
+        var codigoAplicacion = 2007;
+        var usuario = Login_LD.usuario;
+
+        Btn_guardar.setVisible(false);
+        Btn_eliminar.setVisible(false);
+        Btn_buscar.setVisible(false);
+
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[5];
+
+        for (int i = 0; i < 5; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[0].equals("1")) {
+            Btn_guardar.setVisible(true);
+        }
+        if (permisosApp[1].equals("1")) {
+            Btn_buscar.setVisible(true);
+        }
+        if (permisosApp[3].equals("1")) {
+            Btn_eliminar.setVisible(true);
+        }
+    }
+
     /**
      * Creates new form Prcs_DetalleReservación
      */
     public Prcs_DetalleReservacion() {
         initComponents();
+        habilitarAcciones();
+        diseño();
         tablaTarifas("");
     }
 
+    public void diseño() {
+        this.setTitle("Reservación PASO 2");
+        Txt_codigo.setBorder(null);
+        prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_reporte, Btn_buscar, Tbl_Tarifas, Tbl_Asignaciones);
+    }
+    
     public void tablaAsignaciones() {
         ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
         String columnas[] = {"CORRELATIVO", "ID RESERVACIÓN", "ID TARIFA"};
@@ -46,11 +88,11 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
         DetalleReservacionDAO detalleDAO = new DetalleReservacionDAO();
         List<DetalleReservacion> detalle = detalleDAO.select();
         for (DetalleReservacion listaDetalle : detalle) {
-                if (listaDetalle.getIdReservacion().equals(Txt_codigo.getText())) {
+            if (listaDetalle.getIdReservacion().equals(Txt_codigo.getText())) {
                 datos[0] = listaDetalle.getCorrelativo();
                 datos[1] = listaDetalle.getIdReservacion();
                 datos[2] = listaDetalle.getIdTarifa();
-            prcs_repetidos.llenarFilas(datos, tamaño, Tbl_Asignaciones);
+                prcs_repetidos.llenarFilas(datos, tamaño, Tbl_Asignaciones);
             }
         }
     }
@@ -77,9 +119,14 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
     }
 
     public void Limpiar() {
-
+        Txt_codigo.setText("");
+        DefaultTableModel DT_tablaNueva;
+        DT_tablaNueva = new DefaultTableModel();
+        DT_tablaNueva.addColumn("CORRELATIVO");      //LE AÑADIMOS COLUMNAS AL OBJETO MODELO
+        DT_tablaNueva.addColumn("ID TARIFA");
+        DT_tablaNueva.addColumn("ID SERVICIO");
+        Tbl_Asignaciones.setModel(DT_tablaNueva);
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -133,6 +180,9 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
         Btn_guardar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_guardar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_guardar.setText("Insertar");
+        Btn_guardar.setMaximumSize(new java.awt.Dimension(102, 40));
+        Btn_guardar.setMinimumSize(new java.awt.Dimension(102, 40));
+        Btn_guardar.setPreferredSize(new java.awt.Dimension(102, 40));
         Btn_guardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_guardarMouseClicked(evt);
@@ -161,10 +211,15 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
         );
 
         Btn_fondo_eliminar.setBackground(new java.awt.Color(97, 212, 195));
+        Btn_fondo_eliminar.setMaximumSize(new java.awt.Dimension(102, 40));
+        Btn_fondo_eliminar.setMinimumSize(new java.awt.Dimension(102, 40));
 
         Btn_eliminar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_eliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_eliminar.setText("Eliminar");
+        Btn_eliminar.setMaximumSize(new java.awt.Dimension(102, 40));
+        Btn_eliminar.setMinimumSize(new java.awt.Dimension(102, 40));
+        Btn_eliminar.setPreferredSize(new java.awt.Dimension(102, 40));
         Btn_eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_eliminarMouseClicked(evt);
@@ -181,18 +236,24 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
         Btn_fondo_eliminar.setLayout(Btn_fondo_eliminarLayout);
         Btn_fondo_eliminarLayout.setHorizontalGroup(
             Btn_fondo_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Btn_fondo_eliminarLayout.setVerticalGroup(
             Btn_fondo_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Btn_fondo_reporte.setBackground(new java.awt.Color(97, 212, 195));
+        Btn_fondo_reporte.setMaximumSize(new java.awt.Dimension(102, 40));
+        Btn_fondo_reporte.setMinimumSize(new java.awt.Dimension(102, 40));
+        Btn_fondo_reporte.setPreferredSize(new java.awt.Dimension(102, 40));
 
         Btn_reporte.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_reporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_reporte.setText("Reporte");
+        Btn_reporte.setMaximumSize(new java.awt.Dimension(102, 40));
+        Btn_reporte.setMinimumSize(new java.awt.Dimension(102, 40));
+        Btn_reporte.setPreferredSize(new java.awt.Dimension(102, 40));
         Btn_reporte.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_reporteMouseClicked(evt);
@@ -209,18 +270,23 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
         Btn_fondo_reporte.setLayout(Btn_fondo_reporteLayout);
         Btn_fondo_reporteLayout.setHorizontalGroup(
             Btn_fondo_reporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+            .addComponent(Btn_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Btn_fondo_reporteLayout.setVerticalGroup(
             Btn_fondo_reporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Btn_fondo_ayuda.setBackground(new java.awt.Color(253, 255, 182));
+        Btn_fondo_ayuda.setMaximumSize(new java.awt.Dimension(102, 40));
+        Btn_fondo_ayuda.setMinimumSize(new java.awt.Dimension(102, 40));
 
         Btn_ayuda.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_ayuda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_ayuda.setText("Ayuda");
+        Btn_ayuda.setMaximumSize(new java.awt.Dimension(102, 40));
+        Btn_ayuda.setMinimumSize(new java.awt.Dimension(102, 40));
+        Btn_ayuda.setPreferredSize(new java.awt.Dimension(102, 40));
         Btn_ayuda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_ayudaMouseClicked(evt);
@@ -237,18 +303,23 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
         Btn_fondo_ayuda.setLayout(Btn_fondo_ayudaLayout);
         Btn_fondo_ayudaLayout.setHorizontalGroup(
             Btn_fondo_ayudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+            .addComponent(Btn_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Btn_fondo_ayudaLayout.setVerticalGroup(
             Btn_fondo_ayudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Btn_fondo_cancelar.setBackground(new java.awt.Color(255, 128, 115));
+        Btn_fondo_cancelar.setMaximumSize(new java.awt.Dimension(102, 40));
+        Btn_fondo_cancelar.setMinimumSize(new java.awt.Dimension(102, 40));
 
         Btn_cancelar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_cancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_cancelar.setText("Cancelar");
+        Btn_cancelar.setMaximumSize(new java.awt.Dimension(102, 40));
+        Btn_cancelar.setMinimumSize(new java.awt.Dimension(102, 40));
+        Btn_cancelar.setPreferredSize(new java.awt.Dimension(102, 40));
         Btn_cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_cancelarMouseClicked(evt);
@@ -265,11 +336,11 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
         Btn_fondo_cancelar.setLayout(Btn_fondo_cancelarLayout);
         Btn_fondo_cancelarLayout.setHorizontalGroup(
             Btn_fondo_cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Btn_fondo_cancelarLayout.setVerticalGroup(
             Btn_fondo_cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Tbl_Asignaciones.setModel(new javax.swing.table.DefaultTableModel(
@@ -299,6 +370,9 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
         jScrollPane4.setViewportView(Tbl_Tarifas);
 
         Btn_fondoBuscar.setBackground(new java.awt.Color(97, 212, 195));
+        Btn_fondoBuscar.setMaximumSize(new java.awt.Dimension(102, 40));
+        Btn_fondoBuscar.setMinimumSize(new java.awt.Dimension(102, 40));
+        Btn_fondoBuscar.setPreferredSize(new java.awt.Dimension(102, 40));
 
         Btn_buscar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_buscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -319,7 +393,7 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
         Btn_fondoBuscar.setLayout(Btn_fondoBuscarLayout);
         Btn_fondoBuscarLayout.setHorizontalGroup(
             Btn_fondoBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 104, Short.MAX_VALUE)
+            .addGap(0, 102, Short.MAX_VALUE)
             .addGroup(Btn_fondoBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(Btn_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
         );
@@ -329,6 +403,10 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
             .addGroup(Btn_fondoBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(Btn_buscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
         );
+
+        Lbl_cliente.setMaximumSize(new java.awt.Dimension(102, 40));
+        Lbl_cliente.setMinimumSize(new java.awt.Dimension(102, 40));
+        Lbl_cliente.setPreferredSize(new java.awt.Dimension(102, 40));
 
         javax.swing.GroupLayout Pnl_ingresoDatosLayout = new javax.swing.GroupLayout(Pnl_ingresoDatos);
         Pnl_ingresoDatos.setLayout(Pnl_ingresoDatosLayout);
@@ -381,8 +459,8 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                         .addGap(105, 105, 105)
@@ -428,10 +506,10 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
             detalleReservacion.setIdReservacion(Txt_codigo.getText());
             detalleReservacion.setIdTarifa(Tbl_Tarifas.getValueAt(filaSeleccionada, 0).toString());
             detalleReservacion = detalledao.getProcesoAlmacenado(detalleReservacion);
-            
-            if (DetalleReservacionDAO.validacionReservacion==null) {
-            }else{
-                duplicada=false;
+
+            if (DetalleReservacionDAO.validacionReservacion == null) {
+            } else {
+                duplicada = false;
                 JOptionPane.showMessageDialog(null, "Tarifa ya reservada para los dias de esta reservación");
             }
 
@@ -445,6 +523,7 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
                 checkinout.setEstado("0");
                 detalledao.insert(detalleReservacion);
                 checkdao.insert(checkinout);
+                bitacora.GuardarEnBitacora("insertar", "2207");
                 tablaAsignaciones();
             }
         }
@@ -470,6 +549,7 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
                         checkinout.setCorrelativo(Tbl_Asignaciones.getValueAt(filaSeleccionada, 0).toString());
                         detalledao.delete(detalleReservacion);
                         checkdao.delete(checkinout);
+                        bitacora.GuardarEnBitacora("eliminar", "2207");
                         tablaAsignaciones();
                         prcs_repetidos.AlertaMensaje("eliminada", "Asignación", "exitosamente");
                         Limpiar();
@@ -493,6 +573,7 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
         prcs_repetidos.imprimirReporte("Rpt_PrcsDetalleReservación.jrxml", "Reporte Proceso Detalles Reservacion");
+        bitacora.GuardarEnBitacora("reporte", "2207");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
     private void Btn_reporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseEntered
@@ -505,6 +586,7 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
 
     private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
         prcs_repetidos.imprimirAyuda("AyudaMantenimientoServicios.chm");
+        bitacora.GuardarEnBitacora("ayuda", "2207");
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_ayudaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseEntered
@@ -537,6 +619,7 @@ public class Prcs_DetalleReservacion extends javax.swing.JInternalFrame {
                 if (reservacion.getEstadoReservacion() != null) {
                     if (reservacion.getEstadoReservacion().equals("1")) {
                         tablaAsignaciones();
+                        bitacora.GuardarEnBitacora("buscar", "2207");
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Tarifa no encontrada");
