@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Jefferson Dávila
+ * @author Jeff
  */
 public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
 
@@ -617,20 +617,21 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
             String cbxPiso = Cbx_Piso.getSelectedItem().toString();
             String cbxHorario = Cbx_EHora.getSelectedItem().toString();
 
-            AsignacionLimpiezaDAO gobernantadao = new AsignacionLimpiezaDAO();
-
-            gobernanta.setIdAsignacionGobernanta(cbxGobernanta);
-            gobernanta.setIdPiso(cbxPiso);
-            gobernanta.setIdHorario(cbxHorario);
-            if (Rdb_Activo.isSelected()) {
-                gobernanta.setEstadoAsignacionLimpieza("1");
-            } else if (Rdb_Inactivo.isSelected()) {
-                gobernanta.setEstadoAsignacionLimpieza("0");
+            if (prcs_repetidos.cbxNoneSelected(Cbx_Gobernanta, Cbx_Piso, Cbx_EHora)) {
+                AsignacionLimpiezaDAO gobernantadao = new AsignacionLimpiezaDAO();
+                gobernanta.setIdAsignacionGobernanta(cbxGobernanta);
+                gobernanta.setIdPiso(cbxPiso);
+                gobernanta.setIdHorario(cbxHorario);
+                if (Rdb_Activo.isSelected()) {
+                    gobernanta.setEstadoAsignacionLimpieza("1");
+                } else if (Rdb_Inactivo.isSelected()) {
+                    gobernanta.setEstadoAsignacionLimpieza("0");
+                }
+                gobernantadao.insert(gobernanta);
+                actualizarTabla("");
+                prcs_repetidos.AlertaMensaje("guardado", "Asignación", "exitosamente");
+                Limpiar();
             }
-            gobernantadao.insert(gobernanta);
-            actualizarTabla("");
-            prcs_repetidos.AlertaMensaje("guardado", "Asignación", "exitosamente");
-            Limpiar();
         } else {
         }
 
@@ -642,21 +643,22 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
             String cbxPiso = Cbx_Piso.getSelectedItem().toString();
             String cbxHorario = Cbx_EHora.getSelectedItem().toString();
 
-            AsignacionLimpiezaDAO pisosdao = new AsignacionLimpiezaDAO();
-
-            gobernanta.setIdAsignacionLimpieza(ID.getText());
-            gobernanta.setIdAsignacionGobernanta(cbxGobernanta);
-            gobernanta.setIdPiso(cbxPiso);
-            gobernanta.setIdHorario(cbxHorario);
-            if (Rdb_Activo.isSelected()) {
-                gobernanta.setEstadoAsignacionLimpieza("1");
-            } else if (Rdb_Inactivo.isSelected()) {
-                gobernanta.setEstadoAsignacionLimpieza("0");
+            if (prcs_repetidos.cbxNoneSelected(Cbx_Gobernanta, Cbx_Piso, Cbx_EHora)) {
+                AsignacionLimpiezaDAO pisosdao = new AsignacionLimpiezaDAO();
+                gobernanta.setIdAsignacionLimpieza(ID.getText());
+                gobernanta.setIdAsignacionGobernanta(cbxGobernanta);
+                gobernanta.setIdPiso(cbxPiso);
+                gobernanta.setIdHorario(cbxHorario);
+                if (Rdb_Activo.isSelected()) {
+                    gobernanta.setEstadoAsignacionLimpieza("1");
+                } else if (Rdb_Inactivo.isSelected()) {
+                    gobernanta.setEstadoAsignacionLimpieza("0");
+                }
+                pisosdao.update(gobernanta);
+                actualizarTabla("");
+                prcs_repetidos.AlertaMensaje("modificada", "Asignación", "exitosamente");
+                Limpiar();
             }
-            pisosdao.update(gobernanta);
-            actualizarTabla("");
-            prcs_repetidos.AlertaMensaje("modificada", "Asignación", "exitosamente");
-            Limpiar();
         }
     }//GEN-LAST:event_Btn_modificarMouseClicked
 
@@ -704,7 +706,7 @@ public class Prcs_AsignacionLimpieza extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
-        prcs_repetidos.imprimirReporte("Rpt_MantPisos.jrxml");
+        prcs_repetidos.imprimirReporte("Rpt_MantPisos.jrxml", "Reporte de Limpieza");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

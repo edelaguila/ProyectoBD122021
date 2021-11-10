@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="813f8b1f-5588-469e-8bd8-0c502d1de194">
 	<property name="ireport.zoom" value="1.9487171000000019"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="335"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
@@ -16,7 +16,7 @@
 	<parameter name="logo" class="java.lang.String"/>
 	<parameter name="usuario" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT * FROM hoteleria.tbl_horario;]]>
+		<![CDATA[SELECT * FROM empresarial.tbl_horario;]]>
 	</queryString>
 	<field name="PK_id_horario" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -25,9 +25,6 @@
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="salida_horario" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="horas_extras_horario" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="descripcion_horario" class="java.lang.String">
@@ -109,14 +106,7 @@
 				<text><![CDATA[Horario Salida]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" mode="Opaque" x="319" y="0" width="85" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="21dcdbb1-d745-466b-87c8-fcfb10e6a144"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="false"/>
-				</textElement>
-				<text><![CDATA[Horas extras]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" mode="Opaque" x="404" y="0" width="256" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="45391b69-99e2-4eec-9222-945f9be0bf3e"/>
+				<reportElement style="Column header" mode="Opaque" x="319" y="0" width="341" height="25" forecolor="#FFFFFF" backcolor="#000000" uuid="45391b69-99e2-4eec-9222-945f9be0bf3e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="false"/>
 				</textElement>
@@ -157,14 +147,7 @@
 					<textFieldExpression><![CDATA[$F{salida_horario}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="319" y="0" width="85" height="30" uuid="d7242bfe-b7d3-44ba-a5b7-836a932ebee2"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{horas_extras_horario}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="404" y="0" width="256" height="30" uuid="5bde7180-406b-468b-9705-c9e8dfbec45a"/>
+					<reportElement style="Detail" positionType="Float" x="319" y="0" width="341" height="30" uuid="5bde7180-406b-468b-9705-c9e8dfbec45a"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="14"/>
 					</textElement>

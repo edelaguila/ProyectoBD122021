@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a03e3671-e10a-41fc-bc7d-5fcb15375088">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0df78ead-04ec-43bc-8c8f-420bc4031344">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT * FROM administracion.tbl_linea;]]>
+		<![CDATA[SELECT * FROM empresarial.tbl_linea;]]>
 	</queryString>
 	<field name="PK_codigo_linea" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -21,15 +21,15 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<image>
-				<reportElement x="35" y="0" width="109" height="79" uuid="b044ab90-195b-49db-9dc5-105c0b3f0a5e"/>
-				<imageExpression><![CDATA["C:\\Users\\SipaqueRitaMaria.LAPTOP-TII06UQE\\Desktop\\programas\\uno\\SistemaHotelero\\src\\main\\java\\Comercial\\vista\\Captura.PNG"]]></imageExpression>
+				<reportElement x="19" y="0" width="89" height="79" uuid="1cf702b0-5ce5-4466-a2ca-e4af32b64d2e"/>
+				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\6\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="143" y="20" width="539" height="56" uuid="ec453da7-92cc-4a6d-b076-6af2162e7bfb"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="30" isBold="true" isUnderline="false"/>
+				<reportElement x="122" y="26" width="313" height="53" uuid="f5008f97-47c2-4e35-8124-c91b146a72a2"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="26" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Mantenimiento Linea]]></text>
+				<text><![CDATA[MANTENIMIENTO LINEA]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -39,39 +39,33 @@
 	<columnHeader>
 		<band height="61" splitType="Stretch">
 			<staticText>
-				<reportElement x="15" y="41" width="100" height="20" uuid="37a7e81c-1700-49e3-87c3-aa65f01148ea"/>
-				<text><![CDATA[Codigo Linea]]></text>
+				<reportElement x="73" y="41" width="100" height="20" uuid="82734288-a266-4d48-9afb-034912636817"/>
+				<text><![CDATA[PK_codigo_linea]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="143" y="41" width="100" height="20" uuid="c34a8f34-9729-4105-a63e-56cabeae2375"/>
-				<text><![CDATA[Nombre Linea]]></text>
+				<reportElement x="207" y="41" width="100" height="20" uuid="5f145cb0-b702-4d97-9b61-6fd2bbfde8f4"/>
+				<text><![CDATA[nombre_linea]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="321" y="41" width="100" height="20" uuid="15a0b76a-b155-4d39-be12-983db9a7efee"/>
-				<text><![CDATA[Estatus Linea]]></text>
+				<reportElement x="361" y="41" width="100" height="20" uuid="bf2258e4-64a7-48b6-b474-2c869714597b"/>
+				<text><![CDATA[estatus_linea]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="125" splitType="Stretch">
 			<textField>
-				<reportElement x="15" y="14" width="100" height="20" uuid="e8cc68a7-cf48-46b0-aa4f-53afaea9d05b"/>
+				<reportElement x="73" y="0" width="100" height="20" uuid="8eae929f-30e8-4a5f-9d56-315df0ea383c"/>
 				<textFieldExpression><![CDATA[$F{PK_codigo_linea}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="155" y="14" width="100" height="20" uuid="c7525fe3-84e4-4826-a792-4e5d9513847f"/>
+				<reportElement x="207" y="0" width="100" height="20" uuid="30d6a447-d16f-4f43-a3de-0dc1ab6a90cb"/>
 				<textFieldExpression><![CDATA[$F{nombre_linea}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="321" y="14" width="100" height="20" uuid="76a5bfaa-c847-42ba-85f9-969b85730876"/>
+				<reportElement x="361" y="0" width="100" height="20" uuid="da629dcc-a1da-4e64-b92a-dff16932045c"/>
 				<textFieldExpression><![CDATA[$F{estatus_linea}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement x="15" y="0" width="802" height="1" uuid="60a0a2b2-cdae-460f-9789-be1b68eb2bca"/>
-			</line>
-			<line>
-				<reportElement x="0" y="1" width="802" height="1" uuid="3282bfd0-a290-4be8-b2bd-82e27557015f"/>
-			</line>
 		</band>
 	</detail>
 	<columnFooter>

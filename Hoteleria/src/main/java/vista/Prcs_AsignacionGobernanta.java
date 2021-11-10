@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author Jefferson Dávila
+ * @author Jeff
  */
 public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
 
@@ -32,7 +32,7 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
     }
 
     public void diseño() {
-        this.setTitle("Asignación Gobernanta de Piso");
+        this.setTitle("Asignación de Amas de Llaves a Gobernanta");
         Txt_buscar.setBorder(null);
         Rdb_Limpiar2.setVisible(false);
         prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar);
@@ -631,20 +631,22 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
             String cbxGobernanta = Cbx_Gobernanta.getSelectedItem().toString();
             String cbxAmaDeLlave = Cbx_AmaDeLlave.getSelectedItem().toString();
 
-            AsignacionGobernantaDAO gobernantadao = new AsignacionGobernantaDAO();
+            if (prcs_repetidos.cbxNoneSelected(Cbx_Gobernanta, Cbx_AmaDeLlave)) {
+                AsignacionGobernantaDAO gobernantadao = new AsignacionGobernantaDAO();
 
-            gobernanta.setIdGobernanta(cbxGobernanta);
-            gobernanta.setIdAmaDeLlave(cbxAmaDeLlave);
+                gobernanta.setIdGobernanta(cbxGobernanta);
+                gobernanta.setIdAmaDeLlave(cbxAmaDeLlave);
 
-            if (Rdb_Activo.isSelected()) {
-                gobernanta.setEstadoAsignacionGobernanta("1");
-            } else if (Rdb_Inactivo.isSelected()) {
-                gobernanta.setEstadoAsignacionGobernanta("0");
+                if (Rdb_Activo.isSelected()) {
+                    gobernanta.setEstadoAsignacionGobernanta("1");
+                } else if (Rdb_Inactivo.isSelected()) {
+                    gobernanta.setEstadoAsignacionGobernanta("0");
+                }
+                gobernantadao.insert(gobernanta);
+                actualizarTabla("");
+                prcs_repetidos.AlertaMensaje("guardado", "Asignación", "exitosamente");
+                Limpiar();
             }
-            gobernantadao.insert(gobernanta);
-            actualizarTabla("");
-            prcs_repetidos.AlertaMensaje("guardado", "Asignación", "exitosamente");
-            Limpiar();
         } else {
         }
 
@@ -655,20 +657,21 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
             String cbxGobernanta = Cbx_Gobernanta.getSelectedItem().toString();
             String cbxLlave = Cbx_AmaDeLlave.getSelectedItem().toString();
 
-            AsignacionGobernantaDAO pisosdao = new AsignacionGobernantaDAO();
-
-            gobernanta.setIdAsignacionGobernanta(ID.getText());
-            gobernanta.setIdGobernanta(cbxGobernanta);
-            gobernanta.setIdAmaDeLlave(cbxLlave);
-            if (Rdb_Activo.isSelected()) {
-                gobernanta.setEstadoAsignacionGobernanta("1");
-            } else if (Rdb_Inactivo.isSelected()) {
-                gobernanta.setEstadoAsignacionGobernanta("0");
+            if (prcs_repetidos.cbxNoneSelected(Cbx_Gobernanta, Cbx_AmaDeLlave)) {
+                AsignacionGobernantaDAO pisosdao = new AsignacionGobernantaDAO();
+                gobernanta.setIdAsignacionGobernanta(ID.getText());
+                gobernanta.setIdGobernanta(cbxGobernanta);
+                gobernanta.setIdAmaDeLlave(cbxLlave);
+                if (Rdb_Activo.isSelected()) {
+                    gobernanta.setEstadoAsignacionGobernanta("1");
+                } else if (Rdb_Inactivo.isSelected()) {
+                    gobernanta.setEstadoAsignacionGobernanta("0");
+                }
+                pisosdao.update(gobernanta);
+                actualizarTabla("");
+                prcs_repetidos.AlertaMensaje("modificada", "Asignación", "exitosamente");
+                Limpiar();
             }
-            pisosdao.update(gobernanta);
-            actualizarTabla("");
-            prcs_repetidos.AlertaMensaje("modificada", "Asignación", "exitosamente");
-            Limpiar();
         }
     }//GEN-LAST:event_Btn_modificarMouseClicked
 
@@ -714,7 +717,7 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
-        prcs_repetidos.imprimirReporte("Rpt_MantPisos.jrxml");
+        prcs_repetidos.imprimirReporte("Rpt_MantPisos.jrxml", "Reporte Asignaciones Gobernanta");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

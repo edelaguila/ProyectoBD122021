@@ -128,7 +128,6 @@ public class AsignaciónServiciosDAO {
                 asignacion.setCorrelativo(correlativo);
                 asignacion.setId_tarifa(id_tarifa);
                 asignacion.setId_tarifa(id_servicio);
-                System.out.println(asignacion.getCorrelativo()+" "+asignacion.getId_servicio()+" "+asignacion.getId_tarifa());
             }
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
