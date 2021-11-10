@@ -175,7 +175,6 @@ public class DetalleReservacionDAO {
             stmt.execute();
             
             validacionReservacion = stmt.getString(3);
-            System.out.println(detalleRes.getIdReservacion() + " " + detalleRes.getIdTarifa() + " " + stmt.getString(3));
             stmt.close();
             conn.close();
 

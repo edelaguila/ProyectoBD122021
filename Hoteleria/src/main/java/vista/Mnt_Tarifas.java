@@ -5,6 +5,7 @@
  */
 package vista;
 
+import datos.GuardarBitacora;
 import datos.HabitacionDAO;
 import datos.TarifaDAO;
 import dominio.Habitacion;
@@ -22,9 +23,11 @@ import seguridad.vista.Login_LD;
  * @author Herbert Leonel Dominguez Chavez
  */
 public class Mnt_Tarifas extends javax.swing.JInternalFrame {
+
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     Tarifa tarifa = new Tarifa();
-    
+    GuardarBitacora bitacora = new GuardarBitacora();
+
     void habilitarAcciones() {
 
         var codigoAplicacion = 2007;
@@ -56,6 +59,7 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
             Btn_eliminar.setVisible(true);
         }
     }
+
     /**
      * Creates new form Prcs_Tarifa
      */
@@ -651,10 +655,11 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
                             tarifa.setEstado("0");
                         }
                         tarifadao.insert(tarifa);
+                        bitacora.GuardarEnBitacora("insertar", "2007");
                         actualizarTabla("");
                         prcs_repetidos.AlertaMensaje("guardada", "Tarifa", "exitosamente");
                         Limpiar();
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(null, "Habitación no encontrada o esta fuera de servicio");
                     }
                 }
@@ -678,6 +683,7 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
                     tarifa.setId_tarifa(Txt_codigo.getText());
                     tarifadao.delete(tarifa);
                     actualizarTabla("");
+                    bitacora.GuardarEnBitacora("eliminar", "2007");
                     prcs_repetidos.AlertaMensaje("eliminado", "Servicio", "exitosamente");
                     Limpiar();
                 } else {
@@ -718,8 +724,9 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
                         tarifadao.update(tarifa);
                         actualizarTabla("");
                         prcs_repetidos.AlertaMensaje("modificada", "Tarifa", "exitosamente");
+                        bitacora.GuardarEnBitacora("modificar", "2007");
                         Limpiar();
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(null, "Habitación no encontrada o esta fuera de servicio");
                     }
                 }
@@ -737,6 +744,7 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
         prcs_repetidos.imprimirReporte("Rpt_MantTarifas.jrxml", "Reporte de Tarifas");
+        bitacora.GuardarEnBitacora("reporte", "2007");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
     private void Btn_reporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseEntered
@@ -749,6 +757,7 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
 
     private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
         prcs_repetidos.imprimirAyuda("AyudaTarifas.chm");
+        bitacora.GuardarEnBitacora("ayuda", "2007");
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_ayudaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseEntered
@@ -781,11 +790,13 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
             } else {
                 Rdb_inactivo.setSelected(true);
             }
+            bitacora.GuardarEnBitacora("buscar", "2007");
         }
     }//GEN-LAST:event_Tbl_DatosMouseClicked
 
     private void Btn_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseClicked
         actualizarTabla(Txt_buscar.getText());
+        bitacora.GuardarEnBitacora("buscar", "2007");
     }//GEN-LAST:event_Btn_buscarMouseClicked
 
     private void Btn_buscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseEntered
@@ -797,9 +808,9 @@ public class Mnt_Tarifas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_buscarMouseExited
 
     private void Btn_cargarHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_cargarHabitacionesActionPerformed
-    Catalogo_Habitaciones ctl_habitaciones = null;
-    ctl_habitaciones = new Catalogo_Habitaciones();
-    ctl_habitaciones.show();
+        Catalogo_Habitaciones ctl_habitaciones = null;
+        ctl_habitaciones = new Catalogo_Habitaciones();
+        ctl_habitaciones.show();
     }//GEN-LAST:event_Btn_cargarHabitacionesActionPerformed
 
 
