@@ -6,6 +6,7 @@
 package datos;
 
 import dominio.Check_In_Out;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ import java.util.List;
  * @author leelu
  */
 public class Check_In_OutDAO {
-    public static String codigoAuxiliar;
+    public static String codigoAuxiliar,validacionentrega;
     private static final String SQL_INSERT = "insert into tbl_check_in_out values(?,?,?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE tbl_check_in_out SET validacion_entrada=?, validacion_salida=?, estado=? WHERE PK_correlativo=?";
     private static final String SQL_QUERY = "SELECT PK_correlativo, id_reservacion_detalle, validacion_entrada, validacion_salida, id_tarifa_detalle, estado FROM tbl_check_in_out WHERE PK_correlativo = ?";
@@ -177,4 +178,32 @@ public class Check_In_OutDAO {
 
         return rows;
     }
+    
+    public Check_In_Out getProcesoAlmacenado(Check_In_Out detalleRes){
+        Connection conn = null;
+        CallableStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = Conexion.getConnection();
+            String sql = "{call getValidarEntrega (?, ?, ?)}";
+            stmt = conn.prepareCall(sql);
+            stmt.setString(1, detalleRes.getReservacion());
+            
+            stmt.setString(2, detalleRes.getActual());
+            
+            stmt.registerOutParameter(3, java.sql.Types.INTEGER);
+            
+            stmt.execute();
+            
+            validacionentrega = stmt.getString(3);
+            stmt.close();
+            conn.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return detalleRes;
+    }
+    
 }
