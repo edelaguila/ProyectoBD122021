@@ -74,6 +74,12 @@ public class GenerarPermisos {
                 
                 Hoteleria_MDI.MnI_asingacionServiciosHabitacion.setVisible(false);
                 Hoteleria_MDI.MnI_RegistroObjetoPerdido.setVisible(false);
+                Hoteleria_MDI.MnI_CheckIn.setVisible(false);
+                Hoteleria_MDI.MnI_CheckOut.setVisible(false);
+                Hoteleria_MDI.MnI_ObjetosPerdidosE.setVisible(false);
+                Hoteleria_MDI.MnI_serviciosExtras.setVisible(false);
+                Hoteleria_MDI.MnI_reservacion.setVisible(false);
+                Hoteleria_MDI.MnI_reservacionDetalle.setVisible(false);
                 
                 ejecutarPermisos.ejecutarBusqueda(usuario);
                 for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
@@ -98,6 +104,13 @@ public class GenerarPermisos {
                         switch (varApp) {
                             case 2201:Hoteleria_MDI.MnI_asingacionServiciosHabitacion.setVisible(true);break;
                             case 2202:Hoteleria_MDI.MnI_RegistroObjetoPerdido.setVisible(true);break;
+                            case 2203:Hoteleria_MDI.MnI_ObjetosPerdidosE.setVisible(true);break;
+                            case 2204:Hoteleria_MDI.MnI_CheckIn.setVisible(true);break;
+                            case 2205:Hoteleria_MDI.MnI_CheckOut.setVisible(true);break;
+                            case 2206:Hoteleria_MDI.MnI_serviciosExtras.setVisible(true);break;
+                            case 2207:Hoteleria_MDI.MnI_reservacion.setVisible(true);Hoteleria_MDI.MnI_reservacionDetalle.setVisible(true);break;
+                
+                
                         }
                     }
                 }

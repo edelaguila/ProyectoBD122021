@@ -5,6 +5,7 @@
  */
 package vista;
 
+import datos.GuardarBitacora;
 import datos.HabitacionDAO;
 import datos.PisoDAO;
 import dominio.Habitacion;
@@ -25,6 +26,7 @@ public class Mnt_Habitaciones extends javax.swing.JInternalFrame {
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     Habitacion servicios = new Habitacion();
+    GuardarBitacora bitacora = new GuardarBitacora();
 
     /**
      * Creates new form Mnt_Habitaciones
@@ -763,6 +765,7 @@ public class Mnt_Habitaciones extends javax.swing.JInternalFrame {
                             serviciosdao.insert(servicios);
                             actualizarTabla("");
                             prcs_repetidos.AlertaMensaje("guardada", "Habitacion", "exitosamente");
+                            bitacora.GuardarEnBitacora("Guardado", "2001");
                             Limpiar();
                         }
                     }
@@ -788,6 +791,7 @@ public class Mnt_Habitaciones extends javax.swing.JInternalFrame {
                     serviciosdao.delete(servicios);
                     actualizarTabla("");
                     prcs_repetidos.AlertaMensaje("eliminada", "habitacion", "exitosamente");
+                    bitacora.GuardarEnBitacora("Eliminado", "2001");
                     Limpiar();
                 } else {
                     JOptionPane.showMessageDialog(null, "No se pudo eliminar el servicio");
@@ -835,6 +839,7 @@ public class Mnt_Habitaciones extends javax.swing.JInternalFrame {
                             serviciosdao.update(servicios);
                             actualizarTabla("");
                             prcs_repetidos.AlertaMensaje("modificada", "Habitacion", "exitosamente");
+                            bitacora.GuardarEnBitacora("Modificado", "2001");
                             Limpiar();
                         }
                     }
@@ -902,12 +907,14 @@ public class Mnt_Habitaciones extends javax.swing.JInternalFrame {
             }
 
             Txt_cantidad.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 6).toString());
+            bitacora.GuardarEnBitacora("Buscar", "2001");
 
         }
     }//GEN-LAST:event_Tbl_DatosMouseClicked
 
     private void Btn_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseClicked
         actualizarTabla(Txt_buscar.getText());
+        bitacora.GuardarEnBitacora("Buscar", "2001");
     }//GEN-LAST:event_Btn_buscarMouseClicked
 
     private void Btn_buscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseEntered
@@ -921,11 +928,13 @@ public class Mnt_Habitaciones extends javax.swing.JInternalFrame {
     private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
         // TODO add your handling code here:
         prcs_repetidos.imprimirAyuda("AyudaHabitaciones.chm");
+        bitacora.GuardarEnBitacora("Ayuda", "2001");
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
         // TODO add your handling code here:
         prcs_repetidos.imprimirReporte("Rpt_MantHabitacion.jrxml", "Reporte de habitaciones");
+        bitacora.GuardarEnBitacora("Reporte", "2001");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
 
