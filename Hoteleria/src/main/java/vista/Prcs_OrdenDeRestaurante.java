@@ -774,11 +774,17 @@ public class Prcs_OrdenDeRestaurante extends javax.swing.JInternalFrame {
             Lbl_mesa.setVisible(false);
             Txt_NoMesa.setVisible(false);
             jSeparator3.setVisible(false);
+        } else if (cbxServicio.equals("Seleccionar...")) {
+            Txt_NoMesa.setEditable(false);
+            Lbl_mesa.setVisible(false);
+            Txt_NoMesa.setVisible(false);
+            jSeparator3.setVisible(false);
         }
     }//GEN-LAST:event_Cbx_ServicioItemStateChanged
 
     private void Btn_catalogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_catalogoMouseClicked
-        // TODO add your handling code here:
+        Prcs_HabitacionOrden abrir = new Prcs_HabitacionOrden();
+        abrir.setVisible(true);
     }//GEN-LAST:event_Btn_catalogoMouseClicked
 
     private void Btn_catalogoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_catalogoMouseEntered

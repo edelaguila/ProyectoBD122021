@@ -130,17 +130,16 @@ public class TransporteDAO {
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
 
-            stmt.setString(1, transporte.getPK_codigo_transporte());
-            stmt.setString(2, transporte.getClase_transporte());
-            stmt.setString(3, transporte.getMarca_transporte());
-            stmt.setString(4, transporte.getModelo_transporte());
-            stmt.setString(5, transporte.getTipo_transporte());
-            stmt.setString(6, transporte.getPlaca_transporte());
-            stmt.setString(7, transporte.getColor_transporte());
-            stmt.setString(8, transporte.getEstado_transporte());
-            stmt.setString(9, transporte.getNumero_motor_transporte());
-            stmt.setString(10, transporte.getEstatus_transporte());
-            
+            stmt.setString(1, transporte.getClase_transporte());
+            stmt.setString(2, transporte.getMarca_transporte());
+            stmt.setString(3, transporte.getModelo_transporte());
+            stmt.setString(4, transporte.getTipo_transporte());
+            stmt.setString(5, transporte.getPlaca_transporte());
+            stmt.setString(6, transporte.getColor_transporte());
+            stmt.setString(7, transporte.getEstado_transporte());
+            stmt.setString(8, transporte.getNumero_motor_transporte());
+            stmt.setString(9, transporte.getEstatus_transporte());
+            stmt.setString(10, transporte.getPK_codigo_transporte());            
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
 
