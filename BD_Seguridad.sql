@@ -185,7 +185,7 @@ INSERT INTO `tbl_usuario` VALUES ('1', 'admin', 'admin', 'admin', '8cb2237d0679c
 -- -----------------------------------------------------
 INSERT INTO `tbl_aplicacion` VALUES ('2001', 'Mantenimiento de Habitaciones', 'Mantenimiento para el área de hoteleria', '1', '1'),('2002', 'Mantenimiento de Horarios de Trabajo', 'Mantenimiento para el área de hoteleria','1', '1'),('2003', 'Mantenimiento de Huespedes', 'Mantenimiento para el área de hoteleria', '1', '1'),('2004', 'Mantenimiento de Piso', 'Mantenimiento para el área de hoteleria', '1', '1'),('2005', 'Mantenimiento de Servicios', 'Mantenimiento para el área de hoteleria', '1', '1'),('2006', 'Mantenimiento de Menu', 'Mantenimiento para el área de hoteleria', '1', '1'),('2007', 'Mantenimiento de Tarifas', 'Proceso para el área de hoteleria', '1', '1');
 
-INSERT INTO `tbl_aplicacion` VALUES ('2201', 'Proceso Asignación de Servicios Habitación', 'Proceso para el área de hoteleria', '2', '1'),('2202', 'Proceso Registro Objeto Perdido', 'Proceso para el área de hoteleria', '2', '1'),('2203', 'Proceso Entrega Objeto Perdido', 'Proceso para el área de hoteleria', '2', '1'),('2204', 'Proceso Check In', 'Proceso para el área de hoteleria', '2', '1'),('2205', 'Proceso Check Out', 'Proceso para el área de hoteleria', '2', '1');
+INSERT INTO `tbl_aplicacion` VALUES ('2201', 'Proceso Asignación de Servicios Habitación', 'Proceso para el área de hoteleria', '2', '1'),('2202', 'Proceso Registro Objeto Perdido', 'Proceso para el área de hoteleria', '2', '1'),('2203', 'Proceso Entrega Objeto Perdido', 'Proceso para el área de hoteleria', '2', '1'),('2204', 'Proceso Check In', 'Proceso para el área de hoteleria', '2', '1'),('2205', 'Proceso Check Out', 'Proceso para el área de hoteleria', '2', '1'),('2206', 'Proceso Servicios Extras', 'Proceso para el área de hoteleria', '2', '1'),('2207', 'Proceso Reservación', 'Proceso para el área de hoteleria', '2', '1');
 -- -----------------------------------------------------
 -- Insert usuario_aplicacion (Hoteleria)
 -- -----------------------------------------------------
@@ -197,9 +197,9 @@ INSERT INTO `tbl_usuario_aplicacion` VALUES ('3', '2001', '1', '1', '1', '1', '0
 
 INSERT INTO `tbl_usuario_aplicacion` VALUES ('4', '2001', '1', '0', '0', '0', '1'),('4', '2002', '1', '0', '0', '0', '1'),('4', '2003', '1', '0', '0', '0', '1'),('4', '2004', '1', '0', '0', '0', '1'),('4', '2005', '1', '0', '0', '0', '1'),('4', '2006', '1', '0', '0', '0', '1'),('4', '2007', '1', '0', '0', '0', '1');
 
-INSERT INTO `tbl_usuario_aplicacion` VALUES ('1', '2201', '1', '1', '1', '1', '1'),('1', '2202', '1', '1', '1', '1', '1'),('1', '2203', '1', '1', '1', '1', '1'),('1', '2204', '1', '1', '1', '1', '1'),('1', '2205', '1', '1', '1', '1', '1');
+INSERT INTO `tbl_usuario_aplicacion` VALUES ('1', '2201', '1', '1', '1', '1', '1'),('1', '2202', '1', '1', '1', '1', '1'),('1', '2203', '1', '1', '1', '1', '1'),('1', '2204', '1', '1', '1', '1', '1'),('1', '2205', '1', '1', '1', '1', '1'),('1', '2206', '1', '1', '1', '1', '1'),('1', '2207', '1', '1', '1', '1', '1');
 
-INSERT INTO `tbl_usuario_aplicacion` VALUES ('2', '2201', '0', '0', '0', '0', '1'),('2', '2202', '0', '0', '0', '0', '1'),('2', '2203', '0', '0', '0', '0', '1'),('2', '2204', '0', '0', '0', '0', '1'),('2', '2205', '0', '0', '0', '0', '1');
+INSERT INTO `tbl_usuario_aplicacion` VALUES ('2', '2201', '0', '0', '0', '0', '1'),('2', '2202', '0', '0', '0', '0', '1'),('2', '2203', '0', '0', '0', '0', '1'),('2', '2204', '0', '0', '0', '0', '1'),('2', '2205', '0', '0', '0', '0', '1'),('2', '2206', '0', '0', '0', '0', '1'),('2', '2207', '0', '0', '0', '0', '1');
 
 -- -----------------------------------------------------
 -- Insert usuarios (Comercial)

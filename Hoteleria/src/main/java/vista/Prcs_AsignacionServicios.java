@@ -6,6 +6,7 @@
 package vista;
 
 import datos.AsignaciónServiciosDAO;
+import datos.GuardarBitacora;
 import datos.ServicioDAO;
 import datos.TarifaDAO;
 import dominio.AsignaciónServicios;
@@ -18,6 +19,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login_LD;
 
 /**
  *
@@ -28,19 +31,49 @@ public class Prcs_AsignacionServicios extends javax.swing.JInternalFrame {
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     AsignaciónServicios asignacion = new AsignaciónServicios();
 
+    GuardarBitacora bitacora = new GuardarBitacora();
+
+    void habilitarAcciones() {
+
+        var codigoAplicacion = 2201;
+        var usuario = Login_LD.usuario;
+
+        Btn_guardar.setVisible(false);
+        Btn_eliminar.setVisible(false);
+        Btn_buscar.setVisible(false);
+
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[5];
+
+        for (int i = 0; i < 5; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[0].equals("1")) {
+            Btn_guardar.setVisible(true);
+        }
+        if (permisosApp[1].equals("1")) {
+            Btn_buscar.setVisible(true);
+        }
+        if (permisosApp[3].equals("1")) {
+            Btn_eliminar.setVisible(true);
+        }
+    }
+
     /**
      * Creates new form Prcs_AsignacionServicios
      */
     public Prcs_AsignacionServicios() {
         initComponents();
+        habilitarAcciones();
+        diseño();
         tablaServicios();
         diseño();
     }
 
     public void diseño() {
-        this.setTitle("Asignación de Servicios a Habitaciones");
-        ImageIcon icono = new ImageIcon("src/main/java/assets/package.png");
-        this.setFrameIcon(icono);
+        this.setTitle("Asignación de Servicios a Tarifas");
         Txt_codigo.setBorder(null);
         prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_reporte, Btn_buscar, Tbl_Servicios, Tbl_Asignaciones);
     }
@@ -145,10 +178,15 @@ public class Prcs_AsignacionServicios extends javax.swing.JInternalFrame {
         Txt_codigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         Btn_fondoGuardar.setBackground(new java.awt.Color(97, 212, 195));
+        Btn_fondoGuardar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondoGuardar.setMinimumSize(new java.awt.Dimension(104, 40));
 
         Btn_guardar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_guardar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_guardar.setText("Insertar");
+        Btn_guardar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_guardar.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_guardar.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_guardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_guardarMouseClicked(evt);
@@ -177,10 +215,15 @@ public class Prcs_AsignacionServicios extends javax.swing.JInternalFrame {
         );
 
         Btn_fondo_eliminar.setBackground(new java.awt.Color(97, 212, 195));
+        Btn_fondo_eliminar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_eliminar.setMinimumSize(new java.awt.Dimension(104, 40));
 
         Btn_eliminar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_eliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_eliminar.setText("Eliminar");
+        Btn_eliminar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_eliminar.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_eliminar.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_eliminarMouseClicked(evt);
@@ -197,18 +240,23 @@ public class Prcs_AsignacionServicios extends javax.swing.JInternalFrame {
         Btn_fondo_eliminar.setLayout(Btn_fondo_eliminarLayout);
         Btn_fondo_eliminarLayout.setHorizontalGroup(
             Btn_fondo_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Btn_fondo_eliminarLayout.setVerticalGroup(
             Btn_fondo_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Btn_fondo_reporte.setBackground(new java.awt.Color(97, 212, 195));
+        Btn_fondo_reporte.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_reporte.setMinimumSize(new java.awt.Dimension(104, 40));
 
         Btn_reporte.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_reporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_reporte.setText("Reporte");
+        Btn_reporte.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_reporte.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_reporte.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_reporte.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_reporteMouseClicked(evt);
@@ -225,18 +273,23 @@ public class Prcs_AsignacionServicios extends javax.swing.JInternalFrame {
         Btn_fondo_reporte.setLayout(Btn_fondo_reporteLayout);
         Btn_fondo_reporteLayout.setHorizontalGroup(
             Btn_fondo_reporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+            .addComponent(Btn_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Btn_fondo_reporteLayout.setVerticalGroup(
             Btn_fondo_reporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Btn_fondo_ayuda.setBackground(new java.awt.Color(253, 255, 182));
+        Btn_fondo_ayuda.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_ayuda.setMinimumSize(new java.awt.Dimension(104, 40));
 
         Btn_ayuda.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_ayuda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_ayuda.setText("Ayuda");
+        Btn_ayuda.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_ayuda.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_ayuda.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_ayuda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_ayudaMouseClicked(evt);
@@ -253,18 +306,23 @@ public class Prcs_AsignacionServicios extends javax.swing.JInternalFrame {
         Btn_fondo_ayuda.setLayout(Btn_fondo_ayudaLayout);
         Btn_fondo_ayudaLayout.setHorizontalGroup(
             Btn_fondo_ayudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+            .addComponent(Btn_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Btn_fondo_ayudaLayout.setVerticalGroup(
             Btn_fondo_ayudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Btn_fondo_cancelar.setBackground(new java.awt.Color(255, 128, 115));
+        Btn_fondo_cancelar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_cancelar.setMinimumSize(new java.awt.Dimension(104, 40));
 
         Btn_cancelar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_cancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_cancelar.setText("Cancelar");
+        Btn_cancelar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_cancelar.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_cancelar.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_cancelarMouseClicked(evt);
@@ -281,11 +339,11 @@ public class Prcs_AsignacionServicios extends javax.swing.JInternalFrame {
         Btn_fondo_cancelar.setLayout(Btn_fondo_cancelarLayout);
         Btn_fondo_cancelarLayout.setHorizontalGroup(
             Btn_fondo_cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Btn_fondo_cancelarLayout.setVerticalGroup(
             Btn_fondo_cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Tbl_Asignaciones.setModel(new javax.swing.table.DefaultTableModel(
@@ -459,6 +517,7 @@ public class Prcs_AsignacionServicios extends javax.swing.JInternalFrame {
 
     private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
         prcs_repetidos.imprimirAyuda("AyudaMantenimientoServicios.chm");
+        bitacora.GuardarEnBitacora("ayuda", "2201");
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_reporteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseExited
@@ -470,7 +529,8 @@ public class Prcs_AsignacionServicios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_reporteMouseEntered
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
-
+        prcs_repetidos.imprimirReporte("Rpt_PrcsAsignaciónServicios.jrxml", "Reporte Asignación Servicios a Tarifa");
+        bitacora.GuardarEnBitacora("reporte", "2201");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
     private void Btn_eliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_eliminarMouseExited
@@ -491,6 +551,7 @@ public class Prcs_AsignacionServicios extends javax.swing.JInternalFrame {
                         asignacion.setCorrelativo(Tbl_Asignaciones.getValueAt(filaSeleccionada, 0).toString());
                         asignaciondao.delete(asignacion);
                         tablaAsignaciones();
+                        bitacora.GuardarEnBitacora("eliminar", "2201");
                         prcs_repetidos.AlertaMensaje("eliminada", "Asignación", "exitosamente");
                         Limpiar();
                     } else {
@@ -523,13 +584,18 @@ public class Prcs_AsignacionServicios extends javax.swing.JInternalFrame {
                     duplicada = false;
                 }
             }
-            System.out.println(duplicada);
+
             if (duplicada) {
-                asignacion.setCorrelativo("0");
-                asignacion.setId_tarifa(Txt_codigo.getText());
-                asignacion.setId_servicio(Tbl_Servicios.getValueAt(filaSeleccionada, 0).toString());
-                asignaciondao.insert(asignacion);
-                tablaAsignaciones();
+                if (prcs_repetidos.isNoneEmpty(Txt_codigo)) {
+                    if (prcs_repetidos.isNumeric(Txt_codigo.getText())) {
+                        asignacion.setCorrelativo("0");
+                        asignacion.setId_tarifa(Txt_codigo.getText());
+                        asignacion.setId_servicio(Tbl_Servicios.getValueAt(filaSeleccionada, 0).toString());
+                        asignaciondao.insert(asignacion);
+                        bitacora.GuardarEnBitacora("insertar", "2201");
+                        tablaAsignaciones();
+                    }
+                }
             }
         }
     }//GEN-LAST:event_Btn_guardarMouseClicked
@@ -546,6 +612,7 @@ public class Prcs_AsignacionServicios extends javax.swing.JInternalFrame {
                     if (tarifa.getEstado().equals("1")) {
                         tablaServicios();
                         tablaAsignaciones();
+                        bitacora.GuardarEnBitacora("buscar", "2201");
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Tarifa no encontrada");
