@@ -113,41 +113,37 @@
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="Lbl_id1" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="Lbl_id" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="Lbl_id2" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="Lbl_id5" min="-2" pref="100" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jSeparator1" max="32767" attributes="0"/>
+                                  <Component id="Txt_Id" pref="201" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="Lbl_id6" min="-2" pref="92" max="-2" attributes="0"/>
+                                      <Component id="Cbx_EHora" max="-2" attributes="0"/>
+                                      <Component id="Cbx_SHora" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="Cbx_EJornada" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="Cbx_SJornada" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="Lbl_id7" alignment="1" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
                                   <Component id="Lbl_id3" min="-2" pref="92" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="Lbl_id4" min="-2" pref="92" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="Lbl_id1" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <Component id="Lbl_id" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <Component id="Lbl_id2" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <Component id="Lbl_id5" min="-2" pref="100" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jSeparator1" max="32767" attributes="0"/>
-                                          <Component id="Txt_Id" pref="201" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="Lbl_id6" min="-2" pref="92" max="-2" attributes="0"/>
-                                              <Component id="Cbx_EHora" max="-2" attributes="0"/>
-                                              <Component id="Cbx_SHora" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="Cbx_EJornada" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="Cbx_SJornada" alignment="1" max="32767" attributes="0"/>
-                                                  <Component id="Lbl_id7" alignment="1" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
@@ -243,7 +239,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Descripci&#xf3;n:"/>
+            <Property name="text" type="java.lang.String" value="DESCRIPCI&#xd3;N:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="Lbl_estado">
@@ -254,7 +250,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Estado:"/>
+            <Property name="text" type="java.lang.String" value="ESTADO:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="Txt_Id">
@@ -559,7 +555,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Horario:"/>
+            <Property name="text" type="java.lang.String" value="HORARIO:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="Cbx_EHora">
@@ -594,7 +590,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Entrada:"/>
+            <Property name="text" type="java.lang.String" value="ENTRADA:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="Lbl_id3">
@@ -643,7 +639,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Salida:"/>
+            <Property name="text" type="java.lang.String" value="SALIDA:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="Cbx_SHora">

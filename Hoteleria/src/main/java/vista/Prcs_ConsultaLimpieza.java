@@ -112,7 +112,7 @@ public class Prcs_ConsultaLimpieza extends javax.swing.JInternalFrame {
 
         Lbl_codigoNombre.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_codigoNombre.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_codigoNombre.setText("ID Ama de Llave:");
+        Lbl_codigoNombre.setText("ID AMA DE LLAVE:");
 
         Txt_buscar.setBackground(new java.awt.Color(36, 47, 65));
         Txt_buscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -180,12 +180,12 @@ public class Prcs_ConsultaLimpieza extends javax.swing.JInternalFrame {
         Lbl_codigoNombre1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_codigoNombre1.setForeground(new java.awt.Color(255, 255, 255));
         Lbl_codigoNombre1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Lbl_codigoNombre1.setText("Habitaciones Asignadas");
+        Lbl_codigoNombre1.setText("HABITACIONES ASIGNADAS");
 
         Lbl_codigoNombre2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_codigoNombre2.setForeground(new java.awt.Color(255, 255, 255));
         Lbl_codigoNombre2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Lbl_codigoNombre2.setText("Asignaciones de la Ama de Llave");
+        Lbl_codigoNombre2.setText("ASIGNACIONES DE LA AMA DE LLAVE");
 
         javax.swing.GroupLayout Pnl_datosLayout = new javax.swing.GroupLayout(Pnl_datos);
         Pnl_datos.setLayout(Pnl_datosLayout);

@@ -22,7 +22,7 @@ import javax.swing.JComboBox;
 public class AsignacionLimpiezaDAO {
 
     public static String codigoAuxiliar, nombreAuxiliar;
-    private static final String SQL_QUERY_GOBERNANTA = "select PK_id_empleado from tbl_empleado where puesto_empleado='Gobernanta' and estado_empleado='1'";
+    private static final String SQL_QUERY_GOBERNANTA = "select PK_id_empleado from tbl_empleado where puesto_empleado='1' and estado_empleado='1'";
     private static final String SQL_PK = "PK_id_empleado";
     private static final String SQL_QUERY_PISO = "select PK_id_piso from tbl_piso where estado_piso='1'";
     private static final String SQL_PK2 = "PK_id_piso";

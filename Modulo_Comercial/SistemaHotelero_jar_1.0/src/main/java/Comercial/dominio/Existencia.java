@@ -10,7 +10,7 @@ package Comercial.dominio;
  * @author Diana
  */
 public class Existencia {
-    String Pk_codigo_existencia;
+   
     String Pk_codigo_producto;
     String Pk_codigo_bodega;
     String cantidad_existencia;
@@ -18,60 +18,48 @@ public class Existencia {
     String fecha_salida_existencia;
     String estatus_existencia;
 
-    public String getPk_codigo_existencia() {
-        return Pk_codigo_existencia;
-    }
-
     public String getPk_codigo_producto() {
         return Pk_codigo_producto;
-    }
-
-    public String getPk_codigo_bodega() {
-        return Pk_codigo_bodega;
-    }
-
-    public String getCantidad_existencia() {
-        return cantidad_existencia;
-    }
-
-    
-
-    public String getFecha_entrada_existencia() {
-        return fecha_entrada_existencia;
-    }
-
-    public String getFecha_salida_existencia() {
-        return fecha_salida_existencia;
-    }
-
-    public String getEstatus_existencia() {
-        return estatus_existencia;
-    }
-
-    public void setPk_codigo_existencia(String Pk_codigo_existencia) {
-        this.Pk_codigo_existencia = Pk_codigo_existencia;
     }
 
     public void setPk_codigo_producto(String Pk_codigo_producto) {
         this.Pk_codigo_producto = Pk_codigo_producto;
     }
 
+    public String getPk_codigo_bodega() {
+        return Pk_codigo_bodega;
+    }
+
     public void setPk_codigo_bodega(String Pk_codigo_bodega) {
         this.Pk_codigo_bodega = Pk_codigo_bodega;
+    }
+
+    public String getCantidad_existencia() {
+        return cantidad_existencia;
     }
 
     public void setCantidad_existencia(String cantidad_existencia) {
         this.cantidad_existencia = cantidad_existencia;
     }
 
-   
+    public String getFecha_entrada_existencia() {
+        return fecha_entrada_existencia;
+    }
 
     public void setFecha_entrada_existencia(String fecha_entrada_existencia) {
         this.fecha_entrada_existencia = fecha_entrada_existencia;
     }
 
+    public String getFecha_salida_existencia() {
+        return fecha_salida_existencia;
+    }
+
     public void setFecha_salida_existencia(String fecha_salida_existencia) {
         this.fecha_salida_existencia = fecha_salida_existencia;
+    }
+
+    public String getEstatus_existencia() {
+        return estatus_existencia;
     }
 
     public void setEstatus_existencia(String estatus_existencia) {
@@ -80,10 +68,9 @@ public class Existencia {
 
     @Override
     public String toString() {
-        return "Existencias{" + "Pk_codigo_existencia=" + Pk_codigo_existencia + ", Pk_codigo_producto=" + Pk_codigo_producto + ", Pk_codigo_bodega=" + Pk_codigo_bodega + ", cantidad_existencia=" + cantidad_existencia + ", fecha_entrada_existencia=" + fecha_entrada_existencia + ", fecha_salida_existencia=" + fecha_salida_existencia + ", estatus_existencia=" + estatus_existencia + '}';
+        return "Existencia{" + "Pk_codigo_producto=" + Pk_codigo_producto + ", Pk_codigo_bodega=" + Pk_codigo_bodega + ", cantidad_existencia=" + cantidad_existencia + ", fecha_entrada_existencia=" + fecha_entrada_existencia + ", fecha_salida_existencia=" + fecha_salida_existencia + ", estatus_existencia=" + estatus_existencia + '}';
     }
-    
-    
-    
+
+   
     
 }

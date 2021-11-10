@@ -20,17 +20,17 @@
 	</background>
 	<title>
 		<band height="79" splitType="Stretch">
-			<image>
-				<reportElement x="19" y="0" width="89" height="79" uuid="1cf702b0-5ce5-4466-a2ca-e4af32b64d2e"/>
-				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\6\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
-			</image>
 			<staticText>
-				<reportElement x="122" y="26" width="313" height="53" uuid="f5008f97-47c2-4e35-8124-c91b146a72a2"/>
+				<reportElement x="118" y="26" width="313" height="53" uuid="f5008f97-47c2-4e35-8124-c91b146a72a2"/>
 				<textElement verticalAlignment="Bottom">
 					<font size="26" isBold="true"/>
 				</textElement>
 				<text><![CDATA[MANTENIMIENTO LINEA]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="100" height="79" uuid="9f0b3327-c479-47db-9437-18fd80ce304a"/>
+				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\7\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

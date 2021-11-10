@@ -197,7 +197,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="No. Habitaciones:"/>
+            <Property name="text" type="java.lang.String" value="NO. HABITACIONES:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="Lbl_descripcion">
@@ -208,7 +208,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Descripci&#xf3;n:"/>
+            <Property name="text" type="java.lang.String" value="DESCRIPCI&#xd3;N:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="Lbl_estado">
@@ -219,7 +219,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Estado:"/>
+            <Property name="text" type="java.lang.String" value="ESTADO:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="Txt_Id">
@@ -551,7 +551,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" alignment="0" pref="670" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="0" pref="666" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                           <Component id="Lbl_codigoNombre" min="-2" max="-2" attributes="0"/>
