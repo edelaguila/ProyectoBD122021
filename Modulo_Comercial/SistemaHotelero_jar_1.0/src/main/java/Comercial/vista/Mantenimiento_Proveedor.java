@@ -167,7 +167,7 @@ public class Mantenimiento_Proveedor extends javax.swing.JInternalFrame {
         Lbl_estado.setText("Estado Proveedor:");
 
         Lbl_saldo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        Lbl_saldo.setText("Saldo Proveedor:");
+        Lbl_saldo.setText("Representante Proveedor:");
 
         Lbl_telefono.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         Lbl_telefono.setText("Telefono Proveedor:");
@@ -226,9 +226,7 @@ public class Mantenimiento_Proveedor extends javax.swing.JInternalFrame {
                 .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Pnl_datosLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Lbl_saldo, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Lbl_estado, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addComponent(Lbl_estado))
                     .addGroup(Pnl_datosLayout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(Lbl_telefono))
@@ -261,16 +259,18 @@ public class Mantenimiento_Proveedor extends javax.swing.JInternalFrame {
             .addGroup(Pnl_datosLayout.createSequentialGroup()
                 .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(Txt_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(Pnl_datosLayout.createSequentialGroup()
-                        .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Lbl_nombre)
-                            .addComponent(Lbl_codigo)
-                            .addComponent(Lbl_direccion, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(34, 34, 34)
-                        .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Txt_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                            .addComponent(Txt_codigo)))
-                    .addComponent(Txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(Lbl_saldo)
+                        .addGroup(Pnl_datosLayout.createSequentialGroup()
+                            .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(Lbl_nombre)
+                                .addComponent(Lbl_codigo)
+                                .addComponent(Lbl_direccion, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGap(34, 34, 34)
+                            .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(Txt_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                                .addComponent(Txt_codigo)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(Btn_Reporte1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
