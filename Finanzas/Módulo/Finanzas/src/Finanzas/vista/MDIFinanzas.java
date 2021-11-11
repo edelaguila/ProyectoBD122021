@@ -1,6 +1,6 @@
 package Finanzas.vista;
 
-import Formas.Frm_Principal;
+//import Formas.Frm_Principal;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Dimension;
@@ -428,8 +428,8 @@ public class MDIFinanzas extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void BtnNominasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNominasActionPerformed
-        Frm_Principal f_nomina = new Frm_Principal();
-        f_nomina.setVisible(true);
+        //Frm_Principal f_nomina = new Frm_Principal();
+        //f_nomina.setVisible(true);
     }//GEN-LAST:event_BtnNominasActionPerformed
 
     public static void main(String args[]) {
