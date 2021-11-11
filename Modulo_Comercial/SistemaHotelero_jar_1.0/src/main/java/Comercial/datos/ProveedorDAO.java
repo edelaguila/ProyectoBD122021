@@ -22,10 +22,10 @@ import javax.swing.JOptionPane;
  */
 public class ProveedorDAO {
 
-    private static final String SQL_SELECT = "SELECT PK_codigo_proveedor, nombre_proveedor, direccion_proveedor,  telefono_proveedor, nit_proveedor, email_proveedor, saldo_proveedor, estatus_proveedor FROM tbl_proveedor";
-    private static final String SQL_INSERT = "INSERT INTO tbl_proveedor (PK_codigo_proveedor, nombre_proveedor, direccion_proveedor,  telefono_proveedor, nit_proveedor, email_proveedor, saldo_proveedor, estatus_proveedor) VALUES(?,?,?,?,?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_proveedor SET  PK_codigo_proveedor=?, nombre_proveedor=?, direccion_proveedor=?,  telefono_proveedor=?, nit_proveedor=?, email_proveedor=?, saldo_proveedor=?, estatus_proveedor=?    WHERE PK_codigo_proveedor";
-    private static final String SQL_QUERY = "SELECT PK_codigo_proveedor, nombre_proveedor, direccion_proveedor, telefono_proveedor, nit_proveedor, email_proveedor, saldo_proveedor ,estatus_proveedor FROM tbl_proveedor WHERE PK_codigo_proveedor= ?";
+    private static final String SQL_SELECT = "SELECT PK_codigo_proveedor, nombre_proveedor, direccion_proveedor,  telefono_proveedor, nit_proveedor, email_proveedor, representante_proveedor, estatus_proveedor FROM tbl_proveedor";
+    private static final String SQL_INSERT = "INSERT INTO tbl_proveedor (PK_codigo_proveedor, nombre_proveedor, direccion_proveedor,  telefono_proveedor, nit_proveedor, email_proveedor, representante_proveedor, estatus_proveedor) VALUES(?,?,?,?,?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_proveedor SET  nombre_proveedor=?, direccion_proveedor=?,  telefono_proveedor=?, nit_proveedor=?, email_proveedor=?, representante_proveedor=?, estatus_proveedor=?    WHERE PK_codigo_proveedor=?";
+    private static final String SQL_QUERY = "SELECT PK_codigo_proveedor, nombre_proveedor, direccion_proveedor, telefono_proveedor, nit_proveedor, email_proveedor, representante_proveedor ,estatus_proveedor FROM tbl_proveedor WHERE PK_codigo_proveedor= ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_proveedor WHERE PK_codigo_proveedor=?";
     public static final String SQL_QUERY2 = "SELECT PK_codigo_proveedor FROM tbl_proveedor";
 
@@ -47,7 +47,7 @@ public class ProveedorDAO {
                 String telefono_Proveedor = rs.getString("telefono_proveedor");
                 String nit_Proveedor = rs.getString("nit_proveedor");
                 String email_Proveedor = rs.getString("email_proveedor");
-                String saldo_Proveedor = rs.getString("saldo_proveedor");
+                String saldo_Proveedor = rs.getString("representante_proveedor");
                 String estatus_Proveedor = rs.getString("estatus_proveedor");
 
                 proveedor = new Proveedor();
@@ -123,7 +123,7 @@ public class ProveedorDAO {
                 String telefonoProveedor = rs.getString("telefono_proveedor");
                 String nitProveedor = rs.getString("nit_proveedor");
                 String emailProveedor = rs.getString("email_proveedor");
-                String saldoProveedor = rs.getString("saldo_proveedor");
+                String saldoProveedor = rs.getString("representante_proveedor");
                 String estatusProveedor = rs.getString("estatus_proveedor");
 
                 proveedor = new Proveedor();
@@ -180,14 +180,15 @@ public class ProveedorDAO {
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
 
-            stmt.setString(1, proveedor.getPK_codigo_Proveedor());
-            stmt.setString(2, proveedor.getNombre_Proveedor());
-            stmt.setString(3, proveedor.getDireccion_Proveedor());
-            stmt.setString(4, proveedor.getTelefono_Proveedor());
-            stmt.setString(5, proveedor.getNit_Proveedor());
-            stmt.setString(6, proveedor.getEmail_Proveedor());
-            stmt.setString(7, proveedor.getSaldo_Proveedor());
-            stmt.setString(8, proveedor.getEstatus_Proveedor());
+            
+            stmt.setString(1, proveedor.getNombre_Proveedor());
+            stmt.setString(2, proveedor.getDireccion_Proveedor());
+            stmt.setString(3, proveedor.getTelefono_Proveedor());
+            stmt.setString(4, proveedor.getNit_Proveedor());
+            stmt.setString(5, proveedor.getEmail_Proveedor());
+            stmt.setString(6, proveedor.getSaldo_Proveedor());
+            stmt.setString(7, proveedor.getEstatus_Proveedor());
+            stmt.setString(8, proveedor.getPK_codigo_Proveedor());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
