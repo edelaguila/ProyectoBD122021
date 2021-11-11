@@ -1,5 +1,6 @@
 package vista;
 
+import datos.GuardarBitacora;
 import datos.PisoDAO;
 import dominio.ProcesosRepetidos;
 import dominio.Piso;
@@ -19,6 +20,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     Piso pisos = new Piso();
+    GuardarBitacora bitacora = new GuardarBitacora();
     
     void habilitarAcciones() {
 
@@ -59,6 +61,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         initComponents();
         diseño();
         actualizarTabla("");
+        habilitarAcciones();
     }
 
     public void diseño() {
@@ -208,6 +211,8 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         Btn_guardar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_guardar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_guardar.setText("Insertar");
+        Btn_guardar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_guardar.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_guardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_guardarMouseClicked(evt);
@@ -240,6 +245,8 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         Btn_eliminar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_eliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_eliminar.setText("Eliminar");
+        Btn_eliminar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_eliminar.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_eliminarMouseClicked(evt);
@@ -256,7 +263,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         Btn_fondo_eliminar.setLayout(Btn_fondo_eliminarLayout);
         Btn_fondo_eliminarLayout.setHorizontalGroup(
             Btn_fondo_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
         );
         Btn_fondo_eliminarLayout.setVerticalGroup(
             Btn_fondo_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,6 +275,8 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         Btn_modificar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_modificar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_modificar.setText("Modificar");
+        Btn_modificar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_modificar.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_modificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_modificarMouseClicked(evt);
@@ -296,6 +305,8 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         Btn_reporte.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_reporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_reporte.setText("Reporte");
+        Btn_reporte.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_reporte.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_reporte.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_reporteMouseClicked(evt);
@@ -324,6 +335,8 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         Btn_ayuda.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_ayuda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_ayuda.setText("Ayuda");
+        Btn_ayuda.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_ayuda.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_ayuda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_ayudaMouseClicked(evt);
@@ -352,6 +365,8 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         Btn_cancelar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_cancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_cancelar.setText("Cancelar");
+        Btn_cancelar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_cancelar.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_cancelarMouseClicked(evt);
@@ -368,7 +383,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
         Btn_fondo_cancelar.setLayout(Btn_fondo_cancelarLayout);
         Btn_fondo_cancelarLayout.setHorizontalGroup(
             Btn_fondo_cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
         );
         Btn_fondo_cancelarLayout.setVerticalGroup(
             Btn_fondo_cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -647,6 +662,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
                     actualizarTabla("");
                     prcs_repetidos.AlertaMensaje("guardado", "Piso", "exitosamente");
                     Limpiar();
+                    bitacora.GuardarEnBitacora("Guardar", "2004");
                 } else {
                 }
             }
@@ -670,6 +686,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
                     actualizarTabla("");
                     prcs_repetidos.AlertaMensaje("modificado", "Piso", "exitosamente");
                     Limpiar();
+                    bitacora.GuardarEnBitacora("Modificar", "2004");
                 }
             }
         }
@@ -688,6 +705,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "No se pudo eliminar el piso");
                 }
+                bitacora.GuardarEnBitacora("Eliminar", "2004");
             }
         }
     }//GEN-LAST:event_Btn_eliminarMouseClicked
@@ -702,6 +720,7 @@ public class Mnt_Pisos extends javax.swing.JInternalFrame {
             } else {
                 Rdb_Inactivo.setSelected(true);
             }
+            bitacora.GuardarEnBitacora("Buscar", "2004");
         }
     }//GEN-LAST:event_Tbl_DatosMouseClicked
 

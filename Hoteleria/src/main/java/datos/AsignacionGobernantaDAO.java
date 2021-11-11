@@ -7,6 +7,7 @@ package datos;
 
 import dominio.AsignacionGobernanta;
 import dominio.ProcesosRepetidos;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,12 +23,11 @@ import javax.swing.JComboBox;
 public class AsignacionGobernantaDAO {
 
     public static String codigoAuxiliar, nombreAuxiliar;
+    public static String validacionGobernanta;
     private static final String SQL_INSERT = "insert into tbl_asignacion_gobernanta values(?,?,?,?)";
-//    private static final String SQL_SELECT_LLAVE = "SELECT empresarial.tbl_empleado.PK_id_empleado as ID, empresarial.tbl_empleado.nombre_empleado as NOMBRE FROM tbl_empleado INNER JOIN tbl_puesto ON empresarial.tbl_empleado.puesto_empleado = empresarial.tbl_puesto.nombre_puesto WHERE empresarial.tbl_puesto.nombre_puesto='Ama de Llave' AND empresarial.tbl_empleado.estado_empleado='1'";
     private static final String SQL_SELECT_LLAVE = "SELECT empresarial.tbl_empleado.PK_id_empleado as ID, empresarial.tbl_empleado.nombre_empleado as NOMBRE FROM tbl_empleado INNER JOIN tbl_puesto ON empresarial.tbl_empleado.puesto_empleado = empresarial.tbl_puesto.PK_id_puesto WHERE empresarial.tbl_puesto.PK_id_puesto='2'AND empresarial.tbl_empleado.estado_empleado='1'";
     private static final String SQL_UPDATE = "UPDATE tbl_asignacion_gobernanta SET PK_id_gobernanta=?, PK_id_ama_de_llave=?, estado_asignacion_gobernanta=? WHERE PK_id_asignacion_gobernanta=?";
     private static final String SQL_DELETE = "delete from tbl_asignacion_gobernanta where PK_id_asignacion_gobernanta = ?";
-//    private static final String SQL_QUERY = "select PK_id_empleado, concat(nombre_empleado,' ',apellido_empleado) AS nombreCompleto, estado_empleado from tbl_empleado where puesto_empleado='Gobernanta' and estado_empleado='1'";
     private static final String SQL_QUERY = "SELECT PK_id_empleado, concat(nombre_empleado,' ',apellido_empleado) AS nombreCompleto, estado_empleado from tbl_empleado where puesto_empleado='1' and estado_empleado='1'";
     private static final String SQL_QUERY_GOBERNANTA = "select PK_id_empleado from tbl_empleado where puesto_empleado='1' and estado_empleado='1'";
     private static final String SQL_PK = "PK_id_empleado";
@@ -216,5 +216,29 @@ public class AsignacionGobernantaDAO {
         }
 
         return pisos;
+    }
+    
+    public AsignacionGobernanta getProcesoAlmacenado(AsignacionGobernanta asignacionGobernanta){
+        Connection conn = null;
+        CallableStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = Conexion.getConnection();
+            String sql = "{call getValidacionGobernanta (?, ?)}";
+            stmt = conn.prepareCall(sql);
+            stmt.setString(1, asignacionGobernanta.getIdGobernanta());
+            stmt.registerOutParameter(2, java.sql.Types.INTEGER);
+            
+            stmt.execute();
+            
+            validacionGobernanta = stmt.getString(2);
+            stmt.close();
+            conn.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return asignacionGobernanta;
     }
 }
