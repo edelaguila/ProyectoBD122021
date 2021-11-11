@@ -98,10 +98,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="Lbl_saldo" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="Lbl_estado" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="Lbl_estado" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
@@ -146,19 +143,22 @@
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="Txt_direccion" alignment="1" min="-2" pref="275" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="Lbl_nombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="Lbl_codigo" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="Lbl_direccion" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="Txt_nombre" pref="275" max="32767" attributes="0"/>
-                              <Component id="Txt_codigo" max="32767" attributes="0"/>
+                      <Component id="Txt_telefono" min="-2" pref="275" max="-2" attributes="0"/>
+                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                          <Component id="Lbl_saldo" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="Lbl_nombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Lbl_codigo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Lbl_direccion" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="Txt_nombre" pref="275" max="32767" attributes="0"/>
+                                  <Component id="Txt_codigo" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
-                      <Component id="Txt_telefono" min="-2" pref="275" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="33" max="32767" attributes="0"/>
                   <Component id="Btn_Reporte1" min="-2" pref="104" max="-2" attributes="0"/>
@@ -275,7 +275,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Saldo Proveedor:"/>
+            <Property name="text" type="java.lang.String" value="Representante Proveedor:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="Lbl_telefono">
