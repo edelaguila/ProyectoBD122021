@@ -25,6 +25,7 @@ public class DetalleAsignacionOrdenDAO {
     private static final String SQL_UPDATE = "UPDATE tbl_menu_orden_detalle SET id_orden_encabezado=?, id_menu=?, cantidad_orden=?, estado_orden=? WHERE PK_id_orden_detalle=?";
     private static final String SQL_QUERY_ENCABEZADO = "select PK_id_orden_encabezado from tbl_menu_orden_encabezado";
     private static final String SQL_PK = "PK_id_orden_encabezado";
+    private static final String SQL_UPDATE2 = "UPDATE tbl_menu_orden_detalle SET cantidad_orden=?, estado_orden=? WHERE PK_id_orden_detalle=?";
 
     public void llenarCbxGobernanta(JComboBox cbxModulo) {
         llenar.llenarCbx(SQL_QUERY_ENCABEZADO, SQL_PK, cbxModulo);
@@ -92,5 +93,54 @@ public class DetalleAsignacionOrdenDAO {
         }
 
         return restaurantes;
+    }
+
+    public int update2(DetalleOrdenRestaurante detalleOrdenRestaurante) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        try {
+            conn = Conexion.getConnection();
+//          System.out.println("ejecutando query: " + SQL_UPDATE);
+            stmt = conn.prepareStatement(SQL_UPDATE2);
+            stmt.setString(1, detalleOrdenRestaurante.getCantidadOrden());
+            stmt.setString(2, detalleOrdenRestaurante.getEstadoOrden());
+            stmt.setString(3, detalleOrdenRestaurante.getIdDetalle());
+            rows = stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+
+        return rows;
+    }
+    
+    public int update(DetalleOrdenRestaurante detalleOrdenRestaurante) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+
+        try {
+            conn = Conexion.getConnection();
+
+            stmt = conn.prepareStatement(SQL_UPDATE);
+            stmt.setString(1, detalleOrdenRestaurante.getIdDetalle());
+            stmt.setString(2, detalleOrdenRestaurante.getIdEncabezado());
+            stmt.setString(3, detalleOrdenRestaurante.getIdMenu());
+            stmt.setString(4, detalleOrdenRestaurante.getCantidadOrden());
+            stmt.setString(5, detalleOrdenRestaurante.getEstadoOrden());
+
+            rows = stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+
+        return rows;
     }
 }

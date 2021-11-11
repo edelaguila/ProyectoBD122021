@@ -181,23 +181,23 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                   </AuxValues>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+                <MenuItem class="javax.swing.JMenuItem" name="MnI_Gobernanta">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Prcs. Asignaci&#xf3;n Gobernanta"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnI_GobernantaActionPerformed"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                   </AuxValues>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+                <MenuItem class="javax.swing.JMenuItem" name="MnI_Limpieza">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Prcs. Asignaci&#xf3;n Limpieza"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnI_LimpiezaActionPerformed"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -211,21 +211,27 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                   </AuxValues>
                   <SubComponents>
-                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
+                    <MenuItem class="javax.swing.JMenuItem" name="MnI_ConsultaLimpieza">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Prcs. Consulta Limpieza"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnI_ConsultaLimpiezaActionPerformed"/>
                       </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
                     </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
+                    <MenuItem class="javax.swing.JMenuItem" name="MnI_Supervisi&#xf3;nLimpieza">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Prcs. Supervisi&#xf3;n Limpieza"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem5ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnI_Supervisi&#xf3;nLimpiezaActionPerformed"/>
                       </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
                     </MenuItem>
                   </SubComponents>
                 </Menu>
@@ -237,29 +243,49 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                   </AuxValues>
                   <SubComponents>
-                    <MenuItem class="javax.swing.JMenuItem" name="jmenuAsignarIngrediente">
+                    <MenuItem class="javax.swing.JMenuItem" name="MnI_Ingrediente">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Prcs. Asignar Ingrediente"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmenuAsignarIngredienteActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnI_IngredienteActionPerformed"/>
                       </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
                     </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+                    <MenuItem class="javax.swing.JMenuItem" name="MnI_InicioOrden">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Prcs. Iniciar Orden"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnI_InicioOrdenActionPerformed"/>
                       </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
                     </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="jmenuEfectuarOrden">
+                    <MenuItem class="javax.swing.JMenuItem" name="MnI_EfectuarOrden">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Prcs. Efectuar Orden"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmenuEfectuarOrdenActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnI_EfectuarOrdenActionPerformed"/>
                       </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
+                    </MenuItem>
+                    <MenuItem class="javax.swing.JMenuItem" name="MnI_Cocina">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Prcs. Cocina"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnI_CocinaActionPerformed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
                     </MenuItem>
                   </SubComponents>
                 </Menu>

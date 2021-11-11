@@ -10,8 +10,14 @@ package Comercial.dominio;
  * @author PERSONAL
  */
 public class Devolucion_Venta {
+
+    public static void delete(Devolucion_Venta AInser) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 String  no_serie;
+String  no_serie1;
+
 String codigo_factura_encabezado;
 String  codigo_cliente;
 String codigo_cobrador;
@@ -23,6 +29,35 @@ String subtotal_encabezado;
 String estatus_factura  ;
 String cantidad_servicio;
 String precio_servicio;
+String servicio;
+String reservacion;
+
+    public String getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(String servicio) {
+        this.servicio = servicio;
+    }
+
+    public String getReservacion() {
+        return reservacion;
+    }
+
+    public void setReservacion(String reservacion) {
+        this.reservacion = reservacion;
+    }
+
+    
+
+public String getNo_serie1() {
+        return no_serie1;
+    }
+
+    public void setNo_serie1(String no_serie1) {
+        this.no_serie1 = no_serie1;
+    }
+
 
     public String getNo_serie() {
         return no_serie;
@@ -122,8 +157,11 @@ String precio_servicio;
 
     @Override
     public String toString() {
-        return "Factura_Venta{" + "no_serie=" + no_serie + ", codigo_factura_encabezado=" + codigo_factura_encabezado + ", codigo_cliente=" + codigo_cliente + ", codigo_cobrador=" + codigo_cobrador + ", codigo_vendedor=" + codigo_vendedor + ", fecha_emision=" + fecha_emision + ", fecha_vencimiento=" + fecha_vencimiento + ", impuesto_iva_encabezado=" + impuesto_iva_encabezado + ", subtotal_encabezado=" + subtotal_encabezado + ", estatus_factura=" + estatus_factura + ", cantidad_servicio=" + cantidad_servicio + ", precio_servicio=" + precio_servicio + '}';
+        return "Factura_Venta{" + "no_serie=" + no_serie + ", no_serie1=" + no_serie1 + ", codigo_factura_encabezado=" + codigo_factura_encabezado + ", codigo_cliente=" + codigo_cliente + ", codigo_cobrador=" + codigo_cobrador + ", codigo_vendedor=" + codigo_vendedor + ", fecha_emision=" + fecha_emision + ", fecha_vencimiento=" + fecha_vencimiento + ", impuesto_iva_encabezado=" + impuesto_iva_encabezado + ", subtotal_encabezado=" + subtotal_encabezado + ", estatus_factura=" + estatus_factura + ", cantidad_servicio=" + cantidad_servicio + ", precio_servicio=" + precio_servicio + ", servicio=" + servicio + ", reservacion=" + reservacion + '}';
     }
+
+  
+   
 
 
     
