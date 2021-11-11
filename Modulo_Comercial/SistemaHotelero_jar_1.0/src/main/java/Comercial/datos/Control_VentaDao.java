@@ -19,14 +19,14 @@ import java.util.List;
  *
  * @author PERSONAL
  */
-public class Factura_VentaDao {
-  private static final String SQL_INSERT = "INSERT INTO tbl_factura_encabezado("
+public class Control_VentaDao {
+  private static final String SQL_INSERT = "INSERT INTO tbl_control_pago("
        + "no_serie,codigo_reservacion,PK_codigo_factura_encabezado,codigo_cliente,codigo_cobrador,codigo_vendedor,fecha_emision,fecha_vencimiento,codigo_servicio,impuesto_iva_encabezado,subtotal_encabezado,estatus_factura) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-  private static final String SQL_UPDATE = "UPDATE tbl_factura_encabezado SET no_serie = ?, codigo_reservacion = ?,PK_codigo_factura_encabezado = ? ,codigo_cliente = ?, codigo_cobrador = ? ,codigo_vendedor = ?,fecha_emision = ?,fecha_vencimiento = ?,codigo_servicio = ?,impuesto_iva_encabezado = ?,subtotal_encabezado = ?,estatus_factura =? WHERE no_serie"; 
+  private static final String SQL_UPDATE = "UPDATE tbl_control_pago SET no_serie = ?, codigo_reservacion = ?,PK_codigo_factura_encabezado = ? ,codigo_cliente = ?, codigo_cobrador = ? ,codigo_vendedor = ?,fecha_emision = ?,fecha_vencimiento = ?,codigo_servicio = ?,impuesto_iva_encabezado = ?,subtotal_encabezado = ?,estatus_factura =? WHERE no_serie"; 
  private static final String SQL_SELECT = "SELECT  no_serie,codigo_reservacion,PK_codigo_factura_encabezado,codigo_cliente,codigo_cobrador,codigo_vendedor" 
-   + ",fecha_emision,fecha_vencimiento,codigo_servicio,impuesto_iva_encabezado,subtotal_encabezado,estatus_factura FROM tbl_factura_encabezado";
-      private static final String SQL_QUERY = "SELECT no_serie,codigo_reservacion,PK_codigo_factura_encabezado,codigo_cliente,codigo_cobrador,codigo_vendedor,fecha_emision,fecha_vencimiento,codigo_servicio,impuesto_iva_encabezado,subtotal_encabezado,estatus_factura  FROM  tbl_factura_encabezado WHERE no_serie = ?";
-  private static final String SQL_DELETE = "DELETE FROM tbl_factura_encabezado  WHERE no_serie = ? ";
+   + ",fecha_emision,fecha_vencimiento,codigo_servicio,impuesto_iva_encabezado,subtotal_encabezado,estatus_factura FROM tbl_control_pago";
+      private static final String SQL_QUERY = "SELECT no_serie,codigo_reservacion,PK_codigo_factura_encabezado,codigo_cliente,codigo_cobrador,codigo_vendedor,fecha_emision,fecha_vencimiento,codigo_servicio,impuesto_iva_encabezado,subtotal_encabezado,estatus_factura  FROM  tbl_control_pago WHERE no_serie = ?";
+  private static final String SQL_DELETE = "DELETE FROM  tbl_control_pago WHERE no_serie = ? ";
   public int insert(Factura_Venta insertar)  {
          ResultSet rs = null;
         Connection conn = null;
@@ -132,7 +132,6 @@ public class Factura_VentaDao {
                   String subtotal_encabezado = rs.getString("subtotal_encabezado");
                     String estatus_factura = rs.getString("estatus_factura");
             
-                      venta = new Factura_Venta();
                   venta.setNo_serie(no_serie);
                   venta.setCodigo_factura_encabezado(codigo_factura_encabezado);
                     venta.setCodigo_cobrador(codigo_cobrador);
