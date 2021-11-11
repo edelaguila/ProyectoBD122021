@@ -42,6 +42,9 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     private Prcs_Check_In form_Prcs_CheckIn;
     private Prcs_Check_Out form_Prcs_CheckOut;
     private Prcs_ServiciosExtras form_Prcs_ServiciosExtras;
+    private Prcs_DetalleRestaurante form_DetalleRestaurante;
+    private Prcs_IngredienteMenu form_IngredienteMenu;
+    private Prcs_Viaje form_Viaje;
 
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     public static JLabel Jl_logo = new JLabel();
@@ -116,11 +119,14 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jmenuAsignarIngrediente = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jmenuEfectuarOrden = new javax.swing.JMenuItem();
         MnI_RegistroObjetoPerdido = new javax.swing.JMenuItem();
         MnI_ObjetosPerdidosE = new javax.swing.JMenuItem();
         MnI_CheckIn = new javax.swing.JMenuItem();
         MnI_CheckOut = new javax.swing.JMenuItem();
+        MnI_Viaje = new javax.swing.JMenuItem();
         Sbm_herramientas = new javax.swing.JMenu();
         Sbm_ayuda = new javax.swing.JMenu();
         Btn_cerrarSesion = new javax.swing.JMenu();
@@ -288,6 +294,14 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
 
         jMenu2.setText("Restaurante");
 
+        jmenuAsignarIngrediente.setText("Prcs. Asignar Ingrediente");
+        jmenuAsignarIngrediente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmenuAsignarIngredienteActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmenuAsignarIngrediente);
+
         jMenuItem2.setText("Prcs. Iniciar Orden");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -295,6 +309,14 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem2);
+
+        jmenuEfectuarOrden.setText("Prcs. Efectuar Orden");
+        jmenuEfectuarOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmenuEfectuarOrdenActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmenuEfectuarOrden);
 
         Mnu_procesos.add(jMenu2);
 
@@ -329,6 +351,14 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
             }
         });
         Mnu_procesos.add(MnI_CheckOut);
+
+        MnI_Viaje.setText("Prcs. Viaje");
+        MnI_Viaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnI_ViajeActionPerformed(evt);
+            }
+        });
+        Mnu_procesos.add(MnI_Viaje);
 
         Sbm_procesos.add(Mnu_procesos);
 
@@ -546,6 +576,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_E_Objeto_perdido.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         form_E_Objeto_perdido.setVisible(true);
         form_E_Objeto_perdido.toFront();
+        bitacora.GuardarEnBitacora("log", "2203");
     }//GEN-LAST:event_MnI_ObjetosPerdidosEActionPerformed
 
     private void MnI_reservacionDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_reservacionDetalleActionPerformed
@@ -583,6 +614,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Prcs_CheckOut.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         form_Prcs_CheckOut.setVisible(true);
         form_Prcs_CheckOut.toFront();
+        bitacora.GuardarEnBitacora("log", "2205");
     }//GEN-LAST:event_MnI_CheckOutActionPerformed
 
     private void MnI_CheckInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_CheckInActionPerformed
@@ -595,6 +627,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Prcs_CheckIn.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         form_Prcs_CheckIn.setVisible(true);
         form_Prcs_CheckIn.toFront();
+        bitacora.GuardarEnBitacora("log", "2204");
     }//GEN-LAST:event_MnI_CheckInActionPerformed
 
     private void MnI_serviciosExtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_serviciosExtrasActionPerformed
@@ -607,6 +640,40 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
         form_Prcs_ServiciosExtras.toFront();
         bitacora.GuardarEnBitacora("log", "2207");
     }//GEN-LAST:event_MnI_serviciosExtrasActionPerformed
+
+    private void jmenuEfectuarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuEfectuarOrdenActionPerformed
+        form_DetalleRestaurante = new Prcs_DetalleRestaurante();
+        Jdp_contenedor.add(form_DetalleRestaurante);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_DetalleRestaurante.getSize();
+        form_DetalleRestaurante.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_DetalleRestaurante.setVisible(true);
+        form_DetalleRestaurante.toFront();
+        bitacora.GuardarEnBitacora("log", "2207");
+    }//GEN-LAST:event_jmenuEfectuarOrdenActionPerformed
+
+    private void jmenuAsignarIngredienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuAsignarIngredienteActionPerformed
+        form_IngredienteMenu = new Prcs_IngredienteMenu();
+        Jdp_contenedor.add(form_IngredienteMenu);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_IngredienteMenu.getSize();
+        form_IngredienteMenu.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_IngredienteMenu.setVisible(true);
+        form_IngredienteMenu.toFront();
+        bitacora.GuardarEnBitacora("log", "2207");
+    }//GEN-LAST:event_jmenuAsignarIngredienteActionPerformed
+
+    private void MnI_ViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnI_ViajeActionPerformed
+        // TODO add your handling code here:
+        form_Viaje = new Prcs_Viaje();
+        Jdp_contenedor.add(form_Viaje);
+        Dimension desktopSize = Jdp_contenedor.getSize();
+        Dimension FrameSize = form_Viaje.getSize();
+        form_Viaje.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        form_Viaje.setVisible(true);
+        form_Viaje.toFront();
+        bitacora.GuardarEnBitacora("log", "2222");
+    }//GEN-LAST:event_MnI_ViajeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -633,6 +700,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     public static javax.swing.JMenuItem MnI_CheckOut;
     public static javax.swing.JMenuItem MnI_ObjetosPerdidosE;
     public static javax.swing.JMenuItem MnI_RegistroObjetoPerdido;
+    public static javax.swing.JMenuItem MnI_Viaje;
     public static javax.swing.JMenuItem MnI_asingacionServiciosHabitacion;
     public static javax.swing.JMenuItem MnI_habitaciones;
     public static javax.swing.JMenuItem MnI_horario;
@@ -659,5 +727,7 @@ public class Hoteleria_MDI extends javax.swing.JFrame {
     public static javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jmenuAsignarIngrediente;
+    private javax.swing.JMenuItem jmenuEfectuarOrden;
     // End of variables declaration//GEN-END:variables
 }

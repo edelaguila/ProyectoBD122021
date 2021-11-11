@@ -33,12 +33,12 @@ public class ProductoDAO {
     private static final String SQL_UPDATE = "UPDATE tbl_producto SET nombre_producto=?, "
             + "descripcion_producto=?, precio_producto=?, costo_producto=?, estatus_producto=?,"
             + "codigo_linea=?, codigo_marca=?, codigo_bodega=?, codigo_unidad=?"
-            + " WHERE tbl_producto";
+            + " WHERE PK_codigo_producto=?";
     
     private static final String SQL_QUERY = "SELECT  PK_codigo_producto, nombre_producto, "
             + "descripcion_producto, precio_producto, costo_producto, estatus_producto,"
             + "codigo_linea, codigo_marca, codigo_bodega, codigo_unidad"
-            + " WHERE tbl_producto=?";
+            + " FROM tbl_producto WHERE PK_codigo_producto=?";
     
     private static final String SQL_DELETE = "DELETE FROM tbl_producto WHERE PK_codigo_producto=?";
     
@@ -134,17 +134,18 @@ public class ProductoDAO {
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
+                     
+            stmt.setString(1, producto.getNombreProducto());
+            stmt.setString(2, producto.getDescripcionProducto());
+            stmt.setString(3, producto.getPrecioProducto());
+            stmt.setString(4, producto.getCostoProducto());
+            stmt.setString(5, producto.getEstatusProducto());
+            stmt.setString(6, producto.getLineaProducto());
+            stmt.setString(7, producto.getMarcaProducto());
+            stmt.setString(8, producto.getBodegaProducto());
+            stmt.setString(9, producto.getUnidadProducto());
+            stmt.setString(10, producto.getPKcodigoProducto());
             
-            stmt.setString(1, producto.getPKcodigoProducto());
-            stmt.setString(2, producto.getNombreProducto());
-            stmt.setString(3, producto.getDescripcionProducto());
-            stmt.setString(4, producto.getPrecioProducto());
-            stmt.setString(5, producto.getCostoProducto());
-            stmt.setString(6, producto.getEstatusProducto());
-            stmt.setString(7, producto.getLineaProducto());
-            stmt.setString(8, producto.getMarcaProducto());
-            stmt.setString(9, producto.getBodegaProducto());
-            stmt.setString(10, producto.getUnidadProducto());
             rows = stmt.executeUpdate();
             //System.out.println("Registros actualizado:" + rows);
 

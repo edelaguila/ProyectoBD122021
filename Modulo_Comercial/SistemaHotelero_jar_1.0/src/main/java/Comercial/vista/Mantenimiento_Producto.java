@@ -135,14 +135,14 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
         productoAConsultar.setPKcodigoProducto(String.valueOf(Txt_id.getText()));
         productoAConsultar = productoDAO.query(productoAConsultar);
         Txt_nombreproducto.setText(String.valueOf(productoAConsultar.getNombreProducto()));
-        Txt_descipcionproducto.setText(productoAConsultar.getDescripcionProducto());
+        Txt_descipcionproducto.setText(String.valueOf(productoAConsultar.getDescripcionProducto()));
         Txt_precioproducto.setText(String.valueOf(productoAConsultar.getPrecioProducto()));
-        Txt_costoproducto.setText(productoAConsultar.getCostoProducto());
-        Txt_estadoproducto.setText(productoAConsultar.getEstatusProducto());
-        Txt_linea.setText(productoAConsultar.getLineaProducto());
-        Txt_marca.setText(productoAConsultar.getMarcaProducto());
-        Txt_bodega.setText(productoAConsultar.getBodegaProducto());
-        Txt_unidad.setText(productoAConsultar.getUnidadProducto());
+        Txt_costoproducto.setText(String.valueOf(productoAConsultar.getCostoProducto()));
+        Txt_estadoproducto.setText(String.valueOf(productoAConsultar.getEstatusProducto()));
+        Txt_linea.setText(String.valueOf(productoAConsultar.getLineaProducto()));
+        Txt_marca.setText(String.valueOf(productoAConsultar.getMarcaProducto()));
+        Txt_bodega.setText(String.valueOf(productoAConsultar.getBodegaProducto()));
+        Txt_unidad.setText(String.valueOf(productoAConsultar.getUnidadProducto()));
 
     }
 
@@ -161,6 +161,7 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
 
     public Mantenimiento_Producto() {
         initComponents();
+        llenadoDeTablas();
        
     }
 
@@ -583,7 +584,7 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
                             + "/src/main/java/Comercial/reportes/producto.jrxml");
                     print = JasperFillManager.fillReport(report, p, connection);
                     JasperViewer view = new JasperViewer(print, false);
-                    view.setTitle("Reporte de Proceso Productos");
+                    view.setTitle("Reporte de Transporte");
                     view.setVisible(true);
         
                 } catch (Exception e) {

@@ -71,6 +71,7 @@ public class Mantenimiento_Unidad extends javax.swing.JInternalFrame {
 
     public Mantenimiento_Unidad() {
         initComponents();
+        llenadoDeTablas();
     }
 
     /**
@@ -393,7 +394,7 @@ public class Mantenimiento_Unidad extends javax.swing.JInternalFrame {
                     + "/src/main/java/Comercial/reportes/unidad.jrxml");
             print = JasperFillManager.fillReport(report, p, connection);
             JasperViewer view = new JasperViewer(print, false);
-            view.setTitle("Reporte Mantenimiento marca");
+            view.setTitle("Reporte Mantenimiento unidad");
             view.setVisible(true);
 
         } catch (Exception e) {
