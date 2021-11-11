@@ -12,7 +12,9 @@ package Comercial.dominio;
 public class Pedido_Venta {
     
 String  no_serie;
-String codigo_factura_encabezado;
+String  no_serie1;
+
+String codigo_pedido_encabezado;
 String  codigo_cliente;
 String codigo_cobrador;
 String codigo_vendedor;
@@ -20,9 +22,11 @@ String fecha_emision;
 String fecha_vencimiento; 
 String impuesto_iva_encabezado;
 String subtotal_encabezado;
-String estatus_factura  ;
+String estatus_pedido  ;
 String cantidad_servicio;
 String precio_servicio;
+String servicio;
+String reservacion;
 
     public String getNo_serie() {
         return no_serie;
@@ -32,12 +36,20 @@ String precio_servicio;
         this.no_serie = no_serie;
     }
 
-    public String getCodigo_factura_encabezado() {
-        return codigo_factura_encabezado;
+    public String getNo_serie1() {
+        return no_serie1;
     }
 
-    public void setCodigo_factura_encabezado(String codigo_factura_encabezado) {
-        this.codigo_factura_encabezado = codigo_factura_encabezado;
+    public void setNo_serie1(String no_serie1) {
+        this.no_serie1 = no_serie1;
+    }
+
+    public String getCodigo_pedido_encabezado() {
+        return codigo_pedido_encabezado;
+    }
+
+    public void setCodigo_pedido_encabezado(String codigo_pedido_encabezado) {
+        this.codigo_pedido_encabezado = codigo_pedido_encabezado;
     }
 
     public String getCodigo_cliente() {
@@ -96,12 +108,12 @@ String precio_servicio;
         this.subtotal_encabezado = subtotal_encabezado;
     }
 
-    public String getEstatus_factura() {
-        return estatus_factura;
+    public String getEstatus_pedido() {
+        return estatus_pedido;
     }
 
-    public void setEstatus_factura(String estatus_factura) {
-        this.estatus_factura = estatus_factura;
+    public void setEstatus_pedido(String estatus_pedido) {
+        this.estatus_pedido = estatus_pedido;
     }
 
     public String getCantidad_servicio() {
@@ -120,11 +132,26 @@ String precio_servicio;
         this.precio_servicio = precio_servicio;
     }
 
-    @Override
-    public String toString() {
-        return "Factura_Venta{" + "no_serie=" + no_serie + ", codigo_factura_encabezado=" + codigo_factura_encabezado + ", codigo_cliente=" + codigo_cliente + ", codigo_cobrador=" + codigo_cobrador + ", codigo_vendedor=" + codigo_vendedor + ", fecha_emision=" + fecha_emision + ", fecha_vencimiento=" + fecha_vencimiento + ", impuesto_iva_encabezado=" + impuesto_iva_encabezado + ", subtotal_encabezado=" + subtotal_encabezado + ", estatus_factura=" + estatus_factura + ", cantidad_servicio=" + cantidad_servicio + ", precio_servicio=" + precio_servicio + '}';
+    public String getServicio() {
+        return servicio;
     }
 
+    public void setServicio(String servicio) {
+        this.servicio = servicio;
+    }
+
+    public String getReservacion() {
+        return reservacion;
+    }
+
+    public void setReservacion(String reservacion) {
+        this.reservacion = reservacion;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido_Venta{" + "no_serie=" + no_serie + ", no_serie1=" + no_serie1 + ", codigo_pedido_encabezado=" + codigo_pedido_encabezado + ", codigo_cliente=" + codigo_cliente + ", codigo_cobrador=" + codigo_cobrador + ", codigo_vendedor=" + codigo_vendedor + ", fecha_emision=" + fecha_emision + ", fecha_vencimiento=" + fecha_vencimiento + ", impuesto_iva_encabezado=" + impuesto_iva_encabezado + ", subtotal_encabezado=" + subtotal_encabezado + ", estatus_pedido=" + estatus_pedido + ", cantidad_servicio=" + cantidad_servicio + ", precio_servicio=" + precio_servicio + ", servicio=" + servicio + ", reservacion=" + reservacion + '}';
+    }
 
     
     
