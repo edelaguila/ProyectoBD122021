@@ -251,7 +251,7 @@ public class GenerarPermisos {
                                 MDIComercial.ProcesoCompra.setVisible(true);
                                 break;
                             case 3008:
-                                MDIComercial.FacturaCompras.setVisible(true);
+                                MDIComercial.autorizacion.setVisible(true);
                                 break;
 
                             case 3009:
