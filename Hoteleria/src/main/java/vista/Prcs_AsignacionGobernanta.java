@@ -35,7 +35,7 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
         this.setTitle("Asignación de Amas de Llaves a Gobernanta");
         Txt_buscar.setBorder(null);
         Rdb_Limpiar2.setVisible(false);
-        prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar);
+        prcs_repetidos.Cursor(Btn_ayuda, Btn_cancelar, Btn_eliminar, Btn_guardar, Btn_modificar, Btn_reporte, Btn_buscar, Btn_Gobernantas);
         ImageIcon icono = new ImageIcon("src/main/java/assets/pisos.png");
         this.setFrameIcon(icono);
     }
@@ -121,9 +121,10 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
         Cbx_AmaDeLlave = new javax.swing.JComboBox<>();
         Lbl_nombre2 = new javax.swing.JLabel();
         ID = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         Tbl_AmaDeLlave = new javax.swing.JTable();
+        Btn_fondo_cancelar1 = new javax.swing.JPanel();
+        Btn_Gobernantas = new javax.swing.JLabel();
         Pnl_datos = new javax.swing.JPanel();
         Lbl_codigoNombre = new javax.swing.JLabel();
         Txt_buscar = new javax.swing.JTextField();
@@ -145,7 +146,7 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
 
         Lbl_estado.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_estado.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_estado.setText("Estado:");
+        Lbl_estado.setText("ESTADO:");
 
         BtnGp_estado.add(Rdb_Activo);
         Rdb_Activo.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
@@ -328,27 +329,23 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
         );
         Btn_fondo_cancelarLayout.setVerticalGroup(
             Btn_fondo_cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Btn_fondo_cancelarLayout.createSequentialGroup()
+                .addGap(0, 24, Short.MAX_VALUE)
+                .addComponent(Btn_cancelar))
         );
 
         Lbl_estado1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_estado1.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_estado1.setText("Listado de Amas de Llaves");
+        Lbl_estado1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Lbl_estado1.setText("LISTADO DE AMAS DE LLAVE");
 
         Lbl_nombre1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_nombre1.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_nombre1.setText("ID Ama de Llave:");
+        Lbl_nombre1.setText("ID AMA DE LLAVE:");
 
         Lbl_nombre2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Lbl_nombre2.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_nombre2.setText("ID Gobernanta:");
-
-        jButton2.setText("VER GOBERNANTA");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        Lbl_nombre2.setText("ID GOBERNANTA:");
 
         Tbl_AmaDeLlave.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -360,6 +357,36 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
         ));
         jScrollPane3.setViewportView(Tbl_AmaDeLlave);
 
+        Btn_fondo_cancelar1.setBackground(new java.awt.Color(255, 128, 115));
+
+        Btn_Gobernantas.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        Btn_Gobernantas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Btn_Gobernantas.setText("VER GOBERNANTA");
+        Btn_Gobernantas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_GobernantasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Btn_GobernantasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Btn_GobernantasMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Btn_fondo_cancelar1Layout = new javax.swing.GroupLayout(Btn_fondo_cancelar1);
+        Btn_fondo_cancelar1.setLayout(Btn_fondo_cancelar1Layout);
+        Btn_fondo_cancelar1Layout.setHorizontalGroup(
+            Btn_fondo_cancelar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Btn_fondo_cancelar1Layout.createSequentialGroup()
+                .addComponent(Btn_Gobernantas, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        Btn_fondo_cancelar1Layout.setVerticalGroup(
+            Btn_fondo_cancelar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Btn_Gobernantas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout Pnl_ingresoDatosLayout = new javax.swing.GroupLayout(Pnl_ingresoDatos);
         Pnl_ingresoDatos.setLayout(Pnl_ingresoDatosLayout);
         Pnl_ingresoDatosLayout.setHorizontalGroup(
@@ -367,16 +394,8 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                                    .addComponent(Lbl_nombre1)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(Cbx_AmaDeLlave, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(Cbx_Gobernanta, javax.swing.GroupLayout.Alignment.TRAILING, 0, 200, Short.MAX_VALUE)))
+                        .addGap(55, 55, 55)
+                        .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                                 .addComponent(Lbl_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -388,10 +407,19 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
                             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                                 .addGap(183, 183, 183)
                                 .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(Lbl_estado1))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(Lbl_estado1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_ingresoDatosLayout.createSequentialGroup()
+                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Lbl_nombre1)
+                                    .addComponent(Lbl_nombre2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Btn_fondo_cancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(Cbx_AmaDeLlave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Cbx_Gobernanta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(55, 55, 55))))
                     .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                         .addGap(82, 82, 82)
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -405,20 +433,17 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
                         .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Btn_fondo_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(61, Short.MAX_VALUE))
-            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                    .addGap(77, 77, 77)
-                    .addComponent(Lbl_nombre2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(335, 335, 335)))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         Pnl_ingresoDatosLayout.setVerticalGroup(
             Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(Cbx_Gobernanta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Cbx_Gobernanta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Lbl_nombre2))
+                .addGap(14, 14, 14)
+                .addComponent(Btn_fondo_cancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Lbl_nombre1)
@@ -438,7 +463,7 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
                         .addComponent(Rdb_Inactivo)
                         .addGap(1, 1, 1)))
                 .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Btn_fondo_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Btn_fondo_ayuda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -449,11 +474,6 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
                     .addComponent(Btn_fondo_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Btn_fondo_modificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
-            .addGroup(Pnl_ingresoDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(Pnl_ingresoDatosLayout.createSequentialGroup()
-                    .addGap(40, 40, 40)
-                    .addComponent(Lbl_nombre2)
-                    .addContainerGap(525, Short.MAX_VALUE)))
         );
 
         Pnl_datos.setBackground(new java.awt.Color(36, 47, 65));
@@ -518,7 +538,7 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
             .addGroup(Pnl_datosLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
                     .addGroup(Pnl_datosLayout.createSequentialGroup()
                         .addComponent(Lbl_codigoNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -542,7 +562,7 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
                                 .addComponent(Txt_buscar)
                                 .addComponent(Lbl_codigoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
         );
 
@@ -720,15 +740,24 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
         prcs_repetidos.imprimirReporte("Rpt_MantPisos.jrxml", "Reporte Asignaciones Gobernanta");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void Btn_GobernantasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_GobernantasMouseClicked
         Prcs_LimpiezaGobernanta abrir = new Prcs_LimpiezaGobernanta();
         abrir.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_Btn_GobernantasMouseClicked
+
+    private void Btn_GobernantasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_GobernantasMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_GobernantasMouseEntered
+
+    private void Btn_GobernantasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_GobernantasMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_GobernantasMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup BtnGp_estado;
     private javax.swing.ButtonGroup BtnGp_tipo;
+    private javax.swing.JLabel Btn_Gobernantas;
     private javax.swing.JLabel Btn_ayuda;
     private javax.swing.JLabel Btn_buscar;
     private javax.swing.JLabel Btn_cancelar;
@@ -737,6 +766,7 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
     private javax.swing.JPanel Btn_fondo_ayuda;
     private javax.swing.JPanel Btn_fondo_buscar;
     private javax.swing.JPanel Btn_fondo_cancelar;
+    private javax.swing.JPanel Btn_fondo_cancelar1;
     private javax.swing.JPanel Btn_fondo_eliminar;
     private javax.swing.JPanel Btn_fondo_modificar;
     private javax.swing.JPanel Btn_fondo_reporte;
@@ -759,7 +789,6 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
     private javax.swing.JTable Tbl_AmaDeLlave;
     private javax.swing.JTable Tbl_Datos;
     private javax.swing.JTextField Txt_buscar;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator7;

@@ -22,7 +22,7 @@ public class ReservacionDAO {
     public static String codigoAuxReservacion, codigoAuxCliente;
     private static final String SQL_INSERT = "insert into tbl_reservacion values(?,?,?,?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE tbl_reservacion SET fecha_reservacion=?, fecha_entrada_reservacion=?, fecha_salida_reservacion=?, identificacion_huesped_reservacion=?, cantidad_personas_reservacion=?, estado_reservacion=? WHERE PK_id_reservacion=?";
-    private static final String SQL_QUERY = "SELECT PK_id_reservacion, fecha_reservacion, fecha_entrada_reservacion, fecha_salida_reservacion, identificacion_huesped_reservacion, cantidad_personas_reservacion, estado_reservacion FROM tbl_reservacion WHERE PK_id_reservacion = ?";
+    private static final String SQL_QUERY = "SELECT * FROM tbl_reservacion WHERE PK_id_reservacion = ?";
     private static final String SQL_DELETE = "delete from tbl_reservacion where PK_id_reservacion = ?";
 
     public int insert(Reservacion reservacion) {

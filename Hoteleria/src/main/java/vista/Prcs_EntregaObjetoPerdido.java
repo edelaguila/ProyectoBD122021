@@ -5,6 +5,7 @@
  */
 package vista;
 
+import datos.GuardarBitacora;
 import datos.HabitacionDAO;
 import datos.ObjetoPerdidoDAO;
 import dominio.Habitacion;
@@ -34,19 +35,17 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
     DefaultTableModel modelo1;
     DefaultTableModel modelo2;
     DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
+    GuardarBitacora bitacora = new GuardarBitacora();
 
     /**
      * Creates new form Prcs_EntregaObjetoPerdido
      */
     void habilitarAcciones() {
 
-        var codigoAplicacion = 2003;
+        var codigoAplicacion = 2203;
         var usuario = Login_LD.usuario;
 
-        Btn_PasUno.setEnabled(false);
-        Btn_PasTodo.setEnabled(false);
-        Btn_QuitUno.setEnabled(false);
-        Btn_QuitTodo.setEnabled(false);
+        Btn_guardar2.setVisible(false);
         Btn_buscar.setVisible(false);
 
         GenerarPermisos permisos = new GenerarPermisos();
@@ -57,14 +56,12 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
             permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
         }
 
+        if (permisosApp[0].equals("1")) {
+            Btn_guardar2.setVisible(true);
+        }
+
         if (permisosApp[1].equals("1")) {
             Btn_buscar.setVisible(true);
-        }
-        if (permisosApp[2].equals("1")) {
-            Btn_PasUno.setEnabled(true);
-        Btn_PasTodo.setEnabled(true);
-        Btn_QuitUno.setEnabled(true);
-        Btn_QuitTodo.setEnabled(true);
         }
     }
 
@@ -75,6 +72,7 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         cargar_habitaciones();
         imprimir_Objetos();
         imprimir_Objetos_entregar();
+        habilitarAcciones();
     }
 
     public void diseño() {
@@ -221,10 +219,15 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         fecha.setEnabled(false);
 
         Btn_fondoGuardar2.setBackground(new java.awt.Color(97, 212, 195));
+        Btn_fondoGuardar2.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondoGuardar2.setMinimumSize(new java.awt.Dimension(104, 40));
 
         Btn_guardar2.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_guardar2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Btn_guardar2.setText("Insertar");
+        Btn_guardar2.setText("Entregar");
+        Btn_guardar2.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_guardar2.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_guardar2.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_guardar2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_guardar2MouseClicked(evt);
@@ -253,10 +256,16 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         );
 
         Btn_fondo_reporte.setBackground(new java.awt.Color(97, 212, 195));
+        Btn_fondo_reporte.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_reporte.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_reporte.setPreferredSize(new java.awt.Dimension(104, 40));
 
         Btn_reporte.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_reporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_reporte.setText("Reporte");
+        Btn_reporte.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_reporte.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_reporte.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_reporte.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_reporteMouseClicked(evt);
@@ -277,14 +286,20 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         );
         Btn_fondo_reporteLayout.setVerticalGroup(
             Btn_fondo_reporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Btn_fondo_ayuda.setBackground(new java.awt.Color(253, 255, 182));
+        Btn_fondo_ayuda.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_ayuda.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_ayuda.setPreferredSize(new java.awt.Dimension(104, 40));
 
         Btn_ayuda.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_ayuda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_ayuda.setText("Ayuda");
+        Btn_ayuda.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_ayuda.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_ayuda.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_ayuda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_ayudaMouseClicked(evt);
@@ -305,14 +320,19 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         );
         Btn_fondo_ayudaLayout.setVerticalGroup(
             Btn_fondo_ayudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Btn_fondo_cancelar.setBackground(new java.awt.Color(255, 128, 115));
+        Btn_fondo_cancelar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_fondo_cancelar.setMinimumSize(new java.awt.Dimension(104, 40));
 
         Btn_cancelar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_cancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_cancelar.setText("Cancelar");
+        Btn_cancelar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_cancelar.setMinimumSize(new java.awt.Dimension(104, 40));
+        Btn_cancelar.setPreferredSize(new java.awt.Dimension(104, 40));
         Btn_cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_cancelarMouseClicked(evt);
@@ -329,11 +349,11 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
         Btn_fondo_cancelar.setLayout(Btn_fondo_cancelarLayout);
         Btn_fondo_cancelarLayout.setHorizontalGroup(
             Btn_fondo_cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Btn_fondo_cancelarLayout.setVerticalGroup(
             Btn_fondo_cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Tbl_Asignaciones.setModel(new javax.swing.table.DefaultTableModel(
@@ -557,6 +577,7 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
                 }
 
                 JOptionPane.showMessageDialog(null, "Objeto Entregado");
+                bitacora.GuardarEnBitacora("Modificado", "2203");
             } else {
                 JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
             }
@@ -575,7 +596,8 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_guardar2MouseExited
 
     private void Btn_reporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseClicked
-
+prcs_repetidos.imprimirReporte("Rpt_PrcsObjetoPerdido.jrxml", "Reporte Objeto Perdido");
+        bitacora.GuardarEnBitacora("Reporte", "2203");
     }//GEN-LAST:event_Btn_reporteMouseClicked
 
     private void Btn_reporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_reporteMouseEntered
@@ -588,6 +610,7 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
 
     private void Btn_ayudaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseClicked
         prcs_repetidos.imprimirAyuda("AyudaMantenimientoServicios.chm");
+        bitacora.GuardarEnBitacora("Ayuda", "2203");
     }//GEN-LAST:event_Btn_ayudaMouseClicked
 
     private void Btn_ayudaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ayudaMouseEntered
@@ -631,20 +654,8 @@ public class Prcs_EntregaObjetoPerdido extends javax.swing.JInternalFrame {
 
                     modelo1.addRow(datos);
                     Tbl_Servicios.setModel(modelo1);
+                    bitacora.GuardarEnBitacora("Buscar", "2203");
                 }
-            }
-        }
-        for (ObjetoPerdido persona : personas) {
-            if (persona.getEstado().equals("2") && persona.getDpi().equals(Txt_codigo2.getText())) {
-
-                datos[0] = persona.getIdobjeto();
-                datos[1] = persona.getHabitacion();
-                datos[2] = persona.getAma();
-                datos[3] = persona.getFecha();
-                datos[4] = persona.getObjeto();
-
-                modelo2.addRow(datos);
-                Tbl_Asignaciones.setModel(modelo2);
             }
         }
     }//GEN-LAST:event_Btn_buscarMouseClicked

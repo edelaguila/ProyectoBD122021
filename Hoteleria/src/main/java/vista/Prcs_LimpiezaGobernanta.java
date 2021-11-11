@@ -20,6 +20,7 @@ public class Prcs_LimpiezaGobernanta extends javax.swing.JFrame {
     public Prcs_LimpiezaGobernanta() {
         initComponents();
         actualizarTabla("");
+        Txt_buscar.setBorder(null);
     }
     
     
