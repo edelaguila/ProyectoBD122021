@@ -8,9 +8,9 @@ import java.sql.*;
 
 public class Conexion {
     
-    private static final String JDBC_URL = "jdbc:mysql://localhost/finanzas_db1?useSSL=false&serverTimezone=UTC";
+    private static final String JDBC_URL = "jdbc:mysql://localhost/empresarial?useSSL=false&serverTimezone=UTC";
     private static final String JDBC_USER = "root";
-    private static final String JDBC_PASS = "informaticdv2016";
+    private static final String JDBC_PASS = "Umg$2019";
 
 
 

@@ -13,11 +13,11 @@ import javax.swing.JOptionPane;
  */
 public class ClasificacionCuentaDAO extends Conexion {
 
-    private String SQL_INSERT = "INSERT INTO ClasificacionCuenta (Codigo_clasificacion, Clasificacion_CuentaNombre, Descripcion_Clasificacion) VALUES(?,?,?)";
-    private String SQL_UPDATE = "UPDATE ClasificacionCuenta SET Clasificacion_CuentaNombre = ?, Descripcion_Clasificacion = ? WHERE Codigo_clasificacion = ?";
-    private String SQL_QUERY = "SELECT * FROM ClasificacionCuenta WHERE Codigo_clasificacion = ?";
-    private String SQL_DELETE = "DELETE FROM ClasificacionCuenta WHERE Codigo_clasificacion = ?";
-    private String SQL_SELECT = "SELECT * FROM ClasificacionCuenta";
+    private String SQL_INSERT = "INSERT INTO tbl_clasificacioncuenta (Codigo_clasificacion, Clasificacion_CuentaNombre, Descripcion_Clasificacion) VALUES(?,?,?)";
+    private String SQL_UPDATE = "UPDATE tbl_clasificacioncuenta SET Clasificacion_CuentaNombre = ?, Descripcion_Clasificacion = ? WHERE Codigo_clasificacion = ?";
+    private String SQL_QUERY = "SELECT * FROM tbl_clasificacioncuenta WHERE Codigo_clasificacion = ?";
+    private String SQL_DELETE = "DELETE FROM tbl_clasificacioncuenta WHERE Codigo_clasificacion = ?";
+    private String SQL_SELECT = "SELECT * FROM tbl_clasificacioncuenta";
 
     public int Insertar(ClasificacionCuenta objClasificacion) {
 
@@ -160,7 +160,7 @@ public class ClasificacionCuentaDAO extends Conexion {
         try {
 
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement("SELECT COUNT(Codigo_clasificacion) FROM ClasificacionCuenta");
+            stmt = conn.prepareStatement("SELECT COUNT(Codigo_clasificacion) FROM tbl_clasificacioncuenta");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
