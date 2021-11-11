@@ -261,6 +261,17 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmenuEfectuarOrdenActionPerformed"/>
                       </Events>
                     </MenuItem>
+                    <MenuItem class="javax.swing.JMenuItem" name="MnI_Cocina">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Prcs. Cocina"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnI_CocinaActionPerformed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
+                    </MenuItem>
                   </SubComponents>
                 </Menu>
                 <MenuItem class="javax.swing.JMenuItem" name="MnI_RegistroObjetoPerdido">
