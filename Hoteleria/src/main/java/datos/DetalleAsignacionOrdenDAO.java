@@ -117,4 +117,30 @@ public class DetalleAsignacionOrdenDAO {
         return rows;
     }
     
+    public int update(DetalleOrdenRestaurante detalleOrdenRestaurante) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+
+        try {
+            conn = Conexion.getConnection();
+
+            stmt = conn.prepareStatement(SQL_UPDATE);
+            stmt.setString(1, detalleOrdenRestaurante.getIdDetalle());
+            stmt.setString(2, detalleOrdenRestaurante.getIdEncabezado());
+            stmt.setString(3, detalleOrdenRestaurante.getIdMenu());
+            stmt.setString(4, detalleOrdenRestaurante.getCantidadOrden());
+            stmt.setString(5, detalleOrdenRestaurante.getEstadoOrden());
+
+            rows = stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+
+        return rows;
+    }
 }

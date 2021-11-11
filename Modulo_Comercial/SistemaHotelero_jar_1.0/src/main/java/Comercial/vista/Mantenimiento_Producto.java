@@ -112,7 +112,8 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
         Tbl_tablaproducto.setModel(modelo);
         String[] dato = new String[10];
         for (int i = 0; i < producto.size(); i++) {
-            dato[0] = producto.get(i).getPKcodigoProducto();
+             dato[0] = Integer.toString(producto.get(i).getPKcodigoProducto());
+            
             dato[1] = producto.get(i).getNombreProducto();
             dato[2] = producto.get(i).getDescripcionProducto();
             dato[3] = producto.get(i).getPrecioProducto();
@@ -131,7 +132,8 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
     public void buscar() {
         Producto productoAConsultar = new Producto();
         ProductoDAO productoDAO = new ProductoDAO();
-        productoAConsultar.setPKcodigoProducto(String.valueOf(Txt_id.getText()));
+        productoAConsultar.setPKcodigoProducto(Integer.parseInt(Txt_id.getText()));
+        
         productoAConsultar = productoDAO.query(productoAConsultar);
         Txt_nombreproducto.setText(String.valueOf(productoAConsultar.getNombreProducto()));
         Txt_descipcionproducto.setText(String.valueOf(productoAConsultar.getDescripcionProducto()));
@@ -544,7 +546,8 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
 
         ProductoDAO productoDAO = new ProductoDAO();
         Producto productoAInsertar = new Producto();
-        productoAInsertar.setPKcodigoProducto(String.valueOf(Txt_id.getText()));
+        productoAInsertar.setPKcodigoProducto((int) Integer.parseInt(Txt_id.getText()));
+       
         productoAInsertar.setNombreProducto(Txt_nombreproducto.getText());
         productoAInsertar.setDescripcionProducto(Txt_descipcionproducto.getText());
         productoAInsertar.setPrecioProducto(Txt_precioproducto.getText());
@@ -565,7 +568,8 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         ProductoDAO productoDAO = new ProductoDAO();
         Producto productoAActualizar = new Producto();
-        productoAActualizar.setPKcodigoProducto(String.valueOf(Txt_id.getText()));
+        
+        productoAActualizar.setPKcodigoProducto(Integer.parseInt(Txt_id.getText()));
         productoAActualizar.setNombreProducto(Txt_nombreproducto.getText());
         productoAActualizar.setDescripcionProducto(Txt_descipcionproducto.getText());
         productoAActualizar.setPrecioProducto(Txt_precioproducto.getText());
@@ -585,7 +589,8 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         ProductoDAO productoDAO = new ProductoDAO();
         Producto productoAEliminar = new Producto();
-        productoAEliminar.setPKcodigoProducto(String.valueOf(Txt_id.getText()));
+        productoAEliminar.setPKcodigoProducto(Integer.parseInt(Txt_id.getText()));
+        
         productoDAO.delete(productoAEliminar);
         JOptionPane.showMessageDialog(null, "Registro Eliminado.");
 
