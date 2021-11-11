@@ -18,11 +18,11 @@ import Finanzas.dominio.CuentaBancaria;
  * 
  */
 public class CuentaBancariaDAO {
-    private static final String sql_select = "SELECT Numero_CuentaBancaria, Moneda_Cuenta, CuentaHabiente_Cuenta,Banco_Cuenta,Saldo_Cuenta FROM CuentaBancaria";
-    private static final String sql_insert = "INSERT INTO CuentaBancaria(Numero_CuentaBancaria, Moneda_Cuenta, CuentaHabiente_Cuenta,Banco_Cuenta,Saldo_Cuenta) VALUES(?,?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE CuentaBancaria SET Numero_CuentaBancaria=?, Moneda_Cuenta=?, CuentaHabiente_Cuenta=?,Banco_Cuenta=?,Saldo_Cuenta=?, WHERE Numero_CuentaBancaria = ?";
-    private static final String sql_delete = "DELETE FROM CuentaBancaria WHERE Numero_CuentaBancaria=?";
-    private static final String sql_query = "SELECT Numero_CuentaBancaria, Moneda_Cuenta, CuentaHabiente_Cuenta,Banco_Cuenta FROM TipoTransaccion WHERE CuentaBancaria=?";
+    private static final String sql_select = "SELECT Numero_CuentaBancaria, Moneda_Cuenta, CuentaHabiente_Cuenta,Banco_Cuenta,Saldo_Cuenta FROM tbl_CuentaBancaria";
+    private static final String sql_insert = "INSERT INTO tbl_CuentaBancaria(Numero_CuentaBancaria, Moneda_Cuenta, CuentaHabiente_Cuenta,Banco_Cuenta,Saldo_Cuenta) VALUES(?,?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_CuentaBancaria SET Numero_CuentaBancaria=?, Moneda_Cuenta=?, CuentaHabiente_Cuenta=?,Banco_Cuenta=?,Saldo_Cuenta=?, WHERE Numero_CuentaBancaria = ?";
+    private static final String sql_delete = "DELETE FROM tbl_CuentaBancaria WHERE Numero_CuentaBancaria=?";
+    private static final String sql_query = "SELECT Numero_CuentaBancaria, Moneda_Cuenta, CuentaHabiente_Cuenta,Banco_Cuenta FROM tbl_TipoTransaccion WHERE CuentaBancaria=?";
 
     public List<CuentaBancaria> listar()  {
         Connection con = null;

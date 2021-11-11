@@ -18,11 +18,11 @@ import java.util.List;
  * @author Nay Ale
  */
 public class BancoDAO {
- private static final String SQL_SELECT = "SELECT Codigo_Banco, Nombre_Banco, Clave_Banco, Telefono_Banco FROM Banco";
- private static final String SQL_INSERT = "INSERT INTO Banco VALUES(?, ?, ?, ?)";
- private static final String SQL_DELETE = "DELETE FROM Banco WHERE Codigo_Banco=?";
- private static final String SQL_UPDATE = "UPDATE Banco SET Codigo_Banco=?, Nombre_Banco=?, Clave_Banco=?, Telefono_Banco=? WHERE Codigo_Banco = ?";
- private static final String SQL_QUERY = "SELECT Codigo_Banco, Nombre_Banco, Clave_Banco, Telefono_Banco FROM Banco WHERE Codigo_Banco = ?";
+ private static final String SQL_SELECT = "SELECT Codigo_Banco, Nombre_Banco, Clave_Banco, Telefono_Banco FROM tbl_Banco";
+ private static final String SQL_INSERT = "INSERT INTO tbl_Banco VALUES(?, ?, ?, ?)";
+ private static final String SQL_DELETE = "DELETE FROM tbl_Banco WHERE Codigo_Banco=?";
+ private static final String SQL_UPDATE = "UPDATE tbl_Banco SET Codigo_Banco=?, Nombre_Banco=?, Clave_Banco=?, Telefono_Banco=? WHERE Codigo_Banco = ?";
+ private static final String SQL_QUERY = "SELECT Codigo_Banco, Nombre_Banco, Clave_Banco, Telefono_Banco FROM tbl_Banco WHERE Codigo_Banco = ?";
  
     public int insert(Banco banco){
         Connection conn = null;
