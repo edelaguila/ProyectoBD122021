@@ -35,13 +35,11 @@ public class Prcs_Check_In extends javax.swing.JInternalFrame {
     DetalleReservacion detalleReservacion = new DetalleReservacion();
     Check_In_Out checkinout = new Check_In_Out();
     Date fechaentrada = null, fechasalida = null;
-            GuardarBitacora bitacora = new GuardarBitacora();
-    
+    GuardarBitacora bitacora = new GuardarBitacora();
 
     /**
      * Creates new form Prcs_Check_In
      */
-    
     void habilitarAcciones() {
 
         var codigoAplicacion = 2004;
@@ -69,7 +67,7 @@ public class Prcs_Check_In extends javax.swing.JInternalFrame {
             Btn_eliminar.setVisible(true);
         }
     }
-    
+
     public Prcs_Check_In() {
         initComponents();
         fecha_actual();
@@ -117,7 +115,7 @@ public class Prcs_Check_In extends javax.swing.JInternalFrame {
     public void Limpiar() {
 
     }
-    
+
     public void fecha_actual() {
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -641,29 +639,39 @@ public class Prcs_Check_In extends javax.swing.JInternalFrame {
     private void Btn_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseClicked
         if (prcs_repetidos.isNoneEmpty(Txt_codigo)) {
             if (prcs_repetidos.isNumeric(Txt_codigo.getText())) {
-                ReservacionDAO reservaciondao = new ReservacionDAO();
-                Reservacion reservacion = new Reservacion();
-                reservacion.setIdReservacion(Txt_codigo.getText());
-                reservacion = reservaciondao.query(reservacion);
-                if (reservacion.getEstadoReservacion() != null) {
-                    if (reservacion.getEstadoReservacion().equals("1")) {
-                        Txt_identi.setText(reservacion.getIdCliente());
-                        try {
-                            fechaentrada = formato.parse(reservacion.getFechaIngreso());
-                            fechasalida = formato.parse(reservacion.getFechaEgreso());
-                        } catch (ParseException ex) {
-                            Logger.getLogger(Prcs_Check_In.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        entrada.setDate(fechaentrada);
-                        salida.setDate(fechasalida);
-                        if (prcs_repetidos.isNoneEmpty(Txt_codigo)) {
-                            if (prcs_repetidos.isNumeric(Txt_codigo.getText())) {
-                                tablaAsignaciones(Txt_codigo.getText());
-                                tablaTarifas(Txt_codigo.getText());
-                                bitacora.GuardarEnBitacora("Buscar", "2204");
+                Check_In_OutDAO dao = new Check_In_OutDAO();
+                checkinout.setReservacion(Txt_codigo.getText());
+                String fechaa = new SimpleDateFormat("yyyy-MM-dd").format(fecha.getDate());
+                checkinout.setActual(fechaa);
+                checkinout = dao.getProcesoAlmacenado(checkinout);
+
+                if (Check_In_OutDAO.validacionentrega != null) {
+                    ReservacionDAO reservaciondao = new ReservacionDAO();
+                    Reservacion reservacion = new Reservacion();
+                    reservacion.setIdReservacion(Txt_codigo.getText());
+                    reservacion = reservaciondao.query(reservacion);
+                    if (reservacion.getEstadoReservacion() != null) {
+                        if (reservacion.getEstadoReservacion().equals("1")) {
+                            Txt_identi.setText(reservacion.getIdCliente());
+                            try {
+                                fechaentrada = formato.parse(reservacion.getFechaIngreso());
+                                fechasalida = formato.parse(reservacion.getFechaEgreso());
+                            } catch (ParseException ex) {
+                                Logger.getLogger(Prcs_Check_In.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            entrada.setDate(fechaentrada);
+                            salida.setDate(fechasalida);
+                            if (prcs_repetidos.isNoneEmpty(Txt_codigo)) {
+                                if (prcs_repetidos.isNumeric(Txt_codigo.getText())) {
+                                    tablaAsignaciones(Txt_codigo.getText());
+                                    tablaTarifas(Txt_codigo.getText());
+                                    bitacora.GuardarEnBitacora("Buscar", "2204");
+                                }
                             }
                         }
                     }
+                } else {
+                    JOptionPane.showMessageDialog(null, "La fecha esta fuera del rango reservado");
                 }
             }
         }
