@@ -30,14 +30,14 @@ public class NotaDeDebitoDAO {
   //`Fecha` varchar(100) NOT NULL,
   //`Monto` varchar(100) NOT NULL,
   //`Descripcion` varchar(100) NOT NULL
-private static final String SQL_SELECT = "SELECT Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,Saldo_Habilitado FROM CuentaHabiente where Codigo_CuentaHabiente = Codigo_CuentaHabiente and Codigo_CuentaHabiente = ?";
- private static final String SQL_INSERT = "Insert into NotasDeDebito(NumeroDeDocumento,NumeroDeCuenta,Beneficiario,Fecha,Monto,Descripcion )values(?,?,?,?,?,?)";
-  private static final String SQL_INSERT2 = "Insert into deposito(Codigo_CuentaHabiente,Balance,Transaccion,fecha)values(?,?,?,?)";
-private static final String SQL_UPDATE = "update NotasDeDebito set Saldo_Cuenta= Saldo_Cuenta + ? where Numero_CuentaBancaria=?";
- private static final String SQL_UPDATE2 = "update CuentaHabiente set Saldo_Habilitado= Saldo_Habilitado - ? where Codigo_CuentaHabiente=?";
-public static final String SQL_QUERY2 = "SELECT  Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,Saldo_Habilitado FROM CuentaHabiente where Codigo_CuentaHabiente = Codigo_CuentaHabiente and Codigo_CuentaHabiente = ?";
-private static final String sql_query = "SELECT  Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,Saldo_Habilitado FROM CuentaHabiente where Codigo_CuentaHabiente = Codigo_CuentaHabiente and Codigo_CuentaHabiente = ?";
-private static final String sql_query2 = "SELECT  Numero_CuentaBancaria, CuentaHabiente_Cuenta, Banco_Cuenta,Saldo_Cuenta FROM CuentaHabiente where Numero_CuentaBancaria = Numero_CuentaBancaria and Numero_CuentaBancaria = ?";
+private static final String SQL_SELECT = "SELECT Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,Saldo_Habilitado FROM tbl_cuentahabiente where Codigo_CuentaHabiente = Codigo_CuentaHabiente and Codigo_CuentaHabiente = ?";
+ private static final String SQL_INSERT = "Insert into tbl_notasdedebito(NumeroDeDocumento,NumeroDeCuenta,Beneficiario,Fecha,Monto,Descripcion )values(?,?,?,?,?,?)";
+  private static final String SQL_INSERT2 = "Insert into tbl_deposito(Codigo_CuentaHabiente,Balance,Transaccion,fecha)values(?,?,?,?)";
+private static final String SQL_UPDATE = "update tbl_notasdedebito set Saldo_Cuenta= Saldo_Cuenta + ? where Numero_CuentaBancaria=?";
+ private static final String SQL_UPDATE2 = "update tbl_cuentahabiente set Saldo_Habilitado= Saldo_Habilitado - ? where Codigo_CuentaHabiente=?";
+public static final String SQL_QUERY2 = "SELECT  Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,Saldo_Habilitado FROM tbl_cuentahabiente where Codigo_CuentaHabiente = Codigo_CuentaHabiente and Codigo_CuentaHabiente = ?";
+private static final String sql_query = "SELECT  Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,Saldo_Habilitado FROM tbl_cuentahabiente where Codigo_CuentaHabiente = Codigo_CuentaHabiente and Codigo_CuentaHabiente = ?";
+private static final String sql_query2 = "SELECT  Numero_CuentaBancaria, CuentaHabiente_Cuenta, Banco_Cuenta,Saldo_Cuenta FROM tbl_cuentahabiente where Numero_CuentaBancaria = Numero_CuentaBancaria and Numero_CuentaBancaria = ?";
    public List<CuentaHabiente> listar()  {
         Connection con = null;
         PreparedStatement stmt = null;
