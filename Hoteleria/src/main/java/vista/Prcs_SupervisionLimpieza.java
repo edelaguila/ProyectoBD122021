@@ -4,11 +4,14 @@ import dominio.ProcesosRepetidos;
 import dominio.ConsultaYRevisionLimpieza;
 import dominio.Habitacion;
 import datos.ConsultaYRevisionLimpiezaDAO;
+import datos.GuardarBitacora;
 import datos.HabitacionDAO;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login_LD;
 
 /**
  *
@@ -20,6 +23,31 @@ public class Prcs_SupervisionLimpieza extends javax.swing.JInternalFrame {
     ConsultaYRevisionLimpieza consultaSupervision = new ConsultaYRevisionLimpieza();
     ConsultaYRevisionLimpiezaDAO cbxPiso = new ConsultaYRevisionLimpiezaDAO();
     ButtonGroup grupoDeRadios;
+    GuardarBitacora bitacora = new GuardarBitacora();
+    
+    void habilitarAcciones() {
+
+        var codigoAplicacion = 2211;
+        var usuario = Login_LD.usuario;
+
+        Btn_modificar.setVisible(false);
+        Btn_buscar.setVisible(false);
+
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[5];
+
+        for (int i = 0; i < 5; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[1].equals("1")) {
+            Btn_buscar.setVisible(true);
+        }
+        if (permisosApp[2].equals("1")) {
+            Btn_modificar.setVisible(true);
+        }
+    }
 
     public Prcs_SupervisionLimpieza() {
         initComponents();
@@ -29,6 +57,7 @@ public class Prcs_SupervisionLimpieza extends javax.swing.JInternalFrame {
         grupoDeRadios.add(Rdb_Inactivo);
         grupoDeRadios.add(Rdb_Limpiar2);
         Rdb_Limpiar2.setVisible(false);
+        habilitarAcciones();
     }
 
     public void diseño() {
@@ -178,6 +207,8 @@ public class Prcs_SupervisionLimpieza extends javax.swing.JInternalFrame {
         Btn_buscar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_buscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_buscar.setText("Verificar");
+        Btn_buscar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_buscar.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_buscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_buscarMouseClicked(evt);
@@ -194,7 +225,7 @@ public class Prcs_SupervisionLimpieza extends javax.swing.JInternalFrame {
         Btn_fondo_buscar.setLayout(Btn_fondo_buscarLayout);
         Btn_fondo_buscarLayout.setHorizontalGroup(
             Btn_fondo_buscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+            .addComponent(Btn_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
         );
         Btn_fondo_buscarLayout.setVerticalGroup(
             Btn_fondo_buscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,6 +288,8 @@ public class Prcs_SupervisionLimpieza extends javax.swing.JInternalFrame {
         Btn_modificar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_modificar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_modificar.setText("Confirmar");
+        Btn_modificar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_modificar.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_modificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_modificarMouseClicked(evt);
@@ -416,6 +449,8 @@ public class Prcs_SupervisionLimpieza extends javax.swing.JInternalFrame {
         actualizarTabla2(Txt_buscar.getText());
         Rdb_Activo.setEnabled(true);
         Rdb_Inactivo.setEnabled(true);
+        bitacora.GuardarEnBitacora("Buscar", "2211");
+        
     }//GEN-LAST:event_Btn_buscarMouseClicked
 
     private void Tbl_Datos2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_Datos2MouseClicked
@@ -437,6 +472,7 @@ public class Prcs_SupervisionLimpieza extends javax.swing.JInternalFrame {
         actualizarTabla2(Txt_buscar.getText());
         prcs_repetidos.AlertaMensaje("confirmada", "Supervisión", "exitosamente");
         Limpiar2();
+        bitacora.GuardarEnBitacora("Guardar", "2211");
     }//GEN-LAST:event_Btn_modificarMouseClicked
 
     private void Btn_modificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseEntered

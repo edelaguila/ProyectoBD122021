@@ -1,6 +1,7 @@
 package vista;
 
 import datos.DetalleAsignacionOrdenDAO;
+import datos.GuardarBitacora;
 import dominio.ProcesosRepetidos;
 import dominio.DetalleOrdenRestaurante;
 import java.awt.Color;
@@ -20,10 +21,11 @@ public class Prcs_DetalleRestaurante extends javax.swing.JInternalFrame {
     DetalleAsignacionOrdenDAO restauranteDAO = new DetalleAsignacionOrdenDAO();
     DetalleOrdenRestaurante restaurante = new DetalleOrdenRestaurante();
     ButtonGroup grupoDeRadios;
+    GuardarBitacora bitacora = new GuardarBitacora();
 
     void habilitarAcciones() {
 
-        var codigoAplicacion = 2004;
+        var codigoAplicacion = 2214;
         var usuario = Login_LD.usuario;
 
         Btn_guardar.setVisible(false);
@@ -54,6 +56,7 @@ public class Prcs_DetalleRestaurante extends javax.swing.JInternalFrame {
         diseño();
         actualizarTabla("");
         grupoDeRadioButtons();
+        habilitarAcciones();
         ID_Encabezado.setVisible(false);
         Rdb_Limpiar2.setVisible(false);
         restauranteDAO.llenarCbxGobernanta(Cbx_Orden);
@@ -169,6 +172,8 @@ public class Prcs_DetalleRestaurante extends javax.swing.JInternalFrame {
         Btn_guardar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_guardar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_guardar.setText("Insertar");
+        Btn_guardar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_guardar.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_guardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_guardarMouseClicked(evt);
@@ -201,6 +206,8 @@ public class Prcs_DetalleRestaurante extends javax.swing.JInternalFrame {
         Btn_modificar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_modificar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_modificar.setText("Modificar");
+        Btn_modificar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_modificar.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_modificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_modificarMouseClicked(evt);
@@ -229,6 +236,8 @@ public class Prcs_DetalleRestaurante extends javax.swing.JInternalFrame {
         Btn_reporte.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_reporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_reporte.setText("Reporte");
+        Btn_reporte.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_reporte.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_reporte.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_reporteMouseClicked(evt);
@@ -257,6 +266,8 @@ public class Prcs_DetalleRestaurante extends javax.swing.JInternalFrame {
         Btn_ayuda.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_ayuda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_ayuda.setText("Ayuda");
+        Btn_ayuda.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_ayuda.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_ayuda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_ayudaMouseClicked(evt);
@@ -273,7 +284,7 @@ public class Prcs_DetalleRestaurante extends javax.swing.JInternalFrame {
         Btn_fondo_ayuda.setLayout(Btn_fondo_ayudaLayout);
         Btn_fondo_ayudaLayout.setHorizontalGroup(
             Btn_fondo_ayudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+            .addComponent(Btn_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
         );
         Btn_fondo_ayudaLayout.setVerticalGroup(
             Btn_fondo_ayudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,6 +296,8 @@ public class Prcs_DetalleRestaurante extends javax.swing.JInternalFrame {
         Btn_cancelar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_cancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_cancelar.setText("Cancelar");
+        Btn_cancelar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_cancelar.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_cancelarMouseClicked(evt);
@@ -301,7 +314,7 @@ public class Prcs_DetalleRestaurante extends javax.swing.JInternalFrame {
         Btn_fondo_cancelar.setLayout(Btn_fondo_cancelarLayout);
         Btn_fondo_cancelarLayout.setHorizontalGroup(
             Btn_fondo_cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
         );
         Btn_fondo_cancelarLayout.setVerticalGroup(
             Btn_fondo_cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -537,7 +550,7 @@ public class Prcs_DetalleRestaurante extends javax.swing.JInternalFrame {
             .addGroup(Pnl_datosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE)
                     .addGroup(Pnl_datosLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(Lbl_codigoNombre)
@@ -658,6 +671,7 @@ public class Prcs_DetalleRestaurante extends javax.swing.JInternalFrame {
                         actualizarTabla("");
                         prcs_repetidos.AlertaMensaje("registrada", "Orden", "exitosamente");
                         Limpiar();
+                        bitacora.GuardarEnBitacora("Guardar", "2214");
                     } else {
                     }
                 }
@@ -666,34 +680,36 @@ public class Prcs_DetalleRestaurante extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_guardarMouseClicked
 
     private void Btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseClicked
-//        if (prcs_repetidos.isNoneEmpty(Txt_Habitacion)) {
-//            if (prcs_repetidos.cbxNoneSelected(Cbx_Orden)) {
-//                if (prcs_repetidos.isNumeric(Txt_Habitacion.getText())) {
-//                    AsignacionOrdenDAO restauranteDAO = new AsignacionOrdenDAO();
-//                    String cbxServicio = Cbx_Orden.getSelectedItem().toString();
-//                    restaurante.setIdEncabezado(ID_Encabezado.getText());
-//                    restaurante.setIdHabitacion(Txt_Habitacion.getText());
-//                    if (cbxServicio.equals("Habitación")) {
-//                        restaurante.setMesaOrden("Habitación");
-//                    } else {
-//                        restaurante.setMesaOrden(Txt_Cantidad.getText());
-//                    }
-//                    restaurante.setFechaOrden(Txt_Menu.getText());
-//                    restaurante.setHoraOrden(Txt_Hora.getText());
-//                    
-//                    restauranteDAO.update(restaurante);
-//                    actualizarTabla("");
-//                    prcs_repetidos.AlertaMensaje("modificada", "Orden", "exitosamente");
-//                    Limpiar();
-//                }
-//            }
-//        }
+        if (prcs_repetidos.isSelected(Rdb_Activo, Rdb_Inactivo)) {
+            if (prcs_repetidos.isNoneEmpty(Txt_Menu, Txt_Cantidad)) {
+                if (prcs_repetidos.cbxNoneSelected(Cbx_Orden)) {
+                    if (prcs_repetidos.isNumeric(Txt_Menu.getText(), Txt_Cantidad.getText())) {
+                        String cbxServicio = Cbx_Orden.getSelectedItem().toString();
+
+                        restaurante.setIdDetalle(ID_Encabezado.getText());
+                        restaurante.setIdEncabezado(cbxServicio);
+                        restaurante.setIdMenu(Txt_Menu.getText());
+                        restaurante.setCantidadOrden(Txt_Cantidad.getText());
+                        if (Rdb_Activo.isSelected()) {
+                            restaurante.setEstadoOrden("1");
+                        } else if (Rdb_Inactivo.isSelected()) {
+                            restaurante.setEstadoOrden("0");
+                        }
+
+                        restauranteDAO.update(restaurante);
+                        actualizarTabla("");
+                        prcs_repetidos.AlertaMensaje("modificada", "Orden", "exitosamente");
+                        Limpiar();
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_Btn_modificarMouseClicked
 
     private void Tbl_DatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_DatosMouseClicked
         if (evt.getClickCount() == 2) {
             int orden = Integer.parseInt(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 1).toString());
-            
+
             ID_Encabezado.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 0).toString());
             Cbx_Orden.setSelectedItem(orden);
             Txt_Menu.setText(Tbl_Datos.getValueAt(Tbl_Datos.getSelectedRow(), 2).toString());
@@ -705,6 +721,7 @@ public class Prcs_DetalleRestaurante extends javax.swing.JInternalFrame {
                 Rdb_Activo.setEnabled(true);
                 Rdb_Inactivo.setSelected(true);
             }
+            bitacora.GuardarEnBitacora("Buscar", "2214");
         }
     }//GEN-LAST:event_Tbl_DatosMouseClicked
 
