@@ -3,10 +3,13 @@ package vista;
 import dominio.ProcesosRepetidos;
 import dominio.AsignacionGobernanta;
 import datos.AsignacionGobernantaDAO;
+import datos.GuardarBitacora;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login_LD;
 
 /**
  *
@@ -17,10 +20,40 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     AsignacionGobernanta gobernanta = new AsignacionGobernanta();
     AsignacionGobernantaDAO cbxAsignacionGobernanta = new AsignacionGobernantaDAO();
+    GuardarBitacora bitacora = new GuardarBitacora();
 
-    /**
-     * Creates new form Prcs_AsignacionGobernanta
-     */
+    void habilitarAcciones() {
+
+        var codigoAplicacion = 2208;
+        var usuario = Login_LD.usuario;
+
+        Btn_guardar.setVisible(false);
+        Btn_modificar.setVisible(false);
+        Btn_eliminar.setVisible(false);
+        Btn_buscar.setVisible(false);
+
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[5];
+
+        for (int i = 0; i < 5; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[0].equals("1")) {
+            Btn_guardar.setVisible(true);
+        }
+        if (permisosApp[1].equals("1")) {
+            Btn_buscar.setVisible(true);
+        }
+        if (permisosApp[2].equals("1")) {
+            Btn_modificar.setVisible(true);
+        }
+        if (permisosApp[3].equals("1")) {
+            Btn_eliminar.setVisible(true);
+        }
+    }
+
     public Prcs_AsignacionGobernanta() {
         initComponents();
         cbxAsignacionGobernanta.llenarCbx(Cbx_Gobernanta);
@@ -29,6 +62,7 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
         diseño();
         actualizarTabla("");
         tabla1();
+        habilitarAcciones();
     }
 
     public void diseño() {
@@ -165,6 +199,8 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
         Btn_guardar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_guardar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_guardar.setText("Insertar");
+        Btn_guardar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_guardar.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_guardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_guardarMouseClicked(evt);
@@ -197,6 +233,8 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
         Btn_eliminar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_eliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_eliminar.setText("Eliminar");
+        Btn_eliminar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_eliminar.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_eliminarMouseClicked(evt);
@@ -213,7 +251,7 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
         Btn_fondo_eliminar.setLayout(Btn_fondo_eliminarLayout);
         Btn_fondo_eliminarLayout.setHorizontalGroup(
             Btn_fondo_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+            .addComponent(Btn_eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
         );
         Btn_fondo_eliminarLayout.setVerticalGroup(
             Btn_fondo_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,6 +263,8 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
         Btn_modificar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_modificar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_modificar.setText("Modificar");
+        Btn_modificar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_modificar.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_modificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_modificarMouseClicked(evt);
@@ -253,6 +293,8 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
         Btn_reporte.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_reporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_reporte.setText("Reporte");
+        Btn_reporte.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_reporte.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_reporte.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_reporteMouseClicked(evt);
@@ -281,6 +323,8 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
         Btn_ayuda.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_ayuda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_ayuda.setText("Ayuda");
+        Btn_ayuda.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_ayuda.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_ayuda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_ayudaMouseClicked(evt);
@@ -309,6 +353,8 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
         Btn_cancelar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_cancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_cancelar.setText("Cancelar");
+        Btn_cancelar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_cancelar.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_cancelarMouseClicked(evt);
@@ -325,13 +371,11 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
         Btn_fondo_cancelar.setLayout(Btn_fondo_cancelarLayout);
         Btn_fondo_cancelarLayout.setHorizontalGroup(
             Btn_fondo_cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+            .addComponent(Btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
         );
         Btn_fondo_cancelarLayout.setVerticalGroup(
             Btn_fondo_cancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Btn_fondo_cancelarLayout.createSequentialGroup()
-                .addGap(0, 24, Short.MAX_VALUE)
-                .addComponent(Btn_cancelar))
+            .addComponent(Btn_cancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         Lbl_estado1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
@@ -647,25 +691,34 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Btn_buscarMouseExited
 
     private void Btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_guardarMouseClicked
+        boolean duplicada = true;
         if (prcs_repetidos.isSelected(Rdb_Activo, Rdb_Inactivo)) {
             String cbxGobernanta = Cbx_Gobernanta.getSelectedItem().toString();
             String cbxAmaDeLlave = Cbx_AmaDeLlave.getSelectedItem().toString();
-
             if (prcs_repetidos.cbxNoneSelected(Cbx_Gobernanta, Cbx_AmaDeLlave)) {
                 AsignacionGobernantaDAO gobernantadao = new AsignacionGobernantaDAO();
 
                 gobernanta.setIdGobernanta(cbxGobernanta);
-                gobernanta.setIdAmaDeLlave(cbxAmaDeLlave);
-
-                if (Rdb_Activo.isSelected()) {
-                    gobernanta.setEstadoAsignacionGobernanta("1");
-                } else if (Rdb_Inactivo.isSelected()) {
-                    gobernanta.setEstadoAsignacionGobernanta("0");
+                gobernanta = gobernantadao.getProcesoAlmacenado(gobernanta);
+                if (AsignacionGobernantaDAO.validacionGobernanta.equals("1")) {
+                } else {
+                    duplicada = false;
+                    JOptionPane.showMessageDialog(null, "No se puede agregar más de 5 amas de llave a una gobernanta.");
                 }
-                gobernantadao.insert(gobernanta);
-                actualizarTabla("");
-                prcs_repetidos.AlertaMensaje("guardado", "Asignación", "exitosamente");
-                Limpiar();
+                if (duplicada) {
+                    gobernanta.setIdGobernanta(cbxGobernanta);
+                    gobernanta.setIdAmaDeLlave(cbxAmaDeLlave);
+                    if (Rdb_Activo.isSelected()) {
+                        gobernanta.setEstadoAsignacionGobernanta("1");
+                    } else if (Rdb_Inactivo.isSelected()) {
+                        gobernanta.setEstadoAsignacionGobernanta("0");
+                    }
+                    gobernantadao.insert(gobernanta);
+                    actualizarTabla("");
+                    prcs_repetidos.AlertaMensaje("guardado", "Asignación", "exitosamente");
+                    Limpiar();
+                    bitacora.GuardarEnBitacora("Guardar", "2208");
+                }
             }
         } else {
         }
@@ -691,6 +744,7 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
                 actualizarTabla("");
                 prcs_repetidos.AlertaMensaje("modificada", "Asignación", "exitosamente");
                 Limpiar();
+                bitacora.GuardarEnBitacora("Modificar", "2208");
             }
         }
     }//GEN-LAST:event_Btn_modificarMouseClicked
@@ -703,6 +757,7 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
             actualizarTabla("");
             prcs_repetidos.AlertaMensaje("eliminada", "Asignación", "exitosamente");
             Limpiar();
+            bitacora.GuardarEnBitacora("Eliminar", "2208");
         } else {
             JOptionPane.showMessageDialog(null, "No se pudo eliminar la asignación.");
         }
@@ -721,6 +776,7 @@ public class Prcs_AsignacionGobernanta extends javax.swing.JInternalFrame {
             } else {
                 Rdb_Inactivo.setSelected(true);
             }
+            bitacora.GuardarEnBitacora("Buscar", "2208");
         }
     }//GEN-LAST:event_Tbl_DatosMouseClicked
 
