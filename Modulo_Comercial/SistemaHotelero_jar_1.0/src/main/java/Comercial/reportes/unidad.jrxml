@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cc772d31-62b3-4c70-a807-df8db9f93fed">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT * FROM empresarial.tbl_unidad;]]>
+	</queryString>
+	<field name="PK_codigo_unidad" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_unidad" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="medida_acronimo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estatus_unidad" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="135" y="45" width="307" height="34" uuid="633fb026-87a6-4af7-9807-8ca7872172d8"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MANTENIMIENTO UNIDAD]]></text>
+			</staticText>
+			<image>
+				<reportElement x="3" y="0" width="99" height="79" uuid="c1c49c52-2d9a-4bae-8370-d32d3fb79a1f"/>
+				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\7\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="35" y="41" width="100" height="20" uuid="bc883df4-4499-4534-92a3-056efd57bbbc"/>
+				<text><![CDATA[PK_codigo_unidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="145" y="41" width="100" height="20" uuid="4380fafa-7204-4ea2-9fdc-a1e6d585da3b"/>
+				<text><![CDATA[nombre_unidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="265" y="41" width="100" height="20" uuid="3c094d11-3a86-4ad4-8d4a-f8f0f4a40efe"/>
+				<text><![CDATA[medida_acronimo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="41" width="100" height="20" uuid="229606d2-cce8-4aea-8068-df971a957184"/>
+				<text><![CDATA[estatus_unidad]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="35" y="0" width="100" height="20" uuid="1bea0941-c2f4-4a25-b9fd-88c6cf82c27a"/>
+				<textFieldExpression><![CDATA[$F{PK_codigo_unidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="145" y="0" width="100" height="20" uuid="cba33280-97c0-4496-a91d-0b5483e0451a"/>
+				<textFieldExpression><![CDATA[$F{nombre_unidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="265" y="0" width="100" height="20" uuid="a028275a-76f7-4746-9f9e-848efa12d067"/>
+				<textFieldExpression><![CDATA[$F{medida_acronimo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="397" y="0" width="100" height="20" uuid="2a34894a-6040-4cdf-8530-bc26cb573153"/>
+				<textFieldExpression><![CDATA[$F{estatus_unidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

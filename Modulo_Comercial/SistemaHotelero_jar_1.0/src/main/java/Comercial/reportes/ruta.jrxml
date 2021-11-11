@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="358dce00-5700-45a1-8ecd-125c672ef322">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM empresarial.tbl_transporteruta;]]>
+	</queryString>
+	<field name="PK_codigo_transporteruta" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_conductoruta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_transporteruta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo_transporteruta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ubicacion_transporteruta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccion_transporteruta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hora_salida_transporteruta" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hora_entrada_transporteruta" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estatus_transporteruta" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="229" y="45" width="303" height="34" uuid="0a1f2ffb-ed0a-4f12-a413-80a58a7fdd7f"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MANTENIMIENTO RUTA]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="108" height="79" uuid="65be5905-b206-4dd1-9245-79af5be49f06"/>
+				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\7\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="41" width="53" height="20" uuid="cb08b4e4-59d8-49c3-877c-066adf4444f1"/>
+				<text><![CDATA[PK_codigo_transporteruta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="64" y="41" width="111" height="20" uuid="8cbbc11c-9a9d-438d-843a-95140672c137"/>
+				<text><![CDATA[nombre_conductoruta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="186" y="41" width="89" height="20" uuid="80c1cdfc-954e-46d8-8b99-fb91b030538a"/>
+				<text><![CDATA[nombre_transporteruta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="292" y="41" width="89" height="20" uuid="d069e582-ee0a-4db7-a886-2cd3618d7897"/>
+				<text><![CDATA[tipo_transporteruta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="41" width="48" height="20" uuid="81303304-f8bd-4bae-998a-d4da46d015d2"/>
+				<text><![CDATA[ubicacion_transporteruta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="41" width="48" height="20" uuid="fbc4e2fc-9424-46e4-a6d1-975f174399bb"/>
+				<text><![CDATA[direccion_transporteruta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="532" y="41" width="55" height="20" uuid="7fdcde19-37fe-4470-b876-cff6555013d9"/>
+				<text><![CDATA[hora_salida_transporteruta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="609" y="41" width="64" height="20" uuid="c33754b8-5d0f-4e28-bf93-86695c5da120"/>
+				<text><![CDATA[hora_entrada_transporteruta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="700" y="41" width="35" height="20" uuid="29dee9b5-c176-44e8-b3a7-71d7dd2741d8"/>
+				<text><![CDATA[estatus_transporteruta]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="53" height="20" uuid="c0c93743-1de2-4810-b3f6-7115b2e99014"/>
+				<textFieldExpression><![CDATA[$F{PK_codigo_transporteruta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="0" width="111" height="20" uuid="d3160420-6aa5-4771-91e2-71f1a155bec8"/>
+				<textFieldExpression><![CDATA[$F{nombre_conductoruta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="186" y="0" width="89" height="20" uuid="d196c06b-48dc-475d-a7c7-6c12691b5ded"/>
+				<textFieldExpression><![CDATA[$F{nombre_transporteruta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="292" y="0" width="89" height="20" uuid="09119b1a-a826-4fa6-9338-f780a68c7a0a"/>
+				<textFieldExpression><![CDATA[$F{tipo_transporteruta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="0" width="48" height="20" uuid="3d7b6e3c-ae89-4990-884d-ccf17dea8f35"/>
+				<textFieldExpression><![CDATA[$F{ubicacion_transporteruta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="48" height="20" uuid="4657ca2f-35f9-4a50-9638-35b58fabbc43"/>
+				<textFieldExpression><![CDATA[$F{direccion_transporteruta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="532" y="0" width="55" height="20" uuid="0f2e44b2-f69b-4b3a-b60b-9058eb51df5a"/>
+				<textFieldExpression><![CDATA[$F{hora_salida_transporteruta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="609" y="0" width="64" height="20" uuid="79d2ca1f-2345-4afb-8444-c2172a43a1f3"/>
+				<textFieldExpression><![CDATA[$F{hora_entrada_transporteruta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="700" y="0" width="35" height="20" uuid="4128b744-fd69-4566-b946-f0b25f76c597"/>
+				<textFieldExpression><![CDATA[$F{estatus_transporteruta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

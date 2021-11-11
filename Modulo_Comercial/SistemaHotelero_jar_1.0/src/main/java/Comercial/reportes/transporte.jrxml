@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2665d53f-6229-4edd-b5bd-d8726bc710c0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM empresarial.tbl_transporte;]]>
+	</queryString>
+	<field name="PK_codigo_transporte" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="clase_transporte" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="marca_transporte" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="modelo_transporte" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo_transporte" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="placa_transporte" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="color_transporte" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estado_transporte" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numero_motor_transporte" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estatus_transporte" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="185" y="26" width="411" height="53" uuid="d8dcf840-420a-42e8-99db-86800d178224"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MANTENIMIENTO TRANSPORTE]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="119" height="79" uuid="207443a4-7f2f-446e-ab46-3c4cb138307c"/>
+				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\7\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="41" width="54" height="20" uuid="0dd265f0-71f2-442d-b0b3-c78ec6cd63fe"/>
+				<text><![CDATA[PK_codigo_transporte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="41" width="77" height="20" uuid="8a7f4181-9e7c-44e5-a44b-98e9d04bcee9"/>
+				<text><![CDATA[clase_transporte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="41" width="85" height="20" uuid="112314ee-26b6-41c5-93ef-1f2475a84d0e"/>
+				<text><![CDATA[marca_transporte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="41" width="70" height="20" uuid="c4dd8eac-b2e3-4996-808c-17cf86d4db42"/>
+				<text><![CDATA[tipo_transporte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="381" y="41" width="82" height="20" uuid="19f61004-e3bb-42ae-babd-4a768c358c2e"/>
+				<text><![CDATA[placa_transporte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="463" y="41" width="80" height="20" uuid="2bc9e04d-3ca4-41ed-8385-c37a5626f683"/>
+				<text><![CDATA[color_transporte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="543" y="41" width="88" height="20" uuid="c14c648c-2f39-451e-a6f2-768c1135222c"/>
+				<text><![CDATA[estado_transporte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="631" y="41" width="70" height="20" uuid="7f00cbfb-6236-4b7e-a997-8986fe99c9d7"/>
+				<text><![CDATA[numero_motor_transporte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="701" y="41" width="35" height="20" uuid="fd766031-250e-4d64-9770-019d3b156913"/>
+				<text><![CDATA[estatus_transporte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="41" width="95" height="20" uuid="1c5359ff-51b5-4bf3-8663-9452072aed81"/>
+				<text><![CDATA[modelo_transporte]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="54" height="20" uuid="ee5bce9d-e515-474c-a3c2-de9b8954fd3a"/>
+				<textFieldExpression><![CDATA[$F{PK_codigo_transporte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="54" y="0" width="77" height="20" uuid="ad1097d7-e6ae-421d-bcf2-72b1e0f097bc"/>
+				<textFieldExpression><![CDATA[$F{clase_transporte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="131" y="0" width="85" height="20" uuid="1e03a86e-176b-4e4b-a545-3e538024e46e"/>
+				<textFieldExpression><![CDATA[$F{marca_transporte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="311" y="0" width="70" height="20" uuid="d69d4bd0-9c71-4981-bde3-81c07ba09b1d"/>
+				<textFieldExpression><![CDATA[$F{tipo_transporte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="381" y="0" width="82" height="20" uuid="a7db0c70-d016-4553-b79b-db11ed3dfaea"/>
+				<textFieldExpression><![CDATA[$F{placa_transporte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="463" y="0" width="80" height="20" uuid="cabc91b7-a085-4d41-8af5-2a2ec04eb35f"/>
+				<textFieldExpression><![CDATA[$F{color_transporte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="543" y="0" width="88" height="20" uuid="5f223300-2b82-44cc-946f-33da8918737d"/>
+				<textFieldExpression><![CDATA[$F{estado_transporte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="631" y="0" width="70" height="20" uuid="cba4547e-0e37-4a4f-a529-adbaff1f44a9"/>
+				<textFieldExpression><![CDATA[$F{numero_motor_transporte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="701" y="0" width="35" height="20" uuid="48c1373c-a9c4-4628-ab55-2d9618007dbb"/>
+				<textFieldExpression><![CDATA[$F{estatus_transporte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="216" y="0" width="95" height="20" uuid="a1b2e547-6047-4af5-8860-2779a1e8d0d8"/>
+				<textFieldExpression><![CDATA[$F{modelo_transporte}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

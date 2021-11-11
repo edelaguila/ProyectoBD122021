@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="be9a0db8-a357-4c60-bf76-25133ecfa3f0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT * FROM empresarial.tbl_bodega;]]>
+	</queryString>
+	<field name="PK_codigo_bodega" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_bodega" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estatus_bodega" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="99" height="79" uuid="163f2efd-68d4-44f2-a112-609833c900d4"/>
+				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\7\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="131" y="0" width="321" height="35" uuid="18e78187-8f06-49d4-b18d-a7fc9dd75478"/>
+				<textElement verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MANTENIMIENTO BODEGA]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="31" y="41" width="100" height="20" uuid="4a06f34e-1dad-4ec2-a7fa-45870224a06d"/>
+				<text><![CDATA[PK_codigo_bodega]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="41" width="100" height="20" uuid="2a23977d-b97f-4ac1-b10d-d68af6752df5"/>
+				<text><![CDATA[nombre_bodega]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="376" y="41" width="100" height="20" uuid="3c8b782f-98e6-4d6f-9806-9802b8bafb1a"/>
+				<text><![CDATA[estatus_bodega]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="31" y="0" width="100" height="20" uuid="a78c77d9-4f54-4019-9026-3a0c14fbbbe2"/>
+				<textFieldExpression><![CDATA[$F{PK_codigo_bodega}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="0" width="100" height="20" uuid="b445b3f0-92f4-4411-93ac-ba51e24dd10c"/>
+				<textFieldExpression><![CDATA[$F{nombre_bodega}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="376" y="0" width="100" height="20" uuid="9d66ef6a-9636-4b51-b2be-3760a805dab1"/>
+				<textFieldExpression><![CDATA[$F{estatus_bodega}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -10,7 +10,6 @@ package dominio;
  * @author leelu
  */
 public class ObjetoPerdido {
-    private String idobjeto, habitacion, ama, fecha, objeto, nombre, dpi, estado;
 
     public String getIdobjeto() {
         return idobjeto;
@@ -52,14 +51,6 @@ public class ObjetoPerdido {
         this.objeto = objeto;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public String getDpi() {
         return dpi;
     }
@@ -75,4 +66,13 @@ public class ObjetoPerdido {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public String getFechae() {
+        return fechae;
+    }
+
+    public void setFechae(String fechae) {
+        this.fechae = fechae;
+    }
+    private String idobjeto, habitacion, ama, fecha, objeto, dpi, estado, fechae;
 }

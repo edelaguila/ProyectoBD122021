@@ -91,7 +91,6 @@ public class HorarioDAO {
                 String id = rs.getString("PK_id_horario");
                 String entrada = rs.getString("entrada_horario");
                 String salida = rs.getString("salida_horario");
-//                String horas = rs.getString("horas_extras_horario");
                 String descripcion = rs.getString("descripcion_horario");
                 String estado = rs.getString("estado_horario");
 
@@ -132,7 +131,6 @@ public class HorarioDAO {
                 String id = rs.getString("PK_id_horario");
                 String entrada = rs.getString("entrada_horario");
                 String salida = rs.getString("salida_horario");
-//                String horas = rs.getString("horas_extras_horario");
                 String descripcion = rs.getString("descripcion_horario");
                 String estado = rs.getString("estado_horario");
 

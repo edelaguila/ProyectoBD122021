@@ -1,7 +1,7 @@
 package Comercial.vista;
 
-//import seguridad.vista.*;
-import com.formdev.flatlaf.FlatDarkLaf;
+import seguridad.vista.*;
+//import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Dimension;
 import java.io.File;
 import java.net.UnknownHostException;
@@ -21,8 +21,9 @@ import javax.swing.UIManager;
  *
  */
 public class MDIComercial extends javax.swing.JFrame {
+
     private Mantenimiento_Producto MantenimientoProducto;
-    private Mantenimiento_Bodega MantenimientoBodega;
+    private Mantenimiento_Bodega Mantenimiento_Bodega;
     private Mantenimiento_Unidad MantenimientoUnidad;
     private Proceso_Factura_venta Proceso_Factura_venta;
     private Mantenimiento_Transporte MantenimientoTransporte;
@@ -32,6 +33,14 @@ public class MDIComercial extends javax.swing.JFrame {
     private Mantenimiento_Cliente Mantenimiento_Cliente;
     private Mantenimiento_Cobrador Mantenimiento_Cobrador;
     private Mantenimiento_Vendedor Mantenimiento_Vendedor;
+    private Proceso_Existencia Proceso_Existencia;
+    private Mantenimiento_TransporteRuta Mantenimiento_TransporteRuta;
+     private Proceso_Cartera_Venta Proceso_Cartera_Venta;
+     private Proceso_Cotizacion_venta Proceso_Cotizacion_venta;
+     private Proceso_Pedido_venta Proceso_Pedido_venta;
+    private Proceso_Devolucion_venta Proceso_Devolucion_venta; 
+    private Control_Precios_vemta Control_Precios_vemta;
+  private  Balance_saldo_cliente  registro_venta ;
     public static JLabel logo = new JLabel();
 
     public MDIComercial() throws UnknownHostException {
@@ -84,18 +93,25 @@ public class MDIComercial extends javax.swing.JFrame {
         Item_Mntproducto = new javax.swing.JMenuItem();
         Item_Mntunidad = new javax.swing.JCheckBoxMenuItem();
         Item_Mnttransporte = new javax.swing.JCheckBoxMenuItem();
+        MantenimientoRuta = new javax.swing.JCheckBoxMenuItem();
         M_venta = new javax.swing.JMenu();
         M_cliente = new javax.swing.JMenuItem();
         M_deudor = new javax.swing.JMenuItem();
         M_deudor1 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        P_ventas = new javax.swing.JMenu();
-        P_pedido_factura = new javax.swing.JMenuItem();
         P_compras = new javax.swing.JMenu();
         ProcesoCompra = new javax.swing.JMenuItem();
         FacturaCompras = new javax.swing.JMenuItem();
         P_producto = new javax.swing.JMenu();
-        ProcesoInventario = new javax.swing.JMenuItem();
+        ProcesoExistencia = new javax.swing.JCheckBoxMenuItem();
+        P_ventas = new javax.swing.JMenu();
+        P_pedido_factura = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu12 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -187,6 +203,15 @@ public class MDIComercial extends javax.swing.JFrame {
         });
         M_inventario.add(Item_Mnttransporte);
 
+        MantenimientoRuta.setSelected(true);
+        MantenimientoRuta.setText("Mantenimiento Ruta");
+        MantenimientoRuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MantenimientoRutaActionPerformed(evt);
+            }
+        });
+        M_inventario.add(MantenimientoRuta);
+
         M_ccompras.add(M_inventario);
 
         M_venta.setText("Mantenimientos Ventas");
@@ -222,18 +247,6 @@ public class MDIComercial extends javax.swing.JFrame {
         jMenu4.setText("Procesos");
         jMenu4.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
 
-        P_ventas.setText("Proseso ventas");
-
-        P_pedido_factura.setText(" Pedido de  Factura");
-        P_pedido_factura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                P_pedido_facturaActionPerformed(evt);
-            }
-        });
-        P_ventas.add(P_pedido_factura);
-
-        jMenu4.add(P_ventas);
-
         P_compras.setText("ProcesoCompra");
 
         ProcesoCompra.setText("TransaccionalCompra");
@@ -256,15 +269,76 @@ public class MDIComercial extends javax.swing.JFrame {
 
         P_producto.setText("Proceso Inventario");
 
-        ProcesoInventario.setText("Proceso Inventario");
-        ProcesoInventario.addActionListener(new java.awt.event.ActionListener() {
+        ProcesoExistencia.setSelected(true);
+        ProcesoExistencia.setText("Proceso Existencia");
+        ProcesoExistencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ProcesoInventarioActionPerformed(evt);
+                ProcesoExistenciaActionPerformed(evt);
             }
         });
-        P_producto.add(ProcesoInventario);
+        P_producto.add(ProcesoExistencia);
 
         jMenu4.add(P_producto);
+
+        P_ventas.setText("Proseso ventas");
+
+        P_pedido_factura.setText(" Factura");
+        P_pedido_factura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                P_pedido_facturaActionPerformed(evt);
+            }
+        });
+        P_ventas.add(P_pedido_factura);
+
+        jMenuItem2.setText("Cartera de Ventas");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        P_ventas.add(jMenuItem2);
+
+        jMenuItem3.setText("Pedido");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        P_ventas.add(jMenuItem3);
+
+        jMenuItem4.setText("Cotizacion");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        P_ventas.add(jMenuItem4);
+
+        jMenuItem5.setText("Devolucion de Venta");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        P_ventas.add(jMenuItem5);
+
+        jMenuItem6.setText("Control de Precios");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        P_ventas.add(jMenuItem6);
+
+        jMenuItem8.setText("Balance de Saldo a Cliente");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        P_ventas.add(jMenuItem8);
+
+        jMenu4.add(P_ventas);
 
         jMenuBar1.add(jMenu4);
 
@@ -358,7 +432,6 @@ public class MDIComercial extends javax.swing.JFrame {
 
     private void cerrar_sesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrar_sesionMouseClicked
         int respuesta_cs = JOptionPane.showConfirmDialog(this, "¿Desea Cerrar Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
-
         if (respuesta_cs == 0) {
             this.dispose();
         }
@@ -366,9 +439,7 @@ public class MDIComercial extends javax.swing.JFrame {
     }//GEN-LAST:event_cerrar_sesionMouseClicked
 
     private void Item_MntproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_MntproductoActionPerformed
-//       
-         MantenimientoProducto = new Mantenimiento_Producto();
-
+        MantenimientoProducto = new Mantenimiento_Producto();
         jdpescritorio.add(MantenimientoProducto);
         Dimension desktopSize = jdpescritorio.getSize();
         Dimension FrameSize = MantenimientoProducto.getSize();
@@ -390,46 +461,46 @@ public class MDIComercial extends javax.swing.JFrame {
 
     }//GEN-LAST:event_ProcesoCompraActionPerformed
 
-    private void P_pedido_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P_pedido_facturaActionPerformed
-   Proceso_Factura_venta = new Proceso_Factura_venta();
-
-        jdpescritorio.add(Proceso_Factura_venta);
-        Dimension desktopSize = jdpescritorio.getSize();
-        Dimension FrameSize = Proceso_Factura_venta.getSize();
-        Proceso_Factura_venta.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-        Proceso_Factura_venta.show();
-        logo.setVisible(true);
-        Proceso_Factura_venta.setVisible(true);
-//      
-        // TODO add your handling code here:
-    }//GEN-LAST:event_P_pedido_facturaActionPerformed
-
-    private void ProcesoInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProcesoInventarioActionPerformed
-        // TODO add your handling code here:
-//       
-
-    }//GEN-LAST:event_ProcesoInventarioActionPerformed
-
     private void Item_MntbodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_MntbodegaActionPerformed
-        MantenimientoBodega = new Mantenimiento_Bodega();
-        jdpescritorio.add(MantenimientoBodega);      
+        Mantenimiento_Bodega = new Mantenimiento_Bodega();
+        jdpescritorio.add(Mantenimiento_Bodega);
+        Dimension desktopSize = jdpescritorio.getSize();
+        Dimension FrameSize = Mantenimiento_Bodega.getSize();
+        Mantenimiento_Bodega.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        Mantenimiento_Bodega.show();
+        logo.setVisible(true);
+        Mantenimiento_Bodega.setVisible(true);
+
+
     }//GEN-LAST:event_Item_MntbodegaActionPerformed
 
     private void Item_marcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_marcaActionPerformed
         // TODO add your handling code here:
         MantenimientoMarca = new Mantenimiento_Marca();
         jdpescritorio.add(MantenimientoMarca);
+        Dimension desktopSize = jdpescritorio.getSize();
+        Dimension FrameSize = MantenimientoMarca.getSize();
+        MantenimientoMarca.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        MantenimientoMarca.show();
+        logo.setVisible(true);
+        MantenimientoMarca.setVisible(true);
     }//GEN-LAST:event_Item_marcaActionPerformed
 
     private void Item_LineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_LineaActionPerformed
         // TODO add your handling code here:
         MantenimientoLinea = new Mantenimiento_Linea();
         jdpescritorio.add(MantenimientoLinea);
+        Dimension desktopSize = jdpescritorio.getSize();
+        Dimension FrameSize = MantenimientoLinea.getSize();
+        MantenimientoLinea.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        MantenimientoLinea.show();
+        logo.setVisible(true);
+        MantenimientoLinea.setVisible(true);
+
     }//GEN-LAST:event_Item_LineaActionPerformed
 
     private void M_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_M_clienteActionPerformed
         Mantenimiento_Cliente = new Mantenimiento_Cliente();
-
         jdpescritorio.add(Mantenimiento_Cliente);
         Dimension desktopSize = jdpescritorio.getSize();
         Dimension FrameSize = Mantenimiento_Cliente.getSize();
@@ -441,7 +512,6 @@ public class MDIComercial extends javax.swing.JFrame {
 
     private void M_deudorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_M_deudorActionPerformed
         Mantenimiento_Cobrador = new Mantenimiento_Cobrador();
-
         jdpescritorio.add(Mantenimiento_Cobrador);
         Dimension desktopSize = jdpescritorio.getSize();
         Dimension FrameSize = Mantenimiento_Cobrador.getSize();
@@ -449,12 +519,11 @@ public class MDIComercial extends javax.swing.JFrame {
         Mantenimiento_Cobrador.show();
         logo.setVisible(true);
         Mantenimiento_Cobrador.setVisible(true);
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_M_deudorActionPerformed
 
     private void M_deudor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_M_deudor1ActionPerformed
         Mantenimiento_Vendedor = new Mantenimiento_Vendedor();
-
         jdpescritorio.add(Mantenimiento_Vendedor);
         Dimension desktopSize = jdpescritorio.getSize();
         Dimension FrameSize = Mantenimiento_Vendedor.getSize();
@@ -463,16 +532,15 @@ public class MDIComercial extends javax.swing.JFrame {
         logo.setVisible(true);
         Mantenimiento_Vendedor.setVisible(true);
 
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_M_deudor1ActionPerformed
 
     private void Item_MntunidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_MntunidadActionPerformed
         // TODO add your handling code here:
-         MantenimientoUnidad = new Mantenimiento_Unidad();
-
+        MantenimientoUnidad = new Mantenimiento_Unidad();
         jdpescritorio.add(MantenimientoUnidad);
         Dimension desktopSize = jdpescritorio.getSize();
-        Dimension FrameSize = Mantenimiento_Vendedor.getSize();
+        Dimension FrameSize = MantenimientoUnidad.getSize();
         MantenimientoUnidad.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         MantenimientoUnidad.show();
         logo.setVisible(true);
@@ -481,8 +549,7 @@ public class MDIComercial extends javax.swing.JFrame {
 
     private void Item_MnttransporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_MnttransporteActionPerformed
         // TODO add your handling code here:
-         MantenimientoTransporte = new Mantenimiento_Transporte();
-
+        MantenimientoTransporte = new Mantenimiento_Transporte();
         jdpescritorio.add(MantenimientoTransporte);
         Dimension desktopSize = jdpescritorio.getSize();
         Dimension FrameSize = MantenimientoTransporte.getSize();
@@ -490,7 +557,134 @@ public class MDIComercial extends javax.swing.JFrame {
         MantenimientoTransporte.show();
         logo.setVisible(true);
         MantenimientoTransporte.setVisible(true);
+
     }//GEN-LAST:event_Item_MnttransporteActionPerformed
+
+    private void ProcesoExistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProcesoExistenciaActionPerformed
+        // TODO add your handling code here:
+        Proceso_Existencia = new Proceso_Existencia();
+        jdpescritorio.add(Proceso_Existencia);
+        Dimension desktopSize = jdpescritorio.getSize();
+        Dimension FrameSize = Proceso_Existencia.getSize();
+        Proceso_Existencia.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        Proceso_Existencia.show();
+        logo.setVisible(true);
+        Proceso_Existencia.setVisible(true);
+
+
+    }//GEN-LAST:event_ProcesoExistenciaActionPerformed
+
+    private void MantenimientoRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MantenimientoRutaActionPerformed
+        // TODO add your handling code here:
+        Mantenimiento_TransporteRuta = new Mantenimiento_TransporteRuta();
+        jdpescritorio.add(Mantenimiento_TransporteRuta);
+        Dimension desktopSize = jdpescritorio.getSize();
+        Dimension FrameSize = Mantenimiento_TransporteRuta.getSize();
+        Mantenimiento_TransporteRuta.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        Mantenimiento_TransporteRuta.show();
+        logo.setVisible(true);
+        Mantenimiento_TransporteRuta.setVisible(true);
+
+    }//GEN-LAST:event_MantenimientoRutaActionPerformed
+
+    private void P_pedido_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P_pedido_facturaActionPerformed
+        Proceso_Factura_venta = new Proceso_Factura_venta();
+
+        jdpescritorio.add(Proceso_Factura_venta);
+        Dimension desktopSize = jdpescritorio.getSize();
+        Dimension FrameSize = Proceso_Factura_venta.getSize();
+        Proceso_Factura_venta.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        Proceso_Factura_venta.show();
+        logo.setVisible(true);
+        Proceso_Factura_venta.setVisible(true);
+        //
+        // TODO add your handling code here:
+    }//GEN-LAST:event_P_pedido_facturaActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        Proceso_Cartera_Venta = new Proceso_Cartera_Venta();
+
+        jdpescritorio.add(Proceso_Cartera_Venta);
+        Dimension desktopSize = jdpescritorio.getSize();
+        Dimension FrameSize = Proceso_Cartera_Venta.getSize();
+        Proceso_Cartera_Venta.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        Proceso_Cartera_Venta.show();
+        logo.setVisible(true);
+        Proceso_Cartera_Venta.setVisible(true);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        Proceso_Pedido_venta = new Proceso_Pedido_venta();
+
+        jdpescritorio.add(Proceso_Pedido_venta);
+        Dimension desktopSize = jdpescritorio.getSize();
+        Dimension FrameSize = Proceso_Pedido_venta.getSize();
+        Proceso_Pedido_venta.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        Proceso_Pedido_venta.show();
+        logo.setVisible(true);
+        Proceso_Pedido_venta.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        Proceso_Cotizacion_venta = new  Proceso_Cotizacion_venta();
+
+        jdpescritorio.add( Proceso_Cotizacion_venta);
+        Dimension desktopSize = jdpescritorio.getSize();
+        Dimension FrameSize =  Proceso_Cotizacion_venta.getSize();
+        Proceso_Cotizacion_venta.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        Proceso_Cotizacion_venta.show();
+        logo.setVisible(true);
+        Proceso_Cotizacion_venta.setVisible(true);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        Proceso_Devolucion_venta = new Proceso_Devolucion_venta();
+
+        jdpescritorio.add(Proceso_Devolucion_venta);
+        Dimension desktopSize = jdpescritorio.getSize();
+        Dimension FrameSize = Proceso_Devolucion_venta.getSize();
+        Proceso_Devolucion_venta.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        Proceso_Devolucion_venta.show();
+        logo.setVisible(true);
+        Proceso_Devolucion_venta.setVisible(true);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+
+        Control_Precios_vemta = new Control_Precios_vemta();
+
+        jdpescritorio.add(Control_Precios_vemta);
+        Dimension desktopSize = jdpescritorio.getSize();
+        Dimension FrameSize = Control_Precios_vemta.getSize();
+        Control_Precios_vemta.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        Control_Precios_vemta.show();
+        logo.setVisible(true);
+        Control_Precios_vemta.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        Balance_saldo_cliente
+
+        registro_venta = new Balance_saldo_cliente();
+
+        jdpescritorio.add(registro_venta);
+        Dimension desktopSize = jdpescritorio.getSize();
+        Dimension FrameSize = registro_venta.getSize();
+        registro_venta.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        registro_venta.show();
+        logo.setVisible(true);
+        registro_venta.setVisible(true);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -498,7 +692,7 @@ public class MDIComercial extends javax.swing.JFrame {
     public static void main(String args[]) {
 
         try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
+//            UIManager.setLookAndFeel(new FlatDarkLaf());
         } catch (Exception ex) {
             System.out.println(ex);
         }
@@ -531,12 +725,13 @@ public class MDIComercial extends javax.swing.JFrame {
     public static javax.swing.JMenuItem M_deudor1;
     public static javax.swing.JMenu M_inventario;
     public static javax.swing.JMenu M_venta;
+    private javax.swing.JCheckBoxMenuItem MantenimientoRuta;
     public static javax.swing.JMenu P_compras;
     public static javax.swing.JMenuItem P_pedido_factura;
     public static javax.swing.JMenu P_producto;
     public static javax.swing.JMenu P_ventas;
     public static javax.swing.JMenuItem ProcesoCompra;
-    public static javax.swing.JMenuItem ProcesoInventario;
+    private javax.swing.JCheckBoxMenuItem ProcesoExistencia;
     public static javax.swing.JMenu cerrar_sesion;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu11;
@@ -547,7 +742,13 @@ public class MDIComercial extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu7;
     public static javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     public static javax.swing.JDesktopPane jdpescritorio;
     // End of variables declaration//GEN-END:variables
 }

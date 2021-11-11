@@ -5,7 +5,7 @@
  */
 package seguridad.vista;
 
-import com.formdev.flatlaf.FlatDarkLaf;
+//import com.formdev.flatlaf.FlatDarkLaf;
 import seguridad.datos.UsuarioDAO;
 import seguridad.dominio.Usuario;
 import seguridad.dominio.Usuario;
@@ -133,7 +133,7 @@ public class CambioC extends javax.swing.JFrame {
         
         //FLATLAF
         try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
+//            UIManager.setLookAndFeel(new FlatDarkLaf());
         } catch (Exception ex) {
             System.out.println(ex);
         }

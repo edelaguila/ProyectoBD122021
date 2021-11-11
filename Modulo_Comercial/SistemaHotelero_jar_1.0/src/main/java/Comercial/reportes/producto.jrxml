@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="866b5967-38b2-460a-86d9-5f23baab5f7a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM empresarial.tbl_producto;]]>
+	</queryString>
+	<field name="PK_codigo_producto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_producto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcion_producto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precio_producto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="costo_producto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estatus_producto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo_linea" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo_marca" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo_bodega" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo_unidad" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="184" y="31" width="369" height="48" uuid="e2d8d533-b6f3-40ec-b24e-83ea8f0bf829"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MANTENIMIENTO PRODUCTO]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="101" height="79" uuid="35b75fc6-4569-4075-9f0a-d313d06ab17f"/>
+				<imageExpression><![CDATA["C:\\Users\\Diana\\Desktop\\7\\ProyectoBD122021\\Modulo_Comercial\\SistemaHotelero_jar_1.0\\src\\main\\java\\Imagen\\2.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="41" width="53" height="20" uuid="6c47cd56-7066-447b-a5fc-f9c2cbc98b6e"/>
+				<text><![CDATA[PK_codigo_producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="41" width="87" height="20" uuid="6bff0c30-c0ba-449f-910d-29b56fa4e82c"/>
+				<text><![CDATA[nombre_producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="41" width="100" height="20" uuid="9c3c39da-95c8-437e-874d-a2fd309abcff"/>
+				<text><![CDATA[descripcion_producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="41" width="84" height="20" uuid="6f76ce0c-1c93-4dd7-acb0-60ea202876c4"/>
+				<text><![CDATA[precio_producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="41" width="78" height="20" uuid="a90b85bf-00ba-4003-a2ff-0c6b74e493c0"/>
+				<text><![CDATA[costo_producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="41" width="84" height="20" uuid="4158a7c2-c30d-4468-8592-af0bea719ecc"/>
+				<text><![CDATA[estatus_producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="41" width="67" height="20" uuid="e3b1c319-ed55-4c14-82cd-14e399164aab"/>
+				<text><![CDATA[codigo_linea]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="553" y="41" width="69" height="20" uuid="d7cf8d16-5944-4004-b7de-a6ef396be427"/>
+				<text><![CDATA[codigo_marca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="622" y="41" width="78" height="20" uuid="7aded35f-ceb9-4608-aa12-ca231e5c1101"/>
+				<text><![CDATA[codigo_bodega]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="698" y="41" width="54" height="20" uuid="988f54f0-2df8-4315-90f1-e044ea10f71d"/>
+				<text><![CDATA[codigo_unidad]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="5" y="0" width="48" height="20" uuid="ed88a1ce-57ee-4e6f-957e-ed2f7c9ef3d8"/>
+				<textFieldExpression><![CDATA[$F{PK_codigo_producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="0" width="87" height="20" uuid="14d7a154-0779-4994-a7f1-095b14c5b3fb"/>
+				<textFieldExpression><![CDATA[$F{nombre_producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="0" width="100" height="20" uuid="6051b56a-9ccb-43b2-a251-1ac24f4424c7"/>
+				<textFieldExpression><![CDATA[$F{descripcion_producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="0" width="84" height="20" uuid="cb5afcf7-cd8b-41d8-a033-296ad8cb1b00"/>
+				<textFieldExpression><![CDATA[$F{precio_producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="324" y="0" width="78" height="20" uuid="4ba7e311-1aae-452e-8a12-64b9429b8644"/>
+				<textFieldExpression><![CDATA[$F{costo_producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="402" y="0" width="84" height="20" uuid="f1e31aba-53d5-43fb-b59d-c835775c45a8"/>
+				<textFieldExpression><![CDATA[$F{estatus_producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="486" y="0" width="67" height="20" uuid="d8ad60a8-48e3-4485-a169-47d1aeb6e023"/>
+				<textFieldExpression><![CDATA[$F{codigo_linea}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="553" y="0" width="69" height="20" uuid="3e936de2-9d33-4174-a639-9b64ded1a0ba"/>
+				<textFieldExpression><![CDATA[$F{codigo_marca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="622" y="0" width="78" height="20" uuid="edb5f542-ab85-4dc3-bef5-a73531f683de"/>
+				<textFieldExpression><![CDATA[$F{codigo_bodega}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="700" y="0" width="52" height="20" uuid="4474dc38-d799-4c02-bb84-3b7255bf6338"/>
+				<textFieldExpression><![CDATA[$F{codigo_unidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
