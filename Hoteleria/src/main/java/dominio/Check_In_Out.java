@@ -59,5 +59,13 @@ public class Check_In_Out {
         this.estado = estado;
     }
     
-    private String correlativo, reservacion, entrada, salida, tarifa, estado;
+    private String correlativo, reservacion, entrada, salida, tarifa, estado, actual;
+
+    public String getActual() {
+        return actual;
+    }
+
+    public void setActual(String actual) {
+        this.actual = actual;
+    }
 }
