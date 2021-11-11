@@ -20,11 +20,11 @@ import Finanzas.dominio.PeriodoFiscal;
  */
 public class PeriodoFiscalDAO extends Conexion {
     
-    private static final String SQL_SELECT = "SELECT * FROM periodofiscal";
-    private static final String SQL_INSERT = "INSERT INTO periodofiscal(Codigo_PeriodoFiscal, Fecha_inicioPF, Fecha_finPF, Estado_PeriodoFiscal) VALUES(?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE periodofiscal SET Codigo_PeriodoFiscal=?, Fecha_inicioPF=?, Fecha_finPF=?, Estado_PeriodoFiscal=? WHERE Codigo_PeriodoFiscal = ?";
-    private static final String SQL_DELETE = "DELETE FROM periodofiscal WHERE Codigo_PeriodoFiscal=?";
-    private static final String SQL_QUERY = "SELECT Codigo_PeriodoFiscal, Fecha_inicioPF, Fecha_finPF, Estado_PeriodoFiscal FROM periodofiscal WHERE Codigo_PeriodoFiscal = ?";
+    private static final String SQL_SELECT = "SELECT * FROM tbl_periodofiscal";
+    private static final String SQL_INSERT = "INSERT INTO tbl_periodofiscal(Codigo_PeriodoFiscal, Fecha_inicioPF, Fecha_finPF, Estado_PeriodoFiscal) VALUES(?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_periodofiscal SET Codigo_PeriodoFiscal=?, Fecha_inicioPF=?, Fecha_finPF=?, Estado_PeriodoFiscal=? WHERE Codigo_PeriodoFiscal = ?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_periodofiscal WHERE Codigo_PeriodoFiscal=?";
+    private static final String SQL_QUERY = "SELECT Codigo_PeriodoFiscal, Fecha_inicioPF, Fecha_finPF, Estado_PeriodoFiscal FROM tbl_ WHERE Codigo_PeriodoFiscal = ?";
 
     Finanzas.datos.Conexion conectar = new Finanzas.datos.Conexion();
     Connection conn = null;
