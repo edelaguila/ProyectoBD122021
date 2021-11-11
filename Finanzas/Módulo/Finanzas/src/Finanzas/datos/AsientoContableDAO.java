@@ -15,7 +15,7 @@ public class AsientoContableDAO extends Conexion {
     public String NroAsiento() {
 
         String NumeroAsientoContable = "";
-        String SQL_Maximo = "SELECT MAX(Codigo_DetalleAsiento) FROM asientocontabledetalle";
+        String SQL_Maximo = "SELECT MAX(Codigo_DetalleAsiento) FROM tbl_asientocontabledetalle";
 
         try {
 
@@ -43,7 +43,7 @@ public class AsientoContableDAO extends Conexion {
         try {
 
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement("SELECT COUNT(codigo_encabezadoasiento) FROM encabezadoasientocontable");
+            stmt = conn.prepareStatement("SELECT COUNT(codigo_encabezadoasiento) FROM tbl_encabezadoasientocontable");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -75,7 +75,7 @@ public class AsientoContableDAO extends Conexion {
 
         try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement("SELECT codigo_encabezadoasiento FROM encabezadoasientocontable");
+            stmt = conn.prepareStatement("SELECT codigo_encabezadoasiento FROM tbl_encabezadoasientocontable");
             rs = stmt.executeQuery();
             int rowCount = 0;
 
@@ -103,7 +103,7 @@ public class AsientoContableDAO extends Conexion {
         try {
 
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement("SELECT COUNT(codigo_periodofiscal) FROM periodofiscal");
+            stmt = conn.prepareStatement("SELECT COUNT(codigo_periodofiscal) FROM tbl_periodofiscal");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -135,7 +135,7 @@ public class AsientoContableDAO extends Conexion {
 
         try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement("SELECT Codigo_PeriodoFiscal FROM periodofiscal");
+            stmt = conn.prepareStatement("SELECT Codigo_PeriodoFiscal FROM tbl_periodofiscal");
             rs = stmt.executeQuery();
             int rowCount = 0;
 
@@ -163,7 +163,7 @@ public class AsientoContableDAO extends Conexion {
         try {
 
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement("SELECT COUNT(codigo_tipoasiento) FROM tipo_asiento");
+            stmt = conn.prepareStatement("SELECT COUNT(codigo_tipoasiento) FROM tbl_tipo_asiento");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -195,7 +195,7 @@ public class AsientoContableDAO extends Conexion {
 
         try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement("SELECT Codigo_TipoAsiento FROM tipo_asiento");
+            stmt = conn.prepareStatement("SELECT Codigo_TipoAsiento FROM tbl_tipo_asiento");
             rs = stmt.executeQuery();
             int rowCount = 0;
 
@@ -224,7 +224,7 @@ public class AsientoContableDAO extends Conexion {
 
         try {
             con = Conexion.getConnection();
-            stmt = con.prepareStatement("INSERT INTO asientocontabledetalle (Codigo_DetalleAsiento, CuentaContable_Asiento, Partida_Asiento, Encabezado_Asiento, Tipo_Asiento, Monto_Debe, Monto_Haber) VALUES (?,?,?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO tbl_asientocontabledetalle (Codigo_DetalleAsiento, CuentaContable_Asiento, Partida_Asiento, Encabezado_Asiento, Tipo_Asiento, Monto_Debe, Monto_Haber) VALUES (?,?,?,?,?,?,?)");
             stmt.setString(1, objAsientoContable.getCodigo_DetalleAsiento());
             stmt.setString(2, objAsientoContable.getCuentaContable_Asiento());
             stmt.setString(3, objAsientoContable.getPartida_Asiento());

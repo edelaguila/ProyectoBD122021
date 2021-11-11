@@ -81,6 +81,7 @@ public class GenerarPermisos {
                 Hoteleria_MDI.MnI_reservacion.setVisible(false);
                 Hoteleria_MDI.MnI_reservacionDetalle.setVisible(false);
                 Hoteleria_MDI.MnI_Viaje.setVisible(false);
+                Hoteleria_MDI.MnI_Cocina.setVisible(false);
                 
                 ejecutarPermisos.ejecutarBusqueda(usuario);
                 for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
@@ -109,11 +110,16 @@ public class GenerarPermisos {
                             case 2204:Hoteleria_MDI.MnI_CheckIn.setVisible(true);break;
                             case 2205:Hoteleria_MDI.MnI_CheckOut.setVisible(true);break;
                             case 2206:Hoteleria_MDI.MnI_serviciosExtras.setVisible(true);break;                         
-                            case 2222:Hoteleria_MDI.MnI_Viaje.setVisible(true);break;
                             case 2207:Hoteleria_MDI.MnI_reservacion.setVisible(true);Hoteleria_MDI.MnI_reservacionDetalle.setVisible(true);break;
-                            
-                
-                
+                            case 2208:Hoteleria_MDI.MnI_Gobernanta.setVisible(true);break;
+                            case 2209:Hoteleria_MDI.MnI_Limpieza.setVisible(true);break;
+                            case 2210:Hoteleria_MDI.MnI_ConsultaLimpieza.setVisible(true);break;
+                            case 2211:Hoteleria_MDI.MnI_SupervisiónLimpieza.setVisible(true);break;
+                            case 2212:Hoteleria_MDI.MnI_Ingrediente.setVisible(true);break;
+                            case 2213:Hoteleria_MDI.MnI_InicioOrden.setVisible(true);break;
+                            case 2214:Hoteleria_MDI.MnI_EfectuarOrden.setVisible(true);break;
+                            case 2215:Hoteleria_MDI.MnI_Cocina.setVisible(true);break;
+                            case 2222:Hoteleria_MDI.MnI_Viaje.setVisible(true);break;
                         }
                     }
                 }

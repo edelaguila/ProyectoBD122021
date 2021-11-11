@@ -94,7 +94,6 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
 //            String valor = Cbx_unidad.getSelectedItem().toString();
 //        }
 //    }
-
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID Producto");
@@ -113,7 +112,8 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
         Tbl_tablaproducto.setModel(modelo);
         String[] dato = new String[10];
         for (int i = 0; i < producto.size(); i++) {
-            dato[0] = producto.get(i).getPKcodigoProducto();
+             dato[0] = Integer.toString(producto.get(i).getPKcodigoProducto());
+            
             dato[1] = producto.get(i).getNombreProducto();
             dato[2] = producto.get(i).getDescripcionProducto();
             dato[3] = producto.get(i).getPrecioProducto();
@@ -132,7 +132,8 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
     public void buscar() {
         Producto productoAConsultar = new Producto();
         ProductoDAO productoDAO = new ProductoDAO();
-        productoAConsultar.setPKcodigoProducto(String.valueOf(Txt_id.getText()));
+        productoAConsultar.setPKcodigoProducto(Integer.parseInt(Txt_id.getText()));
+        
         productoAConsultar = productoDAO.query(productoAConsultar);
         Txt_nombreproducto.setText(String.valueOf(productoAConsultar.getNombreProducto()));
         Txt_descipcionproducto.setText(String.valueOf(productoAConsultar.getDescripcionProducto()));
@@ -162,7 +163,7 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
     public Mantenimiento_Producto() {
         initComponents();
         llenadoDeTablas();
-       
+
     }
 
     /**
@@ -200,6 +201,10 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
         Txt_marca = new javax.swing.JTextField();
         Txt_bodega = new javax.swing.JTextField();
         Txt_unidad = new javax.swing.JTextField();
+        Btn_ayudalineap = new javax.swing.JButton();
+        Btn_ayudamarcap = new javax.swing.JButton();
+        Btn_ayudabodegap = new javax.swing.JButton();
+        Btn_ayudaunidadp = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tbl_tablaproducto = new javax.swing.JTable();
@@ -301,6 +306,34 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
         jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel10.setText("Unidad");
 
+        Btn_ayudalineap.setText("?");
+        Btn_ayudalineap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_ayudalineapActionPerformed(evt);
+            }
+        });
+
+        Btn_ayudamarcap.setText("?");
+        Btn_ayudamarcap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_ayudamarcapActionPerformed(evt);
+            }
+        });
+
+        Btn_ayudabodegap.setText("?");
+        Btn_ayudabodegap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_ayudabodegapActionPerformed(evt);
+            }
+        });
+
+        Btn_ayudaunidadp.setText("?");
+        Btn_ayudaunidadp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_ayudaunidadpActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -344,7 +377,7 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel7)))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Txt_linea, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                                    .addComponent(Txt_linea)
                                     .addComponent(Txt_marca)
                                     .addComponent(Txt_bodega)
                                     .addComponent(Txt_unidad)))
@@ -358,10 +391,16 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
                                 .addComponent(Btn_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(30, 30, 30)
                                 .addComponent(Btn_Eliminar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                                 .addComponent(Btn_Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(19, 19, 19)))))
-                .addGap(79, 79, 79))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Btn_ayudalineap)
+                    .addComponent(Btn_ayudamarcap)
+                    .addComponent(Btn_ayudabodegap)
+                    .addComponent(Btn_ayudaunidadp))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,19 +426,23 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(Txt_linea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Txt_linea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Btn_ayudalineap))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(Txt_marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(Txt_marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Btn_ayudamarcap))
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(Txt_bodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Txt_bodega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Btn_ayudabodegap))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(Txt_unidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Txt_unidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Btn_ayudaunidadp))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -469,16 +512,17 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(164, 164, 164)
-                        .addComponent(Btn_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(260, 260, 260)
+                            .addComponent(jLabel11)
+                            .addGap(117, 117, 117)
+                            .addComponent(Btn_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -491,7 +535,7 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -499,10 +543,11 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
 
     private void Btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_GuardarActionPerformed
         // TODO add your handling code here:
-        
+
         ProductoDAO productoDAO = new ProductoDAO();
         Producto productoAInsertar = new Producto();
-        productoAInsertar.setPKcodigoProducto(String.valueOf(Txt_id.getText()));
+        productoAInsertar.setPKcodigoProducto((int) Integer.parseInt(Txt_id.getText()));
+       
         productoAInsertar.setNombreProducto(Txt_nombreproducto.getText());
         productoAInsertar.setDescripcionProducto(Txt_descipcionproducto.getText());
         productoAInsertar.setPrecioProducto(Txt_precioproducto.getText());
@@ -523,7 +568,8 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         ProductoDAO productoDAO = new ProductoDAO();
         Producto productoAActualizar = new Producto();
-        productoAActualizar.setPKcodigoProducto(String.valueOf(Txt_id.getText()));
+        
+        productoAActualizar.setPKcodigoProducto(Integer.parseInt(Txt_id.getText()));
         productoAActualizar.setNombreProducto(Txt_nombreproducto.getText());
         productoAActualizar.setDescripcionProducto(Txt_descipcionproducto.getText());
         productoAActualizar.setPrecioProducto(Txt_precioproducto.getText());
@@ -543,7 +589,8 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         ProductoDAO productoDAO = new ProductoDAO();
         Producto productoAEliminar = new Producto();
-        productoAEliminar.setPKcodigoProducto(String.valueOf(Txt_id.getText()));
+        productoAEliminar.setPKcodigoProducto(Integer.parseInt(Txt_id.getText()));
+        
         productoDAO.delete(productoAEliminar);
         JOptionPane.showMessageDialog(null, "Registro Eliminado.");
 
@@ -559,10 +606,10 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
     private void Btn_AyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_AyudaActionPerformed
         // TODO add your handling code here:
         try {
-            if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaMantemientoProducto.chm")).exists()) {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaMantenimientProducto.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaMantemientoProducto.chm");
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaMantenimientProducto.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
@@ -572,25 +619,98 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_Btn_AyudaActionPerformed
- private Connection connection = null;
+    private Connection connection = null;
     private void Btn_ReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ReporteActionPerformed
         // TODO add your handling code here:
         Map p = new HashMap();
-                JasperReport report;
-                JasperPrint print;
-                try {
-                    connection = Conexion.getConnection();
-                    report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-                            + "/src/main/java/Comercial/reportes/producto.jrxml");
-                    print = JasperFillManager.fillReport(report, p, connection);
-                    JasperViewer view = new JasperViewer(print, false);
-                    view.setTitle("Reporte de Transporte");
-                    view.setVisible(true);
-        
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        JasperReport report;
+        JasperPrint print;
+        try {
+            connection = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/main/java/Comercial/reportes/producto.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte de Transporte");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_Btn_ReporteActionPerformed
+
+    private void Btn_ayudalineapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ayudalineapActionPerformed
+        // TODO add your handling code here:
+        try {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaLineaProducto.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaLineaProducto.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+    }//GEN-LAST:event_Btn_ayudalineapActionPerformed
+
+    private void Btn_ayudamarcapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ayudamarcapActionPerformed
+        // TODO add your handling code here:
+        try {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaMarcaProducto.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaMarcaProducto.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_Btn_ayudamarcapActionPerformed
+
+    private void Btn_ayudabodegapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ayudabodegapActionPerformed
+        // TODO add your handling code here:
+        try {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaBodegaProducto.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaBodegaProducto.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
+    }//GEN-LAST:event_Btn_ayudabodegapActionPerformed
+
+    private void Btn_ayudaunidadpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ayudaunidadpActionPerformed
+        // TODO add your handling code here:
+        try {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaUnidadProducto.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaUnidadProducto.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
+    }//GEN-LAST:event_Btn_ayudaunidadpActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -600,6 +720,10 @@ public class Mantenimiento_Producto extends javax.swing.JInternalFrame {
     private javax.swing.JButton Btn_Guardar;
     private javax.swing.JButton Btn_Modificar;
     private javax.swing.JButton Btn_Reporte;
+    private javax.swing.JButton Btn_ayudabodegap;
+    private javax.swing.JButton Btn_ayudalineap;
+    private javax.swing.JButton Btn_ayudamarcap;
+    private javax.swing.JButton Btn_ayudaunidadp;
     private javax.swing.JTable Tbl_tablaproducto;
     private javax.swing.JTextField Txt_bodega;
     private javax.swing.JTextField Txt_costoproducto;

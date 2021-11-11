@@ -6,9 +6,9 @@ public class Conexion {
 
     // Estas constantes deben cambiarse temporalmente para probarlo localmente
 
-    private static final String JDBC_URL = "jdbc:mysql://localhost/finanzas_db1";
-    private static final String JDBC_USER = "root";
-    private static final String JDBC_PASS = "informaticdv2016";
+    private static final String JDBC_URL = "jdbc:mysql://10.0.0.9:3306/empresarial?useSSL=false&serverTimezone=UTC";
+    private static final String JDBC_USER = "procesoEmpresarial";
+    private static final String JDBC_PASS = "Laboratorio2021";
 
 
 

@@ -3,9 +3,12 @@ package vista;
 import dominio.ProcesosRepetidos;
 import dominio.ConsultaYRevisionLimpieza;
 import datos.ConsultaYRevisionLimpiezaDAO;
+import datos.GuardarBitacora;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.ImageIcon;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login_LD;
 
 /**
  *
@@ -16,10 +19,31 @@ public class Prcs_ConsultaLimpieza extends javax.swing.JInternalFrame {
     ProcesosRepetidos prcs_repetidos = new ProcesosRepetidos();
     ConsultaYRevisionLimpieza gobernanta = new ConsultaYRevisionLimpieza();
     ConsultaYRevisionLimpiezaDAO cbxPiso = new ConsultaYRevisionLimpiezaDAO();
+    GuardarBitacora bitacora = new GuardarBitacora();
+
+    void habilitarAcciones() {
+
+        var codigoAplicacion = 2210;
+        var usuario = Login_LD.usuario;
+
+        Btn_buscar.setVisible(false);
+
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[5];
+
+        for (int i = 0; i < 5; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+        if (permisosApp[1].equals("1")) {
+            Btn_buscar.setVisible(true);
+        }
+    }
 
     public Prcs_ConsultaLimpieza() {
         initComponents();
         diseño();
+        habilitarAcciones();
     }
 
     public void diseño() {
@@ -139,6 +163,8 @@ public class Prcs_ConsultaLimpieza extends javax.swing.JInternalFrame {
         Btn_buscar.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         Btn_buscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Btn_buscar.setText("Verificar");
+        Btn_buscar.setMaximumSize(new java.awt.Dimension(104, 40));
+        Btn_buscar.setMinimumSize(new java.awt.Dimension(104, 40));
         Btn_buscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_buscarMouseClicked(evt);
@@ -155,7 +181,7 @@ public class Prcs_ConsultaLimpieza extends javax.swing.JInternalFrame {
         Btn_fondo_buscar.setLayout(Btn_fondo_buscarLayout);
         Btn_fondo_buscarLayout.setHorizontalGroup(
             Btn_fondo_buscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Btn_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+            .addComponent(Btn_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
         );
         Btn_fondo_buscarLayout.setVerticalGroup(
             Btn_fondo_buscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,10 +302,11 @@ public class Prcs_ConsultaLimpieza extends javax.swing.JInternalFrame {
     private void Btn_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_buscarMouseClicked
         actualizarTabla(Txt_buscar.getText());
         actualizarTabla1(Txt_buscar.getText());
+        bitacora.GuardarEnBitacora("Buscar", "2210");
     }//GEN-LAST:event_Btn_buscarMouseClicked
 
     private void Tbl_Datos2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_Datos2MouseClicked
-        
+
     }//GEN-LAST:event_Tbl_Datos2MouseClicked
 
 
