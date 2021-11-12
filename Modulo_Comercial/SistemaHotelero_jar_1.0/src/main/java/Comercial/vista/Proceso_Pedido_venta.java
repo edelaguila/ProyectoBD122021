@@ -341,10 +341,10 @@ llenadoDeTabla2();
         jLabel7 = new javax.swing.JLabel();
         txt_estatus = new javax.swing.JTextField();
         jToggleButton5 = new javax.swing.JToggleButton();
-        jToggleButton6 = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -403,7 +403,7 @@ llenadoDeTabla2();
                 Btn_BuscarActionPerformed(evt);
             }
         });
-        jPanel2.add(Btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, -1, -1));
+        jPanel2.add(Btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 63, 80, 30));
 
         jToggleButton1.setText("Guardar");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -411,7 +411,7 @@ llenadoDeTabla2();
                 jToggleButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
+        jPanel2.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 233, 90, 30));
 
         jToggleButton2.setText("Modificar");
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -419,7 +419,7 @@ llenadoDeTabla2();
                 jToggleButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jToggleButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, -1, -1));
+        jPanel2.add(jToggleButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 233, 80, 30));
 
         jToggleButton3.setText("Eliminar");
         jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -427,7 +427,7 @@ llenadoDeTabla2();
                 jToggleButton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, -1, -1));
+        jPanel2.add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 233, 90, 30));
 
         jLabel14.setText("NUEMRO DE RESERVCION");
 
@@ -457,21 +457,21 @@ llenadoDeTabla2();
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
         jPanel3.add(Txt_impuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 109, 20));
 
-        c.setText("calcular");
+        c.setText("Calcular");
         c.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cActionPerformed(evt);
             }
         });
-        jPanel3.add(c, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, -1, -1));
+        jPanel3.add(c, new org.netbeans.lib.awtextra.AbsoluteConstraints(241, 123, 80, 30));
 
-        jToggleButton4.setText("actualizar");
+        jToggleButton4.setText("Actualizar");
         jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton4ActionPerformed(evt);
             }
         });
-        jPanel3.add(jToggleButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, -1, -1));
+        jPanel3.add(jToggleButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 110, 30));
 
         Btn_Agregar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         Btn_Agregar.setText("Guardar");
@@ -480,7 +480,7 @@ llenadoDeTabla2();
                 Btn_AgregarActionPerformed(evt);
             }
         });
-        jPanel3.add(Btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 90, 20));
+        jPanel3.add(Btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 90, 30));
 
         Btn_Modificar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         Btn_Modificar.setText("Modificar");
@@ -489,7 +489,7 @@ llenadoDeTabla2();
                 Btn_ModificarActionPerformed(evt);
             }
         });
-        jPanel3.add(Btn_Modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 100, 20));
+        jPanel3.add(Btn_Modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 227, 100, 30));
 
         Btn_Eliminar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         Btn_Eliminar.setText("Eliminar");
@@ -498,7 +498,7 @@ llenadoDeTabla2();
                 Btn_EliminarActionPerformed(evt);
             }
         });
-        jPanel3.add(Btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 90, 20));
+        jPanel3.add(Btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 90, 30));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -557,8 +557,6 @@ llenadoDeTabla2();
             }
         });
 
-        jToggleButton6.setText("Enviar a Finanzas");
-
         jButton1.setText("Actualizar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -578,45 +576,41 @@ llenadoDeTabla2();
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Btn_reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(307, 307, 307)
-                                .addComponent(jLabel5))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(Btn_Agregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(jToggleButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(177, 177, 177))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(282, 282, 282)
-                .addComponent(jLabel21)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton1)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel14)
-                                    .addGap(34, 34, 34)
-                                    .addComponent(Txt_reservacion, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(164, 164, 164)
-                                    .addComponent(jLabel16)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jToggleButton5)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jToggleButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(64, 64, 64))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel14)
+                                            .addGap(34, 34, 34)
+                                            .addComponent(Txt_reservacion, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(164, 164, 164)
+                                            .addComponent(jLabel16))
+                                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(116, 116, 116)
+                                        .addComponent(jLabel4)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(Btn_Agregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(282, 282, 282)
+                                        .addComponent(jLabel21)))
+                                .addGap(38, 38, 38)
+                                .addComponent(jButton1)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(67, 67, 67)
@@ -624,11 +618,18 @@ llenadoDeTabla2();
                                 .addGap(31, 31, 31)
                                 .addComponent(txt_estatus, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2)))
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(37, 37, 37)
+                                        .addComponent(Btn_reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(38, 38, 38)
+                                        .addComponent(jLabel5))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
@@ -636,8 +637,9 @@ llenadoDeTabla2();
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel21)
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
@@ -646,33 +648,31 @@ llenadoDeTabla2();
                             .addComponent(Txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
                             .addComponent(txt_estatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jToggleButton5)
-                            .addComponent(jButton2))
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Btn_reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Btn_Agregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jToggleButton6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(15, 15, 15)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4))
+                                .addComponent(Btn_Agregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Btn_reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addGap(29, 29, 29))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addGap(24, 24, 24))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                        .addGap(29, 29, 29))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(24, 24, 24))))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(209, 209, 209))))
         );
 
         pack();
@@ -707,7 +707,7 @@ Pedido_VentaDao Pedido_VentaDao  = new Pedido_VentaDao();
 //                    } catch (UnknownHostException ex) {
 //                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
 //                    }
-//        JOptionPane.showMessageDialog(null, " La ejecucion  a  sido un exito");
+
 
 //           Factura_VentaDao.update1(AInsertar1);
 //
@@ -742,7 +742,20 @@ Pedido_VentaDao Pedido_VentaDao  = new Pedido_VentaDao();
        
         Pedido_VentaDao1.delete(AInser1);
             
-
+ BitacoraDao BitacoraDAO = new BitacoraDao();
+        
+                Bitacora Insertar = new Bitacora();
+                Insertar.setId_Usuario(Login.usuarioComercial);
+                Insertar.setAccion("Eliminar");
+        
+                Insertar.setCodigoAplicacion("3003");
+                Insertar.setModulo("3000");
+        
+                try {
+                        BitacoraDAO.insert(Insertar);
+                    } catch (UnknownHostException ex) {
+                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+                    }
     
 //
         // TODO add your handling code here:
@@ -773,29 +786,29 @@ Pedido_VentaDao Pedido_VentaDao  = new Pedido_VentaDao();
 //        ////        String id = "0";
    
 //
-//                BitacoraDao BitacoraDAO = new BitacoraDao();
-//        
-//                Bitacora Insertar = new Bitacora();
-//                Insertar.setId_Usuario(Login.usuarioComercial);
-//                Insertar.setAccion("Insertar");
-//        
-//                Insertar.setCodigoAplicacion("3001");
-//                Insertar.setModulo("3000");
-//        
-//                try {
-//                        BitacoraDAO.insert(Insertar);
-//                    } catch (UnknownHostException ex) {
-//                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//                
-//                Registro_ventaDao  DAO = new Registro_ventaDao();
-//        
-//                Registro_venta Inserta = new Registro_venta();
-//                Inserta.setUsuario(Login.usuarioComercial);
-//                Inserta.setAccion("Insertar");
-//        
-//                Inserta.setTabla("3001");
-//                Inserta.setTotal(Txt_total.getText());
+                BitacoraDao BitacoraDAO = new BitacoraDao();
+        
+                Bitacora Insertar = new Bitacora();
+                Insertar.setId_Usuario(Login.usuarioComercial);
+                Insertar.setAccion("Insertar");
+        
+                Insertar.setCodigoAplicacion("3001");
+                Insertar.setModulo("3000");
+        
+                try {
+                        BitacoraDAO.insert(Insertar);
+                    } catch (UnknownHostException ex) {
+                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                
+                Registro_ventaDao  DAO = new Registro_ventaDao();
+        
+                Registro_venta Inserta = new Registro_venta();
+                Inserta.setUsuario(Login.usuarioComercial);
+                Inserta.setAccion("Insertar");
+        
+                Inserta.setTabla("3001");
+                Inserta.setTotal(Txt_total.getText());
            
                 Registro_ventaDao Registro_ventaDao = new Registro_ventaDao();
         
@@ -855,7 +868,20 @@ Pedido_VentaDao Pedido_VentaDao  = new Pedido_VentaDao();
 
     private void Btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_BuscarActionPerformed
 buscarVendedor1();
-
+ BitacoraDao BitacoraDAO = new BitacoraDao();
+        
+                Bitacora Insertar = new Bitacora();
+                Insertar.setId_Usuario(Login.usuarioComercial);
+                Insertar.setAccion("Buscar");
+        
+                Insertar.setCodigoAplicacion("3003");
+                Insertar.setModulo("3000");
+        
+                try {
+                        BitacoraDAO.insert(Insertar);
+                    } catch (UnknownHostException ex) {
+                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+                    }
 
 // TODO add your handling code here:
     }//GEN-LAST:event_Btn_BuscarActionPerformed
@@ -881,6 +907,21 @@ buscarVendedor1();
 
         AInser.setImpuesto_iva_encabezado(Txt_impuesto.getText());
         Factura_VentaDao.insert(AInser);
+        
+         BitacoraDao BitacoraDAO = new BitacoraDao();
+        
+                Bitacora Insertar = new Bitacora();
+                Insertar.setId_Usuario(Login.usuarioComercial);
+                Insertar.setAccion("Insertar");
+        
+                Insertar.setCodigoAplicacion("3003");
+                Insertar.setModulo("3000");
+        
+                try {
+                        BitacoraDAO.insert(Insertar);
+                    } catch (UnknownHostException ex) {
+                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+                    }
         // TODO add your handling code here:
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -906,6 +947,21 @@ buscarVendedor1();
 
         AInser.setImpuesto_iva_encabezado(Txt_impuesto.getText());
         Factura_VentaDao.update(AInser);
+        
+         BitacoraDao BitacoraDAO = new BitacoraDao();
+        
+                Bitacora Insertar = new Bitacora();
+                Insertar.setId_Usuario(Login.usuarioComercial);
+                Insertar.setAccion("Modidicar");
+        
+                Insertar.setCodigoAplicacion("3003");
+                Insertar.setModulo("3000");
+        
+                try {
+                        BitacoraDAO.insert(Insertar);
+                    } catch (UnknownHostException ex) {
+                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+                    }
         // TODO add your handling code here:
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
@@ -931,7 +987,20 @@ buscarVendedor1();
         AInser.setImpuesto_iva_encabezado(Txt_impuesto.getText());
         Factura_VentaDao.delete(AInser);
             
-            
+             BitacoraDao BitacoraDAO = new BitacoraDao();
+        
+                Bitacora Insertar = new Bitacora();
+                Insertar.setId_Usuario(Login.usuarioComercial);
+                Insertar.setAccion("Eliminar");
+        
+                Insertar.setCodigoAplicacion("3003");
+                Insertar.setModulo("3000");
+        
+                try {
+                        BitacoraDAO.insert(Insertar);
+                    } catch (UnknownHostException ex) {
+                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+                    }
         // TODO add your handling code here:
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
@@ -1070,7 +1139,6 @@ buscarVendedor1();
     private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JToggleButton jToggleButton4;
     private javax.swing.JToggleButton jToggleButton5;
-    private javax.swing.JToggleButton jToggleButton6;
     private javax.swing.JTextField txt_encabezado;
     private javax.swing.JTextField txt_estatus;
     // End of variables declaration//GEN-END:variables
