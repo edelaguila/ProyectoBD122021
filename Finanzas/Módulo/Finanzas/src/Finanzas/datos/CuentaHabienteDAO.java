@@ -15,11 +15,11 @@ import Finanzas.dominio.CuentaHabiente;
  * @author Santiago Martinez Diaz
  */
 public class CuentaHabienteDAO {
-      private static final String sql_select = "SELECT Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,ApellidoM_CuentaHabiente,TipoPersona_CuentaHabiente,Saldo_Habilitado FROM CuentaHabiente";
-    private static final String sql_insert = "INSERT INTO CuentaHabiente(Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,ApellidoM_CuentaHabiente,TipoPersona_CuentaHabiente,Saldo_Habilitado) VALUES(?,?,?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE CuentaHabiente SET Codigo_CuentaHabiente=?, Nombre_CuentaHabiente=?, ApellidoP_CuentaHabiente=?,ApellidoM_CuentaHabiente=?,Saldo_Habilitado=? WHERE Codigo_CuentaHabiente = ?";
-    private static final String sql_delete = "DELETE FROM CuentaHabiente WHERE Codigo_CuentaHabiente=?";
-    private static final String sql_query = "SELECT Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,ApellidoM_CuentaHabiente,TipoPersona_CuentaHabiente,Saldo_Habilitado FROM CuentaHabiente WHERE Codigo_CuentaHabiente=?";
+      private static final String sql_select = "SELECT Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,ApellidoM_CuentaHabiente,TipoPersona_CuentaHabiente,Saldo_Habilitado FROM tbl_CuentaHabiente";
+    private static final String sql_insert = "INSERT INTO tbl_CuentaHabiente(Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,ApellidoM_CuentaHabiente,TipoPersona_CuentaHabiente,Saldo_Habilitado) VALUES(?,?,?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_CuentaHabiente SET Codigo_CuentaHabiente=?, Nombre_CuentaHabiente=?, ApellidoP_CuentaHabiente=?,ApellidoM_CuentaHabiente=?,Saldo_Habilitado=? WHERE Codigo_CuentaHabiente = ?";
+    private static final String sql_delete = "DELETE FROM tbl_CuentaHabiente WHERE Codigo_CuentaHabiente=?";
+    private static final String sql_query = "SELECT Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,ApellidoM_CuentaHabiente,TipoPersona_CuentaHabiente,Saldo_Habilitado FROM tbl_CuentaHabiente WHERE Codigo_CuentaHabiente=?";
 
     public List<CuentaHabiente> listar() {
         Connection con = null;

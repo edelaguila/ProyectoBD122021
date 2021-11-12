@@ -12,7 +12,7 @@ public class PartidaContableDAO extends Conexion {
     public String NroPartida() {
 
         String NumeroAsientoContable = "";
-        String SQL_Maximo = "SELECT MAX(Codigo_PartidaContable) FROM partidacontable";
+        String SQL_Maximo = "SELECT MAX(Codigo_PartidaContable) FROM tbl_partidacontable";
 
         try {
 
@@ -40,7 +40,7 @@ public class PartidaContableDAO extends Conexion {
         try {
 
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement("SELECT COUNT(Codigo_PartidaContable) FROM partidacontable");
+            stmt = conn.prepareStatement("SELECT COUNT(Codigo_PartidaContable) FROM tbl_partidacontable");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -72,7 +72,7 @@ public class PartidaContableDAO extends Conexion {
 
         try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement("SELECT * FROM partidacontable");
+            stmt = conn.prepareStatement("SELECT * FROM tbl_partidacontable");
             rs = stmt.executeQuery();
             int rowCount = 0;
 
@@ -104,7 +104,7 @@ public class PartidaContableDAO extends Conexion {
 
         try {
             con = Conexion.getConnection();
-            stmt = con.prepareStatement("INSERT INTO partidacontable (codigo_partidacontable, fecha_partidacontable, periodo_fiscalpartida, glosa_partidacontable, monto_decuadre) VALUES (?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO tbl_partidacontable (codigo_partidacontable, fecha_partidacontable, periodo_fiscalpartida, glosa_partidacontable, monto_decuadre) VALUES (?,?,?,?,?)");
             stmt.setString(1, objpartidaContable.getCodigoPartidaContable());
             stmt.setString(2, objpartidaContable.getFechaPartidaContable());
             stmt.setString(3, objpartidaContable.getPeriodoFiscalPartida());
@@ -137,7 +137,7 @@ public class PartidaContableDAO extends Conexion {
         try {
 
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement("SELECT COUNT(Codigo_DetalleAsiento) FROM asientocontabledetalle WHERE partida_asiento = ?");
+            stmt = conn.prepareStatement("SELECT COUNT(Codigo_DetalleAsiento) FROM tbl_asientocontabledetalle WHERE partida_asiento = ?");
             stmt.setString(1, codigo);
             rs = stmt.executeQuery();
 
@@ -170,8 +170,8 @@ public class PartidaContableDAO extends Conexion {
 
         try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement("SELECT cuentacontable_asiento, monto_debe, monto_haber FROM asientocontabledetalle \n"
-                    + "INNER JOIN partidacontable ON partidacontable.Codigo_PartidaContable = asientocontabledetalle.Partida_Asiento\n"
+            stmt = conn.prepareStatement("SELECT cuentacontable_asiento, monto_debe, monto_haber FROM tbl_asientocontabledetalle \n"
+                    + "INNER JOIN tbl_partidacontable ON tbl_partidacontable.Codigo_PartidaContable = tbl_asientocontabledetalle.Partida_Asiento\n"
                     + "WHERE Partida_Asiento = ?");
 
             stmt.setString(1, pc.getCodigoPartidaContable());
@@ -205,7 +205,7 @@ public class PartidaContableDAO extends Conexion {
 
         try {
             con = Conexion.getConnection();
-            stmt = con.prepareStatement("UPDATE partidacontable SET monto_decuadre = ? WHERE codigo_partidacontable = ?");
+            stmt = con.prepareStatement("UPDATE tbl_partidacontable SET monto_decuadre = ? WHERE codigo_partidacontable = ?");
             stmt.setString(1, monto);
             stmt.setString(2, partidaContable);
             row = stmt.executeUpdate();

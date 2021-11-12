@@ -20,6 +20,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
+import seguridad.vista.Aplicacion_Perfil;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login;
+import seguridad.vista.MDI_Components;
 
 /**
  *
@@ -154,6 +160,7 @@ public class Mantenimiento_Cobrador extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -168,7 +175,7 @@ public class Mantenimiento_Cobrador extends javax.swing.JInternalFrame {
                 Btn_ModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(Btn_Modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, -1, -1));
+        getContentPane().add(Btn_Modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 210, 90, 30));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setText("Mantenimiento Cobrador");
@@ -181,7 +188,7 @@ public class Mantenimiento_Cobrador extends javax.swing.JInternalFrame {
                 Btn_EliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(Btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, -1, -1));
+        getContentPane().add(Btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 210, 80, 30));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setText("Codigo Cobrador");
@@ -194,7 +201,7 @@ public class Mantenimiento_Cobrador extends javax.swing.JInternalFrame {
                 Btn_BuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(Btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(409, 78, 76, -1));
+        getContentPane().add(Btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 78, 90, 30));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setText("Nombre Cobrador");
@@ -207,7 +214,7 @@ public class Mantenimiento_Cobrador extends javax.swing.JInternalFrame {
                 Btn_AgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(Btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
+        getContentPane().add(Btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 210, 90, 30));
 
         Txt_codigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,7 +258,7 @@ public class Mantenimiento_Cobrador extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(452, 14, 84, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 14, 100, 30));
 
         Btn_reporte.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         Btn_reporte.setText("Reporte");
@@ -260,7 +267,7 @@ public class Mantenimiento_Cobrador extends javax.swing.JInternalFrame {
                 Btn_reporteActionPerformed(evt);
             }
         });
-        getContentPane().add(Btn_reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, -1, -1));
+        getContentPane().add(Btn_reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 100, 30));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 136, -1, -1));
@@ -298,23 +305,23 @@ public class Mantenimiento_Cobrador extends javax.swing.JInternalFrame {
         dao.update(modi);
         llenadoDeTablas();
         limpiar();
-//        BitacoraDao BitacoraDAO = new BitacoraDao();
-//
-//        Bitacora Insertar = new Bitacora();
-//
-//        Insertar.setAccion("Modificar");
-//        Insertar.setId_Usuario(Login.usuarioComercial);
-//        GenerarPermisos permisos = new GenerarPermisos();
-//        MDI_Components mdi_Components = new MDI_Components();
-//        Insertar.setCodigoAplicacion("3001");
-//        Insertar.setModulo("3000");
-//
-//        try {
-//            BitacoraDAO.insert(Insertar);
-//        } catch (UnknownHostException ex) {
-//            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//           JOptionPane.showMessageDialog(null, " La ejecunsion a  sido un exito");
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+
+        Bitacora Insertar = new Bitacora();
+
+        Insertar.setAccion("Modificar");
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        GenerarPermisos permisos = new GenerarPermisos();
+        MDI_Components mdi_Components = new MDI_Components();
+        Insertar.setCodigoAplicacion("3003");
+        Insertar.setModulo("3000");
+
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
 
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_ModificarActionPerformed
@@ -334,44 +341,44 @@ public class Mantenimiento_Cobrador extends javax.swing.JInternalFrame {
         acreedor.delete(vendedorAEliminar);
         llenadoDeTablas();
         limpiar();
-//        JOptionPane.showMessageDialog(null, "Cliente Eliminado.");
-//        BitacoraDao BitacoraDAO = new BitacoraDao();
-//
-//        Bitacora Insertar = new Bitacora();
-//
-//        Insertar.setAccion("Eliminar");
-//        GenerarPermisos permisos = new GenerarPermisos();
-//        MDI_Components mdi_Components = new MDI_Components();
-//        Insertar.setCodigoAplicacion("3001");
-//        Insertar.setModulo("3000");
-//        Insertar.setId_Usuario(Login.usuarioComercial);
-//        try {
-//            BitacoraDAO.insert(Insertar);
-//        } catch (UnknownHostException ex) {
-//            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//   JOptionPane.showMessageDialog(null, " La ejecunsion a  sido un exito");
+        JOptionPane.showMessageDialog(null, "Cliente Eliminado.");
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+
+        Bitacora Insertar = new Bitacora();
+
+        Insertar.setAccion("Eliminar");
+        GenerarPermisos permisos = new GenerarPermisos();
+        MDI_Components mdi_Components = new MDI_Components();
+        Insertar.setCodigoAplicacion("3003");
+        Insertar.setModulo("3000");
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_EliminarActionPerformed
 
     private void Btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_BuscarActionPerformed
         buscarVendedor() ;
-//        BitacoraDao BitacoraDAO = new BitacoraDao();
-//
-//        Bitacora Insertar = new Bitacora();
-//
-//        Insertar.setAccion("Buscar");
-//        GenerarPermisos permisos = new GenerarPermisos();
-//        MDI_Components mdi_Components = new MDI_Components();
-//        Insertar.setCodigoAplicacion("3001");
-//        Insertar.setModulo("3000");
-//        Insertar.setId_Usuario(Login.usuarioComercial);
-//        try {
-//            BitacoraDAO.insert(Insertar);
-//        } catch (UnknownHostException ex) {
-//            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//   JOptionPane.showMessageDialog(null, " La ejecunsion a  sido un exito");
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+
+        Bitacora Insertar = new Bitacora();
+
+        Insertar.setAccion("Buscar");
+        GenerarPermisos permisos = new GenerarPermisos();
+        MDI_Components mdi_Components = new MDI_Components();
+        Insertar.setCodigoAplicacion("3003");
+        Insertar.setModulo("3000");
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
 //        buscarVendedor();
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_BuscarActionPerformed
@@ -393,20 +400,20 @@ public class Mantenimiento_Cobrador extends javax.swing.JInternalFrame {
 
         llenadoDeTablas();
         limpiar();
-////        BitacoraDao BitacoraDAO = new BitacoraDao();
-////
-////        Bitacora Insertar = new Bitacora();
-////        Insertar.setId_Usuario(Login.usuarioComercial);
-////        Insertar.setAccion("Insertar");
-////
-////        Insertar.setCodigoAplicacion("3001");
-////        Insertar.setModulo("3000");
-////
-////        try {
-////            BitacoraDAO.insert(Insertar);
-////        } catch (UnknownHostException ex) {
-////            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-////        }
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+
+        Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        Insertar.setAccion("Insertar");
+
+        Insertar.setCodigoAplicacion("3003");
+        Insertar.setModulo("3000");
+
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
    JOptionPane.showMessageDialog(null, " La ejecunsion a  sido un exito");
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_AgregarActionPerformed

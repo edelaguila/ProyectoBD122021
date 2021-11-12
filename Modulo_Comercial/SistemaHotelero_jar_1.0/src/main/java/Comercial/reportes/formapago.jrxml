@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0f174efd-02d5-4527-aafe-7598d4e1717e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM empresarial.tbl_forma_pago;]]>
+	</queryString>
+	<field name="PK_codigo_pago" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo_proveedor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo_transaccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Forma_pago" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dias_pago" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_pago" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estatus_pago" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="72" splitType="Stretch">
+			<staticText>
+				<reportElement x="191" y="6" width="539" height="56" uuid="fb8789c0-fc68-4cac-be65-cebb34c71b14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="30" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Mantenimiento Forma Pago]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="13" y="41" width="100" height="20" uuid="b76ba9ae-2253-4c02-bcc6-60d07fd53b3d"/>
+				<text><![CDATA[PK_codigo_pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="137" y="41" width="100" height="20" uuid="5d26003c-c0dc-4709-ba95-022ffd0c4f0f"/>
+				<text><![CDATA[codigo_proveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="41" width="100" height="20" uuid="a43d2c8d-d3e8-4dc5-a7f8-2778cb3dfd65"/>
+				<text><![CDATA[tipo_transaccion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="41" width="100" height="20" uuid="b143a6e5-c596-47fd-80fa-113d1e1e2770"/>
+				<text><![CDATA[Forma_pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="508" y="41" width="100" height="20" uuid="403d95be-c2e6-4f0e-bf3d-4c409fd088f5"/>
+				<text><![CDATA[dias_pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="630" y="41" width="100" height="20" uuid="d6227bcb-085d-4c1b-ba2d-be1f69f4f9ca"/>
+				<text><![CDATA[dias_pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="745" y="22" width="100" height="20" uuid="6abf2457-5df2-4dee-8e07-c1b2fd46000d"/>
+				<text><![CDATA[estatus_pago]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="37" y="26" width="100" height="20" uuid="70d3889f-c4c4-4cbc-860d-3156a9568461"/>
+				<textFieldExpression><![CDATA[$F{PK_codigo_pago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="17" width="100" height="20" uuid="4e9349f7-c13c-4913-a1a2-61b0542ce277"/>
+				<textFieldExpression><![CDATA[$F{codigo_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="253" y="11" width="100" height="20" uuid="1d40102d-74f2-4167-9d6a-9fc3250806bb"/>
+				<textFieldExpression><![CDATA[$F{tipo_transaccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="375" y="6" width="100" height="20" uuid="f120adfe-3a1c-4477-ab9d-a6f0f7f9b8d5"/>
+				<textFieldExpression><![CDATA[$F{Forma_pago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="495" y="17" width="100" height="20" uuid="56ebec67-f4be-4623-acaf-d9ff59afa4b5"/>
+				<textFieldExpression><![CDATA[$F{dias_pago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="608" y="17" width="100" height="20" uuid="000c6974-f6f6-4771-b9b6-b74a43637b93"/>
+				<textFieldExpression><![CDATA[$F{dias_pago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="708" y="6" width="100" height="20" uuid="cffed9d7-73e6-42f0-b130-3e56eb520128"/>
+				<textFieldExpression><![CDATA[$F{estatus_pago}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -19,11 +19,11 @@ import java.util.List;
  */
 public class MonedaDAO {
     
-    private static final String SQL_SELECT = "SELECT Codigo_Moneda, Nombre_Moneda, Simbolo_Moneda FROM Moneda";
-    private static final String SQL_INSERT = "INSERT INTO Moneda VALUES(?, ?, ?)";
-    private static final String SQL_DELETE = "DELETE FROM Moneda WHERE Codigo_Moneda=?";
-    private static final String SQL_UPDATE = "UPDATE Moneda SET Codigo_Moneda=?, Nombre_Moneda=?, Simbolo_Moneda=? WHERE Codigo_Moneda = ?";
-    private static final String SQL_QUERY = "SELECT Codigo_Moneda, Nombre_Moneda, Simbolo_Moneda FROM Moneda WHERE Codigo_Moneda = ?";
+    private static final String SQL_SELECT = "SELECT Codigo_Moneda, Nombre_Moneda, Simbolo_Moneda FROM tbl_Moneda";
+    private static final String SQL_INSERT = "INSERT INTO tbl_Moneda VALUES(?, ?, ?)";
+    private static final String SQL_DELETE = "DELETE FROM tbl_Moneda WHERE Codigo_Moneda=?";
+    private static final String SQL_UPDATE = "UPDATE tbl_Moneda SET Codigo_Moneda=?, Nombre_Moneda=?, Simbolo_Moneda=? WHERE Codigo_Moneda = ?";
+    private static final String SQL_QUERY = "SELECT Codigo_Moneda, Nombre_Moneda, Simbolo_Moneda FROM tbl_Moneda WHERE Codigo_Moneda = ?";
    
      public int insert(Moneda moneda){
         Connection conn = null;
