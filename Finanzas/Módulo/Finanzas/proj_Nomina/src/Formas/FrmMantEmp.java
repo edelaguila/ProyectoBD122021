@@ -6,6 +6,7 @@
 package Formas;
 
 
+import com.mxrck.autocompleter.TextAutoCompleter;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;

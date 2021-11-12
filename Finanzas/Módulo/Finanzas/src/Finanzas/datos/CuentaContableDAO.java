@@ -17,11 +17,11 @@ import javax.swing.JOptionPane;
  */
 public class CuentaContableDAO {
 
-    private String SQL_INSERT = "INSERT INTO CuentaContable (Codigo_CuentaContable, Nombre_CuentaContable, Clasificacion_CuentaContable, Estado_CuentaContable, Monto_CuentaContable) VALUES(?,?,?,?,?)";
-    private String SQL_UPDATE = "UPDATE CuentaContable SET Nombre_CuentaContable = ?, Estado_CuentaContable = ? WHERE Codigo_CuentaContable = ?";
-    private String SQL_QUERY = "SELECT * FROM CuentaContable WHERE Codigo_CuentaContable = ?";
-    private String SQL_DELETE = "DELETE FROM CuentaContable WHERE Codigo_CuentaContable = ?";
-    private String SQL_SELECT = "SELECT * FROM CuentaContable";
+    private String SQL_INSERT = "INSERT INTO tbl_cuentacontable (Codigo_CuentaContable, Nombre_CuentaContable, Clasificacion_CuentaContable, Estado_CuentaContable, Monto_CuentaContable) VALUES(?,?,?,?,?)";
+    private String SQL_UPDATE = "UPDATE tbl_cuentacontable SET Nombre_CuentaContable = ?, Estado_CuentaContable = ? WHERE Codigo_CuentaContable = ?";
+    private String SQL_QUERY = "SELECT * FROM tbl_cuentacontable WHERE Codigo_CuentaContable = ?";
+    private String SQL_DELETE = "DELETE FROM tbl_cuentacontable WHERE Codigo_CuentaContable = ?";
+    private String SQL_SELECT = "SELECT * FROM tbl_cuentacontable";
 
     public int Insertar(CuentaContable objCuenta) {
 
@@ -172,7 +172,7 @@ public class CuentaContableDAO {
         try {
 
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement("SELECT COUNT(Codigo_CuentaContable) FROM CuentaContable");
+            stmt = conn.prepareStatement("SELECT COUNT(Codigo_CuentaContable) FROM tbl_cuentacontable");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -236,7 +236,7 @@ public class CuentaContableDAO {
         ResultSet rs = null;
         try {
             con = Conexion.getConnection();
-            stmt = con.prepareStatement("SELECT cuentacontable.Monto_CuentaContable FROM cuentacontable WHERE cuentacontable.Codigo_CuentaContable = ?");
+            stmt = con.prepareStatement("SELECT tbl_cuentacontable.Monto_CuentaContable FROM tbl_cuentacontable WHERE tbl_cuentacontable.Codigo_CuentaContable = ?");
             stmt.setString(1, codigoCuenta);
             rs = stmt.executeQuery();
 
@@ -266,7 +266,7 @@ public class CuentaContableDAO {
 
         try {
             con = Conexion.getConnection();
-            stmt = con.prepareStatement("UPDATE cuentacontable SET cuentacontbale.Monto_CuentaContable = ? FROM cuentacontable WHERE cuentacontable.Codigo_CuentaContable = ?");
+            stmt = con.prepareStatement("UPDATE tbl_cuentacontable SET tbl_cuentacontable.Monto_CuentaContable = ? FROM tbl_cuentacontable WHERE tbl_cuentacontable.Codigo_CuentaContable = ?");
             stmt.setString(1, codigoCuenta);
             stmt.setString(2, monto);
 
