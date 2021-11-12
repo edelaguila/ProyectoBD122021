@@ -149,10 +149,14 @@ public void limpiar() {
         Txt_numero1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         cambio_precio = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         Jtfactura = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -178,9 +182,11 @@ public void limpiar() {
                 Btn_BuscarActionPerformed(evt);
             }
         });
-        jPanel2.add(Btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, -1, -1));
+        jPanel2.add(Btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 100, 30));
 
+        jToggleButton1.setBackground(new java.awt.Color(255, 255, 102));
         jToggleButton1.setText("Guardar");
+        jToggleButton1.setBorderPainted(false);
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
@@ -206,7 +212,7 @@ public void limpiar() {
 
         jLabel12.setText("FECHA");
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
-        jPanel2.add(Txt_fecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 109, 20));
+        jPanel2.add(Txt_fecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 109, 20));
 
         jLabel6.setText("PRECIO");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
@@ -224,11 +230,35 @@ public void limpiar() {
             }
         });
         jPanel2.add(Btn_reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 90, 20));
-        jPanel2.add(Txt_numero1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 110, -1));
+        jPanel2.add(Txt_numero1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 110, -1));
 
         jLabel1.setText("CAMBIO DE PRECIO");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, -1, 20));
         jPanel2.add(cambio_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, 80, -1));
+
+        jButton2.setText("Eliminar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(339, 190, 90, 30));
+
+        jButton3.setText("Modificar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 190, 100, 40));
+
+        jButton4.setText("Guardar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 190, 100, 40));
 
         Jtfactura.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -256,20 +286,17 @@ public void limpiar() {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 654, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(42, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(284, 284, 284)
                 .addComponent(jLabel21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,11 +304,11 @@ public void limpiar() {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                 .addGap(29, 29, 29))
         );
 
@@ -402,6 +429,119 @@ buscarVendedor1();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+Control_pago_VentaDao  Control_pago_VentaDao  = new  Control_pago_VentaDao();
+
+         Control_pago_Venta AInser = new  Control_pago_Venta();
+      
+      
+        AInser.setNo_serie(Txt_servicio.getText());
+       
+        AInser.setServicio(Txt_servicio.getText());
+        AInser.setPrecio(Txt_precio.getText());
+        AInser.setPrecio_cambio(cambio_precio.getText());
+        AInser.setFecha(Txt_fecha1.getText());
+        AInser.setEstatus(txt_estatus.getText());
+       
+
+        Control_pago_VentaDao.insert(AInser);
+        llenadoDeTablas();
+        limpiar();
+         BitacoraDao BitacoraDAO = new BitacoraDao();
+        
+                Bitacora Insertar = new Bitacora();
+                Insertar.setId_Usuario(Login.usuarioComercial);
+                Insertar.setAccion("Insertar");
+        
+                Insertar.setCodigoAplicacion("3003");
+                Insertar.setModulo("3000");
+        
+                try {
+                        BitacoraDAO.insert(Insertar);
+                    } catch (UnknownHostException ex) {
+                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+      
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+ Control_pago_VentaDao  Control_pago_VentaDao  = new  Control_pago_VentaDao();
+
+         Control_pago_Venta AInser = new  Control_pago_Venta();
+      
+      
+        AInser.setNo_serie(Txt_servicio.getText());
+       
+        AInser.setServicio(Txt_servicio.getText());
+        AInser.setPrecio(Txt_precio.getText());
+        AInser.setPrecio_cambio(cambio_precio.getText());
+        AInser.setFecha(Txt_fecha1.getText());
+        AInser.setEstatus(txt_estatus.getText());
+       
+
+        Control_pago_VentaDao.delete(AInser);
+            llenadoDeTablas();
+            limpiar();
+
+             BitacoraDao BitacoraDAO = new BitacoraDao();
+        
+                Bitacora Insertar = new Bitacora();
+                Insertar.setId_Usuario(Login.usuarioComercial);
+                Insertar.setAccion("Eliminar");
+        
+                Insertar.setCodigoAplicacion("3003");
+                Insertar.setModulo("3000");
+        
+                try {
+                        BitacoraDAO.insert(Insertar);
+                    } catch (UnknownHostException ex) {
+                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+      
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+Control_pago_VentaDao  Control_pago_VentaDao  = new  Control_pago_VentaDao();
+
+         Control_pago_Venta AInser = new  Control_pago_Venta();
+      
+      
+        AInser.setNo_serie(Txt_servicio.getText());
+       
+        AInser.setServicio(Txt_servicio.getText());
+        AInser.setPrecio(Txt_precio.getText());
+        AInser.setPrecio_cambio(cambio_precio.getText());
+        AInser.setFecha(Txt_fecha1.getText());
+        AInser.setEstatus(txt_estatus.getText());
+       
+
+        Control_pago_VentaDao.update(AInser);
+        llenadoDeTablas();
+        limpiar();
+        
+          BitacoraDao BitacoraDAO = new BitacoraDao();
+        
+                Bitacora Insertar = new Bitacora();
+                Insertar.setId_Usuario(Login.usuarioComercial);
+                Insertar.setAccion("Eliminar");
+        
+                Insertar.setCodigoAplicacion("3003");
+                Insertar.setModulo("3000");
+        
+                try {
+                        BitacoraDAO.insert(Insertar);
+                    } catch (UnknownHostException ex) {
+                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+      
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_Buscar;
@@ -413,6 +553,9 @@ buscarVendedor1();
     private javax.swing.JTextField Txt_servicio;
     private javax.swing.JTextField cambio_precio;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
