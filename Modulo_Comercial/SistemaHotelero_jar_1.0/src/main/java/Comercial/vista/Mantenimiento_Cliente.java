@@ -20,6 +20,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
+import seguridad.vista.Aplicacion_Perfil;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login;
+import seguridad.vista.MDI_Components;
 
 /**
  *
@@ -186,6 +192,7 @@ public class Mantenimiento_Cliente extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -200,7 +207,7 @@ public class Mantenimiento_Cliente extends javax.swing.JInternalFrame {
                 Btn_ModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(Btn_Modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 100, 20));
+        getContentPane().add(Btn_Modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 100, 30));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setText("Mantenimiento Cliente");
@@ -213,7 +220,7 @@ public class Mantenimiento_Cliente extends javax.swing.JInternalFrame {
                 Btn_EliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(Btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 90, 20));
+        getContentPane().add(Btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, 90, 30));
 
         Btn_Agregar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         Btn_Agregar.setText("Guardar");
@@ -222,7 +229,7 @@ public class Mantenimiento_Cliente extends javax.swing.JInternalFrame {
                 Btn_AgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(Btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 90, 20));
+        getContentPane().add(Btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 100, 30));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Nit");
@@ -271,7 +278,7 @@ public class Mantenimiento_Cliente extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 14, 84, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 7, 90, 30));
 
         Btn_reporte.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         Btn_reporte.setText("Reporte");
@@ -280,7 +287,7 @@ public class Mantenimiento_Cliente extends javax.swing.JInternalFrame {
                 Btn_reporteActionPerformed(evt);
             }
         });
-        getContentPane().add(Btn_reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, 90, 20));
+        getContentPane().add(Btn_reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 90, 30));
 
         Txt_cuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -327,7 +334,7 @@ public class Mantenimiento_Cliente extends javax.swing.JInternalFrame {
                 Btn_BuscarActionPerformed(evt);
             }
         });
-        jPanel2.add(Btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 76, -1));
+        jPanel2.add(Btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 90, 30));
 
         Txt_codigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -371,23 +378,23 @@ public class Mantenimiento_Cliente extends javax.swing.JInternalFrame {
         dao.update(modi);
         llenadoDeTablas();
         limpiar();
-//        BitacoraDao BitacoraDAO = new BitacoraDao();
-//
-//        Bitacora Insertar = new Bitacora();
-//
-//        Insertar.setAccion("Modificar");
-//        Insertar.setId_Usuario(Login.usuarioComercial);
-//        GenerarPermisos permisos = new GenerarPermisos();
-//        MDI_Components mdi_Components = new MDI_Components();
-//        Insertar.setCodigoAplicacion("3001");
-//        Insertar.setModulo("3000");
-//
-//        try {
-//            BitacoraDAO.insert(Insertar);
-//        } catch (UnknownHostException ex) {
-//            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-           JOptionPane.showMessageDialog(null, " La ejecucion  a  sido un exito");
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+
+        Bitacora Insertar = new Bitacora();
+
+        Insertar.setAccion("Modificar");
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        GenerarPermisos permisos = new GenerarPermisos();
+        MDI_Components mdi_Components = new MDI_Components();
+        Insertar.setCodigoAplicacion("3001");
+        Insertar.setModulo("3000");
+
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
 
 
 
@@ -411,44 +418,44 @@ public class Mantenimiento_Cliente extends javax.swing.JInternalFrame {
         acreedor.delete(vendedorAEliminar);
         llenadoDeTablas();
         limpiar();
-//        JOptionPane.showMessageDialog(null, "Cliente Eliminado.");
-//        BitacoraDao BitacoraDAO = new BitacoraDao();
-//
-//        Bitacora Insertar = new Bitacora();
-//
-//        Insertar.setAccion("Eliminar");
-//        GenerarPermisos permisos = new GenerarPermisos();
-//        MDI_Components mdi_Components = new MDI_Components();
-//        Insertar.setCodigoAplicacion("3001");
-//        Insertar.setModulo("3000");
-//        Insertar.setId_Usuario(Login.usuarioComercial);
-//        try {
-//            BitacoraDAO.insert(Insertar);
-//        } catch (UnknownHostException ex) {
-//            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-   JOptionPane.showMessageDialog(null, " La ejecuncion a  sido un exito");
+        JOptionPane.showMessageDialog(null, "Cliente Eliminado.");
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+
+        Bitacora Insertar = new Bitacora();
+
+        Insertar.setAccion("Eliminar");
+        GenerarPermisos permisos = new GenerarPermisos();
+        MDI_Components mdi_Components = new MDI_Components();
+        Insertar.setCodigoAplicacion("3001");
+        Insertar.setModulo("3000");
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_EliminarActionPerformed
 
     private void Btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_BuscarActionPerformed
         buscarVendedor() ;
-//        BitacoraDao BitacoraDAO = new BitacoraDao();
-//
-//        Bitacora Insertar = new Bitacora();
-//
-//        Insertar.setAccion("Buscar");
-//        GenerarPermisos permisos = new GenerarPermisos();
-//        MDI_Components mdi_Components = new MDI_Components();
-//        Insertar.setCodigoAplicacion("3001");
-//        Insertar.setModulo("3000");
-//        Insertar.setId_Usuario(Login.usuarioComercial);
-//        try {
-//            BitacoraDAO.insert(Insertar);
-//        } catch (UnknownHostException ex) {
-//            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-   JOptionPane.showMessageDialog(null, " La ejecucion  a  sido un exito");
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+
+        Bitacora Insertar = new Bitacora();
+
+        Insertar.setAccion("Buscar");
+        GenerarPermisos permisos = new GenerarPermisos();
+        MDI_Components mdi_Components = new MDI_Components();
+        Insertar.setCodigoAplicacion("3001");
+        Insertar.setModulo("3000");
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
 //        buscarVendedor();
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_BuscarActionPerformed
@@ -476,21 +483,21 @@ public class Mantenimiento_Cliente extends javax.swing.JInternalFrame {
 
         llenadoDeTablas();
         limpiar();
-////        BitacoraDao BitacoraDAO = new BitacoraDao();
-////
-////        Bitacora Insertar = new Bitacora();
-////        Insertar.setId_Usuario(Login.usuarioComercial);
-////        Insertar.setAccion("Insertar");
-////
-////        Insertar.setCodigoAplicacion("3001");
-////        Insertar.setModulo("3000");
-////
-////        try {
-////            BitacoraDAO.insert(Insertar);
-////        } catch (UnknownHostException ex) {
-////            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-////        }
-   JOptionPane.showMessageDialog(null, " La ejecucion  a  sido un exito");
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+
+        Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        Insertar.setAccion("Insertar");
+
+        Insertar.setCodigoAplicacion("3001");
+        Insertar.setModulo("3000");
+
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_AgregarActionPerformed
 

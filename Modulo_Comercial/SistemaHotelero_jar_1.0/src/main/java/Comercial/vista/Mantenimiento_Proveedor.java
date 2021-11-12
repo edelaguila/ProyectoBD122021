@@ -135,13 +135,15 @@ public class Mantenimiento_Proveedor extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         Tbl_Datos = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Mantenimiento Proveedor");
         setVisible(true);
 
-        Lbl_titulo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        Lbl_titulo.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         Lbl_titulo.setText("Mantenimiento Proveedores");
 
         Btn_Ayuda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -153,6 +155,7 @@ public class Mantenimiento_Proveedor extends javax.swing.JInternalFrame {
         });
 
         Pnl_datos.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Proveedores"));
+        Pnl_datos.setForeground(new java.awt.Color(255, 255, 255));
 
         Lbl_codigo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         Lbl_codigo.setText("Codigo Proveedor:");
@@ -223,57 +226,54 @@ public class Mantenimiento_Proveedor extends javax.swing.JInternalFrame {
         Pnl_datosLayout.setHorizontalGroup(
             Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Pnl_datosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Lbl_estado))
+            .addGroup(Pnl_datosLayout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(Lbl_telefono))
+            .addGroup(Pnl_datosLayout.createSequentialGroup()
                 .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Pnl_datosLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(Lbl_estado))
-                    .addGroup(Pnl_datosLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(Lbl_telefono))
-                    .addGroup(Pnl_datosLayout.createSequentialGroup()
                         .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(Pnl_datosLayout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(Btn_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(Pnl_datosLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(Lbl_nit))
-                            .addGroup(Pnl_datosLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(Lbl_email)))
+                            .addComponent(Lbl_nit)
+                            .addComponent(Lbl_email))
+                        .addGap(47, 47, 47))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_datosLayout.createSequentialGroup()
+                        .addComponent(Btn_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)))
+                .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Pnl_datosLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(Btn_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(Pnl_datosLayout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(Btn_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Btn_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(Btn_Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(Txt_estado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                                .addComponent(Txt_saldo, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Txt_email, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Txt_nit, javax.swing.GroupLayout.Alignment.LEADING)))))
-                .addContainerGap(87, Short.MAX_VALUE))
+                        .addComponent(Btn_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Btn_Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(Txt_estado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                        .addComponent(Txt_saldo, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(Txt_email, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(Txt_nit))))
             .addGroup(Pnl_datosLayout.createSequentialGroup()
-                .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Txt_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(Lbl_saldo)
-                        .addGroup(Pnl_datosLayout.createSequentialGroup()
-                            .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Lbl_nombre)
-                                .addComponent(Lbl_codigo)
-                                .addComponent(Lbl_direccion, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addGap(34, 34, 34)
-                            .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(Txt_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                                .addComponent(Txt_codigo)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(Btn_Reporte1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Lbl_saldo)
+                    .addGroup(Pnl_datosLayout.createSequentialGroup()
+                        .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Lbl_nombre)
+                            .addComponent(Lbl_codigo)
+                            .addComponent(Lbl_direccion, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(34, 34, 34)
+                        .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Txt_codigo, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                            .addComponent(Txt_nombre)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_datosLayout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Txt_direccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Txt_telefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addComponent(Btn_Reporte1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         Pnl_datosLayout.setVerticalGroup(
             Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,7 +282,7 @@ public class Mantenimiento_Proveedor extends javax.swing.JInternalFrame {
                 .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Lbl_codigo)
                     .addComponent(Txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Btn_Reporte1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Btn_Reporte1))
                 .addGap(7, 7, 7)
                 .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Lbl_nombre)
@@ -295,7 +295,7 @@ public class Mantenimiento_Proveedor extends javax.swing.JInternalFrame {
                 .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Lbl_telefono)
                     .addComponent(Txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(Pnl_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Lbl_nit, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Txt_nit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -360,22 +360,25 @@ public class Mantenimiento_Proveedor extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(Pnl_detalle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Pnl_datos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(Lbl_titulo)
-                        .addGap(90, 90, 90)
-                        .addComponent(Btn_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(Btn_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(Pnl_datos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Lbl_titulo)
                     .addComponent(Btn_Ayuda))
-                .addGap(18, 18, 18)
+                .addGap(15, 15, 15)
                 .addComponent(Pnl_datos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Pnl_detalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -411,7 +414,7 @@ public class Mantenimiento_Proveedor extends javax.swing.JInternalFrame {
         try {
             connection = Conexion.getConnection();
             report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-                    + "/src/main/java/Comercial/reportes/Proveedor.jrxml");
+                    + "/src/main/java/Comercial/reportes/Aurorizacion.jrxml");
             print = JasperFillManager.fillReport(report, p, connection);
             JasperViewer view = new JasperViewer(print, false);
             view.setTitle("Reporte Mantenimiento Proveedor");

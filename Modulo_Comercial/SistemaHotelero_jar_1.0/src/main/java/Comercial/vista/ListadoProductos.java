@@ -84,10 +84,13 @@ public class ListadoProductos extends javax.swing.JInternalFrame {
         });
         jPopupMenu1.add(mnenviar);
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Listado de Productos");
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         tbprodcutos.setComponentPopupMenu(jPopupMenu1);
         tbprodcutos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));

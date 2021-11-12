@@ -95,10 +95,10 @@ public class BodegaDAO {
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            
-            stmt.setInt(1, bodega.getPKcodigoBodega());
-            stmt.setString(2, bodega.getNombreBodega());
-            stmt.setString(3, bodega.getEstatusBodega());
+
+            stmt.setString(1, bodega.getNombreBodega());
+            stmt.setString(2, bodega.getEstatusBodega());
+            stmt.setInt(3, bodega.getPKcodigoBodega());
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
 
@@ -112,9 +112,6 @@ public class BodegaDAO {
         return rows;
     }
 
-  
-    
-    
     public Bodega query(Bodega bodega) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -128,7 +125,7 @@ public class BodegaDAO {
             stmt = conn.prepareStatement(SQL_QUERY);
             stmt.setInt(1, bodega.getPKcodigoBodega());
             rs = stmt.executeQuery();
-            
+
             while (rs.next()) {
                 int PK_codigo_bodega = rs.getInt("PK_codigo_bodega");
                 String nombre_bodega = rs.getString("nombre_bodega");

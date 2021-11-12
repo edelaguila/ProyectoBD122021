@@ -28,6 +28,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
+import seguridad.vista.Aplicacion_Perfil;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login;
+import seguridad.vista.MDI_Components;
 
 /**
  *
@@ -233,6 +239,7 @@ public void llenadoDeCombos2() {
         jLabel4 = new javax.swing.JLabel();
         Txt_numero = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -247,7 +254,7 @@ public void llenadoDeCombos2() {
                 Btn_ModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(Btn_Modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 100, 20));
+        getContentPane().add(Btn_Modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 100, 40));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setText("Cartera Venta");
@@ -260,7 +267,7 @@ public void llenadoDeCombos2() {
                 Btn_EliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(Btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 330, 90, 20));
+        getContentPane().add(Btn_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, 110, 40));
 
         Btn_Agregar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         Btn_Agregar.setText("Guardar");
@@ -269,7 +276,7 @@ public void llenadoDeCombos2() {
                 Btn_AgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(Btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 90, 20));
+        getContentPane().add(Btn_Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 100, 40));
 
         JtProductos1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         JtProductos1.setModel(new javax.swing.table.DefaultTableModel(
@@ -294,7 +301,7 @@ public void llenadoDeCombos2() {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 84, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, 110, 40));
 
         Btn_reporte.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         Btn_reporte.setText("Reporte");
@@ -303,7 +310,7 @@ public void llenadoDeCombos2() {
                 Btn_reporteActionPerformed(evt);
             }
         });
-        getContentPane().add(Btn_reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 330, 90, 20));
+        getContentPane().add(Btn_reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 310, 100, 40));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(459, 167, -1, -1));
@@ -370,7 +377,7 @@ public void llenadoDeCombos2() {
                 jToggleButton1ActionPerformed(evt);
             }
         });
-        cliente.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
+        cliente.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 163, 90, 40));
 
         getContentPane().add(cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 690, 220));
 
@@ -381,7 +388,7 @@ public void llenadoDeCombos2() {
                 Btn_BuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(Btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 76, -1));
+        getContentPane().add(Btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(276, 43, 90, 30));
 
         jLabel4.setText("Numero de correlativo");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
@@ -434,44 +441,44 @@ public void llenadoDeCombos2() {
         
         llenadoDeTablas();
         limpiar();
-//        JOptionPane.showMessageDialog(null, "Cliente Eliminado.");
-//        BitacoraDao BitacoraDAO = new BitacoraDao();
-//
-//        Bitacora Insertar = new Bitacora();
-//
-//        Insertar.setAccion("Eliminar");
-//        GenerarPermisos permisos = new GenerarPermisos();
-//        MDI_Components mdi_Components = new MDI_Components();
-//        Insertar.setCodigoAplicacion("3001");
-//        Insertar.setModulo("3000");
-//        Insertar.setId_Usuario(Login.usuarioComercial);
-//        try {
-//            BitacoraDAO.insert(Insertar);
-//        } catch (UnknownHostException ex) {
-//            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-   JOptionPane.showMessageDialog(null, " La ejecuncion a  sido un exito");
+       
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+
+        Bitacora Insertar = new Bitacora();
+
+        Insertar.setAccion("Eliminar");
+        GenerarPermisos permisos = new GenerarPermisos();
+        MDI_Components mdi_Components = new MDI_Components();
+        Insertar.setCodigoAplicacion("3001");
+        Insertar.setModulo("3000");
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_EliminarActionPerformed
 
     private void Btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_BuscarActionPerformed
         buscarVendedor() ;
-//        BitacoraDao BitacoraDAO = new BitacoraDao();
-//
-//        Bitacora Insertar = new Bitacora();
-//
-//        Insertar.setAccion("Buscar");
-//        GenerarPermisos permisos = new GenerarPermisos();
-//        MDI_Components mdi_Components = new MDI_Components();
-//        Insertar.setCodigoAplicacion("3001");
-//        Insertar.setModulo("3000");
-//        Insertar.setId_Usuario(Login.usuarioComercial);
-//        try {
-//            BitacoraDAO.insert(Insertar);
-//        } catch (UnknownHostException ex) {
-//            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-   JOptionPane.showMessageDialog(null, " La ejecucion  a  sido un exito");
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+
+        Bitacora Insertar = new Bitacora();
+
+        Insertar.setAccion("Buscar");
+        GenerarPermisos permisos = new GenerarPermisos();
+        MDI_Components mdi_Components = new MDI_Components();
+        Insertar.setCodigoAplicacion("3001");
+        Insertar.setModulo("3000");
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  
 //        buscarVendedor();
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_BuscarActionPerformed
@@ -499,21 +506,21 @@ public void llenadoDeCombos2() {
         llenadoDeTablas();
         
         limpiar();
-////        BitacoraDao BitacoraDAO = new BitacoraDao();
-////
-////        Bitacora Insertar = new Bitacora();
-////        Insertar.setId_Usuario(Login.usuarioComercial);
-////        Insertar.setAccion("Insertar");
-////
-////        Insertar.setCodigoAplicacion("3001");
-////        Insertar.setModulo("3000");
-////
-////        try {
-////            BitacoraDAO.insert(Insertar);
-////        } catch (UnknownHostException ex) {
-////            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-////        }
-   JOptionPane.showMessageDialog(null, " La ejecucion  a  sido un exito");
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+
+        Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        Insertar.setAccion("Insertar");
+
+        Insertar.setCodigoAplicacion("3001");
+        Insertar.setModulo("3000");
+
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_AgregarActionPerformed
 

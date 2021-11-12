@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="acb3da90-6822-46d1-9f7c-f6cefd60be47">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="52"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM empresarial.tbl_autorizacion_ordencompra;]]>
+	</queryString>
+	<field name="PK_codigo_autorizacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo_ordencompra" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_autorizacion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="departamento_autorizacion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_autorizacion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estatus_autorizacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="156" y="13" width="615" height="56" uuid="24abebe4-b66b-49b8-9b87-c609d520ac05"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="30" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Mantenimiento Autorizacio Orden Compra]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="77" y="30" width="100" height="20" uuid="82a2b080-f1b5-4c8b-9845-f9fb62a7d925"/>
+				<text><![CDATA[PK_codigo_autorizacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="195" y="30" width="100" height="20" uuid="5881b6f9-34ce-4190-991d-898e0c392ee2"/>
+				<text><![CDATA[codigo_ordencompra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="30" width="100" height="20" uuid="be618d7f-43fd-4c1b-a2d9-0ff3431d60b5"/>
+				<text><![CDATA[nombre_autorizacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="442" y="30" width="100" height="20" uuid="833f7861-d9a8-4248-b4aa-8a8e58977cec"/>
+				<text><![CDATA[departamento_autorizacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="568" y="22" width="100" height="20" uuid="2c73888c-b468-4e5e-8398-818f6e599302"/>
+				<text><![CDATA[fecha_autorizacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="702" y="22" width="100" height="20" uuid="d3410fc1-2c75-4182-b4c7-9c513145d547"/>
+				<text><![CDATA[estatus_autorizacion]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="77" y="0" width="100" height="20" uuid="fc23358d-8407-4dda-9bff-c8ae13a78bda"/>
+				<textFieldExpression><![CDATA[$F{PK_codigo_autorizacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="0" width="100" height="20" uuid="d9459f62-480a-417b-b9cd-6a29173f8c7e"/>
+				<textFieldExpression><![CDATA[$F{codigo_ordencompra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="322" y="2" width="100" height="20" uuid="0e05a88f-7df9-4b16-9532-62fd72f91b5b"/>
+				<textFieldExpression><![CDATA[$F{nombre_autorizacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="468" y="2" width="100" height="20" uuid="387c0811-02de-4c83-bc81-8bac4f2984ae"/>
+				<textFieldExpression><![CDATA[$F{departamento_autorizacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="589" y="10" width="100" height="20" uuid="743ba60a-6405-4fbe-a802-5fe9239f89d3"/>
+				<textFieldExpression><![CDATA[$F{fecha_autorizacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="738" y="18" width="100" height="20" uuid="0472dcd0-6c3c-45b4-a157-1f624cfa7a02"/>
+				<textFieldExpression><![CDATA[$F{estatus_autorizacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

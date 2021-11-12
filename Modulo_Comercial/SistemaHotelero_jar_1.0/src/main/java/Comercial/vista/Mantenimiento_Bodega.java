@@ -101,17 +101,19 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         Btn_Ayuda = new javax.swing.JButton();
 
+        setBackground(java.awt.Color.white);
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setVisible(true);
 
+        jPanel1.setBackground(java.awt.Color.white);
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle"));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("ID ");
 
-        Txt_id.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Txt_id.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         Btn_Buscar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         Btn_Buscar.setText("Buscar");
@@ -121,19 +123,19 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Nombre Bodega");
 
-        Txt_nombre.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Txt_nombre.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
-        Txt_estatus.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Txt_estatus.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         Txt_estatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Txt_estatusActionPerformed(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel4.setText("Estado Bodega");
 
         Btn_Guardar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -172,16 +174,16 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Btn_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(65, Short.MAX_VALUE)
+                .addComponent(Btn_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(Btn_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Btn_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(Btn_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(Btn_Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(242, 242, 242))
+                .addComponent(Btn_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(Btn_Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,8 +198,8 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
                     .addComponent(Txt_estatus, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(Btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -205,13 +207,13 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Btn_Buscar)
-                        .addComponent(jLabel2))
+                    .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(Txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(Txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -221,13 +223,14 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Btn_Guardar)
-                    .addComponent(Btn_Modificar)
-                    .addComponent(Btn_Eliminar)
-                    .addComponent(Btn_Reporte))
+                    .addComponent(Btn_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btn_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btn_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btn_Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28))
         );
 
+        jPanel2.setBackground(java.awt.Color.white);
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle"));
 
         Tbl_tablabodega.setModel(new javax.swing.table.DefaultTableModel(
@@ -278,14 +281,14 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
                 .addGap(158, 158, 158)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Btn_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Btn_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,12 +296,12 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(Btn_Ayuda, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(Btn_Ayuda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -324,6 +327,30 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
         bodegaDAO.insert(bodegaAInsertar);
         llenadoDeTablas();
         limpiar();
+        
+       
+//        
+//                Bitacora Insertar = new Bitacora();
+//                Insertar.setId_Usuario(Login.usuarioComercial);
+//                Insertar.setAccion("Insertar");
+//        
+//                Insertar.setCodigoAplicacion("3001");
+//                Insertar.setModulo("3000");
+//        
+//                try {
+//                        BitacoraDAO.insert(Insertar);
+//                    } catch (UnknownHostException ex) {
+//                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                
+//                Registro_ventaDao  DAO = new Registro_ventaDao();
+//        
+//                Registro_venta Inserta = new Registro_venta();
+//                Inserta.setUsuario(Login.usuarioComercial);
+//                Inserta.setAccion("Insertar");
+//        
+//                Inserta.setTabla("3001");
+//                Inserta.setTotal(Txt_total.getText());
     }//GEN-LAST:event_Btn_GuardarActionPerformed
 
     private void Btn_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ModificarActionPerformed
@@ -340,6 +367,28 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
 
         llenadoDeTablas();
         limpiar();
+        
+//         Bitacora Insertar = new Bitacora();
+//                Insertar.setId_Usuario(Login.usuarioComercial);
+//                Insertar.setAccion("Insertar");
+//        
+//                Insertar.setCodigoAplicacion("3001");
+//                Insertar.setModulo("3000");
+//        
+//                try {
+//                        BitacoraDAO.insert(Insertar);
+//                    } catch (UnknownHostException ex) {
+//                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                
+//                Registro_ventaDao  DAO = new Registro_ventaDao();
+//        
+//                Registro_venta Inserta = new Registro_venta();
+//                Inserta.setUsuario(Login.usuarioComercial);
+//                Inserta.setAccion("Insertar");
+//        
+//                Inserta.setTabla("3001");
+//                Inserta.setTotal(Txt_total.getText());
     }//GEN-LAST:event_Btn_ModificarActionPerformed
 
     private void Btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EliminarActionPerformed
@@ -353,6 +402,28 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
 
         llenadoDeTablas();
         limpiar();
+        
+//         Bitacora Insertar = new Bitacora();
+//                Insertar.setId_Usuario(Login.usuarioComercial);
+//                Insertar.setAccion("Insertar");
+//        
+//                Insertar.setCodigoAplicacion("3001");
+//                Insertar.setModulo("3000");
+//        
+//                try {
+//                        BitacoraDAO.insert(Insertar);
+//                    } catch (UnknownHostException ex) {
+//                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                
+//                Registro_ventaDao  DAO = new Registro_ventaDao();
+//        
+//                Registro_venta Inserta = new Registro_venta();
+//                Inserta.setUsuario(Login.usuarioComercial);
+//                Inserta.setAccion("Insertar");
+//        
+//                Inserta.setTabla("3001");
+//                Inserta.setTotal(Txt_total.getText());
     }//GEN-LAST:event_Btn_EliminarActionPerformed
     
     private Connection connection = null;
@@ -375,7 +446,27 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+// Bitacora Insertar = new Bitacora();
+//                Insertar.setId_Usuario(Login.usuarioComercial);
+//                Insertar.setAccion("Insertar");
+//        
+//                Insertar.setCodigoAplicacion("3001");
+//                Insertar.setModulo("3000");
+//        
+//                try {
+//                        BitacoraDAO.insert(Insertar);
+//                    } catch (UnknownHostException ex) {
+//                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                
+//                Registro_ventaDao  DAO = new Registro_ventaDao();
+//        
+//                Registro_venta Inserta = new Registro_venta();
+//                Inserta.setUsuario(Login.usuarioComercial);
+//                Inserta.setAccion("Insertar");
+//        
+//                Inserta.setTabla("3001");
+//                Inserta.setTotal(Txt_total.getText());
     }//GEN-LAST:event_Btn_ReporteActionPerformed
 
     private void Btn_AyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_AyudaActionPerformed
@@ -394,7 +485,27 @@ public class Mantenimiento_Bodega extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
         
-        
+//         Bitacora Insertar = new Bitacora();
+//                Insertar.setId_Usuario(Login.usuarioComercial);
+//                Insertar.setAccion("Insertar");
+//        
+//                Insertar.setCodigoAplicacion("3001");
+//                Insertar.setModulo("3000");
+//        
+//                try {
+//                        BitacoraDAO.insert(Insertar);
+//                    } catch (UnknownHostException ex) {
+//                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                
+//                Registro_ventaDao  DAO = new Registro_ventaDao();
+//        
+//                Registro_venta Inserta = new Registro_venta();
+//                Inserta.setUsuario(Login.usuarioComercial);
+//                Inserta.setAccion("Insertar");
+//        
+//                Inserta.setTabla("3001");
+//                Inserta.setTotal(Txt_total.getText());
         
         
     }//GEN-LAST:event_Btn_AyudaActionPerformed

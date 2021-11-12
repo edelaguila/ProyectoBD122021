@@ -98,29 +98,31 @@ public class Proceso_Tipo_Documento extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         Btn_Ayuda = new javax.swing.JButton();
 
+        setBackground(java.awt.Color.white);
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
 
+        jPanel1.setBackground(java.awt.Color.white);
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo_Documento_Detalle"));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("Codigo Documento");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Nombre Documento");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Estatus Documento");
 
-        Txt_id.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Txt_id.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        Txt_nombredocumento.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Txt_nombredocumento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        Txt_estatus.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Txt_estatus.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        Btn_Buscar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Btn_Buscar.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         Btn_Buscar.setText("Buscar");
         Btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,7 +130,7 @@ public class Proceso_Tipo_Documento extends javax.swing.JInternalFrame {
             }
         });
 
-        Btn_Guardar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Btn_Guardar.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         Btn_Guardar.setText("Guardar");
         Btn_Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +138,7 @@ public class Proceso_Tipo_Documento extends javax.swing.JInternalFrame {
             }
         });
 
-        Btn_Modificar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Btn_Modificar.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         Btn_Modificar.setText("Modificar");
         Btn_Modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,7 +146,7 @@ public class Proceso_Tipo_Documento extends javax.swing.JInternalFrame {
             }
         });
 
-        Btn_Eliminar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Btn_Eliminar.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         Btn_Eliminar.setText("Eliminar");
         Btn_Eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +154,7 @@ public class Proceso_Tipo_Documento extends javax.swing.JInternalFrame {
             }
         });
 
-        Btn_Reporte.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Btn_Reporte.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         Btn_Reporte.setText("Reporte");
         Btn_Reporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,14 +187,14 @@ public class Proceso_Tipo_Documento extends javax.swing.JInternalFrame {
                         .addGap(81, 81, 81)
                         .addComponent(Btn_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
-                        .addComponent(Btn_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Btn_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Btn_Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Btn_Eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
+                    .addComponent(Btn_Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                    .addComponent(Btn_Eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Btn_Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addComponent(Btn_Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,7 +203,7 @@ public class Proceso_Tipo_Documento extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(Txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Btn_Buscar))
+                    .addComponent(Btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -212,13 +214,14 @@ public class Proceso_Tipo_Documento extends javax.swing.JInternalFrame {
                     .addComponent(Txt_estatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Btn_Guardar)
-                    .addComponent(Btn_Modificar)
-                    .addComponent(Btn_Eliminar)
-                    .addComponent(Btn_Reporte))
+                    .addComponent(Btn_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btn_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btn_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btn_Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31))
         );
 
+        jPanel2.setBackground(java.awt.Color.white);
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo_Documento_Detalle"));
 
         Tbl_tabladocumento.setModel(new javax.swing.table.DefaultTableModel(
@@ -251,10 +254,10 @@ public class Proceso_Tipo_Documento extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel4.setText("TIPO DE DOCUMENTO");
 
-        Btn_Ayuda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Btn_Ayuda.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         Btn_Ayuda.setText("Ayuda");
         Btn_Ayuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -276,7 +279,7 @@ public class Proceso_Tipo_Documento extends javax.swing.JInternalFrame {
                 .addGap(193, 193, 193)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Btn_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Btn_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
@@ -285,7 +288,7 @@ public class Proceso_Tipo_Documento extends javax.swing.JInternalFrame {
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(Btn_Ayuda))
+                    .addComponent(Btn_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -309,6 +312,28 @@ public class Proceso_Tipo_Documento extends javax.swing.JInternalFrame {
         documentoDAO.insert(documentoAInsertar);
         llenadoDeTablas();
         limpiar();
+        //        
+//                Bitacora Insertar = new Bitacora();
+//                Insertar.setId_Usuario(Login.usuarioComercial);
+//                Insertar.setAccion("Insertar");
+//        
+//                Insertar.setCodigoAplicacion("3001");
+//                Insertar.setModulo("3000");
+//        
+//                try {
+//                        BitacoraDAO.insert(Insertar);
+//                    } catch (UnknownHostException ex) {
+//                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                
+//                Registro_ventaDao  DAO = new Registro_ventaDao();
+//        
+//                Registro_venta Inserta = new Registro_venta();
+//                Inserta.setUsuario(Login.usuarioComercial);
+//                Inserta.setAccion("Insertar");
+//        
+//                Inserta.setTabla("3001");
+//                Inserta.setTotal(Txt_total.getText());
     }//GEN-LAST:event_Btn_GuardarActionPerformed
 
     private void Btn_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ModificarActionPerformed
@@ -323,6 +348,28 @@ public class Proceso_Tipo_Documento extends javax.swing.JInternalFrame {
 
         llenadoDeTablas();
         limpiar();
+        //        
+//                Bitacora Insertar = new Bitacora();
+//                Insertar.setId_Usuario(Login.usuarioComercial);
+//                Insertar.setAccion("Insertar");
+//        
+//                Insertar.setCodigoAplicacion("3001");
+//                Insertar.setModulo("3000");
+//        
+//                try {
+//                        BitacoraDAO.insert(Insertar);
+//                    } catch (UnknownHostException ex) {
+//                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                
+//                Registro_ventaDao  DAO = new Registro_ventaDao();
+//        
+//                Registro_venta Inserta = new Registro_venta();
+//                Inserta.setUsuario(Login.usuarioComercial);
+//                Inserta.setAccion("Insertar");
+//        
+//                Inserta.setTabla("3001");
+//                Inserta.setTotal(Txt_total.getText());
     }//GEN-LAST:event_Btn_ModificarActionPerformed
 
     private void Btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EliminarActionPerformed
@@ -335,11 +382,55 @@ public class Proceso_Tipo_Documento extends javax.swing.JInternalFrame {
 
         llenadoDeTablas();
         limpiar();
+        //        
+//                Bitacora Insertar = new Bitacora();
+//                Insertar.setId_Usuario(Login.usuarioComercial);
+//                Insertar.setAccion("Insertar");
+//        
+//                Insertar.setCodigoAplicacion("3001");
+//                Insertar.setModulo("3000");
+//        
+//                try {
+//                        BitacoraDAO.insert(Insertar);
+//                    } catch (UnknownHostException ex) {
+//                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                
+//                Registro_ventaDao  DAO = new Registro_ventaDao();
+//        
+//                Registro_venta Inserta = new Registro_venta();
+//                Inserta.setUsuario(Login.usuarioComercial);
+//                Inserta.setAccion("Insertar");
+//        
+//                Inserta.setTabla("3001");
+//                Inserta.setTotal(Txt_total.getText());
     }//GEN-LAST:event_Btn_EliminarActionPerformed
 
     private void Btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_BuscarActionPerformed
         // TODO add your handling code here:
         buscar ();
+        //        
+//                Bitacora Insertar = new Bitacora();
+//                Insertar.setId_Usuario(Login.usuarioComercial);
+//                Insertar.setAccion("Insertar");
+//        
+//                Insertar.setCodigoAplicacion("3001");
+//                Insertar.setModulo("3000");
+//        
+//                try {
+//                        BitacoraDAO.insert(Insertar);
+//                    } catch (UnknownHostException ex) {
+//                        Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                
+//                Registro_ventaDao  DAO = new Registro_ventaDao();
+//        
+//                Registro_venta Inserta = new Registro_venta();
+//                Inserta.setUsuario(Login.usuarioComercial);
+//                Inserta.setAccion("Insertar");
+//        
+//                Inserta.setTabla("3001");
+//                Inserta.setTotal(Txt_total.getText());
     }//GEN-LAST:event_Btn_BuscarActionPerformed
     private Connection connection = null;
     private void Btn_ReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ReporteActionPerformed
