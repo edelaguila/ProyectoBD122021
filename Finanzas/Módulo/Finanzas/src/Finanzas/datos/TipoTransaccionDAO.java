@@ -17,11 +17,11 @@ import Finanzas.dominio.TipoTransaccion;
  */
 public class TipoTransaccionDAO {
 
-     private static final String sql_select = "SELECT Codigo_TipoTransaccion, Transaccion_Tipo, Efecto_TipoTransaccion FROM TipoTransaccion";
-    private static final String sql_insert = "INSERT INTO TipoTransaccion(Codigo_TipoTransaccion, Transaccion_Tipo, Efecto_TipoTransaccion) VALUES(?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE TipoTransaccion SET Codigo_TipoTransaccion=?, Transaccion_Tipo=?, Efecto_TipoTransaccion=? WHERE Codigo_TipoTransaccion = ?";
-    private static final String sql_delete = "DELETE FROM TipoTransaccion WHERE Codigo_TipoTransaccion=?";
-    private static final String sql_query = "SELECT Codigo_TipoTransaccion, Transaccion_Tipo, Efecto_TipoTransaccion FROM TipoTransaccion WHERE Codigo_TipoTransaccion=?";
+     private static final String sql_select = "SELECT Codigo_TipoTransaccion, Transaccion_Tipo, Efecto_TipoTransaccion FROM tbl_TipoTransaccion";
+    private static final String sql_insert = "INSERT INTO tbl_TipoTransaccion(Codigo_TipoTransaccion, Transaccion_Tipo, Efecto_TipoTransaccion) VALUES(?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_TipoTransaccion SET Codigo_TipoTransaccion=?, Transaccion_Tipo=?, Efecto_TipoTransaccion=? WHERE Codigo_TipoTransaccion = ?";
+    private static final String sql_delete = "DELETE FROM tbl_TipoTransaccion WHERE Codigo_TipoTransaccion=?";
+    private static final String sql_query = "SELECT Codigo_TipoTransaccion, Transaccion_Tipo, Efecto_TipoTransaccion FROM tbl_TipoTransaccion WHERE Codigo_TipoTransaccion=?";
 
     public List<TipoTransaccion> listar() {
         Connection con = null;

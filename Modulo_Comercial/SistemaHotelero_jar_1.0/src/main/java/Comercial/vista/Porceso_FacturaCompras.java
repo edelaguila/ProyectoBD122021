@@ -242,6 +242,7 @@ public class Porceso_FacturaCompras extends javax.swing.JInternalFrame {
         txtTotal1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);

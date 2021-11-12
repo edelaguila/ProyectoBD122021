@@ -1,5 +1,6 @@
 package Comercial.vista;
 
+
 import seguridad.vista.*;
 //import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Dimension;
@@ -13,6 +14,8 @@ import javax.swing.JLabel;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
 
 //import seguridad.datos.BitacoraDao;
 //import seguridad.dominio.Bitacora;
@@ -51,6 +54,7 @@ public class MDIComercial extends javax.swing.JFrame {
     private AutorizacionOrdenCompra AutorizacionOrdenCompra;
     private MantenimientoFormaPago MantenimientoFormaPago;
     private ConsultasFacturas  ConsultasFacturas;
+    private FmrBitacora FmrBitacora;
    
     
     public static JLabel logo = new JLabel();
@@ -500,7 +504,27 @@ ConsultasFacturas = new  ConsultasFacturas();
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
 
-        // TODO add your handling code here:
+        
+        FmrBitacora = new seguridad.vista.FmrBitacora();
+
+        jdpescritorio.add(FmrBitacora);
+        Dimension desktopSize = jdpescritorio.getSize();
+        Dimension FrameSize = FmrBitacora.getSize();
+        FmrBitacora.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        FmrBitacora.show();
+        logo.setVisible(true);
+        FmrBitacora.setVisible(true);
+
+        Bitacora Bitacora = new Bitacora();
+
+        Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        Insertar.setAccion("Accesso");
+
+        Insertar.setCodigoAplicacion("200");
+        Insertar.setModulo("3000");
+
+     
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed

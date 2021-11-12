@@ -19,11 +19,11 @@ import java.util.List;
  */
 public class TipoPersonaDAO extends Conexion {
     
-    private static final String SQL_SELECT = "SELECT Codigo_TipoPersona, TipoPersona_Nombres FROM TipoPersona";
-    private static final String SQL_INSERT = "INSERT INTO TipoPersona VALUES(?, ?)";
-    private static final String SQL_DELETE = "DELETE FROM TipoPersona WHERE Codigo_TipoPersona=?";
-    private static final String SQL_UPDATE = "UPDATE TipoPersona SET Codigo_TipoPersona=?, TipoPersona_Nombres=? WHERE Codigo_TipoPersona = ?";
-    private static final String SQL_QUERY = "SELECT Codigo_TipoPersona, TipoPersona_Nombres FROM TipoPersona WHERE Codigo_TipoPersona = ?";
+    private static final String SQL_SELECT = "SELECT Codigo_TipoPersona, TipoPersona_Nombres FROM tbl_TipoPersona";
+    private static final String SQL_INSERT = "INSERT INTO tbl_TipoPersona VALUES(?, ?)";
+    private static final String SQL_DELETE = "DELETE FROM tbl_TipoPersona WHERE Codigo_TipoPersona=?";
+    private static final String SQL_UPDATE = "UPDATE tbl_TipoPersona SET Codigo_TipoPersona=?, TipoPersona_Nombres=? WHERE Codigo_TipoPersona = ?";
+    private static final String SQL_QUERY = "SELECT Codigo_TipoPersona, TipoPersona_Nombres FROM tbl_TipoPersona WHERE Codigo_TipoPersona = ?";
    
      public int insert(TipoPersona tipoPersona){
         Connection conn = null;
