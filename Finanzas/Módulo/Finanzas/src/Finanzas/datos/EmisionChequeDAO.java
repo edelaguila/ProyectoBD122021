@@ -15,11 +15,11 @@ import java.util.List;
  */
 public class EmisionChequeDAO {
     
-   private static final String SQL_SELECT = "SELECT Numero_Cheque, Fecha_Cheque, FK_Banco, FK_Cuenta, FK_Cuentahabiente, Monto_Cheque  FROM cheque";
-   private static final String SQL_INSERT = "INSERT INTO  cheque VALUES(?,?,?,?,?,?)";
-   private static final String SQL_DELETE = "DELETE FROM  cheque   WHERE Numero_Cheque =?";
-   private static final String SQL_UPDATE = "UPDATE  cheque  SET  Numero_Cheque=?,  Fecha_Cheque=?, FK_Banco=?, FK_Cuenta=?, FK_Cuentahabiente=?, Monto_Cheque=?  WHERE    Numero_Cheque= ?";
-   private static final String SQL_QUERY = "SELECT   Numero_Cheque,  Fecha_Cheque,  FK_Banco,  FK_Cuenta,  FK_Cuentahabiente,  Monto_Cheque  FROM cheque  WHERE    Numero_Cheque= ?";
+   private static final String SQL_SELECT = "SELECT Numero_Cheque, Fecha_Cheque, FK_Banco, FK_Cuenta, FK_Cuentahabiente, Monto_Cheque  FROM tbl_cheque";
+   private static final String SQL_INSERT = "INSERT INTO  tbl_cheque VALUES(?,?,?,?,?,?)";
+   private static final String SQL_DELETE = "DELETE FROM  tbl_cheque   WHERE Numero_Cheque =?";
+   private static final String SQL_UPDATE = "UPDATE  tbl_cheque  SET  Numero_Cheque=?,  Fecha_Cheque=?, FK_Banco=?, FK_Cuenta=?, FK_Cuentahabiente=?, Monto_Cheque=?  WHERE    Numero_Cheque= ?";
+   private static final String SQL_QUERY = "SELECT   Numero_Cheque,  Fecha_Cheque,  FK_Banco,  FK_Cuenta,  FK_Cuentahabiente,  Monto_Cheque  FROM tbl_cheque  WHERE    Numero_Cheque= ?";
    
    
      public int insert(EmisionCheque emisioncheque){

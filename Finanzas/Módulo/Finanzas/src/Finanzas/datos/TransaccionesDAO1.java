@@ -9,21 +9,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
-import Finanzas.dominio.Transaccion;
+import Finanzas.dominio.Transaccion1;
 import java.sql.SQLException;
 
 
 
-public class TransaccionesDAO {
-private static final String SQL_SELECT = "SELECT Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,Saldo_Habilitado FROM tbl_CuentaHabiente where Codigo_CuentaHabiente = Codigo_CuentaHabiente and Codigo_CuentaHabiente = ?";
- private static final String SQL_INSERT = "Insert into tbl_deposito(Codigo_CuentaHabiente,Balance,Transaccion,fecha)values(?,?,?,?)";
-  private static final String SQL_INSERT2 = "Insert into tbl_deposito(Codigo_CuentaHabiente,Balance,Transaccion,fecha)values(?,?,?,?)";
-private static final String SQL_UPDATE = "update tbl_CuentaHabiente set Saldo_Habilitado= Saldo_Habilitado + ? where Codigo_CuentaHabiente=?";
- private static final String SQL_UPDATE2 = "update tbl_CuentaHabiente set Saldo_Habilitado= Saldo_Habilitado - ? where Codigo_CuentaHabiente=?";
-public static final String SQL_QUERY2 = "SELECT  Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,Saldo_Habilitado FROM tbl_CuentaHabiente where Codigo_CuentaHabiente = Codigo_CuentaHabiente and Codigo_CuentaHabiente = ?";
-private static final String sql_query = "SELECT  Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,Saldo_Habilitado FROM tbl_CuentaHabiente where Codigo_CuentaHabiente = Codigo_CuentaHabiente and Codigo_CuentaHabiente = ?";
-private static final String sql_query2 = "SELECT  Numero_CuentaBancaria, CuentaHabiente_Cuenta, Banco_Cuenta,Saldo_Cuenta FROM tbl_CuentaHabiente where Numero_CuentaBancaria = Numero_CuentaBancaria and Numero_CuentaBancaria = ?";
+public class TransaccionesDAO1 {
+private static final String SQL_SELECT = "SELECT Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,Saldo_Habilitado FROM CuentaHabiente where Codigo_CuentaHabiente = Codigo_CuentaHabiente and Codigo_CuentaHabiente = ?";
+ private static final String SQL_INSERT = "Insert into deposito(Codigo_CuentaHabiente,Credito,Debito,Transaccion,fecha)values(?,?,?,?,?)";
+  private static final String SQL_INSERT2 = "Insert into deposito(Codigo_CuentaHabiente,Balance,Transaccion,fecha)values(?,?,?,?)";
+private static final String SQL_UPDATE = "update CuentaHabiente set Saldo_Habilitado= Saldo_Habilitado + ? where Codigo_CuentaHabiente=?";
+ private static final String SQL_UPDATE2 = "update CuentaHabiente set Saldo_Habilitado= Saldo_Habilitado - ? where Codigo_CuentaHabiente=?";
+public static final String SQL_QUERY2 = "SELECT  Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,Saldo_Habilitado FROM CuentaHabiente where Codigo_CuentaHabiente = Codigo_CuentaHabiente and Codigo_CuentaHabiente = ?";
+private static final String sql_query = "SELECT  Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,Saldo_Habilitado FROM CuentaHabiente where Codigo_CuentaHabiente = Codigo_CuentaHabiente and Codigo_CuentaHabiente = ?";
+private static final String sql_query2 = "SELECT  Numero_CuentaBancaria, CuentaHabiente_Cuenta, Banco_Cuenta,Saldo_Cuenta FROM CuentaHabiente where Numero_CuentaBancaria = Numero_CuentaBancaria and Numero_CuentaBancaria = ?";
    public List<CuentaHabiente> listar()  {
         Connection con = null;
         PreparedStatement stmt = null;
@@ -62,7 +61,7 @@ private static final String sql_query2 = "SELECT  Numero_CuentaBancaria, CuentaH
     }
    
    
-  public int insert(Transaccion cuenta) {
+  public int insert(Transaccion1 cuenta) {
         Connection con = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -71,8 +70,9 @@ private static final String sql_query2 = "SELECT  Numero_CuentaBancaria, CuentaH
             stmt = con.prepareStatement(SQL_INSERT);
             stmt.setString(1, cuenta.getCodigo_CuentaHabiente());
             stmt.setString(2, cuenta.getBalance());
-            stmt.setString(3, cuenta.getTransaccion());
-            stmt.setString(4, cuenta.getFecha());
+            stmt.setString(3, cuenta.getCredito());
+            stmt.setString(4, cuenta.getDebito());
+            stmt.setString(5, cuenta.getFecha());
 
             rows = stmt.executeUpdate();
 
@@ -85,7 +85,7 @@ private static final String sql_query2 = "SELECT  Numero_CuentaBancaria, CuentaH
         return rows;
     }
 
-  public int update(Transaccion emisioncheque){
+  public int update(Transaccion1 emisioncheque){
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -94,8 +94,9 @@ private static final String sql_query2 = "SELECT  Numero_CuentaBancaria, CuentaH
             conn = Conexion.getConnection();
  
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, emisioncheque.getTransaccion());
-            stmt.setString(2, emisioncheque.getCodigo_CuentaHabiente());
+            stmt.setString(1, emisioncheque.getCredito());
+            stmt.setString(2, emisioncheque.getDebito());
+            stmt.setString(3, emisioncheque.getCodigo_CuentaHabiente());
             rows = stmt.executeUpdate();
     
             
@@ -110,7 +111,7 @@ private static final String sql_query2 = "SELECT  Numero_CuentaBancaria, CuentaH
         return rows;
  }
   
-   public int update2(Transaccion emisioncheque){
+   public int update2(Transaccion1 emisioncheque){
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -118,8 +119,9 @@ private static final String sql_query2 = "SELECT  Numero_CuentaBancaria, CuentaH
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_UPDATE2);
-            stmt.setString(1, emisioncheque.getTransaccion());
-            stmt.setString(2, emisioncheque.getCodigo_CuentaHabiente());
+                     stmt.setString(1, emisioncheque.getCredito());
+            stmt.setString(2, emisioncheque.getDebito());
+            stmt.setString(3, emisioncheque.getCodigo_CuentaHabiente());
             rows = stmt.executeUpdate();
 
             
