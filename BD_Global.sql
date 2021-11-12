@@ -783,6 +783,20 @@ CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_tipo_documento` (
   PRIMARY KEY ( Pk_codigo_tipo_documento)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
+CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_forma_pago` (
+`PK_codigo_pago` INT NOT NULL,
+`codigo_proveedor` INT NOT NULL,
+`tipo_transaccion` VARCHAR(35) NULL DEFAULT NULL,
+`Forma_pago` VARCHAR(35) NULL DEFAULT NULL,
+`dias_pago` VARCHAR(35) NULL DEFAULT NULL,
+`fecha_pago` VARCHAR(35) NULL DEFAULT NULL,
+`estatus_pago` TINYINT NOT NULL,
+PRIMARY KEY (`PK_codigo_pago`),
+FOREIGN KEY (`codigo_proveedor`)
+REFERENCES `empresarial`.`tbl_proveedor` (`PK_codigo_proveedor`))
+ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+
+
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_compra_encabezado` (
 `PK_codigo_factura` INT NOT NULL,
 `PK_codigo_bodega` INT NOT NULL,
@@ -1468,7 +1482,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- ---------------------
 -- PROCESOS ALMACENADOS
 -- ---------------------
--- ----------------------------------------------1
+-- ----------------------------------------------1 LEONEL
 DELIMITER $$
 USE `empresarial`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getValidarReservacion`(IN no_reservacion INT, IN no_tarifa INT, OUT validacion INT)
@@ -1498,7 +1512,7 @@ tbl_detalle_reservacion.id_reservacion_detalle = tbl_reservacion.PK_id_reservaci
 END$$
 DELIMITER ;
 
--- ----------------------------------------------2
+-- ----------------------------------------------2 JEFF
 DELIMITER $$
 USE `empresarial`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getValidacionGobernanta`(IN idGobernanta INT, OUT validacion BOOLEAN)
@@ -1511,10 +1525,11 @@ WHERE PK_id_gobernanta=idGobernanta;
 END$$
 DELIMITER ;
 
--- ----------------------------------------------3
+-- ----------------------------------------------3 LUIS CARLOS
 DELIMITER $$
 USE `empresarial`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getValidarEntrega`(IN IdReservacion int,IN fechaactual date, out validacion int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getValidarEntrega`
+(IN IdReservacion int,IN fechaactual date, out validacion int)
 BEGIN
 DECLARE fecha_inicio, fecha_fin DATE;
 SELECT
@@ -1530,14 +1545,16 @@ where PK_id_reservacion = IdReservacion and fechaactual between fecha_inicio and
 END$$
 DELIMITER ;
 
--- ----------------------area administrativa--------3
+-- ----------------------area administrativa--------3 RITA
 DELIMITER $$
 USE `empresarial`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_limite_stock`()
 BEGIN 
 select * from tbl_existencia
-where cantidad_existencia<=20;
+   where cantidad_existencia<=20;
+
 END$$
+
 DELIMITER ;
 ;
 call empresarial.pa_limite_stock();
@@ -1571,6 +1588,9 @@ UPDATE tbl_existencia SET cantidad_existencia = nueva_existencia WHERE PK_codigo
 END$$
 
 DELIMITER ;
+
+
+
 
 -- -------------------------
 -- FUNCIONES ALMACENADAS
