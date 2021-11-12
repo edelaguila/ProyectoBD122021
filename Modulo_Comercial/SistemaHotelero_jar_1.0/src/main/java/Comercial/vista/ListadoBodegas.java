@@ -88,6 +88,8 @@ public class ListadoBodegas extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("Listado de Bodegas");
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
         tbcbodega.setComponentPopupMenu(jPopupMenu1);
         tbcbodega.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tbcbodega.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -119,14 +121,11 @@ public class ListadoBodegas extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(181, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(84, 84, 84))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

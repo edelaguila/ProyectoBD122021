@@ -17,6 +17,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Comercial.datos.Conexion;
+import java.io.File;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class MantenimientoFormaPago extends javax.swing.JInternalFrame {
     DefaultTableModel modelo;
@@ -119,7 +129,6 @@ public class MantenimientoFormaPago extends javax.swing.JInternalFrame {
         Lbl_telefono2 = new javax.swing.JLabel();
         Lbl_nit2 = new javax.swing.JLabel();
         Txt_estatus = new javax.swing.JTextField();
-        Btn_Reporte4 = new javax.swing.JButton();
         Btn_Guardar2 = new javax.swing.JButton();
         Btn_Modificar2 = new javax.swing.JButton();
         Btn_Eliminar2 = new javax.swing.JButton();
@@ -132,6 +141,7 @@ public class MantenimientoFormaPago extends javax.swing.JInternalFrame {
         txt_tipopago = new javax.swing.JComboBox<>();
         txt_IdProveedor = new javax.swing.JTextField();
         btnAgregarProveedor6 = new javax.swing.JButton();
+        Btn_Reporte = new javax.swing.JButton();
 
         jPopupMenu1.setForeground(new java.awt.Color(204, 0, 204));
 
@@ -193,14 +203,6 @@ public class MantenimientoFormaPago extends javax.swing.JInternalFrame {
 
         Lbl_nit2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         Lbl_nit2.setText("Estatus Forma Pago:");
-
-        Btn_Reporte4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        Btn_Reporte4.setText("Reporte");
-        Btn_Reporte4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_Reporte4ActionPerformed(evt);
-            }
-        });
 
         Btn_Guardar2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         Btn_Guardar2.setText("Guardar");
@@ -265,6 +267,14 @@ public class MantenimientoFormaPago extends javax.swing.JInternalFrame {
             }
         });
 
+        Btn_Reporte.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Btn_Reporte.setText("Reporte");
+        Btn_Reporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_ReporteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout Pnl_datos2Layout = new javax.swing.GroupLayout(Pnl_datos2);
         Pnl_datos2.setLayout(Pnl_datos2Layout);
         Pnl_datos2Layout.setHorizontalGroup(
@@ -293,8 +303,8 @@ public class MantenimientoFormaPago extends javax.swing.JInternalFrame {
                                 .addComponent(Btn_Modificar2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(Btn_Eliminar2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(Btn_Reporte4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(Btn_Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(Pnl_datos2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Pnl_datos2Layout.createSequentialGroup()
                                     .addComponent(Lbl_nit2)
@@ -317,7 +327,7 @@ public class MantenimientoFormaPago extends javax.swing.JInternalFrame {
                             .addComponent(txt_dias, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Txt_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_tipopago, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
         Pnl_datos2Layout.setVerticalGroup(
             Pnl_datos2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,7 +370,7 @@ public class MantenimientoFormaPago extends javax.swing.JInternalFrame {
                     .addComponent(Btn_Guardar2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Btn_Modificar2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Btn_Eliminar2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Btn_Reporte4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Btn_Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(60, 60, 60))
         );
 
@@ -499,10 +509,6 @@ private void mnenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         
     }//GEN-LAST:event_tbcbodegaKeyPressed
 
-    private void Btn_Reporte4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Reporte4ActionPerformed
-
-    }//GEN-LAST:event_Btn_Reporte4ActionPerformed
-
     private void Btn_Guardar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Guardar2ActionPerformed
         // TODO add your handling code here:
 
@@ -574,12 +580,31 @@ private void mnenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         pro.toFront();
         pro.setVisible(true);
     }//GEN-LAST:event_btnAgregarProveedor6ActionPerformed
+private Connection connection = null;
+    private void Btn_ReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ReporteActionPerformed
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            connection = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                + "/src/main/java/Comercial/reportes/formapago.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte Mantenimiento Proveedor");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_Btn_ReporteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Btn_Eliminar2;
     public javax.swing.JButton Btn_Guardar2;
     public javax.swing.JButton Btn_Modificar2;
-    public javax.swing.JButton Btn_Reporte4;
+    public javax.swing.JButton Btn_Reporte;
     public javax.swing.JButton Btn_Reporte5;
     private javax.swing.JLabel Lbl_codigo2;
     private javax.swing.JLabel Lbl_direccion2;

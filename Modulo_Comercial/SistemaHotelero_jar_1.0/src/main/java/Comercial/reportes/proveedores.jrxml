@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e0db6531-adfa-434a-a9c8-0fb796480aca">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM empresarial.tbl_proveedor;]]>
+	</queryString>
+	<field name="PK_codigo_proveedor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_proveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccion_proveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefono_proveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nit_proveedor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="email_proveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="representante_proveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estatus_proveedor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="211" y="10" width="539" height="56" uuid="5a0d70cc-f011-4a63-bc7d-e26f7f3850e5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="30" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Mantenimiento Proveedor]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="37" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="13" y="41" width="100" height="20" uuid="98d77a56-2fc5-4d51-9f2b-61685188dc0b"/>
+				<text><![CDATA[PK_codigo_proveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="41" width="100" height="20" uuid="beec1bd1-4c5f-4873-8118-e96c7c3758ca"/>
+				<text><![CDATA[nombre_proveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="254" y="41" width="100" height="20" uuid="ca7a76ea-7e4b-4f39-a977-75aa875c8e2c"/>
+				<text><![CDATA[telefono_proveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="41" width="100" height="20" uuid="7bb17cbb-3ade-4f18-bff6-b8dce4bbc069"/>
+				<text><![CDATA[nit_proveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="41" width="100" height="20" uuid="b6dcc822-cc51-4489-abce-c554ffcce8a6"/>
+				<text><![CDATA[email_proveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="702" y="41" width="100" height="20" uuid="2bfff79d-8442-43db-8d27-7ca5553232ce"/>
+				<text><![CDATA[estatus_proveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="583" y="41" width="100" height="20" uuid="41b640a8-5c57-4888-a10b-ce284fe86b7a"/>
+				<text><![CDATA[representante_proveedor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="13" y="0" width="100" height="20" uuid="8f0aff99-9bdb-4d7a-8453-505598dfcc61"/>
+				<textFieldExpression><![CDATA[$F{PK_codigo_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="0" width="100" height="20" uuid="19dfdd79-c4d8-45c1-9aff-089a81cf62c6"/>
+				<textFieldExpression><![CDATA[$F{nombre_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="20" width="100" height="20" uuid="b30cb6c6-80c6-4ebf-9b07-f3a3f0ecf61d"/>
+				<textFieldExpression><![CDATA[$F{telefono_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="354" y="20" width="100" height="20" uuid="db6f24d4-1ae6-4c37-9cd1-fc7e0c3b30b1"/>
+				<textFieldExpression><![CDATA[$F{nit_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="20" width="100" height="20" uuid="6dd36f5c-d1fb-41f5-a901-85f1a6ffe40c"/>
+				<textFieldExpression><![CDATA[$F{email_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="583" y="10" width="100" height="20" uuid="89a28f35-b856-4c70-a907-8d742ea4d8d0"/>
+				<textFieldExpression><![CDATA[$F{representante_proveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="702" y="0" width="100" height="20" uuid="105d813e-e7f6-4ef3-8e29-c8556b5bcedb"/>
+				<textFieldExpression><![CDATA[$F{estatus_proveedor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
